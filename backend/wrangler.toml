@@ -1,13 +1,15 @@
-name = "api"
+name = "backend"
 main = "src/index.ts"
 compatibility_date = "2024-09-23"
-account_id = "0f6494520f3d37980a11bf7dc6aa2f3a"
+account_id = "cb08ee7e11f68fade1c303c525e8da0f"
+
 
 # D1 Database binding: connects remote Cloudflare D1 to env.DB in your Worker code
 [[d1_databases]]
 binding = "DB"
-database_name = "1stompackersandmover_db"
-database_id = "72e9a7e0-4549-4642-99be-0f7e25fffbd6"
+database_name = "omrundrapackersandmovers_db"
+database_id = "8dd40380-0c28-40a2-84ea-647391c7cdef"
+migrations_dir = "drizzle"
 
 # Public environment variables (non-sensitive)
 [vars]
@@ -27,5 +29,3 @@ persist = true
 enabled = true
 head_sampling_rate = 1
 persist = true
-
-
