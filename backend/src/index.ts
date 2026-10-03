@@ -16,14 +16,14 @@ app.use(
         "http://localhost:5173",
         "http://localhost:5174",
         "http://localhost:5175",
-        "https://admin.1stompackersandmovers.com",
-        "https://1stompackersandmovers.com",
-        "https://www.1stompackersandmovers.com",
+        "https://admin-omrudrapackersandmovers.pages.dev",
+        "https://omrudrapackersandmovers.pages.dev",
       ];
       // In development or if no origin (server-to-server / curl), be permissive
       if (!origin || env?.ENVIRONMENT === "development") return origin || "*";
-      // Allow production domains and any Cloudflare Pages deployments (*.pages.dev)
-      if (allowedOrigins.includes(origin) || origin.endsWith(".pages.dev")) {
+      // Allow only these projects' HTTPS Pages preview deployments.
+      const isProjectPreview = /^https:\/\/[a-z0-9-]+\.(admin-omrudrapackersandmovers|omrudrapackersandmovers)\.pages\.dev$/.test(origin);
+      if (allowedOrigins.includes(origin) || isProjectPreview) {
         return origin;
       }
       return null;
