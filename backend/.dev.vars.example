@@ -1,0 +1,16 @@
+# Cloudflare Workers Local Development Environment Variables
+# Copy this file to .dev.vars (which is gitignored) and fill in your actual credentials
+
+ENVIRONMENT="development"
+JWT_SECRET="dev-jwt-secret-key-1stom-packers-2026"
+
+# Brevo (formerly Sendinblue) Transactional Email
+# Get your API key from https://app.brevo.com/settings/keys/api
+BREVO_API_KEY=""
+
+# The verified sender email in your Brevo account (e.g. your Brevo login email or custom domain)
+BREVO_SENDER_EMAIL="1stompackersandmovers@gmail.com"
+BREVO_SENDER_NAME="1st Om Packers & Movers"
+
+# Notification recipient email for inbound moving leads
+NOTIFICATION_EMAIL="1stompackersandmovers@gmail.com"

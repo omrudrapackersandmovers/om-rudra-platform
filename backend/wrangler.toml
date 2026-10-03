@@ -1,0 +1,31 @@
+name = "api"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+account_id = "0f6494520f3d37980a11bf7dc6aa2f3a"
+
+# D1 Database binding: connects remote Cloudflare D1 to env.DB in your Worker code
+[[d1_databases]]
+binding = "DB"
+database_name = "1stompackersandmover_db"
+database_id = "72e9a7e0-4549-4642-99be-0f7e25fffbd6"
+
+# Public environment variables (non-sensitive)
+[vars]
+ENVIRONMENT = "production"
+BREVO_SENDER_EMAIL = "hello@1stompackersandmovers.com"
+BREVO_SENDER_NAME = "1st Om Packers & Movers"
+NOTIFICATION_EMAIL = "hello@1stompackersandmovers.com"
+
+# Observability (Logs & Traces)
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
+
+[observability.traces]
+enabled = true
+head_sampling_rate = 1
+persist = true
+
+

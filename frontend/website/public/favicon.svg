@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Navy House with "1" and Truck -->
+  <g fill="#203a64">
+    <!-- Roof and Upper House -->
+    <path d="M256 70L70 215l32 40 154-120 154 120 32-40L256 70z" />
+    <!-- Number 1 on left side of house -->
+    <path d="M102 230h52v190h70V176l-82 28-18-40 102-38h46v294H92v-70l60-10-50-110z" opacity="0" />
+    <path d="M110 240l70-24v194h-70V240z" />
+    <path d="M90 260l35-12 35-12v64l-70 24v-64z" />
+    <!-- Windows in negative space -->
+    <rect x="236" y="196" width="22" height="22" rx="3" fill="#203a64" />
+    <rect x="264" y="196" width="22" height="22" rx="3" fill="#203a64" />
+    <rect x="236" y="224" width="22" height="22" rx="3" fill="#203a64" />
+    <rect x="264" y="224" width="22" height="22" rx="3" fill="#203a64" />
+    <!-- Truck Cabin & Chassis -->
+    <path d="M350 246h64l36 50v84h-30a46 46 0 01-90 0h-50V246h70zm56 22h-40v40h62l-22-40z" />
+    <!-- Truck Wheel -->
+    <circle cx="375" cy="380" r="28" fill="#203a64" />
+    <circle cx="375" cy="380" r="12" fill="#ffffff" />
+    <circle cx="170" cy="380" r="14" fill="#203a64" />
+  </g>
+  <!-- Marigold Route S-Curve -->
+  <path d="M50 400c120-10 180-80 230-145 35-45 65-55 70-55-25 35-50 85-90 135-45 55-110 75-210 65z" fill="#f5a623" />
+  <!-- Dashed Highway Centerline -->
+  <path d="M90 395l20-4m35-12l25-10m35-18l22-16m28-22l18-18" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+</svg>
