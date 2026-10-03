@@ -18,6 +18,9 @@ app.use(
         "http://localhost:5175",
         "https://admin-omrudrapackersandmovers.pages.dev",
         "https://omrudrapackersandmovers.pages.dev",
+        "https://omrudrapackersandmovers.com",
+        "https://www.omrudrapackersandmovers.com",
+        "https://admin.omrudrapackersandmovers.com",
       ];
       // In development or if no origin (server-to-server / curl), be permissive
       if (!origin || env?.ENVIRONMENT === "development") return origin || "*";

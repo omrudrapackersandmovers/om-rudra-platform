@@ -30,7 +30,7 @@ export const sendLeadNotificationEmail = async (
   const safeTo = sanitizeHeader(lead.movingTo);
 
   const payload = {
-    sender: { name: "Om Rudra Packers and Movers System", email: "alerts@1stompackersandmovers.com" },
+    sender: { name: "Om Rudra Packers and Movers System", email: "alerts@omrudrapackersandmovers.com" },
     to: [{ email: recipientEmail }],
     subject: `New Moving Inquiry: ${safeName} (${safeFrom} to ${safeTo})`,
     htmlContent: `

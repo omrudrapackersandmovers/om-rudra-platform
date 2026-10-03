@@ -14,10 +14,10 @@ const Home = () => {
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://1stompackersandmovers.com/#organization",
+        "@id": "https://omrudrapackersandmovers.com/#organization",
         "name": company.legalName,
         "alternateName": company.brandName,
-        "url": "https://1stompackersandmovers.com",
+        "url": "https://omrudrapackersandmovers.com",
         "telephone": company.phone.primary || undefined,
         "email": company.email.general || undefined,
         "address": {
@@ -31,10 +31,10 @@ const Home = () => {
       },
       {
         "@type": "MovingCompany",
-        "@id": "https://1stompackersandmovers.com/#localbusiness",
+        "@id": "https://omrudrapackersandmovers.com/#localbusiness",
         "name": company.brandName,
         "telephone": company.phone.primary || undefined,
-        "url": "https://1stompackersandmovers.com",
+        "url": "https://omrudrapackersandmovers.com",
         "priceRange": "₹₹",
         "address": {
           "@type": "PostalAddress",

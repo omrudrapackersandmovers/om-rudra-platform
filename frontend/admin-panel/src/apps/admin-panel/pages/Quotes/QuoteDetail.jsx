@@ -399,8 +399,8 @@ Govt Approved & Verified Mover.`;
             </p>
             <div className="pt-1 space-y-0.5 text-[11px] text-slate-600">
               <p>Phone: <strong className="text-slate-900">{company.phone || "+91 7033488691"}</strong></p>
-              <p>Email: <strong className="text-slate-900">{company.email || "hello@1stompackersandmovers.com"}</strong></p>
-              <p>Web: <strong className="text-slate-900">{company.website?.replace(/^https?:\/\//, "") || "1stompackersandmovers.com"}</strong></p>
+              <p>Email: <strong className="text-slate-900">{company.email || "hello@omrudrapackersandmovers.com"}</strong></p>
+              <p>Web: <strong className="text-slate-900">{company.website?.replace(/^https?:\/\//, "") || "omrudrapackersandmovers.com"}</strong></p>
             </div>
             <p className="text-[10px] text-slate-500 font-mono pt-0.5">
               {isRealGstin
@@ -636,7 +636,7 @@ Govt Approved & Verified Mover.`;
             This is a computer-generated quotation and does not require any signature or seal.
           </p>
           <p className="text-[11px] text-slate-400">
-            Om Rudra Packers and Movers • Patna, Bihar • Helpline: +91 7033488691 • Email: hello@1stompackersandmovers.com
+            Om Rudra Packers and Movers • Patna, Bihar • Helpline: +91 7033488691 • Email: hello@omrudrapackersandmovers.com
           </p>
         </div>
       </div>

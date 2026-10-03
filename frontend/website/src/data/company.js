@@ -30,10 +30,10 @@ export const company = {
   },
 
   email: {
-    general: "hello@1stompackersandmovers.com",
-    privacy: "privacy@1stompackersandmovers.com",
-    legal: "legal@1stompackersandmovers.com",
-    claims: "claims@1stompackersandmovers.com",
+    general: "hello@omrudrapackersandmovers.com",
+    privacy: "privacy@omrudrapackersandmovers.com",
+    legal: "legal@omrudrapackersandmovers.com",
+    claims: "claims@omrudrapackersandmovers.com",
   },
 
   headOffice: {

@@ -167,8 +167,8 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
             </p>
             <div className="pt-1 space-y-0.5 text-[11px] text-slate-600">
               <p>Phone: <strong className="text-slate-900">{company.phone || "+91 7033488691"}</strong></p>
-              <p>Email: <strong className="text-slate-900">{company.email || "hello@1stompackersandmovers.com"}</strong></p>
-              <p>Web: <strong className="text-slate-900">{company.website?.replace(/^https?:\/\//, "") || "1stompackersandmovers.com"}</strong></p>
+              <p>Email: <strong className="text-slate-900">{company.email || "hello@omrudrapackersandmovers.com"}</strong></p>
+              <p>Web: <strong className="text-slate-900">{company.website?.replace(/^https?:\/\//, "") || "omrudrapackersandmovers.com"}</strong></p>
             </div>
             <p className="text-xs font-semibold text-slate-800 pt-0.5 font-mono">
               {isRealGstin ? `GSTIN: ${company.gstin} ${isRealPan ? `| PAN: ${company.pan}` : ""}` : "Govt Approved Transport Carrier"}

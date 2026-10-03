@@ -14,9 +14,9 @@ migrations_dir = "drizzle"
 # Public environment variables (non-sensitive)
 [vars]
 ENVIRONMENT = "production"
-BREVO_SENDER_EMAIL = "hello@1stompackersandmovers.com"
+BREVO_SENDER_EMAIL = "hello@omrudrapackersandmovers.com"
 BREVO_SENDER_NAME = "Om Rudra Packers and Movers"
-NOTIFICATION_EMAIL = "hello@1stompackersandmovers.com"
+NOTIFICATION_EMAIL = "hello@omrudrapackersandmovers.com"
 
 # Observability (Logs & Traces)
 [observability.logs]

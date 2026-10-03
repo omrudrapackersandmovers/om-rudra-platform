@@ -251,7 +251,7 @@ const JobDetail = () => {
   const reviewMessage = `*Thank you for moving with ${company.name || "Om Rudra Packers and Movers"}!*
 Dear ${job.customerName}, we hope your relocation to ${job.deliveryAddress} went smoothly.
 Could you please take 30 seconds to leave us a 5-star review on Google?
-👉 ${company.website || "https://1stompackersandmovers.com"}`;
+👉 ${company.website || "https://omrudrapackersandmovers.com"}`;
 
   const dispatchMessage = `*Relocation Update from ${company.name || "Om Rudra Packers and Movers"}*
 Dear ${job.customerName}, your moving crew and transport has been dispatched!

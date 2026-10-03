@@ -11,11 +11,11 @@ export const companyConfig = {
   tagline: "Safer Moves, Brighter Tomorrows",
   phone: "+91 7033488691",
   whatsapp: "+91 7033488691",
-  email: "hello@1stompackersandmovers.com",
-  website: "https://1stompackersandmovers.com",
+  email: "hello@omrudrapackersandmovers.com",
+  website: "https://omrudrapackersandmovers.com",
   contact: {
     primaryPhone: "+91 7033488691",
-    email: "hello@1stompackersandmovers.com",
+    email: "hello@omrudrapackersandmovers.com",
     whatsapp: "+91 7033488691",
   },
 

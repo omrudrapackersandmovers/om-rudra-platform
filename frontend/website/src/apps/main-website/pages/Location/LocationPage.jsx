@@ -387,7 +387,7 @@ const LocationPage = () => {
       {
         "@type": "MovingCompany",
         name: `${company.brandName} - ${location.name}`,
-        url: `https://1stompackersandmovers.com/packers-movers-${location.slug}`,
+        url: `https://omrudrapackersandmovers.com/packers-movers-${location.slug}`,
         telephone: company.phone.primary || undefined,
         description: `Professional household packing, commercial shifting, and vehicle transport services in ${location.name}, ${location.state}. Fixed pricing and verified moving crew.`,
         address: {
@@ -404,19 +404,19 @@ const LocationPage = () => {
             "@type": "ListItem",
             position: 1,
             name: "Home",
-            item: "https://1stompackersandmovers.com/",
+            item: "https://omrudrapackersandmovers.com/",
           },
           {
             "@type": "ListItem",
             position: 2,
             name: "Locations",
-            item: "https://1stompackersandmovers.com/where-we-serve",
+            item: "https://omrudrapackersandmovers.com/where-we-serve",
           },
           {
             "@type": "ListItem",
             position: 3,
             name: `${location.name}, ${location.state}`,
-            item: `https://1stompackersandmovers.com/packers-movers-${location.slug}`,
+            item: `https://omrudrapackersandmovers.com/packers-movers-${location.slug}`,
           },
         ],
       },

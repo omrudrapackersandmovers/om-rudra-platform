@@ -430,12 +430,12 @@ const QuoteForm = ({
     setStatus("submitting");
 
     try {
-      const rawBase = (import.meta.env.VITE_API_URL || "https://api.1stompackersandmovers.workers.dev").trim();
+      const rawBase = (import.meta.env.VITE_API_URL || "https://api.omrudrapackersandmovers.com").trim();
       const apiBase = rawBase
         ? rawBase.startsWith("http://") || rawBase.startsWith("https://")
           ? rawBase.replace(/\/+$/, "")
           : `https://${rawBase.replace(/\/+$/, "")}`
-        : "https://api.1stompackersandmovers.workers.dev";
+        : "https://api.omrudrapackersandmovers.com";
       const res = await fetch(`${apiBase}/api/leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
