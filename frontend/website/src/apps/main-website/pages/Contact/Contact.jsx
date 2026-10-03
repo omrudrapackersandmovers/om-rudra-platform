@@ -252,7 +252,7 @@ const Contact = () => {
   return (
     <>
       <SEO
-        title="Contact Us - Speak With Relocation Planners | 1st Om Packers"
+        title="Contact Us - Speak With Relocation Planners | Om Rudra Packers and Movers"
         description={`Directly contact ${company.brandName} head office in ${company.headOffice.city}, Bihar or our dedicated regional desks. Phone ${company.phone.primary}, WhatsApp, or book a free doorstep move survey.`}
       />
 

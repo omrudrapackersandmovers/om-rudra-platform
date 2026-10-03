@@ -83,7 +83,7 @@ const LeadsList = () => {
   };
 
   const { data: dbSettings } = useGetSettingsQuery();
-  const companyName = dbSettings?.name || "1st Om Packers and Movers";
+  const companyName = dbSettings?.name || "Om Rudra Packers and Movers";
   const [createManualLead] = useCreateManualLeadMutation();
   const [updateLead] = useUpdateLeadMutation();
 

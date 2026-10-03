@@ -33,7 +33,7 @@ export const DEFAULT_RELOCATION_IMAGES = [
   "/images/places/gujrat.webp",
 ];
 
-const ImageCard = ({ src, onLoad, alt = "1st Om Movers Transit Fleet" }) => {
+const ImageCard = ({ src, onLoad, alt = "Om Rudra Packers and Movers Transit Fleet" }) => {
   return (
     <div className="w-full aspect-video flex-shrink-0 bg-[#0f172a] rounded-xl overflow-hidden border border-white/10 transition-transform duration-300 hover:scale-[1.02] relative will-change-transform backface-hidden preserve-3d shadow-md">
       <img

@@ -472,7 +472,7 @@ const QuoteForm = ({
   const whatsappUrl = useMemo(() => {
     const cleanNum = company.phone.whatsapp ? company.phone.whatsapp.replace(/\D/g, "") : "917033488691";
     const sizePart = form.moveSize ? ` (${form.moveSize.split(" (")[0]})` : "";
-    const msg = `Hi 1st Om Packers, I would like a quote for ${form.service || "relocation"}${sizePart} from ${form.movingFrom || "[Origin]"} to ${form.movingTo || "[Destination]"} (${form.moveType || "Standard move"}). Timeline: ${form.timeline || "Soon"}.`;
+    const msg = `Hi Om Rudra Packers and Movers, I would like a quote for ${form.service || "relocation"}${sizePart} from ${form.movingFrom || "[Origin]"} to ${form.movingTo || "[Destination]"} (${form.moveType || "Standard move"}). Timeline: ${form.timeline || "Soon"}.`;
     return `https://wa.me/${cleanNum}?text=${encodeURIComponent(msg)}`;
   }, [form]);
 

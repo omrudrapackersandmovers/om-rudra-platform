@@ -227,7 +227,7 @@ const StaffDetail = () => {
 
           <a
             href={`https://wa.me/91${staff.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
-              `Hello ${staff.name}, this is from 1st Om Packers and Movers Operations Desk.`
+              `Hello ${staff.name}, this is from Om Rudra Packers and Movers Operations Desk.`
             )}`}
             target="_blank"
             rel="noreferrer"

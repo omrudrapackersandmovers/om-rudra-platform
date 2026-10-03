@@ -116,8 +116,8 @@ const SearchPage = () => {
       <SEO
         title={
           query.trim()
-            ? `Search Results for "${query}" | 1st Om Packers`
-            : "Search Services, Cities & Interstate Routes | 1st Om Packers"
+            ? `Search Results for "${query}" | Om Rudra Packers and Movers`
+            : "Search Services, Cities & Interstate Routes | Om Rudra Packers and Movers"
         }
         description={`Search across ${company.legalName}'s nationwide relocation services, 100+ cities, interstate route rates, transparent pricing calculators, and verified company policies.`}
       />
@@ -159,7 +159,7 @@ const SearchPage = () => {
               className="font-display font-extrabold text-text tracking-tight mb-4"
               style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)", lineHeight: 1.15 }}
             >
-              Search Everything on 1st Om Packers
+              Search Everything on Om Rudra Packers and Movers
             </h1>
             <p className="text-text-muted text-base sm:text-lg leading-relaxed">
               Find specialized shifting services, city branches, interstate highway route rates, transparent moving calculators, and verified transit risk policies.

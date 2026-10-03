@@ -1,4 +1,4 @@
-# 1st Om Packers and Movers — User Journey & Admin Panel Specification
+# Om Rudra Packers and Movers — User Journey & Admin Panel Specification
 
 **Status:** Final — companion to `design.md`. Read `design.md` first; this file assumes its tokens, data layer, and stack decisions and does not repeat them.
 **Purpose:** Define exactly what happens from "someone finds the site" through "the client's team closes the booking," and exactly what the admin panel does and does not do, before any code is written.
@@ -85,7 +85,7 @@ Requirements:
 
 ### 4.1 Who uses it
 
-Internal staff at 1st Om Packers and Movers only. Not a multi-tenant system, not customer-facing. Single role for v1 — do not build a permissions/roles system (admin vs. staff vs. viewer) unless the client specifically says they need it; it adds real complexity for no v1 benefit.
+Internal staff at Om Rudra Packers and Movers only. Not a multi-tenant system, not customer-facing. Single role for v1 — do not build a permissions/roles system (admin vs. staff vs. viewer) unless the client specifically says they need it; it adds real complexity for no v1 benefit.
 
 **Access:** Cloudflare Access in front of the admin panel is the preferred approach (stays inside the Cloudflare ecosystem per `design.md` Section 16) — a simple login gate, no public sign-up flow, no "forgot password" email flow to build and maintain unless Cloudflare Access alone doesn't cover the requirement.
 

@@ -364,7 +364,7 @@ export const inclusionsVsExtras = [
 ];
 
 /**
- * Direct comparison highlighting how 1st Om beats rogue movers and hidden aggregator fees.
+ * Direct comparison highlighting how Om Rudra beats rogue movers and hidden aggregator fees.
  */
 export const scamComparison = [
   {
@@ -412,7 +412,7 @@ export const pricingFaqs = [
   },
   {
     q: "Can you provide an official GST invoice for corporate relocation reimbursement?",
-    a: "Yes, absolutely. 1st Om Packers and Movers Pvt. Ltd. is a legally registered corporate entity. We issue full GST-compliant tax invoices, consignment notes (LR copy), and itemized packing lists required for employer relocation reimbursements.",
+    a: "Yes, absolutely. Om Rudra Packers and Movers is a legally registered corporate entity. We issue full GST-compliant tax invoices, consignment notes (LR copy), and itemized packing lists required for employer relocation reimbursements.",
   },
   {
     q: "What happens if my relocation date changes? Is there a cancellation fee?",

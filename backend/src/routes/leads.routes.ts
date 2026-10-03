@@ -7,7 +7,7 @@ export const leadsRouter = new Hono<{ Bindings: Bindings }>();
 leadsRouter.get("/", (c) => {
   return c.json({
     status: "active",
-    service: "1st Om Packers Leads API",
+    service: "Om Rudra Packers and Movers Leads API",
     message: "Ready to accept inbound relocation inquiries via POST.",
   });
 });

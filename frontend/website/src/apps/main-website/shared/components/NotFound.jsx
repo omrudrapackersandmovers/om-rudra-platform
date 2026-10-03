@@ -68,7 +68,7 @@ const NotFound = () => {
   return (
     <>
       <SEO
-        title="404 - Page Not Found | 1st Om Packers and Movers"
+        title="404 - Page Not Found | Om Rudra Packers and Movers"
         description="The relocation page you were looking for doesn't exist or has moved. Explore our household shifting, vehicle carrier, pricing, or nationwide locations."
       />
 

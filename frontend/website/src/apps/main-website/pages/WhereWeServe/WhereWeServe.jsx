@@ -165,7 +165,7 @@ const WhereWeServe = () => {
     <>
       <SEO
         title="Where We Serve  -  Service Locations & Interstate Moving Routes"
-        description="Explore 50+ districts and national interstate corridors served by 1st Om Packers and Movers across Bihar, Jharkhand, UP, Delhi NCR, and all across India."
+        description="Explore 50+ districts and national interstate corridors served by Om Rudra Packers and Movers across Bihar, Jharkhand, UP, Delhi NCR, and all across India."
       />
 
       {/* ── 1. HERO SECTION ────────────────────────────────────────── */}
@@ -430,7 +430,7 @@ const WhereWeServe = () => {
                       <div className="relative aspect-[16/10] w-full overflow-hidden bg-background border-b border-border/60">
                         <img
                           src={image}
-                          alt={`1st Om Packers and Movers in ${state}`}
+                          alt={`Om Rudra Packers and Movers in ${state}`}
                           className="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500 ease-out"
                           loading="lazy"
                         />

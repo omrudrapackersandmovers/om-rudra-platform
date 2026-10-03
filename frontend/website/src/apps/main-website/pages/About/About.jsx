@@ -235,7 +235,7 @@ const About = () => {
               </div>
 
               <h2 className="font-display font-extrabold text-text text-2xl sm:text-3xl tracking-tight leading-snug">
-                Why We Started 1st Om: Solving the Relocation Dilemma
+                Why We Started Om Rudra: Solving the Relocation Dilemma
               </h2>
 
               <div className="space-y-4 text-text-muted text-sm sm:text-base leading-relaxed">
@@ -284,7 +284,7 @@ const About = () => {
                 <div className="aspect-[4/3] w-full overflow-hidden">
                   <img
                     src="/images/process-for-home-service/after-shifting.webp"
-                    alt="Happy family settled in their new home with 1st Om Packers and Movers"
+                    alt="Happy family settled in their new home with Om Rudra Packers and Movers"
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                     loading="lazy"
                   />
@@ -292,7 +292,7 @@ const About = () => {
                 <div className="p-6 bg-surface border-t border-border">
                   <div className="flex items-center gap-2 text-accent text-xs font-bold uppercase tracking-wider mb-2">
                     <HeartHandshake size={16} />
-                    <span>The 1st Om Philosophy</span>
+                    <span>The Om Rudra Philosophy</span>
                   </div>
                   <blockquote className="font-display font-bold text-text text-base leading-snug">
                     &ldquo;We don&apos;t just transport boxes and furniture. We transport the rhythm of daily life and the security of your family&apos;s hard work.&rdquo;

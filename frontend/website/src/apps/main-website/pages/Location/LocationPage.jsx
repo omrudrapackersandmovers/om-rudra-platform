@@ -434,7 +434,7 @@ const LocationPage = () => {
   return (
     <>
       <SEO
-        title={`Packers and Movers in ${location.name}, ${location.state} | 1st Om Movers`}
+        title={`Packers and Movers in ${location.name}, ${location.state} | Om Rudra Packers and Movers`}
         description={`Reliable packers and movers in ${location.name}. Dedicated closed container trucks, 5-layer packing protection, transparent fixed pricing, and verified moving crews.`}
         schemaJson={structuredData}
       />
@@ -762,7 +762,7 @@ const LocationPage = () => {
                   <tr className="border-b border-border text-text font-display font-bold">
                     <th className="py-3.5 pr-4 w-1/4">Relocation Parameter</th>
                     <th className="py-3.5 px-4 w-3/8 text-text-muted">Informal Market Practice</th>
-                    <th className="py-3.5 pl-4 w-3/8 text-primary font-bold">1st Om Binding Standards</th>
+                    <th className="py-3.5 pl-4 w-3/8 text-primary font-bold">Om Rudra Binding Standards</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/60">
@@ -1071,10 +1071,10 @@ const LocationPage = () => {
                 </div>
               )}
 
-              {/* Why Choose 1st Om in This Area */}
+              {/* Why Choose Om Rudra in This Area */}
               <div>
                 <h3 className="font-display font-bold text-text text-base mb-3">
-                  Why Customers in {location.name} Choose 1st Om
+                  Why Customers in {location.name} Choose Om Rudra
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {competitiveAdvantages.map((adv, idx) => (

@@ -8,8 +8,8 @@
  */
 
 export const company = {
-  legalName: "1st Om Packers and Movers Pvt. Ltd.",
-  brandName: "1st Om Packers and Movers",
+  legalName: "Om Rudra Packers and Movers",
+  brandName: "Om Rudra Packers and Movers",
   tagline: "Safer Moves, Brighter Tomorrows",
 
   logo: {

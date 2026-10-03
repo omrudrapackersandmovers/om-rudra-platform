@@ -414,7 +414,7 @@ const ServicesPage = () => {
   return (
     <>
       <SEO
-        title="Packing & Relocation Services | 1st Om Packers and Movers"
+        title="Packing & Relocation Services | Om Rudra Packers and Movers"
         description="Comprehensive household, office, car, and bike moving services. 5-layer packing, 100% dedicated closed trucks, transparent pricing, and zero co-loading."
       />
 
@@ -940,7 +940,7 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* ── 7. "WHY 1ST OM VS. LOCAL UNVERIFIED MOVERS" MATRIX ───── */}
+      {/* ── 7. "WHY OM RUDRA VS. LOCAL UNVERIFIED MOVERS" MATRIX ───── */}
       <section className="bg-surface py-14 sm:py-20 border-b border-border/70">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
@@ -950,7 +950,7 @@ const ServicesPage = () => {
               <span>Safety & Value Comparison</span>
             </div>
             <h2 className="font-display font-extrabold text-text text-2xl sm:text-3xl tracking-tight mb-3 text-balance">
-              Why Choosing 1st Om Protects You
+              Why Choosing Om Rudra Protects You
             </h2>
             <p className="text-text-muted text-xs sm:text-sm max-w-2xl mx-auto text-balance">
               Don&apos;t risk damaged furniture or unexpected moving-day extortion from unverified aggregators.
@@ -963,7 +963,7 @@ const ServicesPage = () => {
               <thead>
                 <tr className="border-b border-border text-text font-display font-bold">
                   <th className="py-3.5 pr-4 w-1/4">Key Consideration</th>
-                  <th className="py-3.5 px-4 w-3/8 text-primary font-bold">1st Om Binding Standards</th>
+                  <th className="py-3.5 px-4 w-3/8 text-primary font-bold">Om Rudra Binding Standards</th>
                   <th className="py-3.5 pl-4 w-3/8 text-text-muted">Informal Market Practice</th>
                 </tr>
               </thead>

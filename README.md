@@ -1,6 +1,6 @@
-# 1st Om Packers and Movers Pvt. Ltd.
+# Om Rudra Packers and Movers
 
-Official enterprise web platform for **1st Om Packers and Movers**, offering reliable household relocation, commercial office shifting, vehicle transport, and warehousing across Bihar, Jharkhand, Uttar Pradesh, Delhi NCR, West Bengal, and nationwide corridors.
+Official enterprise web platform for **Om Rudra Packers and Movers**, offering reliable household relocation, commercial office shifting, vehicle transport, and warehousing across Bihar, Jharkhand, Uttar Pradesh, Delhi NCR, West Bengal, and nationwide corridors.
 
 ---
 

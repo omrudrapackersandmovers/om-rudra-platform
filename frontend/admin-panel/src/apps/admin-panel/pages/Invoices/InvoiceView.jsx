@@ -133,14 +133,14 @@ const InvoiceView = () => {
 
   // Dynamic UPI Payment Intent String
   const upiId = company.upi?.id || company.bankDetails?.upiId || "";
-  const payeeName = company.upi?.payeeName || company.name || "1st Om Packers and Movers";
+  const payeeName = company.upi?.payeeName || company.name || "Om Rudra Packers and Movers";
   const upiPayload = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(
     payeeName
   )}&am=${invoice.balanceDue > 0 ? invoice.balanceDue : invoice.totalAmount}&cu=INR&tn=${encodeURIComponent(
     invoice.invoiceNumber
   )}`;
 
-  const whatsAppMessage = `*Tax Invoice from ${company.name || "1st Om Packers and Movers"}*
+  const whatsAppMessage = `*Tax Invoice from ${company.name || "Om Rudra Packers and Movers"}*
 Invoice No: ${invoice.invoiceNumber}
 Customer: ${invoice.customerName}
 -----------------------------
@@ -151,7 +151,7 @@ Status: ${invoice.paymentStatus.toUpperCase()}
 -----------------------------
 ${upiId ? `You can pay via UPI to: ${upiId}\n` : ""}Bank: ${company.bankDetails?.bankName || "State Bank of India"} | A/C: ${company.bankDetails?.accountNumber || "N/A"} | IFSC: ${company.bankDetails?.ifsc || "N/A"}
 -----------------------------
-Thank you for choosing ${company.name || "1st Om Packers & Movers"}!`;
+Thank you for choosing ${company.name || "Om Rudra Packers and Movers"}!`;
 
   return (
     <div className="space-y-6 pb-12 max-w-5xl mx-auto">
@@ -275,7 +275,7 @@ Thank you for choosing ${company.name || "1st Om Packers & Movers"}!`;
           {/* Left Side: Company Contact & Credentials */}
           <div className="space-y-1 text-left max-w-md">
             <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-tight">
-              {company.name || "1st Om Packers and Movers"}
+              {company.name || "Om Rudra Packers and Movers"}
             </h1>
             <p className="text-xs text-blue-600 font-semibold">{company.tagline || "Safer Moves, Brighter Tomorrows"}</p>
             <p className="text-[11px] text-slate-600 mt-1 leading-snug">
@@ -532,7 +532,7 @@ Thank you for choosing ${company.name || "1st Om Packers & Movers"}!`;
               Notice & Terms
             </h5>
             <p className="text-slate-600">
-              Please make all cheques or digital payments payable to <strong>{company.name || "1st Om Packers and Movers"}</strong>. 
+              Please make all cheques or digital payments payable to <strong>{company.name || "Om Rudra Packers and Movers"}</strong>.
               Payment is due upon successful unloading & verification at destination.
             </p>
           </div>
@@ -544,7 +544,7 @@ Thank you for choosing ${company.name || "1st Om Packers & Movers"}!`;
             This is a computer-generated invoice and does not require any signature or seal.
           </p>
           <p className="text-[11px] text-slate-400">
-            1st Om Packers and Movers • Patna, Bihar • Helpline: +91 7033488691 • Email: hello@1stompackersandmovers.com
+            Om Rudra Packers and Movers • Patna, Bihar • Helpline: +91 7033488691 • Email: hello@1stompackersandmovers.com
           </p>
         </div>
       </div>

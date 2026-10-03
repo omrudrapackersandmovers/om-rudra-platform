@@ -69,7 +69,7 @@ const Privacy = () => {
   return (
     <>
       <SEO
-        title="Privacy Policy - Customer Data Protection | 1st Om Packers"
+        title="Privacy Policy - Customer Data Protection | Om Rudra Packers and Movers"
         description={`Read the official Privacy Policy of ${company.legalName}. Learn how we protect customer phone numbers, inventory records, and relocation addresses in compliance with DPDP Act regulations.`}
       />
 

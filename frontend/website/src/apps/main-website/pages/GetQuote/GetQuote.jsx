@@ -156,7 +156,7 @@ const GetQuote = () => {
   return (
     <>
       <SEO
-        title="Get a Free Moving Quote - Transparent Binding Pricing | 1st Om Packers"
+        title="Get a Free Moving Quote - Transparent Binding Pricing | Om Rudra Packers and Movers"
         description="Request a free, transparent moving estimate for household, corporate office, or vehicle shifting across Bihar, Jharkhand, and nationwide corridors. 100% binding upfront price guarantee."
       />
 
@@ -384,7 +384,7 @@ const GetQuote = () => {
                     Informal Market Practice
                   </th>
                   <th className="p-4 sm:p-5 w-3/8 text-primary bg-primary/5">
-                    1st Om Binding Standards
+                    Om Rudra Binding Standards
                   </th>
                 </tr>
               </thead>

@@ -1,5 +1,5 @@
 /**
- * searchIndex.js — Unified site-wide search catalog for 1st Om Packers & Movers.
+ * searchIndex.js — Unified site-wide search catalog for Om Rudra Packers and Movers.
  *
  * Pre-indexes:
  * 1. Specialized Relocation Services (8 core services)
@@ -160,7 +160,7 @@ export const pagesSearchData = [
   },
   {
     id: "page-about",
-    title: "About 1st Om Packers & Movers",
+    title: "About Om Rudra Packers and Movers",
     category: "Pages & Tools",
     url: "/about",
     quoteUrl: "/get-quote",

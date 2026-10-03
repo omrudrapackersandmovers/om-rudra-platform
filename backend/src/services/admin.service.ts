@@ -787,8 +787,8 @@ export const getCompanySettings = async (env: Bindings) => {
 
   if (!result[0]) {
     const defaultData = {
-      name: "1st Om Packers and Movers",
-      shortName: "1st Om",
+      name: "Om Rudra Packers and Movers",
+      shortName: "Om Rudra",
       tagline: "Safer Moves, Brighter Tomorrows",
       phone: "+91 7033488691",
       whatsapp: "+91 7033488691",
@@ -806,10 +806,10 @@ export const getCompanySettings = async (env: Bindings) => {
       },
       upi: {
         id: "1stompackers@sbi",
-        payeeName: "1st Om Packers and Movers",
+        payeeName: "Om Rudra Packers and Movers",
       },
       bankDetails: {
-        accountName: "1ST OM PACKERS AND MOVERS",
+        accountName: "OM RUDRA PACKERS AND MOVERS",
         bankName: "State Bank of India",
         accountNumber: "000000000000",
         ifsc: "SBIN0000000",
@@ -825,7 +825,7 @@ export const getCompanySettings = async (env: Bindings) => {
         ],
         invoice: [
           "Goods are accepted for transport subject to conditions printed on Consignment Note.",
-          "Payment should be made in favor of 1st Om Packers and Movers via UPI/Bank transfer.",
+          "Payment should be made in favor of Om Rudra Packers and Movers via UPI/Bank transfer.",
           "Any dispute subject to Patna jurisdiction only.",
         ],
         bilty: [

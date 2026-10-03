@@ -261,7 +261,7 @@ const RoutePage = () => {
       category: "pricing",
       categoryLabel: "Pricing & Tolls",
       q: `Are highway toll plaza fees, green cess, and state entry taxes included?`,
-      a: `Yes, completely. Every quotation from 1st Om includes all highway toll plaza charges along ${highwayCorridor}, state entry permits, green cess, and driver fuel allowances. You will never be asked for cash or roadside contributions during transit.`,
+      a: `Yes, completely. Every quotation from Om Rudra includes all highway toll plaza charges along ${highwayCorridor}, state entry permits, green cess, and driver fuel allowances. You will never be asked for cash or roadside contributions during transit.`,
     },
     {
       category: "pricing",
@@ -410,7 +410,7 @@ const RoutePage = () => {
   return (
     <>
       <SEO
-        title={`Packers and Movers from ${route.from} to ${route.to} | 1st Om Movers`}
+        title={`Packers and Movers from ${route.from} to ${route.to} | Om Rudra Packers and Movers`}
         description={`Dedicated interstate relocation services between ${route.from} and ${route.to}. Sealed closed containers, ${estimatedDays} transit, 5-layer packing, and upfront fixed pricing.`}
         schemaJson={structuredData}
       />
@@ -870,7 +870,7 @@ const RoutePage = () => {
                 <tr className="border-b border-border text-text font-display font-bold">
                   <th className="py-3.5 pr-4 w-1/4">Transit Parameter</th>
                   <th className="py-3.5 px-4 w-3/8 text-text-muted">Informal Market Practice</th>
-                  <th className="py-3.5 pl-4 w-3/8 text-primary font-bold">1st Om Binding Standards</th>
+                  <th className="py-3.5 pl-4 w-3/8 text-primary font-bold">Om Rudra Binding Standards</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/60">

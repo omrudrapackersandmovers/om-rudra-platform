@@ -69,7 +69,7 @@ const Terms = () => {
   return (
     <>
       <SEO
-        title="Terms of Service - Moving Contract & Legal Policies | 1st Om Packers"
+        title="Terms of Service - Moving Contract & Legal Policies | Om Rudra Packers and Movers"
         description={`Official Terms of Service and Operational Relocation Policies governing ${company.legalName}. Carriage by Road Act 2007 compliant, binding quotation integrity, and transit insurance guidelines.`}
       />
 
@@ -249,7 +249,7 @@ const Terms = () => {
                   <strong>1.1 Indicative vs. Binding Quotes:</strong> Online estimates, instant rates, and verbal approximations are indicative and do not constitute a legally binding contractual offer. A binding quotation is executed exclusively following:
                 </p>
                 <ul className="list-disc pl-5 space-y-1.5 text-text-muted">
-                  <li>A physical on-site pre-move survey conducted by a certified 1st Om moving officer, OR</li>
+                  <li>A physical on-site pre-move survey conducted by a certified Om Rudra moving officer, OR</li>
                   <li>A verified digital video survey where complete household contents, cabinet interiors, and access corridors are documented, OR</li>
                   <li>A confirmed itemized inventory sheet mutually endorsed by both the consignor (client) and company operations.</li>
                 </ul>

@@ -25,7 +25,7 @@ const InvoicesList = () => {
   const { data: invoices = [], isLoading, isFetching, refetch: fetchInvoices } =
     useGetInvoicesQuery();
   const { data: dbSettings } = useGetSettingsQuery();
-  const companyName = dbSettings?.name || companyConfig?.name || "1st Om Packers and Movers";
+  const companyName = dbSettings?.name || companyConfig?.name || "Om Rudra Packers and Movers";
   const upiId = dbSettings?.upi?.id || dbSettings?.bankDetails?.upiId || companyConfig?.bankDetails?.upiId || "";
   const [isSyncing, setIsSyncing] = useState(false);
 

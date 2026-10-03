@@ -72,7 +72,7 @@ const BiltyView = () => {
     return <div className="text-center py-12 text-rose-500 text-sm">Bilty not found.</div>;
   }
 
-  const whatsAppMessage = `*Official Consignment Note (LR/Bilty) from ${company.name || "1st Om Packers and Movers"}*
+  const whatsAppMessage = `*Official Consignment Note (LR/Bilty) from ${company.name || "Om Rudra Packers and Movers"}*
 LR No: ${bilty.lrNumber}
 Truck No: ${bilty.truckNumber}
 Driver: ${bilty.driverName} (${bilty.driverPhone || "N/A"})
@@ -155,7 +155,7 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
         <div className="border-b-2 border-slate-800 pb-4 flex flex-col sm:flex-row justify-between items-start gap-4">
           <div className="space-y-1 text-left max-w-md">
             <h1 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight leading-tight">
-              {company.name || "1st Om Packers and Movers"}
+              {company.name || "Om Rudra Packers and Movers"}
             </h1>
             <p className="text-[11px] font-semibold text-blue-800">
               GOVT. REGD. PACKERS & HIGHWAY TRANSPORT CONTRACTORS (IBA APPROVED)
@@ -287,7 +287,7 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
               Driver Signature
             </div>
             <div className="border-t border-slate-400 pt-1">
-              For {company.name || "1st Om Packers and Movers"}
+              For {company.name || "Om Rudra Packers and Movers"}
             </div>
           </div>
         </div>

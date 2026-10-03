@@ -183,7 +183,7 @@ const LeadDetail = () => {
               </a>
               <a
                 href={`https://wa.me/91${lead.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
-                  `Hello ${lead.name}, this is from 1st Om Packers & Movers regarding your relocation inquiry.`
+                  `Hello ${lead.name}, this is from Om Rudra Packers and Movers regarding your relocation inquiry.`
                 )}`}
                 target="_blank"
                 rel="noreferrer"

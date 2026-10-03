@@ -30,7 +30,7 @@ const QuotesList = () => {
   const { data: quotes = [], isLoading, isFetching, refetch: fetchQuotes } =
     useGetQuotesQuery();
   const { data: dbSettings } = useGetSettingsQuery();
-  const companyName = dbSettings?.name || "1st Om Packers and Movers";
+  const companyName = dbSettings?.name || "Om Rudra Packers and Movers";
   const [updateQuoteStatus] = useUpdateQuoteStatusMutation();
   const [isSyncing, setIsSyncing] = useState(false);
 

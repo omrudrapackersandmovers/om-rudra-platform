@@ -1,6 +1,6 @@
-# 1st Om Packers and Movers — Frontend Web Application
+# Om Rudra Packers and Movers — Frontend Web Application
 
-High-performance, mobile-first React application built for **1st Om Packers and Movers Pvt. Ltd.**
+High-performance, mobile-first React application built for **Om Rudra Packers and Movers**
 
 ---
 

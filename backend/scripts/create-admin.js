@@ -48,7 +48,7 @@ async function main() {
   const password = filteredArgs[1] || "ompackers@2026";
 
   console.log(`\n========================================`);
-  console.log(`🔑 1st Om Packers & Movers — Admin Creator`);
+  console.log(`🔑 Om Rudra Packers and Movers — Admin Creator`);
   console.log(`========================================`);
   console.log(`Target: ${isRemote ? "☁️ REMOTE Production D1 Database" : "💻 LOCAL D1 Database"}`);
   console.log(`Username: ${username}`);

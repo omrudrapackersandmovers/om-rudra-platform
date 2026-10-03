@@ -162,7 +162,7 @@ const LocationsSnapshot = () => {
                     <div className="relative aspect-[16/10] w-full overflow-hidden bg-surface/60 border-b border-border/60">
                       <img
                         src={item.image}
-                        alt={`1st Om Packers and Movers in ${item.state}`}
+                        alt={`Om Rudra Packers and Movers in ${item.state}`}
                         className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />

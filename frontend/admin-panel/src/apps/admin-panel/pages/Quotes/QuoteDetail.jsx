@@ -185,7 +185,7 @@ const QuoteDetail = () => {
 
   const inventory = quote.inventoryData ? JSON.parse(quote.inventoryData) : [];
 
-  const whatsAppMessage = `*Official Relocation Quotation from ${company.name || "1st Om Packers and Movers"}*
+  const whatsAppMessage = `*Official Relocation Quotation from ${company.name || "Om Rudra Packers and Movers"}*
 Quote No: ${quote.quoteNumber}
 Client: ${quote.customerName}
 Route: ${quote.movingFrom} ➔ ${quote.movingTo}
@@ -389,7 +389,7 @@ Govt Approved & Verified Mover.`;
           {/* Left Side: Company Contact & Credentials */}
           <div className="space-y-1 text-left max-w-md">
             <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-tight">
-              {company.name || "1st Om Packers and Movers"}
+              {company.name || "Om Rudra Packers and Movers"}
             </h1>
             <p className="text-xs text-blue-600 font-semibold">{company.tagline || "Safer Moves, Brighter Tomorrows"}</p>
             <p className="text-[11px] text-slate-600 mt-1 leading-snug">
@@ -636,7 +636,7 @@ Govt Approved & Verified Mover.`;
             This is a computer-generated quotation and does not require any signature or seal.
           </p>
           <p className="text-[11px] text-slate-400">
-            1st Om Packers and Movers • Patna, Bihar • Helpline: +91 7033488691 • Email: hello@1stompackersandmovers.com
+            Om Rudra Packers and Movers • Patna, Bihar • Helpline: +91 7033488691 • Email: hello@1stompackersandmovers.com
           </p>
         </div>
       </div>

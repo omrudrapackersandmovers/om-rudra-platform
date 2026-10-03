@@ -1,8 +1,8 @@
-# 1st Om Packers and Movers — Master Design & Engineering Specification
+# Om Rudra Packers and Movers — Master Design & Engineering Specification
 
 **Status:** Final — binding for all design and development work on this project.
 **Owner:** Unyrise Tech
-**Client:** 1st Om Packers and Movers Pvt. Ltd.
+**Client:** Om Rudra Packers and Movers
 
 ---
 
@@ -23,7 +23,7 @@ Rules of engagement:
 
 ### 1.1 Company Snapshot
 
-- **Legal name:** 1st Om Packers and Movers Pvt. Ltd.
+- **Legal name:** Om Rudra Packers and Movers
 - **Industry:** Packing, moving, and relocation services
 - **Primary base:** Bihar, with coverage extending across Jharkhand, Uttar Pradesh, Delhi NCR, West Bengal, and pan-India interstate routes (full location data lives in Section 12 / the Locations Data Layer, not hardcoded anywhere in the UI).
 - **Audience:** Households and businesses relocating within a city, within a state, interstate, or (in the "Other Relocation Markets" set) to major metros. The overwhelming majority of visitors arrive **on a mobile phone**, often from a WhatsApp share, a Google search, or a Google Business Profile listing. Design and build mobile-first, not "responsive as an afterthought."
@@ -35,7 +35,7 @@ We are not building "a packers and movers website." We are building the **calmes
 The competitive set (reference sites like ompackersindia.com) sells **services**: a features list, a rate card, an FAQ, a wall of city links. We sell **an experience**: the feeling of watching your last box leave your old home and knowing it's in good hands, and the feeling of walking into your new home already unpacked and settled.
 
 Positioning statement (internal, not for the site verbatim):
-> "1st Om Packers and Movers doesn't move boxes. It moves the beginning of someone's next chapter — safely, on time, without them having to think about it."
+> "Om Rudra Packers and Movers doesn't move boxes. It moves the beginning of someone's next chapter — safely, on time, without them having to think about it."
 
 ### 1.3 Voice & Tone
 
@@ -308,8 +308,8 @@ Example shape (adapt exact filename/casing to the existing project conventions):
 ```ts
 // company.ts — single source of truth for all static company facts
 export const company = {
-  legalName: "1st Om Packers and Movers Pvt. Ltd.",
-  brandName: "1st Om Packers and Movers",
+  legalName: "Om Rudra Packers and Movers",
+  brandName: "Om Rudra Packers and Movers",
   tagline: "", // TODO: confirm with client
   foundedYear: null, // TODO: confirm with client — do not guess
   phone: {

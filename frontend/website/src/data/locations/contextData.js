@@ -260,7 +260,7 @@ export const locationProfiles = {
     popularDestinations: ["Patna", "Lucknow", "Delhi NCR", "Kolkata", "Prayagraj"],
     faqs: [
       {
-        q: "How does 1st Om handle moves in narrow lanes of Varanasi?",
+        q: "How does Om Rudra handle moves in narrow lanes of Varanasi?",
         a: "We use compact feeder vehicles to transfer packed goods from your doorstep to our large container truck positioned at the nearest accessible highway point.",
       },
     ],

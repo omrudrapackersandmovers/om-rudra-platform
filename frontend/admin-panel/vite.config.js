@@ -12,9 +12,9 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
       manifest: {
-        name: "1st Om Packers & Movers — Admin",
-        short_name: "1st Om Admin",
-        description: "Mobile Admin Panel & Invoicing for 1st Om Packers and Movers",
+        name: "Om Rudra Packers and Movers — Admin",
+        short_name: "Om Rudra Admin",
+        description: "Mobile Admin Panel & Invoicing for Om Rudra Packers and Movers",
         theme_color: "#1e3a8a",
         background_color: "#f8fafc",
         display: "standalone",

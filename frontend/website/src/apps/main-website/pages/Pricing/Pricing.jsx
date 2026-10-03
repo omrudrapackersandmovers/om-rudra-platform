@@ -70,7 +70,7 @@ const Pricing = () => {
   return (
     <>
       <SEO
-        title="Transparent Pricing & Relocation Cost Estimates | 1st Om Packers and Movers"
+        title="Transparent Pricing & Relocation Cost Estimates | Om Rudra Packers and Movers"
         description="Clear, upfront pricing with zero hidden charges. Calculate moving costs for 1 BHK, 2 BHK, 3 BHK, car, bike, and commercial moves locally and across India."
       />
 
@@ -713,7 +713,7 @@ const Pricing = () => {
               <thead>
                 <tr className="border-b border-border text-text font-display font-bold">
                   <th className="py-3.5 pr-4 w-1/4">Cost Parameter</th>
-                  <th className="py-3.5 px-4 w-3/8 text-primary font-bold">1st Om Binding Standards</th>
+                  <th className="py-3.5 px-4 w-3/8 text-primary font-bold">Om Rudra Binding Standards</th>
                   <th className="py-3.5 pl-4 w-3/8 text-text-muted">Informal Market Practice</th>
                 </tr>
               </thead>

@@ -248,12 +248,12 @@ const JobDetail = () => {
     return <div className="text-center py-12 text-rose-500 text-sm">Job not found.</div>;
   }
 
-  const reviewMessage = `*Thank you for moving with ${company.name || "1st Om Packers and Movers"}!*
+  const reviewMessage = `*Thank you for moving with ${company.name || "Om Rudra Packers and Movers"}!*
 Dear ${job.customerName}, we hope your relocation to ${job.deliveryAddress} went smoothly.
 Could you please take 30 seconds to leave us a 5-star review on Google?
 👉 ${company.website || "https://1stompackersandmovers.com"}`;
 
-  const dispatchMessage = `*Relocation Update from ${company.name || "1st Om Packers and Movers"}*
+  const dispatchMessage = `*Relocation Update from ${company.name || "Om Rudra Packers and Movers"}*
 Dear ${job.customerName}, your moving crew and transport has been dispatched!
 Vehicle: ${job.vehicleAssigned || "Assigned Transport"}
 Driver: ${job.driverName || "Our Staff"} (${job.driverPhone || company.phone || "+91 7033488691"})

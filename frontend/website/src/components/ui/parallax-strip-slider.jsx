@@ -534,7 +534,7 @@ export default function ParallaxStripSlider({
         >
           <img
             src={slide.src}
-            alt={slide.title || "1st Om Movers Logistics Operation"}
+            alt={slide.title || "Om Rudra Packers and Movers Logistics Operation"}
             draggable={false}
             className="absolute inset-0 h-full w-full select-none object-cover"
           />
@@ -556,7 +556,7 @@ export default function ParallaxStripSlider({
       <div className="absolute inset-0">
         <img
           src={slides[current]?.src || slides[0]?.src}
-          alt={slides[current]?.title || "1st Om Movers Transit Fleet"}
+          alt={slides[current]?.title || "Om Rudra Packers and Movers Transit Fleet"}
           draggable={false}
           className="absolute inset-0 h-full w-full select-none object-cover"
         />

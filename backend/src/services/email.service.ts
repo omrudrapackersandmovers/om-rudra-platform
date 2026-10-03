@@ -30,7 +30,7 @@ export const sendLeadNotificationEmail = async (
   const safeTo = sanitizeHeader(lead.movingTo);
 
   const payload = {
-    sender: { name: "1st Om Packers System", email: "alerts@1stompackersandmovers.com" },
+    sender: { name: "Om Rudra Packers and Movers System", email: "alerts@1stompackersandmovers.com" },
     to: [{ email: recipientEmail }],
     subject: `New Moving Inquiry: ${safeName} (${safeFrom} to ${safeTo})`,
     htmlContent: `
@@ -88,17 +88,17 @@ export const sendOtpEmail = async (
   }
 
   const fromEmail = senderEmail || "1stompackersandmovers@gmail.com";
-  const fromName = senderName || "1st Om Packers Security";
+  const fromName = senderName || "Om Rudra Packers and Movers Security";
 
   const safePurposeHeader = sanitizeHeader(purpose);
   const safePurposeHtml = escapeHtml(purpose);
   const safeOtp = sanitizeHeader(otpCode);
 
-  const subject = `[1st Om P&M Security] ${safeOtp} is your ${safePurposeHeader} code`;
+  const subject = `[Om Rudra P&M Security] ${safeOtp} is your ${safePurposeHeader} code`;
   const htmlContent = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 520px; margin: 0 auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
       <div style="text-align: center; margin-bottom: 24px;">
-        <h1 style="color: #0f172a; font-size: 20px; font-weight: 700; margin: 0;">1st Om Packers & Movers</h1>
+        <h1 style="color: #0f172a; font-size: 20px; font-weight: 700; margin: 0;">Om Rudra Packers and Movers</h1>
         <p style="color: #64748b; font-size: 13px; margin-top: 4px;">Account Security Verification</p>
       </div>
 
@@ -111,8 +111,8 @@ export const sendOtpEmail = async (
       </div>
 
       <div style="color: #64748b; font-size: 12px; line-height: 1.6; border-top: 1px solid #e2e8f0; padding-top: 16px;">
-        <p style="margin: 0;">If you did not initiate this request, someone may be attempting to access your 1st Om account. Please immediately review your account credentials.</p>
-        <p style="margin: 8px 0 0 0; color: #94a3b8; font-size: 11px;">1st Om Packers and Movers Hub Central • Automated Security Service</p>
+        <p style="margin: 0;">If you did not initiate this request, someone may be attempting to access your Om Rudra account. Please immediately review your account credentials.</p>
+        <p style="margin: 8px 0 0 0; color: #94a3b8; font-size: 11px;">Om Rudra Packers and Movers Hub Central • Automated Security Service</p>
       </div>
     </div>
   `;
