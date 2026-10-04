@@ -7,10 +7,11 @@ import LocationAutocomplete from "./LocationAutocomplete";
 import { company } from "../../../../../data/company";
 
 const initialForm = { movingFrom: "", movingTo: "", service: "Home shifting", name: "", phone: "", email: "", moveType: "", timeline: "", moveSize: "" };
-const services = ["Home shifting", "Office shifting", "Car transport", "Bike transport", "Packing & unpacking only", "Loading & unloading only", "Warehousing / storage", "Other"];
+const services = ["Home shifting", "Office shifting", "Car transport", "Bike transport", "Packing & unpacking only", "Loading & unloading only", "Warehousing / storage", "Transit insurance", "Other"];
 const timelines = ["Urgent (within 2 to 3 days)", "Within a week", "Within 15 days", "Within a month", "Not fixed yet"];
 const moveTypes = ["Within the city", "Within the state", "To another state"];
 const sizes = ["1 BHK", "2 BHK", "3 BHK", "4+ BHK / Villa", "Few items / Single room", "Car / Vehicle only", "Bike / Two-wheeler only", "Office / Commercial setup"];
+const serviceSizes = { "Car transport": "Car / Vehicle only", "Bike transport": "Bike / Two-wheeler only", "Office shifting": "Office / Commercial setup" };
 const inputClass = "w-full min-h-[50px] px-3 border rounded-md bg-background text-text text-base focus:border-primary focus:ring-2 focus:ring-primary/20";
 
 function resolveLocation(value) {
@@ -26,8 +27,8 @@ function inferMoveType(from, to) {
   return origin.state === destination.state ? "Within the state" : "To another state";
 }
 
-export default function RouteEnquiryBar() {
-  const [form, setForm] = useState(initialForm);
+export default function RouteEnquiryBar({ defaultService = "Home shifting" }) {
+  const [form, setForm] = useState(() => ({ ...initialForm, service: defaultService, moveSize: serviceSizes[defaultService] || "" }));
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
   const [serverError, setServerError] = useState("");
@@ -55,6 +56,7 @@ export default function RouteEnquiryBar() {
   function update(field, value) {
     setForm((prev) => {
       const next = { ...prev, [field]: value };
+      if (field === "service") next.moveSize = serviceSizes[value] || (serviceSizes[prev.service] ? "" : prev.moveSize);
       if (field === "movingFrom" || field === "movingTo") next.moveType = inferMoveType(next.movingFrom, next.movingTo);
       return next;
     });
@@ -147,7 +149,7 @@ export default function RouteEnquiryBar() {
         <div className="p-5 sm:p-8">
           <div className="flex justify-between items-start gap-4 mb-5"><div><p className="text-primary text-sm font-semibold mb-2">{status === "success" ? "Enquiry received" : "Step 2 of 2"}</p><h2 id="enquiry-heading" className="font-display font-bold text-2xl">{status === "success" ? "Your request is with our team." : "Finish your moving enquiry"}</h2></div><button type="button" onClick={closeDetails} disabled={status === "submitting"} aria-label="Close enquiry" className="min-h-11 min-w-11 inline-flex items-center justify-center rounded-md hover:bg-surface disabled:opacity-40"><X size={20} /></button></div>
           {status === "success" ? (
-            <div role="status"><CheckCircle2 size={36} className="text-success mb-4" /><p className="text-text-muted text-base">We will contact you on your provided number to discuss the move and prepare your quote.</p><button type="button" onClick={() => { dialogRef.current.close(); setForm(initialForm); setStatus("idle"); }} className="mt-6 min-h-12 px-6 bg-accent text-white font-semibold rounded-md">Done</button></div>
+            <div role="status"><CheckCircle2 size={36} className="text-success mb-4" /><p className="text-text-muted text-base">We will contact you on your provided number to discuss the move and prepare your quote.</p><button type="button" onClick={() => { dialogRef.current.close(); setForm({ ...initialForm, service: defaultService, moveSize: serviceSizes[defaultService] || "" }); setStatus("idle"); }} className="mt-6 min-h-12 px-6 bg-accent text-white font-semibold rounded-md">Done</button></div>
           ) : (
             <form ref={detailsFormRef} onSubmit={submitEnquiry} noValidate>
               <div className="bg-surface rounded-md p-4 mb-5 text-sm"><p className="font-semibold break-words">{form.movingFrom} to {form.movingTo}</p><p className="text-text-muted mt-1">{form.service}</p><button type="button" onClick={closeDetails} disabled={status === "submitting"} className="min-h-11 text-primary font-semibold underline underline-offset-4">Edit route or service</button></div>

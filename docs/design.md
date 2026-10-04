@@ -1,3 +1,7 @@
+> Service detail update: all eight routes share an accessible responsive template backed by distinct service guidance and FAQs. The early two-step enquiry preselects the current service, including transit insurance. Preparation, agreed scope, related services and call/quote actions replace unsupported ratings and guarantees. Catalogue data is shared with the overview.
+
+> Services overview: a concise service selector above the catalogue, searchable category filters, eight service cards with separate detail and quote actions, practical quote factors, shared moving process, plus/minus FAQs, and consultation CTA. Existing imagery is retained. Unverified guarantees, competitor claims and hard-coded estimator rates are removed from this overview.
+
 > Header alignment refinement: desktop uses a fixed logo column, centered navigation, and a compact action group. Search and phone use matching 44px icon controls; the quote action is one flat red pill without extra borders or an arrow badge. Mobile retains compact search, call and menu controls.
 
 > Responsive homepage update: hero and enquiry now share a natural layout without negative margins or a persistent sticky form. Mobile service/location cards use two columns; process steps use compact image/text rows. Header uses 44px controls and a light 4px blur. Footer is warm charcoal with the retained marquee, reverse logo and lighter links. FAQ controls use a right-aligned plus/minus.
