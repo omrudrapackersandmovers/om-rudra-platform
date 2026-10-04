@@ -13,6 +13,7 @@ export const createLead = async (
     moveType: string;
     service: string;
     timeline: string;
+    moveSize?: string;
     email?: string;
   }
 ) => {
@@ -28,6 +29,7 @@ export const createLead = async (
     timeline: leadData.timeline,
     email: leadData.email ? leadData.email.trim() : null,
     status: "new",
+    notes: leadData.moveSize?.trim() ? `Move size: ${leadData.moveSize.trim()}` : null,
     createdAt: new Date().toISOString(),
   };
 

@@ -62,7 +62,7 @@ const popularRoutes = [
 
 const NotFound = () => {
   const whatsappUrl = company.phone.whatsapp
-    ? `https://wa.me/91${company.phone.whatsapp.replace(/\D/g, "")}?text=Hi%2C%20I%20hit%20a%20broken%20page%20on%20your%20website%20and%20need%20moving%20help.`
+    ? `https://wa.me/${company.phone.whatsapp.replace(/\D/g, "")}?text=Hi%2C%20I%20hit%20a%20broken%20page%20on%20your%20website%20and%20need%20moving%20help.`
     : "#";
 
   return (

@@ -3,14 +3,17 @@
 @theme {
   /* ── Color ───────────────────────────────────────────── */
   --color-background: #ffffff;
-  --color-surface: #f7f7f9;
-  --color-primary: #203a64;
+  --color-surface: #f6f6f7;
+  --color-brand-soft: #fff1f3;
+  --color-hero-overlay: #211419;
+  --color-marquee-surface: #fbf3f4;
+  --color-primary: #b51b35;
   --color-primary-foreground: #ffffff;
-  --color-accent: #f5a623;
-  --color-accent-foreground: #141416;
+  --color-accent: #d7193f;
+  --color-accent-foreground: #ffffff;
   --color-text: #141416;
   --color-text-muted: #5b5f6b;
-  --color-border: #e4e4e8;
+  --color-border: #e5e5e7;
   --color-success: #1f9d55;
   --color-danger: #d64545;
 
@@ -188,3 +191,63 @@
 
 
 
+
+/* Keep transparent-header overrides confined to top-level navigation and utilities.
+   Dropdowns and the search dialog retain their normal surface colours. */
+.site-header .header-nav-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  background: transparent;
+  transition: color 150ms ease, background-color 150ms ease;
+}
+.site-header .header-nav-item:hover,
+.site-header .header-nav-item:focus-visible,
+.site-header .header-nav-item[aria-current="page"],
+.site-header .header-nav-item[data-active="true"],
+.site-header .header-nav-item[aria-expanded="true"] {
+  color: var(--color-primary);
+  background: var(--color-brand-soft);
+}
+.site-header[data-transparent="true"] .header-nav-item {
+  color: white;
+}
+.site-header[data-transparent="true"] .header-nav-item:hover,
+.site-header[data-transparent="true"] .header-nav-item:focus-visible,
+.site-header[data-transparent="true"] .header-nav-item[aria-current="page"],
+.site-header[data-transparent="true"] .header-nav-item[data-active="true"],
+.site-header[data-transparent="true"] .header-nav-item[aria-expanded="true"] {
+  color: white;
+  background: rgb(255 255 255 / 0.12);
+}
+.site-header .header-nav-item svg { color: currentColor; }
+.site-header[data-transparent="true"] .header-topbar button[aria-label^="Search"],
+.site-header[data-transparent="true"] .header-topbar button[aria-controls="mobile-nav"],
+.site-header[data-transparent="true"] .header-topbar a[aria-label^="Call helpline"] {
+  color: var(--color-primary-foreground);
+  background: rgb(255 255 255 / 0.1);
+  border-color: rgb(255 255 255 / 0.3);
+}
+.site-header[data-transparent="true"] .header-topbar button[aria-label^="Search"] *,
+.site-header[data-transparent="true"] .header-topbar a[aria-label^="Call helpline"] * {
+  color: inherit;
+}
+.site-header[data-transparent="true"] .header-topbar kbd {
+  background: rgb(255 255 255 / 0.1);
+  border-color: rgb(255 255 255 / 0.3);
+}
+
+.enquiry-dialog::backdrop {
+  background: rgb(20 20 22 / 0.5);
+}
+
+.faq-question { list-style: none; }
+.faq-question::-webkit-details-marker { display: none; }

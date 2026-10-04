@@ -1,6 +1,12 @@
+> Header alignment refinement: desktop uses a fixed logo column, centered navigation, and a compact action group. Search and phone use matching 44px icon controls; the quote action is one flat red pill without extra borders or an arrow badge. Mobile retains compact search, call and menu controls.
+
+> Responsive homepage update: hero and enquiry now share a natural layout without negative margins or a persistent sticky form. Mobile service/location cards use two columns; process steps use compact image/text rows. Header uses 44px controls and a light 4px blur. Footer is warm charcoal with the retained marquee, reverse logo and lighter links. FAQ controls use a right-aligned plus/minus.
+
+> Current update: the homepage now uses a two-step route-bar enquiry. Step one captures route and service; step two opens an accessible modal for contact and moving details. One final POST sends the complete enquiry. The separate homepage form is removed; dedicated quote and other page forms remain. Move size is saved in the lead notes and notification without a database migration. Header blur is reduced to 8px, and the header scrolls away. Earlier descriptions of query-prefill into a second homepage form are superseded.
+
 # Om Rudra Packers and Movers — Master Design & Engineering Specification
 
-**Status:** Final — binding for all design and development work on this project.
+**Status:** Active specification, updated 4 October 2026 for the client-requested red theme and OYO-inspired homepage.
 **Owner:** Unyrise Tech
 **Client:** Om Rudra Packers and Movers
 
@@ -8,7 +14,7 @@
 
 ## 0. How to Use This Document
 
-This file is the **single source of truth**. If any instruction elsewhere (a chat message, a code comment, a guess) conflicts with this file, **this file wins**. If something is not covered here, stop and ask — do not invent a convention.
+This file records the current design direction. Explicit user and client revisions take precedence; update this document when that direction changes. Use the existing code and reasonable implementation choices for details not specified here.
 
 Rules of engagement:
 
@@ -18,6 +24,12 @@ Rules of engagement:
 4. Do not restructure the project. Section 14 governs folder structure — follow the structure that already exists in the repository. Do not scaffold a new one, rename folders, or "clean up" structure on your own initiative.
 
 ---
+
+## Current homepage direction (4 October 2026)
+
+The client requests a red theme, the enquiry form in the first or second section, and a homepage inspired by the supplied OYO screenshots. The current implementation uses a photographic hero, an overlapping route planning bar that remains sticky on desktop, a two-step enquiry within the route bar, straightforward service cards, region-filtered destination photography, a consultation feature and moving FAQs. Keep the footer marquee and its soft transition into the footer.
+
+See [OYO reference study and implementation guidance](oyo-design-reference.md) for all nine archived screenshots, pattern adaptations, component mapping and future image requirements. These revisions supersede the previous navy/gold palette and the restriction on red emphasis within headings. They do not change the manual lead-to-booking business model.
 
 ## 1. Brand Foundation
 
@@ -59,14 +71,17 @@ Because the stack uses Tailwind CSS (latest, v4+, CSS-first configuration — se
 @theme {
   /* Color */
   --color-background: #ffffff;
-  --color-surface: #f7f7f9;
-  --color-primary: #203a64;      /* deep navy — trust, corporate reliability */
+  --color-surface: #f6f6f7;
+  --color-brand-soft: #fff1f3;
+  --color-hero-overlay: #211419;
+  --color-marquee-surface: #fbf3f4;
+  --color-primary: #b51b35;      /* deep red for brand text and navigation */
   --color-primary-foreground: #ffffff;
-  --color-accent: #f5a623;       /* marigold — CTAs, price highlights, "Om" warmth without cliché saffron/red */
-  --color-accent-foreground: #141416;
+  --color-accent: #d7193f;       /* action red for primary calls to action */
+  --color-accent-foreground: #ffffff;
   --color-text: #141416;
   --color-text-muted: #5b5f6b;
-  --color-border: #e4e4e8;
+  --color-border: #e5e5e7;
   --color-success: #1f9d55;
   --color-danger: #d64545;
 
@@ -96,12 +111,15 @@ Because the stack uses Tailwind CSS (latest, v4+, CSS-first configuration — se
 | Token | Hex | Usage |
 |---|---|---|
 | `--color-background` | `#FFFFFF` | Page background (white theme, as required) |
-| `--color-surface` | `#F7F7F9` | Section alternation, card backgrounds |
-| `--color-primary` | `#203A64` | Navigation, headings, primary buttons, trust elements |
-| `--color-accent` | `#F5A623` | CTAs, "Get a Free Quote" buttons, price highlights, active states |
+| `--color-surface` | `#F6F6F7` | Section alternation, card backgrounds |
+| `--color-brand-soft` | `#FFF1F3` | Soft footer and brand surfaces |
+| `--color-hero-overlay` | `#211419` | Image overlays and consultation feature |
+| `--color-marquee-surface` | `#FBF3F4` | Marquee edge masks |
+| `--color-primary` | `#B51B35` | Navigation, headings, primary buttons, trust elements |
+| `--color-accent` | `#D7193F` | CTAs, "Get a Free Quote" buttons, price highlights, active states |
 | `--color-text` | `#141416` | Body copy, headings |
 | `--color-text-muted` | `#5B5F6B` | Captions, secondary text, metadata |
-| `--color-border` | `#E4E4E8` | Dividers, input borders, card outlines |
+| `--color-border` | `#E5E5E7` | Dividers, input borders, card outlines |
 
 Do not introduce additional brand colors without updating this table first.
 
@@ -121,7 +139,7 @@ Do not introduce additional brand colors without updating this table first.
   - Caption: `0.875rem`
 - Line length: body copy max ~72 characters per line on desktop; don't let text spans go edge-to-edge on wide screens.
 - **NEVER** use all-caps tracked-out "eyebrow" labels above headings (e.g. "OUR SERVICES") — this is a generic AI-design tell. If a section needs a label, set it in sentence case as part of the visual hierarchy, not as decorative chrome.
-- **NEVER** style a headline by bolding/coloring just one word for "punch." If emphasis is needed, it must come from layout or scale, not mid-sentence styling tricks.
+- The current client reference allows restrained red emphasis on a meaningful heading phrase. Keep the rest of the heading near-black and avoid highlighting every word.
 
 ---
 
@@ -200,7 +218,7 @@ Do not do any of the following unless the client explicitly requests it later:
 Build these as reusable, token-driven components (exact folder location per Section 14):
 
 - **Header/Nav** — logo, primary nav, phone number visibly clickable at all breakpoints, "Get a Free Quote" as the accent-colored CTA.
-- **Hero** — headline + subhead + primary CTA + (mobile) immediately visible call/WhatsApp action. No stock photo of generic smiling movers; use an illustration or a real, licensed photo if the client supplies one later.
+- **Hero** — a moving-service photograph with a readable overlay, centered headline and concise supporting copy. On mobile, show quote and call actions within the opening screen. An overlapping route bar collects origin, destination and service, then pre-fills the full enquiry form in section two. Keep existing imagery until the user supplies replacements.
 - **Quote/Lead Form** — Moving From / Moving To / Phone / Move Type / Timeline / Service — short, mobile-optimized, protected by Cloudflare Turnstile (not reCAPTCHA — stay in the Cloudflare ecosystem, see Section 15).
 - **Service card grid** — icon (semantic, per Section 4) + short title + one clear sentence, not a paragraph.
 - **Trust bar** — only real, verifiable facts pulled from the Company Data File (years in business, districts served, real review count if available). Never fabricated badges.

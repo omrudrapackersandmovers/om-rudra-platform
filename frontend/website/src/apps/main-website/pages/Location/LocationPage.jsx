@@ -178,7 +178,7 @@ const LocationPage = () => {
       : allRoutes.filter((r) => r.fromSlug === hubSlug).slice(0, 6);
 
   const whatsappUrl = company.phone.whatsapp
-    ? `https://wa.me/91${company.phone.whatsapp.replace(/\D/g, "")}?text=Hi%2C%20I%20need%20packers%20and%20movers%20in%20${encodeURIComponent(location.name)}.`
+    ? `https://wa.me/${company.phone.whatsapp.replace(/\D/g, "")}?text=Hi%2C%20I%20need%20packers%20and%20movers%20in%20${encodeURIComponent(location.name)}.`
     : "#";
 
   // Location slides for full-bleed hero parallax strip slider (16:9 imagery)

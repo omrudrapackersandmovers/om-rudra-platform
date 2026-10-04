@@ -8,6 +8,8 @@ import { ChevronDown, Check } from "lucide-react";
 const CustomSelect = ({
   id,
   label,
+  name,
+  disabled = false,
   value,
   onChange,
   options = [],
@@ -30,6 +32,12 @@ const CustomSelect = ({
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    if (isOpen && focusedIndex >= 0) {
+      listboxRef.current?.querySelector(`[id="${id}-option-${focusedIndex}"]`)?.scrollIntoView({ block: "nearest" });
+    }
+  }, [isOpen, focusedIndex, id]);
 
   // Keyboard navigation
   const handleKeyDown = (e) => {
@@ -58,6 +66,7 @@ const CustomSelect = ({
         setIsOpen((prev) => !prev);
       }
     } else if (e.key === "Escape") {
+      if (isOpen) { e.preventDefault(); e.stopPropagation(); }
       setIsOpen(false);
     } else if (e.key === "Tab") {
       setIsOpen(false);
@@ -73,9 +82,10 @@ const CustomSelect = ({
     <div className="relative flex flex-col gap-2" ref={containerRef}>
       {label && (
         <label
+          id={`${id}-label`}
           htmlFor={id}
           className="text-sm font-semibold text-text tracking-wide flex items-center justify-between"
-          onClick={() => setIsOpen((prev) => !prev)}
+
         >
           <span>
             {label} {required && <span className="text-danger ml-0.5" aria-hidden="true">*</span>}
@@ -87,11 +97,17 @@ const CustomSelect = ({
       <button
         type="button"
         id={id}
-        onClick={() => setIsOpen((prev) => !prev)}
+        name={name}
+        disabled={disabled}
+        aria-invalid={!!error}
+        aria-describedby={error ? `${id}-error` : undefined}
+        aria-controls={isOpen ? `${id}-listbox` : undefined}
+        aria-activedescendant={isOpen && focusedIndex >= 0 ? `${id}-option-${focusedIndex}` : undefined}
+        onClick={() => { setFocusedIndex(Math.max(0, options.indexOf(value))); setIsOpen((prev) => !prev); }}
         onKeyDown={handleKeyDown}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        aria-labelledby={label ? undefined : id}
+        aria-labelledby={label ? `${id}-label` : undefined}
         className={`w-full flex items-center justify-between px-4 py-3.5 text-left bg-background rounded-[var(--radius-md)] border transition-all duration-150 cursor-pointer select-none text-[0.95rem] ${
           error
             ? "border-danger ring-4 ring-danger/10"
@@ -117,6 +133,8 @@ const CustomSelect = ({
       {isOpen && (
         <div
           ref={listboxRef}
+          id={`${id}-listbox`}
+          aria-labelledby={label ? `${id}-label` : undefined}
           role="listbox"
           tabIndex={-1}
           className="absolute top-full left-0 right-0 mt-2 z-50 py-1.5 bg-background border border-border rounded-[var(--radius-md)] shadow-xl max-h-64 overflow-y-auto focus:outline-none animate-in fade-in-50 zoom-in-95 duration-100"
@@ -128,6 +146,7 @@ const CustomSelect = ({
             return (
               <div
                 key={option}
+                id={`${id}-option-${index}`}
                 role="option"
                 aria-selected={isSelected}
                 onClick={() => handleSelect(option)}
@@ -152,7 +171,7 @@ const CustomSelect = ({
 
       {/* Error text */}
       {error && (
-        <p className="text-xs font-medium text-danger mt-1" role="alert">
+        <p id={`${id}-error`} className="text-xs font-medium text-danger mt-1" role="alert">
           {error}
         </p>
       )}

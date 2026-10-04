@@ -17,7 +17,6 @@ import {
 } from "lucide-react";
 import CustomSelect from "../../../shared/components/CustomSelect";
 import Button from "../../../shared/components/Button";
-import TopoField from "@/components/ui/topo-field";
 import { company } from "@/data/company";
 import LocationAutocomplete from "./LocationAutocomplete";
 import { detectUserCity, detectFromBrowserGps } from "@/apps/main-website/utils/geoService";
@@ -464,7 +463,7 @@ const QuoteForm = ({
     } catch (err) {
       console.error("Quote submission error:", err);
       setStatus("idle");
-      setServerError("Unable to reach the relocation server. Please check your connection or call us directly at +91 7033488691.");
+      setServerError("Unable to send your request. Please check your connection or use the call or WhatsApp options.");
     }
   };
 
@@ -487,21 +486,17 @@ const QuoteForm = ({
 
   if (status === "success") {
     return (
-      <section className="relative overflow-hidden bg-[#eef3f8] py-16 sm:py-24 border-y border-border/80" aria-labelledby="quote-form-heading">
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-70">
-          <TopoField mode="light" speed={0.5} density={1.1} length={1.2} opacity={0.75} />
-        </div>
-
+      <section className="relative overflow-hidden bg-surface py-16 sm:py-24 border-y border-border/80" aria-labelledby="quote-form-heading">
         <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6">
-          <div className="bg-white/95 backdrop-blur-md border border-border/90 rounded-3xl p-8 sm:p-12 text-center shadow-[0_20px_60px_rgba(20,35,60,0.08)]">
+          <div className="bg-background border border-border rounded-3xl p-8 sm:p-12 text-center shadow-card">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-success/10 text-success mb-6">
               <CheckCircle2 size={36} strokeWidth={2} />
             </div>
-            <h2 className="font-display font-bold text-text text-2xl sm:text-3xl mb-3">
+            <h2 id="quote-form-heading" className="font-display font-bold text-text text-2xl sm:text-3xl mb-3">
               We Received Your Quote Request!
             </h2>
             <p className="text-text-muted text-base leading-relaxed mb-6 max-w-md mx-auto">
-              A senior move planner is reviewing your inventory scope. You will receive an itemized, binding written quote shortly.
+              Our team will contact you to confirm your route, inventory and moving date before preparing your quote.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
@@ -518,10 +513,10 @@ const QuoteForm = ({
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#25D366] text-white text-sm font-display font-bold shadow-sm hover:brightness-105 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#157347] text-white text-sm font-display font-bold shadow-sm hover:brightness-105 transition-all"
               >
                 <MessageCircle size={16} />
-                <span>Instant WhatsApp Update</span>
+                <span>Chat on WhatsApp</span>
               </a>
             </div>
 
@@ -544,38 +539,33 @@ const QuoteForm = ({
   return (
     <section
       id="quote-form-section"
-      className={`relative overflow-hidden bg-[#eef3f8] ${isStandalonePage ? "py-10 sm:py-16" : "py-16 sm:py-24"} border-y border-border/80 scroll-mt-20 lg:scroll-mt-24`}
+      className={`relative overflow-hidden bg-background ${isStandalonePage ? "py-10 sm:py-16" : "py-10 sm:py-14"} border-y border-border/80 scroll-mt-4 lg:scroll-mt-44`}
       aria-labelledby="quote-form-heading"
     >
-      {/* Animated Topo Field Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-70">
-        <TopoField mode="light" speed={0.5} density={1.1} length={1.2} opacity={0.75} />
-      </div>
-
-      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header (condensed when standalone page hero is present) */}
         {!isStandalonePage && (
           <div className="mb-10 text-center sm:text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-3.5 backdrop-blur-xs">
               <ShieldCheck size={14} className="text-accent" />
-              <span>Transparent Pricing - Quick Response</span>
+              <span>Free moving enquiry</span>
             </div>
             <h2
               id="quote-form-heading"
               className="font-display font-extrabold text-text mb-3 tracking-tight"
               style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.35rem)" }}
             >
-              Get a free quote
+              Tell us where you’re moving
             </h2>
             <p className="text-text-muted text-base sm:text-lg leading-relaxed max-w-xl">
-              Fill in the details below and we will contact you with a transparent price, usually within a few hours.
+              Share your route and contact details. Our team will discuss your requirements and help you plan the next step. Fields marked * are required.
             </p>
           </div>
         )}
 
         {/* Card Form Container */}
-        <div className="bg-white/95 backdrop-blur-md border border-border/90 rounded-3xl p-6 sm:p-10 shadow-[0_20px_60px_rgba(20,35,60,0.08)]">
+        <div className="bg-background border border-border rounded-lg p-6 sm:p-8 shadow-card">
 
           {/* Service Select in One Line */}
           <div className="mb-7 pb-5 border-b border-border/80">
@@ -915,7 +905,7 @@ const QuoteForm = ({
             <div className="relative mt-3 sm:col-span-2 rounded-xl border border-primary/20 bg-primary/[0.02] py-2.5 px-4 sm:px-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4">
               {/* Embedded Top Tag */}
               <span className="absolute -top-2.5 left-4 px-2.5 py-0.5 rounded-full bg-primary text-white text-[10px] font-bold uppercase tracking-wider shadow-xs">
-                Live Estimate
+                Indicative estimate
               </span>
 
               <div className="flex items-center gap-2 text-xs text-text-muted pt-1 sm:pt-0 min-w-0">
@@ -924,7 +914,7 @@ const QuoteForm = ({
                 </span>
                 <span className="text-border shrink-0">•</span>
                 <span className="truncate">
-                  Includes packing, loading & transit insurance
+                  Final price depends on inventory, access and route
                 </span>
               </div>
 
@@ -951,14 +941,14 @@ const QuoteForm = ({
                   size="lg"
                   className="sm:col-span-8 w-full shadow-md"
                 >
-                  {status === "submitting" ? "Sending your request..." : "Get Free Binding Quote"}
+                  {status === "submitting" ? "Sending your request..." : "Request my free quote"}
                 </Button>
 
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="sm:col-span-4 inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-full bg-[#25D366] text-white font-display font-bold text-xs sm:text-sm hover:brightness-105 transition-all shadow-sm"
+                  className="sm:col-span-4 inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-full bg-[#157347] text-white font-display font-bold text-xs sm:text-sm hover:brightness-105 transition-all shadow-sm"
                 >
                   <MessageCircle size={16} />
                   <span>WhatsApp Quote</span>
@@ -968,15 +958,15 @@ const QuoteForm = ({
               <div className="flex flex-wrap items-center justify-center gap-4 mt-5 text-xs text-text-muted">
                 <span className="flex items-center gap-1.5">
                   <ShieldCheck size={15} className="text-primary shrink-0" />
-                  <span>100% Binding Written Price</span>
+                  <span>No payment to enquire</span>
                 </span>
                 <span className="flex items-center gap-1.5">
                   <CheckCircle2 size={15} className="text-green-600 shrink-0" />
-                  <span>Zero Spam Guarantee</span>
+                  <span>Discuss your requirements</span>
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Truck size={15} className="text-accent shrink-0" />
-                  <span>Dedicated Closed Fleet</span>
+                  <span>Home, office & vehicle moves</span>
                 </span>
               </div>
             </div>

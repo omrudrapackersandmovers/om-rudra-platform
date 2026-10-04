@@ -11,6 +11,7 @@ const createLeadSchema = z.object({
   moveType: z.string().min(2, "Move type is required"),
   service: z.string().min(2, "Service type is required"),
   timeline: z.string().min(2, "Timeline is required"),
+  moveSize: z.string().trim().max(120, "Move size is too long").optional(),
   email: z.string().email("Please enter a valid email address with a domain (e.g. name@example.com)").optional().or(z.literal("")),
 });
 

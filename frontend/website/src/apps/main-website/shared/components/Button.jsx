@@ -33,14 +33,14 @@ const Button = ({
   // Variant color & shadow classes
   const variantClasses = {
     accent:
-      "bg-accent text-accent-foreground border-2 border-white/60 shadow-[0_8px_22px_rgba(245,166,35,0.32)] hover:border-white/90 active:shadow-sm",
+      "bg-accent text-accent-foreground border-2 border-white/60 shadow-[0_8px_22px_rgba(201,35,55,0.22)] hover:border-white/90 active:shadow-sm",
     primary:
-      "bg-primary text-white border-2 border-white/25 shadow-[0_8px_22px_rgba(32,58,100,0.28)] hover:border-white/50 active:shadow-sm",
+      "bg-primary text-white border-2 border-white/25 shadow-[0_8px_22px_rgba(165,29,45,0.22)] hover:border-white/50 active:shadow-sm",
     outline:
       "bg-background text-text border-2 border-border shadow-sm hover:border-primary/40 hover:bg-surface active:shadow-none",
     ghost:
       "bg-transparent text-text border-2 border-border/80 hover:bg-surface hover:border-primary/40 active:shadow-none",
-  }[variant] || "bg-accent text-accent-foreground border-2 border-white/60 shadow-[0_8px_22px_rgba(245,166,35,0.32)]";
+  }[variant] || "bg-accent text-accent-foreground border-2 border-white/60 shadow-[0_8px_22px_rgba(201,35,55,0.22)]";
 
   const combinedClasses = `
     group inline-flex items-center justify-center font-display font-bold rounded-full

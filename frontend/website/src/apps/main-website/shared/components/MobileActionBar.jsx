@@ -11,7 +11,7 @@ import { company } from "../../../../data/company";
  */
 const MobileActionBar = () => {
   const whatsappUrl = company.phone.whatsapp
-    ? `https://wa.me/91${company.phone.whatsapp.replace(/\D/g, "")}`
+    ? `https://wa.me/${company.phone.whatsapp.replace(/\D/g, "")}`
     : "#";
 
   const callUrl = company.phone.primary

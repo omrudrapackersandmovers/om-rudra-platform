@@ -44,6 +44,7 @@ export const sendLeadNotificationEmail = async (
       <p><strong>Move Type:</strong> ${escapeHtml(lead.moveType)}</p>
       <p><strong>Service Requested:</strong> ${escapeHtml(lead.service)}</p>
       <p><strong>Preferred Timeline:</strong> ${escapeHtml(lead.timeline)}</p>
+      ${lead.notes ? `<p><strong>Moving Details:</strong> ${escapeHtml(lead.notes)}</p>` : ""}
     `,
   };
 

@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { MapPin, X, Loader2, LocateFixed, Building2, Navigation } from "lucide-react";
-import { allServiceLocations, hubLocations } from "@/data/locations";
+import { allServiceLocations } from "@/data/locations";
 
 const POPULAR_HUBS = [
   { name: "Patna", state: "Bihar", type: "hub" },
@@ -49,8 +49,8 @@ export default function LocationAutocomplete({
   const filteredOptions = useMemo(() => {
     const q = (value || "").trim().toLowerCase();
     if (!q) {
-      return POPULAR_HUBS.map((h) => ({
-        label: `${h.name}, ${h.state}`,
+      return POPULAR_HUBS.slice(0, 6).map((h) => ({
+        label: h.name === h.state ? h.name : `${h.name}, ${h.state}`,
         city: h.name,
         state: h.state,
         type: h.type,
@@ -71,7 +71,7 @@ export default function LocationAutocomplete({
         stateNorm.includes(q) ||
         slugNorm.includes(q)
       ) {
-        const key = `${loc.name}, ${loc.state}`;
+        const key = loc.name === loc.state ? loc.name : `${loc.name}, ${loc.state}`;
         if (!seen.has(key)) {
           seen.add(key);
           matches.push({
@@ -87,6 +87,8 @@ export default function LocationAutocomplete({
 
     // 2. Sort: Hubs first, then alphabetical
     matches.sort((a, b) => {
+      const rank = (option) => option.city.toLowerCase() === q ? 0 : option.city.toLowerCase().startsWith(q) ? 1 : 2;
+      if (rank(a) !== rank(b)) return rank(a) - rank(b);
       if (a.isHub && !b.isHub) return -1;
       if (!a.isHub && b.isHub) return 1;
       return a.city.localeCompare(b.city);
@@ -129,8 +131,12 @@ export default function LocationAutocomplete({
         setIsOpen(false);
       }
     } else if (e.key === "Escape") {
+      e.preventDefault();
+      e.stopPropagation();
       setIsOpen(false);
       setHighlightIndex(-1);
+    } else if (e.key === "Tab") {
+      setIsOpen(false);
     }
   };
 
@@ -182,6 +188,11 @@ export default function LocationAutocomplete({
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           autoComplete="off"
+          role="combobox"
+          aria-required={required}
+          aria-invalid={!!error}
+          aria-describedby={error ? `${id}-error` : undefined}
+          aria-activedescendant={isOpen && highlightIndex >= 0 ? `${id}-option-${highlightIndex}` : undefined}
           aria-expanded={isOpen}
           aria-autocomplete="list"
           aria-controls={`${id}-listbox`}
@@ -213,16 +224,16 @@ export default function LocationAutocomplete({
           id={`${id}-listbox`}
           role="listbox"
           ref={listRef}
-          className="absolute top-full left-0 right-0 mt-1.5 bg-white border border-border/90 rounded-2xl shadow-[0_12px_36px_rgba(20,35,60,0.12)] py-2 z-50 max-h-64 overflow-y-auto"
+          className="absolute top-full left-0 right-0 mt-1.5 bg-white border border-border/90 rounded-2xl shadow-[0_12px_36px_rgba(20,35,60,0.12)] py-2 z-50 max-h-72 overflow-y-auto overscroll-contain"
         >
           <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-text-muted border-b border-border/50 flex items-center justify-between">
-            <span>{value ? "Matching Service Locations" : "Popular Operational Hubs"}</span>
-            <span className="text-primary font-medium lowercase text-[10px]">where we serve</span>
+            <span>{value ? "Matching locations" : "Popular cities"}</span>
+            <span className="normal-case tracking-normal font-normal">Type to search</span>
           </div>
 
           {filteredOptions.length === 0 ? (
             <div className="px-4 py-3 text-xs text-text-muted text-center">
-              No matching branch found. You can still type custom locations.
+              No matching city. You can still enter your city or area.
             </div>
           ) : (
             filteredOptions.map((opt, idx) => {
@@ -230,7 +241,9 @@ export default function LocationAutocomplete({
               return (
                 <div
                   key={opt.label}
+                  id={`${id}-option-${idx}`}
                   role="option"
+                  onMouseDown={(event) => event.preventDefault()}
                   aria-selected={isSelected}
                   onClick={() => handleSelect(opt)}
                   onMouseEnter={() => setHighlightIndex(idx)}
@@ -246,21 +259,13 @@ export default function LocationAutocomplete({
                     ) : (
                       <Navigation size={13} className="text-text-muted shrink-0" />
                     )}
-                    <div className="truncate">
-                      <span className="font-medium text-text">{opt.city}</span>
-                      <span className="text-text-muted text-[11px] ml-1.5">({opt.state})</span>
+                    <div className="min-w-0">
+                      <span className="block font-medium text-text truncate">{opt.city}</span>
+                      {opt.state !== opt.city && <span className="block text-text-muted text-xs mt-0.5 truncate">{opt.state}</span>}
                     </div>
                   </div>
 
-                  <span
-                    className={`text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
-                      opt.isHub || opt.type === "hub"
-                        ? "bg-primary/10 text-primary border border-primary/20"
-                        : "bg-surface border border-border text-text-muted"
-                    }`}
-                  >
-                    {opt.isHub || opt.type === "hub" ? "Branch Hub" : "Direct Service"}
-                  </span>
+
                 </div>
               );
             })
@@ -269,7 +274,7 @@ export default function LocationAutocomplete({
       )}
 
       {error && (
-        <p className="text-xs font-medium text-danger mt-0.5" role="alert">
+        <p id={`${id}-error`} className="text-xs font-medium text-danger mt-0.5" role="alert">
           {error}
         </p>
       )}

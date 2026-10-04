@@ -21,7 +21,7 @@ const steps = [
     title: "Survey & quote",
     image: "/images/process-for-home-service/visti-and-survey.webp",
     description:
-      "We visit your home (or do a video survey), assess the volume and distance, and give you a clear, itemised price before anything is packed.",
+      "Share your inventory, route and access details. Confirm the scope and quote before booking.",
   },
   {
     icon: Package,
@@ -29,7 +29,7 @@ const steps = [
     title: "Professional packing",
     image: "/images/process-for-home-service/packing.webp",
     description:
-      "Our team arrives on the agreed date with the right materials. Fragile items are individually wrapped. Nothing gets taped into the wrong box.",
+      "Agree on packing materials and special care for fragile items before moving day.",
   },
   {
     icon: Truck,
@@ -37,7 +37,7 @@ const steps = [
     title: "Safe transport",
     image: "/images/process-for-home-service/safe-transport.webp",
     description:
-      "Your belongings travel in a dedicated vehicle, never mixed with another family's goods. We take the safest route and update you when we depart and arrive.",
+      "Confirm transport arrangements, delivery timing and available transit cover.",
   },
   {
     icon: Home,
@@ -45,7 +45,7 @@ const steps = [
     title: "Delivery & unpacking",
     image: "/images/process-for-home-service/setting-on-new-place.webp",
     description:
-      "We unload, place furniture where you want it, and do a room-by-room check with you before we leave. Your new home, ready to live in.",
+      "Check your delivered items with the team. Include unpacking and placement in your booking if needed.",
   },
 ];
 
@@ -122,11 +122,11 @@ const HowItWorks = () => {
   return (
     <section
       ref={sectionRef}
-      className="bg-surface py-14 sm:py-20 overflow-hidden"
+      className="bg-surface py-12 sm:py-16 overflow-hidden"
       aria-labelledby="how-it-works-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 max-w-3xl">
+        <div className="mb-8 sm:mb-10 max-w-3xl">
           <h2
             id="how-it-works-heading"
             className="font-display font-extrabold text-text mb-3 tracking-tight"
@@ -135,7 +135,7 @@ const HowItWorks = () => {
             How your move works
           </h2>
           <p className="text-text-muted text-base sm:text-lg leading-relaxed max-w-2xl">
-            Four clear steps from your current front door to your new one. No surprises, no hidden steps.
+            From your current address to your next, in four steps.
           </p>
         </div>
 
@@ -190,10 +190,10 @@ const HowItWorks = () => {
             return (
               <li
                 key={s.step}
-                className="group flex flex-col rounded-[var(--radius-lg)] border border-border/80 bg-background shadow-xs hover:border-primary/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                className="group flex flex-row sm:flex-col rounded-[var(--radius-lg)] border border-border/80 bg-background shadow-xs hover:border-primary/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
               >
                 {/* 16:10 Visual Image Header */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-text/5">
+                <div className="relative w-28 shrink-0 sm:aspect-[16/10] sm:w-full overflow-hidden bg-text/5">
                   <img
                     src={s.image}
                     alt={s.title}
@@ -215,7 +215,7 @@ const HowItWorks = () => {
                   </div>
                 </div>
 
-                <div className="p-5 flex flex-col flex-1">
+                <div className="p-4 sm:p-5 flex flex-col flex-1">
                   <h3 className="font-display font-bold text-text text-base mb-2 group-hover:text-primary transition-colors">
                     {s.title}
                   </h3>

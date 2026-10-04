@@ -15,8 +15,8 @@ const MainWebsiteLayout = () => {
   return (
     <div className="flex flex-col min-h-dvh">
       <Header />
-      {/* pt-16 on mobile, pt-20 on lg - matches header height */}
-      <main className="flex-1 pt-16 lg:pt-20">
+      {/* The homepage hero extends behind the transparent header. */}
+      <main className="flex-1">
         <Suspense fallback={<PageLoadingFallback />}>
           <Outlet />
         </Suspense>

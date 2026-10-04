@@ -149,7 +149,7 @@ const RoutePage = () => {
       : "National highway freight transit network";
 
   const whatsappUrl = company.phone.whatsapp
-    ? `https://wa.me/91${company.phone.whatsapp.replace(/\D/g, "")}?text=Hi%2C%20I%20need%20a%20quote%20for%20moving%20from%20${encodeURIComponent(route.from)}%20to%20${encodeURIComponent(route.to)}.`
+    ? `https://wa.me/${company.phone.whatsapp.replace(/\D/g, "")}?text=Hi%2C%20I%20need%20a%20quote%20for%20moving%20from%20${encodeURIComponent(route.from)}%20to%20${encodeURIComponent(route.to)}.`
     : "#";
 
   // Other outbound corridors from this origin

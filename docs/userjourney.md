@@ -1,3 +1,7 @@
+> Responsive homepage update: hero and enquiry now share a natural layout without negative margins or a persistent sticky form. Mobile service/location cards use two columns; process steps use compact image/text rows. Header uses 44px controls and a light 4px blur. Footer is warm charcoal with the retained marquee, reverse logo and lighter links. FAQ controls use a right-aligned plus/minus.
+
+> Current update: the homepage now uses a two-step route-bar enquiry. Step one captures route and service; step two opens an accessible modal for contact and moving details. One final POST sends the complete enquiry. The separate homepage form is removed; dedicated quote and other page forms remain. Move size is saved in the lead notes and notification without a database migration. Header blur is reduced to 8px, and the header scrolls away. Earlier descriptions of query-prefill into a second homepage form are superseded.
+
 # Om Rudra Packers and Movers — User Journey & Admin Panel Specification
 
 **Status:** Final — companion to `design.md`. Read `design.md` first; this file assumes its tokens, data layer, and stack decisions and does not repeat them.
@@ -12,6 +16,12 @@ This is a **lead-generation site with a manual sales process behind it**, not a 
 The admin panel exists for one reason: **so the client never loses a lead and never has to ask a developer to change a phone number, a price, or a testimonial.**
 
 ---
+
+## Homepage route planning update (4 October 2026)
+
+The homepage now starts with an OYO-inspired route planning bar: pickup city, destination city and service. Selecting **Plan my move** validates both cities, writes `from`, `to` and `service` query parameters, and scrolls to the full enquiry form in section two. This action does not create a lead or confirm a booking. Step two collects name, phone, move type, preferred timeline, optional move size and optional email. Only the final action submits one complete lead. The header scrolls away, and the bar sticks at the viewport top on desktop and scrolls normally on mobile, where the existing Call/WhatsApp bar remains available. No payment, customer account or new lead API is introduced.
+
+See [the reference study](oyo-design-reference.md) for the visual direction and screenshot archive.
 
 ## 1. Customer-Facing User Journey
 

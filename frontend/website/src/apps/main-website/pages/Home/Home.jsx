@@ -1,10 +1,11 @@
 import Hero from "./components/Hero";
+import RouteEnquiryBar from "./components/RouteEnquiryBar";
 import TrustBar from "./components/TrustBar";
 import ServicesGrid from "./components/ServicesGrid";
 import HowItWorks from "./components/HowItWorks";
-import QuoteForm from "./components/QuoteForm";
 import TestimonialsBlock from "./components/TestimonialsBlock";
 import LocationsSnapshot from "./components/LocationsSnapshot";
+import MovingHelp from "./components/MovingHelp";
 import SEO from "../../../../configs/seo";
 import { company } from "../../../../data/company";
 
@@ -54,13 +55,15 @@ const Home = () => {
         description="Dedicated home shifting, office relocation, and vehicle transport across Bihar, Jharkhand, UP, Delhi NCR, and nationwide routes."
         schemaJson={schema}
       />
-      <Hero />
+      <Hero>
+        <RouteEnquiryBar />
+      </Hero>
       <TrustBar />
       <ServicesGrid />
       <HowItWorks />
-      <QuoteForm />
       <TestimonialsBlock />
       <LocationsSnapshot />
+      <MovingHelp />
     </>
   );
 };

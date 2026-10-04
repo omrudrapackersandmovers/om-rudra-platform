@@ -1,16 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router";
-import { MapPin, Building2, Navigation } from "lucide-react";
-import InteractiveLink from "@/components/ui/interactive-link";
+import { MapPin, ArrowRight } from "lucide-react";
 import { locationsByState, placeImages } from "../../../../../data/locations/index";
 
-/**
- * LocationsSnapshot — purposeful coverage preview with full 2-row grids.
- *
- * Shows 6 key operating states (2 full rows of 3) with explicit Main Hub callouts,
- * and 6 top interstate routes (2 full rows of 3) with origin hubs and distances.
- */
-
-// 6 Core States — creates exactly 2 full rows on desktop (3 x 2)
 const STATE_CARDS = [
   {
     state: "Bihar",
@@ -56,237 +48,85 @@ const FEATURED_ROUTES = [
     slug: "patna-to-delhi",
     from: "Patna",
     to: "Delhi NCR",
-    originHub: "Patna Central Hub",
+    originHub: "Interstate moving",
     distanceKm: 1000,
-    serviceType: "Daily Direct",
+    serviceType: "Check availability",
   },
   {
     slug: "patna-to-kolkata",
     from: "Patna",
     to: "Kolkata",
-    originHub: "Patna Central Hub",
+    originHub: "Interstate moving",
     distanceKm: 581,
-    serviceType: "Fast Freight",
+    serviceType: "Check availability",
   },
   {
     slug: "patna-to-ranchi",
     from: "Patna",
     to: "Ranchi",
-    originHub: "Patna Central Hub",
+    originHub: "Interstate moving",
     distanceKm: 341,
-    serviceType: "Next-Day",
+    serviceType: "Check availability",
   },
   {
     slug: "patna-to-mumbai",
     from: "Patna",
     to: "Mumbai",
-    originHub: "Patna Central Hub",
+    originHub: "Interstate moving",
     distanceKm: 1874,
-    serviceType: "Dedicated Carrier",
+    serviceType: "Check availability",
   },
   {
     slug: "ranchi-to-delhi",
     from: "Ranchi",
     to: "Delhi NCR",
-    originHub: "Ranchi Regional Hub",
+    originHub: "Interstate moving",
     distanceKm: 1280,
-    serviceType: "Express Lane",
+    serviceType: "Check availability",
   },
   {
     slug: "jamshedpur-to-kolkata",
     from: "Jamshedpur",
     to: "Kolkata",
-    originHub: "Jamshedpur Hub",
+    originHub: "Interstate moving",
     distanceKm: 270,
-    serviceType: "Fast Lane",
+    serviceType: "Check availability",
   },
 ];
 
-const LocationsSnapshot = () => {
-  const getCityLink = (state, cityName) => {
-    const list = locationsByState[state] ?? [];
-    const matched = list.find(
-      (c) => c.name.toLowerCase() === cityName.toLowerCase()
-    );
-    return matched ? `/packers-movers-${matched.slug}` : `/where-we-serve`;
-  };
+const filters = ["All regions", "Bihar", "Jharkhand", "Uttar Pradesh", "Delhi NCR", "West Bengal", "Maharashtra"];
 
+export default function LocationsSnapshot() {
+  const [activeRegion, setActiveRegion] = useState("All regions");
+  const visibleRegions = activeRegion === "All regions" ? STATE_CARDS : STATE_CARDS.filter((item) => item.state === activeRegion);
+  function getCityLink(state, name) {
+    const location = (locationsByState[state] || []).find((item) => item.name.toLowerCase() === name.toLowerCase());
+    return location ? `/packers-movers-${location.slug}` : "/where-we-serve";
+  }
   return (
-    <section
-      className="bg-surface py-16 sm:py-24"
-      aria-labelledby="locations-heading"
-    >
+    <section className="bg-background py-12 sm:py-16" aria-labelledby="locations-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10 sm:mb-12">
-          <div className="max-w-2xl">
-            <h2
-              id="locations-heading"
-              className="font-display font-extrabold text-text mb-3 tracking-tight"
-              style={{ fontSize: "clamp(1.85rem, 3vw, 2.5rem)", lineHeight: "1.25" }}
-            >
-              Where we serve
-            </h2>
-            <p className="text-text-muted text-base sm:text-lg leading-relaxed">
-              Operating dedicated branch hubs across 6 core states with verified daily transport corridors connecting major metros nationwide.
-            </p>
-          </div>
-          <InteractiveLink
-            to="/where-we-serve"
-            size="md"
-            className="shrink-0"
-          >
-            View all locations
-          </InteractiveLink>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div><h2 id="locations-heading" className="font-display font-extrabold text-[clamp(1.8rem,3.3vw,2.8rem)] tracking-tight mb-3"><span className="text-primary">A new city.</span> The same moving team.</h2><p className="text-base text-text-muted max-w-2xl">Explore your destination and ask us about availability for your route.</p></div>
+          <Link to="/where-we-serve" className="inline-flex items-center gap-2 min-h-11 text-sm text-primary font-semibold shrink-0 hover:underline">All locations<ArrowRight size={16} aria-hidden="true" /></Link>
         </div>
-
-        {/* State Grid - Full 2 Rows (3 x 2 = 6 cards) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 sm:mb-20">
-          {STATE_CARDS.map((item) => {
-            const locs = (locationsByState[item.state] ?? []).filter(
-              (l) => l.type === "hub" || l.type === "city"
-            );
-            const displayCities =
-              item.cities.length > 0
-                ? item.cities
-                : locs.slice(0, 6).map((l) => l.name);
-
-            return (
-              <div
-                key={item.state}
-                className="rounded-3xl border border-border/80 bg-background hover:border-primary/40 hover:shadow-md transition-all duration-200 overflow-hidden flex flex-col justify-between group"
-              >
-                <div>
-                  {/* State Place Poster */}
-                  {item.image && (
-                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-surface/60 border-b border-border/60">
-                      <img
-                        src={item.image}
-                        alt={`Om Rudra Packers and Movers in ${item.state}`}
-                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
-
-                  <div className="p-5 sm:p-6">
-                    {/* Top State Title */}
-                    <div className="flex items-center gap-2.5 mb-4">
-                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                        <MapPin size={16} strokeWidth={2.2} aria-hidden="true" />
-                      </div>
-                      <h3 className="font-display font-bold text-text text-base sm:text-lg">
-                        {item.state}
-                      </h3>
-                    </div>
-
-                    {/* City Pills with Main Hub clearly badged */}
-                    <ul className="flex flex-wrap gap-2" role="list">
-                      {displayCities.map((cityName) => {
-                        const link = getCityLink(item.state, cityName);
-                        const isHub = item.mainHub
-                          .toLowerCase()
-                          .includes(cityName.toLowerCase());
-                        return (
-                          <li key={cityName}>
-                            <Link
-                              to={link}
-                              className={`text-xs font-medium px-2.5 py-1 rounded-full border transition-all duration-150 inline-flex items-center gap-1.5 ${
-                                isHub
-                                  ? "bg-primary/10 text-primary border-primary/30 font-semibold hover:bg-primary/15"
-                                  : "bg-surface text-text-muted border-border hover:border-primary/30 hover:text-primary"
-                              }`}
-                            >
-                              <span>{cityName}</span>
-                              {isHub && (
-                                <span className="text-[10px] font-bold uppercase tracking-wider text-primary/80">
-                                  (Hub)
-                                </span>
-                              )}
-                            </Link>
-                          </li>
-                        );
-                      })}
-                      {locs.length > displayCities.length && (
-                        <li>
-                          <Link
-                            to="/where-we-serve"
-                            className="text-xs font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full hover:bg-primary/20 transition-colors"
-                          >
-                            +{locs.length - displayCities.length} more
-                          </Link>
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+        <div className="flex gap-6 overflow-x-auto border-b border-border mt-7 mb-8" aria-label="Filter service regions">
+          {filters.map((region) => <button key={region} type="button" aria-pressed={activeRegion === region} onClick={() => setActiveRegion(region)} className={`shrink-0 inline-flex items-center gap-2 min-h-12 border-b-2 text-sm font-semibold ${activeRegion === region ? "text-primary border-primary" : "text-text-muted border-transparent hover:text-text"}`}><MapPin size={16} aria-hidden="true" />{region}</button>)}
         </div>
-
-        {/* Popular Routes - Full 2 Rows (3 x 2 = 6 cards) with Main Hub */}
-        <div className="pt-10 border-t border-border/80">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent-foreground text-xs font-bold uppercase tracking-wider mb-2.5">
-                <Navigation size={13} className="text-accent" />
-                <span>Interstate Network</span>
-              </div>
-              <h3 className="font-display font-extrabold text-text text-xl sm:text-2xl tracking-tight">
-                Popular interstate corridors
-              </h3>
-            </div>
-            <InteractiveLink to="/where-we-serve" size="sm">
-              View all 20+ routes
-            </InteractiveLink>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {FEATURED_ROUTES.map((route) => (
-              <Link
-                key={route.slug}
-                to={`/route/${route.slug}`}
-                className="p-5 sm:p-6 rounded-3xl border border-border/80 bg-background hover:border-primary/40 hover:shadow-md transition-all duration-200 group flex flex-col justify-between"
-              >
-                <div>
-                  {/* Origin Hub and Distance */}
-                  <div className="flex items-center justify-between gap-2 mb-3.5">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">
-                      <Building2 size={13} className="text-accent shrink-0" />
-                      <span>{route.originHub}</span>
-                    </span>
-                    <span className="text-xs font-semibold text-text-muted">
-                      {route.distanceKm} km
-                    </span>
-                  </div>
-
-                  {/* Route Name */}
-                  <div className="font-display font-bold text-text text-base sm:text-lg group-hover:text-primary transition-colors flex items-center gap-2 mb-2">
-                    <span>{route.from}</span>
-                    <span className="text-accent font-extrabold group-hover:translate-x-1 transition-transform">
-                      &rarr;
-                    </span>
-                    <span>{route.to}</span>
-                  </div>
-                </div>
-
-                {/* Bottom Route Features & Link */}
-                <div className="pt-4 mt-4 border-t border-border/70 flex items-center justify-between text-xs">
-                  <span className="font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">
-                    {route.serviceType}
-                  </span>
-                  <span className="font-bold text-primary group-hover:underline inline-flex items-center gap-1">
-                    Route details &rarr;
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {visibleRegions.map((item) => (
+            <article key={item.state} className="relative rounded-lg overflow-hidden bg-hero-overlay min-h-[260px] sm:min-h-[320px] flex flex-col justify-end isolate">
+              <img src={item.image} alt={`Moving destinations in ${item.state}`} className="absolute inset-0 -z-20 w-full h-full object-cover" loading="lazy" width="640" height="480" />
+              <div className="absolute inset-0 -z-10 bg-gradient-to-t from-hero-overlay/95 via-hero-overlay/25 to-transparent" />
+              <div className="p-3 sm:p-6"><h3 className="font-display text-white font-bold text-lg sm:text-2xl mb-2">{item.state}</h3><ul className="flex flex-wrap gap-x-3 gap-y-0">{item.cities.slice(0,4).map((city, index) => <li key={city} className={index > 1 ? "hidden sm:block" : ""}><Link to={getCityLink(item.state,city)} className="inline-flex min-h-11 items-center text-white text-sm underline decoration-white/40 underline-offset-4 hover:decoration-white">{city}</Link></li>)}</ul></div>
+            </article>
+          ))}
+        </div>
+        <div className="mt-12 sm:mt-16">
+          <h3 className="font-display font-bold text-xl sm:text-2xl mb-5">Popular interstate routes</h3>
+          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2">{FEATURED_ROUTES.map((route) => <li key={route.slug}><Link to={`/route/${route.slug}`} className="flex items-center justify-between gap-3 min-h-14 py-3 border-b border-border text-sm font-semibold hover:text-primary"><span>{route.from} to {route.to}</span><ArrowRight size={17} className="text-primary" aria-hidden="true" /></Link></li>)}</ul>
         </div>
       </div>
     </section>
   );
-};
-
-export default LocationsSnapshot;
+}
