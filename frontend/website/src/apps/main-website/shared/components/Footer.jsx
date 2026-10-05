@@ -1,6 +1,5 @@
 import { responsiveImageSet } from "../../../../utils/responsiveImages";
 import { Link } from "react-router";
-import { motion, useReducedMotion } from "framer-motion";
 import {
   PhoneCall,
   Mail,
@@ -65,7 +64,6 @@ const popularRoutes = [
 ];
 
 const Footer = () => {
-  const reduceMotion = useReducedMotion();
   const currentYear = new Date().getFullYear();
   const cleanLegalName = (company.legalName || "").replace(/\.+$/, "");
 
@@ -78,10 +76,8 @@ const Footer = () => {
         <div className="absolute left-0 top-0 bottom-0 w-10 sm:w-20 bg-gradient-to-r from-[#302c30] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-10 sm:w-20 bg-gradient-to-l from-[#302c30] to-transparent z-10 pointer-events-none" />
 
-        <motion.div
-          className="flex items-center gap-12 whitespace-nowrap w-max"
-          animate={reduceMotion ? { x: "0%" } : { x: ["0%", "-50%"] }}
-          transition={{ repeat: Infinity, duration: 32, ease: "linear" }}
+        <div
+          className="footer-trust-strip flex items-center gap-12 whitespace-nowrap w-max"
         >
           {[...trustItems, ...trustItems].map((item, idx) => {
             const Icon = item.icon;
@@ -95,7 +91,7 @@ const Footer = () => {
               </div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
 
       {/* ── Main Footer Columns ───────────────────────────────────── */}

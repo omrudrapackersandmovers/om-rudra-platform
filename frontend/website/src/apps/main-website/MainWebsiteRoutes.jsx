@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router";
 
 import { lazy } from "react";
 import MainWebsiteLayout from "./MainWebsiteLayout";
+import Home from "./pages/Home/Home";
 
-const Home = import.meta.env.SSR ? null : lazy(() => import("./pages/Home/Home"));
 const ServicesPage = import.meta.env.SSR ? null : lazy(() => import("./pages/Services/ServicesPage"));
 const ServiceDetail = import.meta.env.SSR ? null : lazy(() => import("./pages/Services/ServiceDetail"));
 const About = import.meta.env.SSR ? null : lazy(() => import("./pages/About/About"));

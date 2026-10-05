@@ -256,3 +256,11 @@
 :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="submit"]):not([type="button"]):not([type="reset"]), textarea, select) {
   border-radius: var(--radius-md);
 }
+
+/* Keep the footer strip off the JavaScript animation loop. */
+@keyframes footer-trust-scroll {
+  to { transform: translateX(-50%); }
+}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .footer-trust-strip { animation: footer-trust-scroll 32s linear infinite; }
+}
