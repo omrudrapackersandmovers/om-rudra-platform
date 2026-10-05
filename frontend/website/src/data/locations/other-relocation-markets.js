@@ -4,7 +4,7 @@
  * Major metros and other states the company serves for interstate moves,
  * even if they don't have a physical branch there.
  *
- * type: "city" — served city (no branch, but route pages exist)
+ * type: "city" - served city (no branch, but route pages exist)
  */
 
 /** @typedef {{ slug: string, name: string, state: string, type: "hub" | "district" | "city", isPrimaryHub?: boolean }} ServiceLocation */

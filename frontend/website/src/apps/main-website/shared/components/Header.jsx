@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { responsiveImageSet } from "../../../../utils/responsiveImages";
+import { lazy, Suspense, useState, useEffect, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import {
   PhoneCall,
@@ -20,7 +21,7 @@ import {
 } from "lucide-react";
 import { company } from "@/data/company";
 import Button from "./Button";
-import GlobalSearchModal from "@/components/search/GlobalSearchModal";
+const GlobalSearchModal = lazy(() => import("@/components/search/GlobalSearchModal"));
 
 const servicesList = [
   {
@@ -87,12 +88,14 @@ const Header = () => {
   const dropdownRef = useRef(null);
   const location = useLocation();
 
-  // Close menus on route change
-  useEffect(() => {
+  // Reset route-specific menus before committing the new page.
+  const [menuPath, setMenuPath] = useState(location.pathname);
+  if (menuPath !== location.pathname) {
+    setMenuPath(location.pathname);
     setMenuOpen(false);
     setServicesOpen(false);
     setSearchModalOpen(false);
-  }, [location.pathname]);
+  }
 
   // Global keyboard shortcut for Ctrl+K / Cmd+K search
   useEffect(() => {
@@ -143,7 +146,7 @@ const Header = () => {
             aria-label={`${company.brandName}, return to homepage`}
           >
             <img
-              src={isTransparent ? company.logo.reverse : company.logo.horizontal}
+              src={isTransparent ? company.logo.reverse : company.logo.horizontal} srcSet={responsiveImageSet(isTransparent ? company.logo.reverse : company.logo.horizontal)} sizes="160px"
               alt={company.brandName}
               className={`${isTransparent ? "w-32 sm:w-36 lg:w-40 h-14" : "w-28 lg:w-36 h-10"} object-contain object-left`}
             />
@@ -392,10 +395,10 @@ const Header = () => {
       )}
 
       {/* Global Search Modal */}
-      <GlobalSearchModal
+      {searchModalOpen && <Suspense fallback={null}><GlobalSearchModal
         isOpen={searchModalOpen}
         onClose={() => setSearchModalOpen(false)}
-      />
+      /></Suspense>}
     </header>
   );
 };

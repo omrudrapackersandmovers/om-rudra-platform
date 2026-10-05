@@ -1,0 +1,95 @@
+// Geography references support address distinctions, not company operations or vehicle rules.
+// Only these manually reviewed guides qualify for search discovery. All locations remain usable.
+export const editorialGuides = {
+  patna: {
+    heading: "A Patna address needs more than the city name.",
+    intro: "Plan a neighbourhood move, a pickup elsewhere in Patna district or a journey to another city from one place. Our confirmed office is in Ram Krishna Nagar, Soranpur, Goraiya Asthan. Start by separating the pickup area from the destination, then describe how each building can be reached.",
+    fact: "Patna district's administrative directory distinguishes Patna Sadar, Patna City and Danapur subdivisions. A district address and a central-city address should not be treated as the same pickup point.",
+    references: [{ label: "Patna district: subdivisions and blocks", url: "https://patna.nic.in/subdivision-blocks/" }],
+    areas: ["Patna Sadar", "Danapur", "Phulwari Sharif", "Bihta", "Maner", "Barh"],
+    decisions: [
+      { title: "Between Patna neighbourhoods", detail: "For Kankarbagh to Boring Road, for example, provide both building locations and floors. A short city route still needs a packing plan, loading space and a check of lift access." },
+      { title: "A pickup around Danapur or Bihta", detail: "Include the town, postcode and a map pin. Do not use only 'Patna' when the pickup is away from the central city; the team needs the actual approach and delivery addresses." },
+      { title: "Leaving Patna", detail: "Compare the destination-specific route guides below. Arrange who can receive the goods, then ask for the pickup and delivery window in your written quote." },
+    ],
+    faqs: [{ q: "Can I plan Danapur and central Patna pickups the same way?", a: "Use the same inventory checklist, but share separate map pins and access details. Danapur is identified separately in Patna district's administrative directory; the actual addresses determine your route and loading arrangements." }],
+  },
+  gaya: {
+    heading: "Gaya, Bodh Gaya or a pickup elsewhere in the district?",
+    intro: "A Gaya enquiry can describe very different addresses. Identify the pickup town first, then pair it with the complete delivery address. This guide helps you separate a city move from a district pickup or a listed journey to Delhi NCR or Kolkata.",
+    fact: "The Gaya district directory lists Gaya Sadar, Manpur and Bodhgaya separately, along with blocks in the Tekari and Sherghati subdivisions. 'Gaya district' alone does not identify a loading address.",
+    references: [{ label: "Gaya district: subdivisions and blocks", url: "https://gaya.nic.in/subdivision-and-blocks/" }],
+    areas: ["Gaya Sadar", "Manpur", "Bodh Gaya", "Tekari", "Sherghati", "Dobhi"],
+    decisions: [
+      { title: "Gaya and Bodh Gaya addresses", detail: "Write the locality and town at each end instead of repeating only 'Gaya'. Include a map pin and identify where the vehicle could stop for loading." },
+      { title: "A pickup near Tekari or Sherghati", detail: "Add the village or town, postcode and approach-road details. Ask the team to assess the full address before agreeing on vehicle arrangements." },
+      { title: "Gaya to Delhi NCR or Kolkata", detail: "Use the matching route guide below to prepare the receiving address. For Delhi NCR, specify the actual city; for Kolkata, include the street number and postcode." },
+    ],
+    faqs: [{ q: "Should I enter Bodh Gaya as just Gaya?", a: "Enter 'Bodh Gaya, Bihar' with your precise address. Bodhgaya is separately identified in the district directory, and a city-level label cannot replace your loading location." }],
+  },
+  ranchi: {
+    heading: "Separate a Ranchi city move from a district pickup.",
+    intro: "Identify whether your pickup is a city address or a town or village elsewhere in Ranchi district. The distinction helps the team understand the approach to your door before you compare packing, transport and delivery arrangements.",
+    fact: "Ranchi district has Ranchi and Bundu subdivisions. Its directory lists Kanke, Namkum, Ratu and Ormanjhi under Ranchi, while Bundu and Tamar are listed under Bundu subdivision.",
+    references: [{ label: "Ranchi district: subdivisions and blocks", url: "https://ranchi.nic.in/subdivision-blocks/" }],
+    areas: ["Kanke", "Namkum", "Ratu", "Ormanjhi", "Bundu", "Tamar"],
+    decisions: [
+      { title: "A city address or a wider district address", detail: "Include the neighbourhood for a city pickup, or the town, village and block for a district address. Add a pin so the team can distinguish the two." },
+      { title: "Two Ranchi addresses", detail: "List stairs, lifts and parking independently at both properties. Tell the team if furniture needs dismantling before it can pass through either entrance." },
+      { title: "Compare Ranchi's listed destinations", detail: "The route links below separate journeys to Patna, Kolkata, Delhi NCR and other destinations. Check the receiving contact and building access before choosing dates." },
+    ],
+    faqs: [{ q: "Is a Bundu address enough if I select Ranchi?", a: "Include Bundu and the complete property location in your enquiry. The district directory separates Bundu subdivision from Ranchi subdivision, so use the town or village name as well as the district." }],
+  },
+  muzaffarpur: {
+    heading: "Muzaffarpur city and district pickups need different detail.",
+    intro: "For an address in the city, share the neighbourhood and property entrance. For a pickup elsewhere in the district, identify the town or village before discussing the route. Use the Delhi NCR and Kolkata connections below to prepare a receiving address as well.",
+    fact: "The district directory places Mushahari and Bochahan in the East subdivision, and Kanti, Kurhani and Motipur in the West subdivision. These are address references, not interchangeable pickup points.",
+    references: [{ label: "Muzaffarpur district: subdivisions and blocks", url: "https://muzaffarpur.nic.in/about-district/administrative-setup/subdivision-blocks/" }],
+    areas: ["Mushahari", "Bochahan", "Kanti", "Kurhani", "Motipur", "Saraiya"],
+    decisions: [
+      { title: "Inside the city", detail: "Add the street or neighbourhood, floor and a contact who can show the loading entrance. Mention any item that may need to be carried through a staircase." },
+      { title: "Kanti, Motipur or another district pickup", detail: "Specify the town or village, block and map pin. Ask the team to assess the road approach and distance from a stopping point to your door." },
+      { title: "A receiving address in Delhi NCR", detail: "Name Delhi, Noida, Gurugram or the actual destination town. Include the sector or locality and building entry arrangements before discussing a delivery window." },
+    ],
+    faqs: [{ q: "What should I add for a Motipur pickup?", a: "Include Motipur, the village or town address, postcode and a map pin. The district directory lists Motipur separately in the West subdivision; 'Muzaffarpur' alone leaves the pickup unclear." }],
+  },
+  bhagalpur: {
+    heading: "Name the town as well as Bhagalpur district.",
+    intro: "Prepare a city pickup with a street and property entrance, or describe a district pickup with its town or village. Then compare the listed Delhi NCR and Kolkata routes and identify who will receive your items at the destination.",
+    fact: "Bhagalpur's administrative directory groups blocks by Sadar, Kahalgaon and Naugachia subdivisions. An address in the district needs its town or village as well as the Bhagalpur label.",
+    references: [{ label: "Bhagalpur district: subdivisions and blocks", url: "https://bhagalpur.nic.in/subdivision-blocks/" }],
+    areas: ["Kahalgaon", "Naugachia", "Sabour", "Nathnagar", "Sultanganj", "Pirpainti"],
+    decisions: [
+      { title: "Within Bhagalpur city", detail: "Identify the street, building and floor at both ends. Measure bulky furniture and check whether it can clear the stairway or lift." },
+      { title: "Kahalgaon or Naugachia pickups", detail: "Use the specific town or village name and a map pin. Ask for a quote based on both complete addresses rather than an assumed city-centre starting point." },
+      { title: "Bhagalpur to Kolkata or Delhi NCR", detail: "Choose the relevant route guide and confirm the destination postcode, receiving contact and unloading access. Inventory and actual addresses must be agreed before a price is final." },
+    ],
+    faqs: [{ q: "Can I give only Bhagalpur for a Kahalgaon address?", a: "Give Kahalgaon and the full property location too. It is separately identified in the district directory, and the team needs the actual starting point when reviewing your route." }],
+  },
+  delhi: {
+    heading: "Delhi NCR is a region, not a delivery address.",
+    intro: "First name the destination city. Delhi, Noida and Gurugram require different address details even when an enquiry is labelled Delhi NCR. Then add your sector, block or neighbourhood, property entrance and the contact responsible for delivery access.",
+    fact: "The National Capital Region Planning Board lists NCT Delhi alongside NCR districts in Haryana, Uttar Pradesh and Rajasthan. A move labelled 'Delhi NCR' can therefore involve locations in different states.",
+    references: [{ label: "NCR Planning Board: districts in the region", url: "https://ncrpb.nic.in/districts.html" }],
+    areas: ["Delhi", "Noida", "Gurugram", "Ghaziabad", "Faridabad"],
+    decisions: [
+      { title: "Delhi versus a neighbouring NCR city", detail: "Use the actual city and state when giving either address. If you choose a Patna to Delhi NCR route, still tell the team whether your receiving address is Delhi, Noida or Gurugram." },
+      { title: "Sector, block and building entrance", detail: "A society name may not identify the right gate. Add the tower or block, receiving floor and the entrance where unloading can be discussed." },
+      { title: "Plan permission before dispatch", detail: "Ask your building management about lift booking, unloading space and allowed working hours. Share their answer with the moving team; do not assume one rule applies across NCR." },
+    ],
+    faqs: [{ q: "Can I use Delhi for an address in Noida?", a: "Use 'Noida, Uttar Pradesh' and your sector and property details. NCR spans multiple states; the regional label helps browse routes but cannot replace the actual delivery address." }],
+  },
+  kolkata: {
+    heading: "Start a Kolkata enquiry with the street and premises number.",
+    intro: "Pair the locality with the complete street address and postcode. Then describe the entrance, floor and receiving arrangements. For the listed journeys involving Patna, Ranchi and other origins, prepare the two addresses together instead of estimating from city names alone.",
+    fact: "Kolkata Municipal Corporation's building documentation identifies premises through number, street address, ward and borough. Use the full premises address when distinguishing properties with similar locality names.",
+    references: [{ label: "Kolkata Municipal Corporation: building documentation", url: "https://www.kmcgov.in/KMCPortal/downloads/KMC_Building_Rule.pdf" }],
+    areas: [],
+    decisions: [
+      { title: "Premises number and street", detail: "Copy the complete address from your property documents, including postcode. Add a map pin and describe the correct loading entrance if the building has more than one." },
+      { title: "Furniture and building access", detail: "Measure large pieces against your lift or stairway. Tell the team whether doors, furniture or appliances need preparation before items can be brought outside." },
+      { title: "Receiving a move from Patna or Ranchi", detail: "Use the relevant origin-specific guide below. Confirm a receiving contact, access permission and unloading location before agreeing on dispatch and delivery dates." },
+    ],
+    faqs: [{ q: "Is the Kolkata locality name enough for a quote?", a: "Add the premises number, street and postcode, plus your receiving floor and entrance. Municipal address references can help identify the property; vehicle access and moving arrangements still need a separate discussion." }],
+  },
+};

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { ChevronDown, Check } from "lucide-react";
 
 /**
- * CustomSelect — accessible, single-border custom dropdown.
+ * CustomSelect - accessible, single-border custom dropdown.
  * Eliminates browser-native dropdown quirks, double borders, and harsh default outlines.
  */
 const CustomSelect = ({
@@ -107,7 +107,7 @@ const CustomSelect = ({
         onKeyDown={handleKeyDown}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        aria-labelledby={label ? `${id}-label` : undefined}
+        aria-labelledby={label ? `${id}-label ${id}-value` : undefined}
         className={`w-full flex items-center justify-between px-4 py-3.5 text-left bg-background rounded-[var(--radius-md)] border transition-all duration-150 cursor-pointer select-none text-[0.95rem] ${
           error
             ? "border-danger ring-4 ring-danger/10"
@@ -116,7 +116,7 @@ const CustomSelect = ({
             : "border-border hover:border-text-muted/60"
         }`}
       >
-        <span className={`block truncate ${value ? "text-text font-medium" : "text-text-muted"}`}>
+        <span id={`${id}-value`} className={`block truncate ${value ? "text-text font-medium" : "text-text-muted"}`}>
           {value || placeholder}
         </span>
         <ChevronDown

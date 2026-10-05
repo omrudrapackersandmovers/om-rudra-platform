@@ -1,6 +1,6 @@
-import { patnaLocalities } from "./coverage";
+import { patnaLocalities } from "./coverage.js";
 /**
- * contextData.js — Hyper-local operational and geographical metadata for location pages.
+ * contextData.js - Hyper-local operational and geographical metadata for location pages.
  *
  * This file provides unique local context for cities and districts:
  * - Prominent neighborhoods and residential localities

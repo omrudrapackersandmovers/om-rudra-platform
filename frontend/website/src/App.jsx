@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router";
-import { Provider } from "react-redux";
 import { HelmetProvider } from "react-helmet-async";
-import store from "./store";
 import MainWebsiteRoutes from "./apps/main-website/MainWebsiteRoutes";
 import ErrorBoundary from "./apps/main-website/shared/components/ErrorBoundary";
 
@@ -30,7 +28,10 @@ function LenisScroll() {
     }
 
     let lenis;
+    let cancelled = false;
+    let frame;
     import("lenis").then(({ default: Lenis }) => {
+      if (cancelled) return;
       lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -42,13 +43,15 @@ function LenisScroll() {
 
       function raf(time) {
         lenis.raf(time);
-        requestAnimationFrame(raf);
+        frame = requestAnimationFrame(raf);
       }
 
-      requestAnimationFrame(raf);
+      frame = requestAnimationFrame(raf);
     });
 
     return () => {
+      cancelled = true;
+      cancelAnimationFrame(frame);
       if (window.__lenis) {
         window.__lenis = null;
       }
@@ -61,11 +64,10 @@ function LenisScroll() {
   return null;
 }
 
-const App = () => {
+const App = ({ Router = BrowserRouter, routerProps = {}, helmetContext, pageComponents }) => {
   return (
-    <HelmetProvider>
-      <Provider store={store}>
-        <BrowserRouter>
+    <HelmetProvider context={helmetContext}>
+        <Router {...routerProps}>
           <ScrollToTop />
           <LenisScroll />
           <Routes>
@@ -73,13 +75,12 @@ const App = () => {
               path="/*"
               element={
                 <ErrorBoundary>
-                  <MainWebsiteRoutes />
+                  <MainWebsiteRoutes pages={pageComponents} />
                 </ErrorBoundary>
               }
             />
           </Routes>
-        </BrowserRouter>
-      </Provider>
+        </Router>
     </HelmetProvider>
   );
 };

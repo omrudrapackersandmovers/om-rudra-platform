@@ -1,11 +1,12 @@
+import { responsiveImageSet } from "../../../../../utils/responsiveImages";
 import { useEffect, useRef } from "react";
 import { CheckCircle2, Package, Truck, Home } from "lucide-react";
 
 /**
- * HowItWorks — the ONE bold motion moment on this page.
+ * HowItWorks - the ONE bold motion moment on this page.
  *
  * A route line threads through 4 steps (Survey → Pack → Transport → Unpack).
- * A truck marker travels along the line as the user scrolls — built with
+ * A truck marker travels along the line as the user scrolls - built with
  * GSAP ScrollTrigger.
  *
  * Every other section on this page uses NO scroll animation.
@@ -56,10 +57,15 @@ const HowItWorks = () => {
 
   useEffect(() => {
     let ctx;
+    let cancelled = false;
 
     const initGSAP = async () => {
+      if (!window.matchMedia("(min-width: 1024px)").matches) return;
       const { gsap } = await import("gsap");
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      if (cancelled || !sectionRef.current) return;
+      const section = sectionRef.current;
+      const truck = truckRef.current;
       gsap.registerPlugin(ScrollTrigger);
 
       ctx = gsap.context(() => {
@@ -68,7 +74,7 @@ const HowItWorks = () => {
         ).matches;
 
         if (prefersReducedMotion) {
-          // No motion — just show the full line immediately
+          // No motion - just show the full line immediately
           if (lineRef.current) {
             lineRef.current.style.strokeDashoffset = "0";
           }
@@ -105,18 +111,21 @@ const HowItWorks = () => {
             onUpdate: (self) => {
               const progress = self.progress;
               // Translate truck from left to right across the section
-              gsap.set(truckRef.current, {
+              gsap.set(truck, {
                 left: `${progress * 85}%`,
               });
             },
           });
         }
-      }, sectionRef);
+      }, section);
     };
 
     initGSAP();
 
-    return () => ctx?.revert();
+    return () => {
+      cancelled = true;
+      ctx?.revert();
+    };
   }, []);
 
   return (
@@ -195,7 +204,7 @@ const HowItWorks = () => {
                 {/* 16:10 Visual Image Header */}
                 <div className="relative w-28 shrink-0 sm:aspect-[16/10] sm:w-full overflow-hidden bg-text/5">
                   <img
-                    src={s.image}
+                    width="640" height="480" src={s.image} srcSet={responsiveImageSet(s.image)} sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 112px"
                     alt={s.title}
                     className="w-full h-full object-cover object-center group-hover:scale-106 transition-transform duration-500 ease-out"
                     loading="lazy"

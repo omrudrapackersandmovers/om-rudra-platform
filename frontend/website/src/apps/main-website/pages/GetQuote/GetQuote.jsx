@@ -21,7 +21,7 @@ const questions = [
 export default function GetQuote() {
   const whatsapp = `https://wa.me/${company.phone.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(`Hello ${company.brandName}, I would like to discuss a moving quote.`)}`;
   return <>
-    <SEO title="Get a Free Moving Quote — Local & Interstate Moves" description={`Request a moving quote from ${company.brandName}. Share your route, service and preferred date for home, office, car or bike moving.`} />
+    <SEO title="Get a Free Moving Quote - Local & Interstate Moves" description={`Request a moving quote from ${company.brandName}. Share your route, service and preferred date for home, office, car or bike moving.`} />
     <section className="bg-surface border-b border-border py-8 sm:py-12"><div className="container mx-auto px-4 sm:px-6">
       <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-text-muted mb-7"><Link to="/" className="hover:text-primary">Home</Link><ChevronRight size={14} aria-hidden="true" /><span aria-current="page">Get a Quote</span></nav>
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] gap-8 lg:gap-12 items-start">

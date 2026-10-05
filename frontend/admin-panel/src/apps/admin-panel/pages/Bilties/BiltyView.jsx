@@ -38,20 +38,20 @@ const BiltyView = () => {
 
   const formatDate = (dateStr) => {
     if (!dateStr || dateStr === "CURRENT_TIMESTAMP" || dateStr === "null" || dateStr === "undefined") {
-      return "—";
+      return "-";
     }
     try {
       const s = dateStr.includes("T") ? dateStr : dateStr.replace(" ", "T") + "Z";
       const d = new Date(s);
       return isNaN(d.getTime())
-        ? (dateStr.length > 20 ? "—" : dateStr)
+        ? (dateStr.length > 20 ? "-" : dateStr)
         : d.toLocaleDateString("en-IN", {
             day: "numeric",
             month: "short",
             year: "numeric",
           });
     } catch {
-      return "—";
+      return "-";
     }
   };
 

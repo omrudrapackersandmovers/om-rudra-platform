@@ -1,0 +1,6 @@
+---
+description: Use normal hyphens instead of em dashes in all project writing
+alwaysApply: true
+---
+
+Use an ASCII hyphen (-) instead of Unicode U+2014 in UI copy, metadata, documentation, comments, generated text and chat responses. Never introduce em dashes.

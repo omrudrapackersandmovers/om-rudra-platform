@@ -1,5 +1,5 @@
 /**
- * searchIndex.js — Unified site-wide search catalog for Om Rudra Packers and Movers.
+ * searchIndex.js - Unified site-wide search catalog for Om Rudra Packers and Movers.
  *
  * Pre-indexes:
  * 1. Specialized Relocation Services (8 core services)
@@ -9,7 +9,8 @@
  * 5. Instant Operational Actions (Call Hotline, WhatsApp Assistant, Insurance Claims)
  */
 
-import { allServiceLocations, interstateRoutes } from "./locations";
+import { interstateRoutes } from "./locations";
+import { allLocationPages } from "./locations/pageData";
 import { company } from "./company";
 
 // ── 1. Services Catalog ────────────────────────────────────────────────────────
@@ -247,20 +248,18 @@ export const actionsSearchData = [
  * Builds searchable location entries from allServiceLocations
  */
 export const buildLocationsSearchData = () => {
-  return allServiceLocations.map((loc) => {
-    const isHub = loc.type === "hub" || loc.isPrimaryHub;
-    const areasString = Array.isArray(loc.neighborhoods) ? loc.neighborhoods.join(", ") : "";
-    const pincodesString = Array.isArray(loc.pincodes) ? loc.pincodes.join(", ") : "";
+  return allLocationPages.map((loc) => {
+    const isHub = !!loc.isPrimaryHub;
 
     return {
       id: `loc-${loc.slug}`,
       title: `${loc.name} Packers and Movers`,
-      subtitle: `${loc.state}${isHub ? " (Primary Relocation Hub)" : ""}`,
+      subtitle: `${loc.state}${isHub ? " (Patna office)" : ""}`,
       category: "Cities & Locations",
       slug: loc.slug,
       url: `/packers-movers-${loc.slug}`,
       quoteUrl: `/get-quote?from=${encodeURIComponent(loc.name)}`,
-      description: loc.metaDescription || `Verified local and domestic household moving, car carrier, and packing services in ${loc.name}, ${loc.state}.`,
+      description: loc.metaDescription || `Discuss moving requirements for ${loc.name}, ${loc.state}. Review pickup details, service options and your location-prefilled enquiry.`,
       keywords: [
         loc.name.toLowerCase(),
         `${loc.name.toLowerCase()} packers and movers`,
@@ -270,7 +269,7 @@ export const buildLocationsSearchData = () => {
         ...(Array.isArray(loc.pincodes) ? loc.pincodes : []),
       ],
       badges: [
-        isHub ? "Regional Hub" : "District Service",
+        isHub ? "Patna office" : loc.type === "locality" ? "Local area" : "Moving location",
         loc.state,
       ],
       cityName: loc.name,

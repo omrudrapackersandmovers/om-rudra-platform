@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 
 /**
- * InteractiveLink — Reusable animated action link / button.
+ * InteractiveLink - Reusable animated action link / button.
  *
  * Features:
  * - Expanding underline animation on hover (left to right)

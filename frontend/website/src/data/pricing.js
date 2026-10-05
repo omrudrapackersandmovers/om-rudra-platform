@@ -1,5 +1,5 @@
 /**
- * pricing.js — Single Source of Truth for all pricing data and relocation rates.
+ * pricing.js - Single Source of Truth for all pricing data and relocation rates.
  *
  * Every component or page requiring rates, estimates, or estimator options
  * MUST import from this file. Never duplicate or hardcode pricing anywhere else.

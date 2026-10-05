@@ -1,7 +1,7 @@
 /**
  * interstate-routes.js
  *
- * High-intent interstate routes — each gets its own page targeting
+ * High-intent interstate routes - each gets its own page targeting
  * queries like "Patna to Delhi packers and movers."
  *
  * slug format: "[origin]-to-[destination]"

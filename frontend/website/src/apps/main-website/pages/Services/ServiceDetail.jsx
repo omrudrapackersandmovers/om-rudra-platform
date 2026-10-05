@@ -1,4 +1,5 @@
-import { useParams, Link, Navigate } from "react-router";
+import { useParams, Link } from "react-router";
+import NotFound from "../../shared/components/NotFound";
 import { ChevronRight, ArrowRight, Check, Plus, Minus, PhoneCall } from "lucide-react";
 import { company } from "../../../../data/company";
 import { services } from "../../../../data/services";
@@ -10,7 +11,7 @@ export default function ServiceDetail() {
   const { slug } = useParams();
   const service = services.find((item) => item.slug === slug);
   const detail = serviceDetails[slug];
-  if (!service || !detail) return <Navigate to="/services" replace />;
+  if (!service || !detail) return <NotFound />;
   const related = services.filter((item) => item.slug !== slug).sort((a, b) => {
     const score = (item) => item.category === service.category ? 0 : item.slug === "goods-insurance" ? 1 : item.category === "support" ? 2 : 3;
     return score(a) - score(b);

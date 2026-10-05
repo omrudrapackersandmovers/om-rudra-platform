@@ -92,13 +92,13 @@ const LeadsList = () => {
 
   const formatLeadDate = (dateStr) => {
     if (!dateStr || dateStr === "CURRENT_TIMESTAMP" || dateStr === "null" || dateStr === "undefined") {
-      return "—";
+      return "-";
     }
     try {
       const s = dateStr.includes("T") ? dateStr : dateStr.replace(" ", "T") + "Z";
       const d = new Date(s);
       return isNaN(d.getTime())
-        ? (dateStr.length > 20 ? "—" : dateStr)
+        ? (dateStr.length > 20 ? "-" : dateStr)
         : d.toLocaleDateString("en-IN", {
             month: "short",
             day: "numeric",
@@ -106,7 +106,7 @@ const LeadsList = () => {
             minute: "2-digit",
           });
     } catch {
-      return "—";
+      return "-";
     }
   };
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);

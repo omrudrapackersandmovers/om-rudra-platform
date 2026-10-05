@@ -1,5 +1,5 @@
 /**
- * bihar.js — All Bihar service locations.
+ * bihar.js - All Bihar service locations.
  *
  * type: "hub"      → full-service branch, dedicated page with branch info + rate table
  * type: "district" → district/city page with unique content (lighter than hub)

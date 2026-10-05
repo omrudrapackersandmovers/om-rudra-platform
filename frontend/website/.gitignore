@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local Lighthouse reports
+lighthouse-*.json
+lighthouse-*.html

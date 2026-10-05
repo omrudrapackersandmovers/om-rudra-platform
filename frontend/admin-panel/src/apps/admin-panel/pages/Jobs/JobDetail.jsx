@@ -805,7 +805,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                       .filter((s) => s.status !== "inactive")
                       .map((s) => (
                         <option key={s.id} value={s.id}>
-                          {s.name} — {s.role} {s.specialization ? `(${s.specialization})` : ""} [{s.status}]
+                          {s.name} - {s.role} {s.specialization ? `(${s.specialization})` : ""} [{s.status}]
                         </option>
                       ))}
                   </Select>

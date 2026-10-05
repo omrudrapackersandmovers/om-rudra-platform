@@ -1,4 +1,4 @@
-import React, {
+import {
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -8,32 +8,18 @@ import React, {
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 
-/* Inline stand-in for @gsap/react's useGSAP.
-   One gsap.context lives for the component's lifetime. */
+/* Each effect owns its animations and reverts them before rerunning. */
 function useGSAP(callback, options) {
   const deps = options?.dependencies ?? [];
   const scope = options?.scope;
-  const ctxRef = useRef(null);
-  const cleanupRef = useRef(undefined);
 
   useLayoutEffect(() => {
-    const el =
-      scope && typeof scope === "object" && "current" in scope
-        ? scope.current
-        : scope;
-    ctxRef.current = gsap.context(() => {}, el ?? undefined);
-    return () => {
-      ctxRef.current?.revert();
-      ctxRef.current = null;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useLayoutEffect(() => {
-    if (!ctxRef.current) return;
-    cleanupRef.current?.();
-    const ret = ctxRef.current.add(callback);
-    cleanupRef.current = typeof ret === "function" ? ret : undefined;
+    const el = scope && typeof scope === "object" && "current" in scope
+      ? scope.current
+      : scope;
+    if (!el) return;
+    const context = gsap.context(callback, el);
+    return () => context.revert();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }
@@ -41,7 +27,7 @@ function useGSAP(callback, options) {
 if (typeof window !== "undefined") {
   try {
     gsap.registerPlugin(SplitText);
-  } catch (e) {
+  } catch {
     // Graceful fallback if already registered or unavailable
   }
 }
@@ -97,7 +83,6 @@ export default function ParallaxStripSlider({
   autoplay = true,
   showCounter = true,
   showControls = true,
-  accentColor = "#ffffff",
   backgroundColor = "#070b14",
 }) {
   const [current, setCurrent] = useState(0);
@@ -272,7 +257,7 @@ export default function ParallaxStripSlider({
   useLayoutEffect(() => {
     try {
       splitRef.current?.revert();
-    } catch (e) {}
+    } catch { /* Already reverted during cleanup. */ }
     splitRef.current = null;
   }, [caption]);
 
@@ -305,7 +290,7 @@ export default function ParallaxStripSlider({
           split = new SplitText(titleRef.current, { type: "chars" });
           splitRef.current = split;
         }
-      } catch (err) {
+      } catch {
         split = null;
       }
 
@@ -313,7 +298,7 @@ export default function ParallaxStripSlider({
         onComplete: () => {
           try {
             split?.revert();
-          } catch (e) {}
+          } catch { /* Already reverted during cleanup. */ }
           if (splitRef.current === split) splitRef.current = null;
         },
       });
@@ -374,7 +359,7 @@ export default function ParallaxStripSlider({
     () => () => {
       try {
         splitRef.current?.revert();
-      } catch (e) {}
+      } catch { /* Already reverted during cleanup. */ }
       splitRef.current = null;
     },
     { scope: rootRef }
@@ -504,6 +489,8 @@ export default function ParallaxStripSlider({
     return () => {
       window.removeEventListener("mousemove", handleMove);
       if (rafId) cancelAnimationFrame(rafId);
+      gsap.killTweensOf([cursor, l1, l2]);
+      isInside.current = false;
     };
   }, [showControls, isCoarsePointer]);
 
@@ -515,7 +502,7 @@ export default function ParallaxStripSlider({
       <div
         key={i}
         ref={(el) => {
-          if (el) stripsRef.current[i] = el;
+          stripsRef.current[i] = el;
         }}
         className="absolute inset-y-0 overflow-hidden"
         style={{

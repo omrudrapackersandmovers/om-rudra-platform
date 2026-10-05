@@ -1,5 +1,5 @@
 /**
- * index.js — Locations Data Layer aggregator.
+ * index.js - Locations Data Layer aggregator.
  *
  * This is the single import point for everything location-related.
  * The sitemap generator, "Where We Serve" page, quote form dropdowns,
@@ -9,26 +9,26 @@
  * Never touch this aggregator unless you're adding a whole new state file.
  */
 
-export { biharLocations } from "./bihar";
-export { jharkhandLocations } from "./jharkhand";
-export { uttarPradeshLocations } from "./uttar-pradesh";
-export { delhiNcrLocations } from "./delhi-ncr";
-export { westBengalLocations } from "./west-bengal";
-export { otherRelocationMarkets } from "./other-relocation-markets";
-export { interstateRoutes } from "./interstate-routes";
+export { biharLocations } from "./bihar.js";
+export { jharkhandLocations } from "./jharkhand.js";
+export { uttarPradeshLocations } from "./uttar-pradesh.js";
+export { delhiNcrLocations } from "./delhi-ncr.js";
+export { westBengalLocations } from "./west-bengal.js";
+export { otherRelocationMarkets } from "./other-relocation-markets.js";
+export { interstateRoutes } from "./interstate-routes.js";
 
 // ── Aggregated collections ────────────────────────────────────────────────────
 
-import { biharLocations } from "./bihar";
-import { jharkhandLocations } from "./jharkhand";
-import { uttarPradeshLocations } from "./uttar-pradesh";
-import { delhiNcrLocations } from "./delhi-ncr";
-import { westBengalLocations } from "./west-bengal";
-import { otherRelocationMarkets } from "./other-relocation-markets";
-import { interstateRoutes } from "./interstate-routes";
+import { biharLocations } from "./bihar.js";
+import { jharkhandLocations } from "./jharkhand.js";
+import { uttarPradeshLocations } from "./uttar-pradesh.js";
+import { delhiNcrLocations } from "./delhi-ncr.js";
+import { westBengalLocations } from "./west-bengal.js";
+import { otherRelocationMarkets } from "./other-relocation-markets.js";
+import { interstateRoutes } from "./interstate-routes.js";
 
 /**
- * All service locations (city/district pages) — used for sitemap + "Where We Serve"
+ * All service locations (city/district pages) - used for sitemap + "Where We Serve"
  */
 export const allServiceLocations = [
   ...biharLocations,
@@ -40,21 +40,21 @@ export const allServiceLocations = [
 ];
 
 /**
- * Hub cities only — used for branch selectors, primary nav dropdowns
+ * Hub cities only - used for branch selectors, primary nav dropdowns
  */
 export const hubLocations = allServiceLocations.filter(
   (loc) => loc.type === "hub"
 );
 
 /**
- * Primary hub — Patna (used for schema.org headquarters and default context)
+ * Primary hub - Patna (used for schema.org headquarters and default context)
  */
 export const primaryHub = allServiceLocations.find(
   (loc) => loc.isPrimaryHub === true
 );
 
 /**
- * Locations grouped by state — used on the "Where We Serve" page
+ * Locations grouped by state - used on the "Where We Serve" page
  */
 export const locationsByState = allServiceLocations.reduce((acc, loc) => {
   if (!acc[loc.state]) acc[loc.state] = [];
@@ -82,11 +82,11 @@ export const placeImages = {
 };
 
 /**
- * All routes — used for sitemap + route pages
+ * All routes - used for sitemap + route pages
  */
 export { interstateRoutes as allRoutes };
 
 /**
  * Hyper-local profile and metadata helpers
  */
-export { locationProfiles, getLocationProfile } from "./contextData";
+export { locationProfiles, getLocationProfile } from "./contextData.js";

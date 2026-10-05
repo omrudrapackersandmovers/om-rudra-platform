@@ -108,7 +108,7 @@ const VehicleDetail = () => {
   };
 
   const formatDate = (dateStr) => {
-    if (!dateStr || dateStr === "CURRENT_TIMESTAMP" || dateStr === "null") return "—";
+    if (!dateStr || dateStr === "CURRENT_TIMESTAMP" || dateStr === "null") return "-";
     try {
       const s = dateStr.includes("T") ? dateStr : dateStr.replace(" ", "T") + "Z";
       const d = new Date(s);
@@ -165,7 +165,7 @@ const VehicleDetail = () => {
             ? `Expired ${Math.abs(days ?? 0)}d ago`
             : data.status === "ok"
             ? `${days}d remaining`
-            : `${days}d left — Renew soon`}
+            : `${days}d left - Renew soon`}
         </div>
       </div>
     );
@@ -480,7 +480,7 @@ const VehicleDetail = () => {
                   {(move.driverName || move.driverPhone) && (
                     <div className="flex items-center gap-2 text-[11px] text-slate-600 pt-1 border-t border-slate-200/60">
                       <span className="text-slate-400">Driver:</span>
-                      <span className="font-semibold text-slate-800">{move.driverName || "—"}</span>
+                      <span className="font-semibold text-slate-800">{move.driverName || "-"}</span>
                       {move.driverPhone && (
                         <a href={`tel:${move.driverPhone}`} className="font-mono text-blue-600 hover:underline ml-auto">{move.driverPhone}</a>
                       )}

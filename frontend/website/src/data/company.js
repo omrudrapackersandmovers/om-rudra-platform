@@ -1,5 +1,5 @@
 /**
- * company.js — Single source of truth for all static company facts.
+ * company.js - Single source of truth for all static company facts.
  *
  * Every component that needs a phone number, address, email, or service list
  * MUST import from this file. Never hardcode any of these values inline.
@@ -44,7 +44,7 @@ export const company = {
   },
 
   /**
-   * branches — each entry: { city, addressLine, phone, mapEmbedUrl }
+   * branches - each entry: { city, addressLine, phone, mapEmbedUrl }
    * Only include branches the client has confirmed.
    */
   branches: [
@@ -52,7 +52,7 @@ export const company = {
   ],
 
   /**
-   * businessHours — shown on contact page and in schema.org
+   * businessHours - shown on contact page and in schema.org
    */
   businessHours: {
     weekdays: "9:00 AM - 7:00 PM", // TODO: confirm with client
@@ -60,7 +60,7 @@ export const company = {
   },
 
   /**
-   * certifications — ONLY include entries the client has actually provided
+   * certifications - ONLY include entries the client has actually provided
    * proof of. Never copy competitor certifications.
    */
   certifications: [
@@ -69,12 +69,15 @@ export const company = {
 
   socials: {
     facebook: "", // TODO: confirm with client
-    instagram: "", // TODO: confirm with client
-    youtube: "", // TODO: confirm with client
+    instagram: "https://www.instagram.com/omrudrapackersandmovers/",
+    youtube: "https://www.youtube.com/@omrudrapackersandmovers",
+    x: "https://x.com/omrudrapackers",
+    pinterest: "https://in.pinterest.com/omrudrapackersandmovers/",
+    threads: "https://www.threads.com/@omrudrapackersandmovers",
   },
 
   /**
-   * serviceCategories — drives services nav, footer links, quote form dropdown,
+   * serviceCategories - drives services nav, footer links, quote form dropdown,
    * and schema.org Service data. Order matters (displayed as-is).
    */
   serviceCategories: [

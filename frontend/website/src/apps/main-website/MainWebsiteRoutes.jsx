@@ -3,22 +3,24 @@ import { Route, Routes } from "react-router";
 import { lazy } from "react";
 import MainWebsiteLayout from "./MainWebsiteLayout";
 
-const Home = lazy(() => import("./pages/Home/Home"));
-const ServicesPage = lazy(() => import("./pages/Services/ServicesPage"));
-const ServiceDetail = lazy(() => import("./pages/Services/ServiceDetail"));
-const About = lazy(() => import("./pages/About/About"));
-const Pricing = lazy(() => import("./pages/Pricing/Pricing"));
-const Contact = lazy(() => import("./pages/Contact/Contact"));
-const GetQuote = lazy(() => import("./pages/GetQuote/GetQuote"));
-const WhereWeServe = lazy(() => import("./pages/WhereWeServe/WhereWeServe"));
-const LocationPage = lazy(() => import("./pages/Location/LocationPage"));
-const RoutePage = lazy(() => import("./pages/Route/RoutePage"));
-const Privacy = lazy(() => import("./pages/Legal/Privacy"));
-const Terms = lazy(() => import("./pages/Legal/Terms"));
-const SearchPage = lazy(() => import("./pages/Search/SearchPage"));
-const NotFound = lazy(() => import("./shared/components/NotFound"));
+const Home = import.meta.env.SSR ? null : lazy(() => import("./pages/Home/Home"));
+const ServicesPage = import.meta.env.SSR ? null : lazy(() => import("./pages/Services/ServicesPage"));
+const ServiceDetail = import.meta.env.SSR ? null : lazy(() => import("./pages/Services/ServiceDetail"));
+const About = import.meta.env.SSR ? null : lazy(() => import("./pages/About/About"));
+const Pricing = import.meta.env.SSR ? null : lazy(() => import("./pages/Pricing/Pricing"));
+const Contact = import.meta.env.SSR ? null : lazy(() => import("./pages/Contact/Contact"));
+const GetQuote = import.meta.env.SSR ? null : lazy(() => import("./pages/GetQuote/GetQuote"));
+const WhereWeServe = import.meta.env.SSR ? null : lazy(() => import("./pages/WhereWeServe/WhereWeServe"));
+const LocationPage = import.meta.env.SSR ? null : lazy(() => import("./pages/Location/LocationPage"));
+const RoutePage = import.meta.env.SSR ? null : lazy(() => import("./pages/Route/RoutePage"));
+const Privacy = import.meta.env.SSR ? null : lazy(() => import("./pages/Legal/Privacy"));
+const Terms = import.meta.env.SSR ? null : lazy(() => import("./pages/Legal/Terms"));
+const SearchPage = import.meta.env.SSR ? null : lazy(() => import("./pages/Search/SearchPage"));
+const NotFound = import.meta.env.SSR ? null : lazy(() => import("./shared/components/NotFound"));
 
-const MainWebsiteRoutes = () => {
+const defaultPages = { Home, ServicesPage, ServiceDetail, About, Pricing, Contact, GetQuote, WhereWeServe, LocationPage, RoutePage, Privacy, Terms, SearchPage, NotFound };
+const MainWebsiteRoutes = ({ pages = defaultPages }) => {
+  const { Home, ServicesPage, ServiceDetail, About, Pricing, Contact, GetQuote, WhereWeServe, LocationPage, RoutePage, Privacy, Terms, SearchPage, NotFound } = pages;
   return (
     <Routes>
       <Route path="/" element={<MainWebsiteLayout />}>

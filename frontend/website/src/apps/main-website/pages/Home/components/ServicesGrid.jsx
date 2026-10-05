@@ -1,3 +1,4 @@
+import { responsiveImageSet } from "../../../../../utils/responsiveImages";
 import { useState } from "react";
 import { Link } from "react-router";
 import { Home, Building2, Car, Bike, Package, Boxes, Warehouse, ShieldCheck, ArrowRight } from "lucide-react";
@@ -131,7 +132,7 @@ export default function ServicesGrid() {
           {filteredServices.map((service) => (
             <li key={service.slug} className="flex flex-col">
               <Link to={`/services/${service.slug}`} className="block overflow-hidden rounded-lg bg-surface group">
-                <img src={service.image} alt={service.title} className="w-full aspect-[4/3] object-cover group-hover:scale-[1.03] transition-transform duration-300" loading="lazy" width="640" height="480" />
+                <img src={service.image} srcSet={responsiveImageSet(service.image)} sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 50vw" alt={service.title} className="w-full aspect-[4/3] object-cover group-hover:scale-[1.03] transition-transform duration-300" loading="lazy" width="640" height="480" />
               </Link>
               <h3 className="font-display font-bold text-base sm:text-lg mt-3 mb-2"><Link to={`/services/${service.slug}`} className="hover:text-primary">{service.title}</Link></h3>
               <p className="text-xs sm:text-sm text-text-muted leading-relaxed mb-2 flex-1">{service.tagline}</p>

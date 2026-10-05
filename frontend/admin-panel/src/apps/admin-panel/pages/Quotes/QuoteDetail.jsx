@@ -68,14 +68,14 @@ const QuoteDetail = () => {
 
   const formatDate = (dateStr) => {
     if (!dateStr || dateStr === "CURRENT_TIMESTAMP" || dateStr === "null" || dateStr === "undefined") {
-      return "—";
+      return "-";
     }
     try {
       const s = dateStr.includes("T") ? dateStr : dateStr.replace(" ", "T") + "Z";
       const d = new Date(s);
-      return isNaN(d.getTime()) ? (dateStr.length > 20 ? "—" : dateStr) : d.toLocaleDateString("en-IN");
+      return isNaN(d.getTime()) ? (dateStr.length > 20 ? "-" : dateStr) : d.toLocaleDateString("en-IN");
     } catch {
-      return "—";
+      return "-";
     }
   };
 
@@ -548,7 +548,7 @@ Govt Approved & Verified Mover.`;
               <div className="flex justify-between py-2.5 px-4">
                 <span className="text-slate-600">
                   Transit Insurance Cover (Declared Goods Value: ₹
-                  {quote.insuranceDeclaredValue?.toLocaleString("en-IN") || "—"})
+                  {quote.insuranceDeclaredValue?.toLocaleString("en-IN") || "-"})
                 </span>
                 <span className="font-mono">
                   ₹{quote.insuranceCharges.toLocaleString("en-IN")}
@@ -696,7 +696,7 @@ Govt Approved & Verified Mover.`;
               <FormField label="Allocated Vehicle" required error={modalErrors.vehicleAssigned}>
                 {availableVehicles.filter((v) => v.status !== "retired").length === 0 ? (
                   <div className="w-full px-3 py-2 border border-amber-200 bg-amber-50 rounded-xl text-xs text-amber-700">
-                    No vehicles added yet — add vehicles in Fleet section first.
+                    No vehicles added yet - add vehicles in Fleet section first.
                   </div>
                 ) : (
                   <Select
@@ -716,7 +716,7 @@ Govt Approved & Verified Mover.`;
                     <option value="">-- Select from fleet --</option>
                     {availableVehicles.filter((v) => v.status !== "retired").map((v) => (
                       <option key={v.id} value={v.id}>
-                        {v.vehicleNumber} — {v.vehicleType} [{v.status}]
+                        {v.vehicleNumber} - {v.vehicleType} [{v.status}]
                       </option>
                     ))}
                   </Select>
@@ -759,7 +759,7 @@ Govt Approved & Verified Mover.`;
                 <div className="space-y-1.5">
                   {allStaff.filter((s) => s.status !== "inactive").length === 0 ? (
                     <div className="px-3 py-2 border border-amber-200 bg-amber-50 rounded-xl text-xs text-amber-700">
-                      No crew added yet — add staff in Team section.
+                      No crew added yet - add staff in Team section.
                     </div>
                   ) : (
                     <Select
@@ -780,7 +780,7 @@ Govt Approved & Verified Mover.`;
                       <option value="">+ Add crew member from team...</option>
                       {allStaff.filter((s) => s.status !== "inactive").map((s) => (
                         <option key={s.id} value={s.id}>
-                          {s.name} — {s.role} [{s.status}]
+                          {s.name} - {s.role} [{s.status}]
                         </option>
                       ))}
                     </Select>

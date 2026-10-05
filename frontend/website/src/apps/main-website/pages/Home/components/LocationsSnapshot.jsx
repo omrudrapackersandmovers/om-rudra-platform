@@ -1,3 +1,4 @@
+import { responsiveImageSet } from "../../../../../utils/responsiveImages";
 import { useState } from "react";
 import { Link } from "react-router";
 import { MapPin, ArrowRight } from "lucide-react";
@@ -42,7 +43,7 @@ const STATE_CARDS = [
   },
 ];
 
-// 6 Top Interstate Routes — creates exactly 2 full rows on desktop (3 x 2)
+// 6 Top Interstate Routes - creates exactly 2 full rows on desktop (3 x 2)
 const FEATURED_ROUTES = [
   {
     slug: "patna-to-delhi",
@@ -116,7 +117,7 @@ export default function LocationsSnapshot() {
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {visibleRegions.map((item) => (
             <article key={item.state} className="relative rounded-lg overflow-hidden bg-hero-overlay min-h-[260px] sm:min-h-[320px] flex flex-col justify-end isolate">
-              <img src={item.image} alt={`Moving destinations in ${item.state}`} className="absolute inset-0 -z-20 w-full h-full object-cover" loading="lazy" width="640" height="480" />
+              <img src={item.image} srcSet={responsiveImageSet(item.image)} sizes="(min-width: 1024px) 400px, 50vw" alt={`Moving destinations in ${item.state}`} className="absolute inset-0 -z-20 w-full h-full object-cover" loading="lazy" width="640" height="480" />
               <div className="absolute inset-0 -z-10 bg-gradient-to-t from-hero-overlay/95 via-hero-overlay/25 to-transparent" />
               <div className="p-3 sm:p-6"><h3 className="font-display text-white font-bold text-lg sm:text-2xl mb-2">{item.state}</h3><ul className="flex flex-wrap gap-x-3 gap-y-0">{item.cities.slice(0,4).map((city, index) => <li key={city} className={index > 1 ? "hidden sm:block" : ""}><Link to={getCityLink(item.state,city)} className="inline-flex min-h-11 items-center text-white text-sm underline decoration-white/40 underline-offset-4 hover:decoration-white">{city}</Link></li>)}</ul></div>
             </article>

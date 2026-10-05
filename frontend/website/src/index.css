@@ -18,8 +18,8 @@
   --color-danger: #d64545;
 
   /* ── Typography ──────────────────────────────────────── */
-  --font-display: "Sora", ui-sans-serif, sans-serif;
-  --font-body: "Inter", ui-sans-serif, sans-serif;
+  --font-display: "Sora Variable", ui-sans-serif, sans-serif;
+  --font-body: "Inter Variable", ui-sans-serif, sans-serif;
 
   /* ── Radius ──────────────────────────────────────────── */
   --radius-sm: 6px;

@@ -1,106 +1,139 @@
 # Om Rudra Packers and Movers
 
-Official enterprise web platform for **Om Rudra Packers and Movers**, offering reliable household relocation, commercial office shifting, vehicle transport, and warehousing across Bihar, Jharkhand, Uttar Pradesh, Delhi NCR, West Bengal, and nationwide corridors.
+Web platform for **Om Rudra Packers and Movers Private Limited**, a new relocation business based in Patna. The repository contains the public website, an admin panel and a lead-management API.
 
----
+## Project structure
 
-## 📊 Complete Website Architecture & Page Count
+- `frontend/website/` - public React website.
+- `frontend/admin-panel/` - operations and administration frontend.
+- `backend/` - Hono API on Cloudflare Workers, with Cloudflare D1 and Drizzle ORM.
 
-The platform features **168 total pages**, driven by a unified static data layer designed for high local SEO authority, fast mobile loading, and zero duplicate-content penalties.
+## Public pages
 
-### 1. Places & Location-Driven Pages (151 Pages Total)
+The website currently supports **257 named public pages**, excluding unknown URLs and redirects:
 
-* **Where We Serve Hub (`/where-we-serve`)**: **1 Page**  
-  Interactive state-by-state relocation directory with search, hub highlights, and network stats.
+- **202 location pages** at `/packers-movers-:slug`: 157 listed cities/districts and 45 local areas (31 in Patna and 14 in Delhi).
+- **37 city-to-city route pages** at `/route/:slug`.
+- **18 core, service, legal and search pages** listed below.
 
-* **City & District Landing Pages (`/packers-movers-:slug`)**: **114 Pages**
-  * **Bihar (36 pages)**:
-    * *Primary Hubs (4)*: Patna (Headquarters), Gaya, Muzaffarpur, Bhagalpur
-    * *Districts (32)*: Nalanda, Arrah (Bhojpur), Chapra (Saran), Darbhanga, Purnia, Samastipur, Begusarai, Sitamarhi, Madhubani, Supaul, Kishanganj, Araria, Katihar, Munger, Lakhisarai, Sheikhpura, Nawada, Aurangabad, Rohtas (Sasaram), Kaimur (Bhabua), Buxar, Siwan, Gopalganj, East Champaran (Motihari), West Champaran (Bettiah), Sheohar, Vaishali (Hajipur), Jehanabad, Arwal, Banka, Jamui, Khagaria.
-  * **Jharkhand (23 pages)**:
-    * *Regional Hubs (3)*: Ranchi, Jamshedpur, Dhanbad
-    * *Districts (20)*: Bokaro, Hazaribagh, Deoghar, Giridih, Dumka, Palamu, Chaibasa, Chakulia, Simdega, Lohardaga, Gumla, Khunti, Chatra, Koderma, Jamtara, Pakur, Godda, Sahibganj, Ramgarh, Seraikela-Kharsawan.
-  * **Uttar Pradesh (23 pages)**:
-    * *Regional Hubs (4)*: Varanasi, Lucknow, Prayagraj (Allahabad), Gorakhpur
-    * *Cities & Districts (19)*: Agra, Kanpur, Meerut, Bareilly, Aligarh, Moradabad, Saharanpur, Ghaziabad, Jhansi, Mathura, Firozabad, Deoria, Kushinagar, Basti, Ballia, Azamgarh, Ghazipur, Mirzapur, Sonbhadra.
-  * **Delhi NCR (6 pages)**:
-    * *Hub (1)*: Delhi
-    * *NCR Cities (5)*: Noida, Greater Noida, Gurgaon (Gurugram), Faridabad, Ghaziabad (NCR).
-  * **West Bengal (14 pages)**:
-    * *Regional Hubs (3)*: Kolkata, Siliguri, Asansol
-    * *Cities & Districts (11)*: Durgapur, Howrah, Kharagpur, Burdwan, Malda, Murshidabad, Nadia, North 24 Parganas, South 24 Parganas, Cooch Behar, Jalpaiguri.
-  * **Other Major Relocation Metros (12 pages)**:
-    * Mumbai, Pune, Bengaluru, Hyderabad, Chennai, Ahmedabad, Surat, Jaipur, Indore, Bhopal, Nagpur, Chandigarh.
+Core and utility routes:
 
-* **High-Intent Interstate Corridors (`/route/:slug`)**: **36 Pages**
-  * *From Patna (20 routes)*: Delhi NCR, Kolkata, Ranchi, Mumbai, Bengaluru, Hyderabad, Lucknow, Varanasi, Jamshedpur, Dhanbad, Siliguri, Pune, Chennai, Jaipur, Ahmedabad, Bhopal, Indore, Chandigarh, Gurgaon, Noida.
-  * *From Ranchi (6 routes)*: Delhi NCR, Kolkata, Mumbai, Patna, Bengaluru, Hyderabad.
-  * *From Gaya (2 routes)*: Delhi NCR, Kolkata.
-  * *From Muzaffarpur (2 routes)*: Delhi NCR, Kolkata.
-  * *From Bhagalpur (2 routes)*: Delhi NCR, Kolkata.
-  * *From Jamshedpur (4 routes)*: Delhi NCR, Kolkata, Mumbai, Bengaluru.
+- `/` - homepage.
+- `/about` - company introduction and moving approach.
+- `/pricing` - indicative pricing and moving cost guidance.
+- `/where-we-serve` - searchable location directory, with Patna local areas selected initially and filters for listed routes.
+- `/contact` - general enquiries, booking questions, feedback and business enquiries.
+- `/get-quote` - moving enquiry form.
+- `/privacy` - privacy policy, including current cookie and planned analytics information.
+- `/terms` - terms of service.
+- `/search` - site search across services, locations and routes.
 
----
+Service routes:
 
-### 2. Core, Service, Legal & Utility Pages (17 Pages Total)
+- `/services`
+- `/services/home-shifting`
+- `/services/office-commercial-shifting`
+- `/services/car-transportation`
+- `/services/bike-transportation`
+- `/services/packing-unpacking`
+- `/services/loading-unloading`
+- `/services/warehousing-storage`
+- `/services/goods-insurance`
 
-* **Core & Lead Capture Pages (7 pages)**:
-  * `/` (Homepage)
-  * `/about` (Company story, values, operational footprint)
-  * `/pricing` (Comprehensive pricing guide, moving cost estimator)
-  * `/contact` (Branch directory, phone numbers, map coordinates)
-  * `/get-quote` (Online move survey & lead capture)
-  * `/privacy` (Privacy Policy)
-  * `/terms` (Terms of Service)
+Page counts come from the saved data and should be updated when locations, routes or services change. Listed locations represent moving enquiry areas, not branch offices. The confirmed office is in Patna.
 
-* **Service Pages (9 pages)**:
-  * `/services` (Services index & overview)
-  * `/services/home-shifting` (Household goods relocation)
-  * `/services/office-commercial-shifting` (Office & corporate IT relocation)
-  * `/services/car-transportation` (Enclosed vehicle car carriers)
-  * `/services/bike-transportation` (Crated two-wheeler transit)
-  * `/services/packing-unpacking` (Multi-layer materials & packing labor)
-  * `/services/loading-unloading` (Heavy item handling & equipment)
-  * `/services/warehousing-storage` (Short & long term safe storage)
-  * `/services/goods-insurance` (Transit insurance & claims assistance)
+## Location and route pages
 
-* **Site Search & Utility (1 page)**:
-  * `/search` (Instant search across all services, cities, and corridors)
+Location pages share a responsive design, with content varying by location type, saved local areas and listed city connections. They include address-access checklists, service enquiries, pricing guidance, FAQs and links to other locations. This is a data-driven foundation; the pages do not yet have genuine completed-move stories, customer reviews or location-specific business photographs.
 
----
+Every listed route opens its own page from the directory and location pages. Route pages include pickup and delivery planning, available enquiry categories, FAQs, endpoint location links and other outbound routes. Quote actions prefill the origin, destination and interstate scope; service actions also prefill the selected service.
 
-## 🛠️ Tech Stack
+Do not add invented reviews, move counts, branch addresses, delivery guarantees or operational claims. Confirm service availability and final quote scope with the business. Real local evidence can be added as the business completes moves.
 
-* **Frontend**: React 19, Vite, React Router 7
-* **Styling**: Tailwind CSS v4, CSS Custom Properties
-* **State Management**: Redux Toolkit
-* **Animation & Motion**: GSAP, Framer Motion, Lenis Smooth Scroll
-* **SEO**: `react-helmet-async`, structured data (`LocalBusiness`, `MovingCompany`, `Service`, `FAQPage`, `BreadcrumbList`)
-* **Icons**: `lucide-react`, `react-icons/fa6`
+## Forms and lead handling
 
----
+- The moving enquiry form submits to `POST /api/leads`.
+- The contact form submits to `POST /api/leads/contact` and requires name, phone, email, subject and message.
+- Forms use custom validation and inline feedback instead of browser validation popups. Submission states include loading, success and failure feedback.
+- The backend validates requests, stores enquiries in the leads table and supports email notifications through Brevo.
+- Cloudflare Turnstile verification is enabled when its backend secret is configured. Contact widget configuration uses `VITE_TURNSTILE_SITE_KEY`; verify token handling across both forms before enabling protection in production.
 
-## 📍 Single Source of Truth Architecture
+Frontend API requests use `VITE_API_URL`, falling back to `https://api.omrudrapackersandmovers.com`. A working frontend build alone does not verify production lead storage or notification delivery.
 
-To ensure data integrity, no operational details or rates are hardcoded inside components:
-* `src/data/company.js`: All company facts, primary phone, WhatsApp, head office address, business hours, and social links.
-* `src/data/pricing.js`: Central pricing engine with local shifting rates, interstate corridors, vehicle transport, and estimator configs.
-* `src/data/locations/`: Granular regional modules (`bihar.js`, `jharkhand.js`, `uttar-pradesh.js`, `delhi-ncr.js`, `west-bengal.js`, `interstate-routes.js`).
+## Tech stack
 
----
+- React 19, Vite and React Router 7.
+- Tailwind CSS v4 and shared CSS variables for colours, typography and border radii.
+- Redux Toolkit, GSAP, Framer Motion and Lenis.
+- `react-helmet-async` for page metadata and JSON-LD.
+- Lucide and React Icons.
+- Hono, Zod, Drizzle ORM and Cloudflare D1 for the backend.
 
-## 🚀 Running Locally
+## Data and SEO
+
+Public website data lives under `frontend/website/src/data/`:
+
+- `company.js` - company identity, contacts and office information.
+- `pricing.js` - indicative rates and estimator configuration.
+- `locations/index.js` - aggregated city, district and route collections.
+- `locations/coverage.js` - coverage filters and local-area options.
+- `locations/pageData.js` - the complete location-page collection and derived page content.
+- `locations/interstate-routes.js` - the listed city-to-city routes.
+- `searchIndex.js` - search entries for public pages.
+
+Public pages have canonical URLs, indexing rules, social metadata and confirmed business structured data. Location, route and service pages include Service metadata and breadcrumbs. The static build emits `dist/sitemap.xml` and `dist/robots.txt` using the production domain and saved page data. The sitemap currently contains **61 URLs**, including seven reviewed city guides. The other 195 location pages remain accessible for enquiries with `noindex,follow` until their local content is reviewed; utility search and error pages are excluded. See [location editorial policy](docs/location-content.md). The build also generates an unrestricted `robots.txt`, a `robot.txt` alias, an `llms.txt` content index and site-specific `agent.txt`/`agents.txt` enquiry guides. Public AI crawling is allowed; CDN crawler settings still need verification after deployment.
+
+The production build generates **258 static HTML documents**, including complete content and metadata for 61 indexable pages, 195 noindex location enquiry pages, a noindex search page and a noindex error page. React hydrates normal routes to keep interactions working. The build validates metadata, sitemap membership, image assets, internal links and crawlable content. See [SEO build and launch guide](docs/seo-launch.md) for hosting, verification and production checks. Static generation does not guarantee indexing or rankings.
+
+## Running locally
+
+Start the website:
 
 ```bash
-# Navigate to the website workspace
 cd frontend/website
-
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
-
-# Build for production
-npm run build
 ```
+
+For local API requests, create `frontend/website/.env.local`:
+
+```dotenv
+VITE_API_URL=http://localhost:8787
+# Add a suitable development Turnstile site key if testing the widget.
+# VITE_TURNSTILE_SITE_KEY=
+```
+
+Start the API in a separate terminal:
+
+```bash
+cd backend
+npm install
+npm run db:migrate:local
+npm run dev
+```
+
+Local database setup uses the existing migration script. Review subsequent files in `backend/drizzle/` if a feature needs additional migrations. Backend configuration is in `backend/wrangler.toml`; use local development secrets for local testing and keep them out of version control. Bindings include `DB`, `BREVO_API_KEY`, `NOTIFICATION_EMAIL`, `TURNSTILE_SECRET_KEY` and `JWT_SECRET`.
+
+## Validation
+
+From `frontend/website/`:
+
+```bash
+npm run build
+npm run lint
+npm run check:seo
+npm run preview
+```
+
+The recent location and route work passed production builds, targeted lint checks, data checks for all 202 locations and 37 route endpoints, and mobile overflow/quote-prefill checks. Repository-wide lint still has previously identified issues in shared search/form components; targeted checks are not a substitute for a clean full lint run.
+
+## Remaining launch work
+
+- Complete a site-wide mobile and desktop review, including existing service pages and shared interactions.
+- Deploy and verify the contact endpoint and moving enquiry flow: validation, D1 storage, notifications and failure handling.
+- Review Privacy Policy and Terms of Service with the business before launch; further legal work was deferred.
+- Add GA4 when ready. Analytics is planned and is not currently installed. There is no dedicated cookie policy page yet; update disclosures and consent behaviour to match the eventual setup.
+- Push and deploy the static build, verify redirects and HTTP 404s, then create/verify Search Console and submit the sitemap using docs/seo-launch.md.
+- Add genuine photos, customer feedback and completed-move details as they become available.
+
+No production deployment or analytics setup is implied by the current page implementation.

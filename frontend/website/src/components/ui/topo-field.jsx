@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 /**
- * TopoField — Reusable WebGL animated topographic contour & grid background component.
+ * TopoField - Reusable WebGL animated topographic contour & grid background component.
  *
  * Adapted for Om Rudra Packers and Movers brand palette:
  * - Light Mode: Cool paper surface (#eef3f8) with subtle primary navy (#203a64) contour lines.
@@ -322,7 +322,7 @@ body[data-threeui-ready] > [data-threeui-role] { visibility: visible !important;
 }
 
 /**
- * TopoField — an isolated, full-bleed animated WebGL background: a faint grid plus
+ * TopoField - an isolated, full-bleed animated WebGL background: a faint grid plus
  * ultra-thin topographic contour lines drifting slowly over time.
  */
 export default function TopoField({

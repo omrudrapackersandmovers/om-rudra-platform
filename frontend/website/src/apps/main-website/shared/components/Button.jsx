@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 
 /**
- * Button — unified brand button component tailored to our design system.
+ * Button - unified brand button component tailored to our design system.
  *
  * Features:
  * - Geometric pill shape with crisp borders and multi-layered shadows

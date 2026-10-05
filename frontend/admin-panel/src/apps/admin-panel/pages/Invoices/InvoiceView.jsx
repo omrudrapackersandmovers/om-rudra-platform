@@ -61,14 +61,14 @@ const InvoiceView = () => {
 
   const formatDate = (dateStr) => {
     if (!dateStr || dateStr === "CURRENT_TIMESTAMP" || dateStr === "null" || dateStr === "undefined") {
-      return "—";
+      return "-";
     }
     try {
       const s = dateStr.includes("T") ? dateStr : dateStr.replace(" ", "T") + "Z";
       const d = new Date(s);
-      return isNaN(d.getTime()) ? (dateStr.length > 20 ? "—" : dateStr) : d.toLocaleDateString("en-IN");
+      return isNaN(d.getTime()) ? (dateStr.length > 20 ? "-" : dateStr) : d.toLocaleDateString("en-IN");
     } catch {
-      return "—";
+      return "-";
     }
   };
 
@@ -496,7 +496,7 @@ Thank you for choosing ${company.name || "Om Rudra Packers and Movers"}!`;
                     <tr key={idx} className="hover:bg-slate-50/50">
                       <td className="py-2 px-3 font-mono">{p.paymentDate}</td>
                       <td className="py-2 px-3 uppercase font-medium">{p.paymentMode}</td>
-                      <td className="py-2 px-3 text-slate-500">{p.transactionRef || p.notes || "—"}</td>
+                      <td className="py-2 px-3 text-slate-500">{p.transactionRef || p.notes || "-"}</td>
                       <td className="py-2 px-3 text-right font-mono font-bold text-emerald-700">
                         ₹{Number(p.amount).toLocaleString("en-IN")}
                       </td>

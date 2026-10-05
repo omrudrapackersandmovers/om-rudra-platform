@@ -96,7 +96,7 @@ export default function Contact() {
     return <div key={name}><label htmlFor={`contact-${name}`} className="block text-sm font-semibold">{config.label} <span className="text-danger">*</span></label><input id={`contact-${name}`} required name={name} type={config.type} placeholder={config.placeholder} autoComplete={config.autoComplete} inputMode={name === "phone" ? "numeric" : undefined} maxLength={config.maxLength} value={form[name]} onChange={change} onBlur={blur} aria-invalid={!!errors[name]} aria-describedby={errors[name] ? `contact-${name}-error` : undefined} className={`${fieldClass} mt-2 ${errors[name] ? "border-danger" : ""}`} /><FieldError name={name} error={errors[name]} /></div>;
   }
   return <>
-    <SEO title="Contact Us — Plan Your Move With Our Patna Team" description={`Call ${company.brandName} on ${company.phone.primaryDisplay}, message on WhatsApp or contact our Patna office to discuss your local or interstate move.`} />
+    <SEO title="Contact Us - Plan Your Move With Our Patna Team" description={`Call ${company.brandName} on ${company.phone.primaryDisplay}, message on WhatsApp or contact our Patna office to discuss your local or interstate move.`} />
     <section className="bg-surface border-b border-border py-10 sm:py-14"><div className="container mx-auto px-4 sm:px-6">
       <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-text-muted mb-7"><Link to="/" className="hover:text-primary">Home</Link><ChevronRight size={14} aria-hidden="true" /><span aria-current="page">Contact Us</span></nav>
       <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8 lg:gap-16 items-start">

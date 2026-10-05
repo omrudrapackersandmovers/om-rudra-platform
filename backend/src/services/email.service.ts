@@ -32,7 +32,7 @@ export const sendLeadNotificationEmail = async (
   const payload = {
     sender: { name: "Om Rudra Packers and Movers System", email: "alerts@omrudrapackersandmovers.com" },
     to: [{ email: recipientEmail }],
-    subject: lead.moveType === "Contact enquiry" ? `New Contact Enquiry: ${safeName} — ${sanitizeHeader(lead.service)}` : `New Moving Inquiry: ${safeName} (${safeFrom} to ${safeTo})`,
+    subject: lead.moveType === "Contact enquiry" ? `New Contact Enquiry: ${safeName} - ${sanitizeHeader(lead.service)}` : `New Moving Inquiry: ${safeName} (${safeFrom} to ${safeTo})`,
     htmlContent: `
       <h2>${lead.moveType === "Contact enquiry" ? "New Contact Enquiry" : "New Relocation Request Received"}</h2>
       <p><strong>Customer Name:</strong> ${escapeHtml(lead.name)}</p>

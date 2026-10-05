@@ -1,9 +1,8 @@
-import { Link } from "react-router";
 import { PhoneCall, MessageCircle } from "lucide-react";
 import { company } from "../../../../data/company";
 
 /**
- * MobileActionBar — persistent Call + WhatsApp bar, fixed to the
+ * MobileActionBar - persistent Call + WhatsApp bar, fixed to the
  * bottom of the viewport on mobile only (hidden on md and above).
  *
  * This is the highest-converting element for this industry on mobile.
@@ -31,7 +30,7 @@ const MobileActionBar = () => {
         <a
           href={callUrl}
           className="flex items-center justify-center gap-2.5 py-4 text-sm font-semibold text-primary border-r border-border active:bg-surface transition-colors duration-150"
-          aria-label="Call us now"
+          aria-label="Call Now - our moving team"
         >
           <PhoneCall size={18} strokeWidth={2} />
           Call Now
@@ -40,7 +39,7 @@ const MobileActionBar = () => {
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2.5 py-4 text-sm font-semibold text-success active:bg-surface transition-colors duration-150"
+          className="flex items-center justify-center gap-2.5 py-4 text-sm font-semibold text-[#157347] active:bg-surface transition-colors duration-150"
           aria-label="Chat with us on WhatsApp"
         >
           <MessageCircle size={18} strokeWidth={2} />

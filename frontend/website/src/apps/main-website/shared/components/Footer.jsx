@@ -1,3 +1,4 @@
+import { responsiveImageSet } from "../../../../utils/responsiveImages";
 import { Link } from "react-router";
 import { motion, useReducedMotion } from "framer-motion";
 import {
@@ -12,6 +13,15 @@ import {
   Heart,
 } from "lucide-react";
 import { company } from "../../../../data/company";
+import { FaInstagram, FaYoutube, FaXTwitter, FaPinterestP, FaThreads } from "react-icons/fa6";
+
+const socialLinks = [
+  { key: "instagram", label: "Instagram", icon: FaInstagram },
+  { key: "youtube", label: "YouTube", icon: FaYoutube },
+  { key: "x", label: "X", icon: FaXTwitter },
+  { key: "pinterest", label: "Pinterest", icon: FaPinterestP },
+  { key: "threads", label: "Threads", icon: FaThreads },
+];
 
 const trustItems = [
   { icon: ShieldCheck, text: "Ask About Transit Insurance" },
@@ -102,7 +112,7 @@ const Footer = () => {
               aria-label={`${company.brandName}, return to homepage`}
             >
               <img
-                src={company.logo.reverse}
+                width="416" height="208" loading="lazy" src={company.logo.reverse} srcSet={responsiveImageSet(company.logo.reverse)} sizes="208px"
                 alt={company.brandName}
                 className="w-48 sm:w-52 h-auto object-contain"
               />
@@ -145,6 +155,13 @@ const Footer = () => {
                 </div>
               )}
             </address>
+            <nav aria-label="Social accounts" className="flex flex-wrap gap-2 mt-6">
+              {socialLinks.filter(item => company.socials[item.key]).map(({ key, label, icon: Icon }) => (
+                <a key={key} href={company.socials[key]} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${company.brandName} on ${label} (opens in a new tab)`} title={label} className="inline-flex items-center justify-center w-11 h-11 rounded-[var(--radius-md)] border border-white/20 text-white/85 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                  <Icon size={19} aria-hidden="true" />
+                </a>
+              ))}
+            </nav>
 
           </div>
 

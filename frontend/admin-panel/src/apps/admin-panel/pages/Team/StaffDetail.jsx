@@ -155,7 +155,7 @@ const StaffDetail = () => {
   };
 
   const formatDate = (dateStr) => {
-    if (!dateStr || dateStr === "CURRENT_TIMESTAMP" || dateStr === "null") return "—";
+    if (!dateStr || dateStr === "CURRENT_TIMESTAMP" || dateStr === "null") return "-";
     try {
       const s = dateStr.includes("T") ? dateStr : dateStr.replace(" ", "T") + "Z";
       const d = new Date(s);
