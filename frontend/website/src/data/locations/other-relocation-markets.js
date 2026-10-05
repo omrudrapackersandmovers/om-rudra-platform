@@ -23,4 +23,11 @@ export const otherRelocationMarkets = [
   { slug: "bhopal", name: "Bhopal", state: "Madhya Pradesh", type: "city" },
   { slug: "nagpur", name: "Nagpur", state: "Maharashtra", type: "city" },
   { slug: "chandigarh", name: "Chandigarh", state: "Chandigarh", type: "city" },
+
+  // Client location list, reviewed October 2026. These are destinations, not branches.
+  {"slug": "guwahati", "name": "Guwahati", "state": "Assam", "type": "city"},
+  {"slug": "dibrugarh", "name": "Dibrugarh", "state": "Assam", "type": "city"},
+  {"slug": "silchar", "name": "Silchar", "state": "Assam", "type": "city"},
+
+  { slug: "bhubaneswar", name: "Bhubaneswar", state: "Odisha", type: "city" },
 ];

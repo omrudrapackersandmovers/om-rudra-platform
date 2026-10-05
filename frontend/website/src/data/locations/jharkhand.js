@@ -13,7 +13,7 @@ export const jharkhandLocations = [
   { slug: "deoghar", name: "Deoghar", state: "Jharkhand", type: "district" },
   { slug: "giridih", name: "Giridih", state: "Jharkhand", type: "district" },
   { slug: "dumka", name: "Dumka", state: "Jharkhand", type: "district" },
-  { slug: "palamu", name: "Palamu (Daltonganj)", state: "Jharkhand", type: "district" },
+  { slug: "palamu", name: "Palamu (Medininagar / Daltonganj)", state: "Jharkhand", type: "district" },
   { slug: "chaibasa", name: "Chaibasa (West Singhbhum)", state: "Jharkhand", type: "district" },
   { slug: "chakulia", name: "Chakulia (East Singhbhum)", state: "Jharkhand", type: "district" },
   { slug: "simdega", name: "Simdega", state: "Jharkhand", type: "district" },
@@ -28,4 +28,7 @@ export const jharkhandLocations = [
   { slug: "sahibganj", name: "Sahibganj", state: "Jharkhand", type: "district" },
   { slug: "ramgarh", name: "Ramgarh", state: "Jharkhand", type: "district" },
   { slug: "seraikela", name: "Seraikela-Kharsawan", state: "Jharkhand", type: "district" },
+
+  // Client location list, reviewed October 2026. These are destinations, not branches.
+  {"slug": "garhwa", "name": "Garhwa", "state": "Jharkhand", "type": "city"},
 ];

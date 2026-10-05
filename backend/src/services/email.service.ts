@@ -32,9 +32,9 @@ export const sendLeadNotificationEmail = async (
   const payload = {
     sender: { name: "Om Rudra Packers and Movers System", email: "alerts@omrudrapackersandmovers.com" },
     to: [{ email: recipientEmail }],
-    subject: `New Moving Inquiry: ${safeName} (${safeFrom} to ${safeTo})`,
+    subject: lead.moveType === "Contact enquiry" ? `New Contact Enquiry: ${safeName} — ${sanitizeHeader(lead.service)}` : `New Moving Inquiry: ${safeName} (${safeFrom} to ${safeTo})`,
     htmlContent: `
-      <h2>New Relocation Request Received</h2>
+      <h2>${lead.moveType === "Contact enquiry" ? "New Contact Enquiry" : "New Relocation Request Received"}</h2>
       <p><strong>Customer Name:</strong> ${escapeHtml(lead.name)}</p>
       <p><strong>Phone:</strong> <a href="tel:${encodeURIComponent(lead.phone)}">${escapeHtml(lead.phone)}</a></p>
       <p><strong>Email:</strong> ${escapeHtml(lead.email || "Not provided")}</p>
@@ -44,7 +44,7 @@ export const sendLeadNotificationEmail = async (
       <p><strong>Move Type:</strong> ${escapeHtml(lead.moveType)}</p>
       <p><strong>Service Requested:</strong> ${escapeHtml(lead.service)}</p>
       <p><strong>Preferred Timeline:</strong> ${escapeHtml(lead.timeline)}</p>
-      ${lead.notes ? `<p><strong>Moving Details:</strong> ${escapeHtml(lead.notes)}</p>` : ""}
+      ${lead.notes ? `<p><strong>Message / Moving Details:</strong> ${escapeHtml(lead.notes)}</p>` : ""}
     `,
   };
 

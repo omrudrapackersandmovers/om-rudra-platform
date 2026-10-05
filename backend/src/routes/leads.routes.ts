@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { handleContact } from "../controllers/contact.controller";
 import { handleCreateLead } from "../controllers/leads.controller";
 import { verifyTurnstile } from "../middlewares/turnstile";
 import { Bindings } from "../types";
@@ -13,3 +14,5 @@ leadsRouter.get("/", (c) => {
 });
 
 leadsRouter.post("/", verifyTurnstile, handleCreateLead);
+
+leadsRouter.post("/contact", verifyTurnstile, handleContact);

@@ -395,7 +395,7 @@ const GlobalSearchModal = ({ isOpen, onClose, initialQuery = "" }) => {
                     }}
                     className="p-3 rounded-xl bg-primary text-white text-left transition-all hover:bg-primary/90 group shadow-sm"
                   >
-                    <FileCheck size={18} className="text-accent mb-1.5 group-hover:scale-110 transition-transform" />
+                    <FileCheck size={18} className="text-white mb-1.5 group-hover:scale-110 transition-transform" />
                     <div className="text-xs font-bold text-white">Get a Free Quote</div>
                     <div className="text-[10px] text-white/80">Instant binding price</div>
                   </button>

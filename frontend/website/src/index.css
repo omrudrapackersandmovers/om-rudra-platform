@@ -251,3 +251,8 @@
 
 .faq-question { list-style: none; }
 .faq-question::-webkit-details-marker { display: none; }
+
+/* Keep text-entry controls aligned with the shared CustomSelect radius token. */
+:where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="submit"]):not([type="button"]):not([type="reset"]), textarea, select) {
+  border-radius: var(--radius-md);
+}

@@ -108,6 +108,8 @@ const Footer = () => {
               />
             </Link>
 
+            <p className="font-display font-semibold text-sm text-white leading-relaxed mb-5">{cleanLegalName}</p>
+
             {/* Unified Contact Information Group - Clean Natural Flow without Box */}
             <address className="not-italic w-full max-w-sm space-y-4 text-sm">
               {company.headOffice.addressLine && (

@@ -8,7 +8,7 @@
  */
 
 export const company = {
-  legalName: "Om Rudra Packers and Movers",
+  legalName: "Om Rudra Packers and Movers Private Limited",
   brandName: "Om Rudra Packers and Movers",
   tagline: "Safer Moves, Brighter Tomorrows",
 

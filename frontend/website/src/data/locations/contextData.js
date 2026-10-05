@@ -1,3 +1,4 @@
+import { patnaLocalities } from "./coverage";
 /**
  * contextData.js — Hyper-local operational and geographical metadata for location pages.
  *
@@ -20,22 +21,7 @@ export const locationProfiles = {
     hubName: "Patna Central Headquarters",
     isHub: true,
     corridors: "NH 19, NH 31, the AIIMS to Digha elevated corridor, and the JP Ganga Path along the northern riverfront",
-    localities: [
-      "Boring Road",
-      "Kankarbagh",
-      "Bailey Road",
-      "Danapur Cantt",
-      "Rajendra Nagar",
-      "Patliputra Colony",
-      "Ashiana Nagar",
-      "Anisabad",
-      "Saguna More",
-      "Gola Road",
-      "Phulwari Sharif",
-      "Exhibition Road",
-      "Rukunpura",
-      "Khagaul",
-    ],
+    localities: patnaLocalities,
     logisticsNote: "Operating directly from our Soranpur and Ram Krishna Nagar headquarters, our Patna fleet provides same-day survey bookings, immediate container vehicle dispatch, and zero-delay highway exit via the new bypass corridors. Dedicated mini-shuttles handle tight residential lanes in central neighborhoods.",
     truckEntryNote: "Heavy commercial vehicles follow municipal guidelines with scheduled transit windows outside morning and evening peak traffic hours.",
     popularDestinations: ["Delhi NCR", "Ranchi", "Kolkata", "Bengaluru", "Mumbai", "Muzaffarpur", "Gaya"],

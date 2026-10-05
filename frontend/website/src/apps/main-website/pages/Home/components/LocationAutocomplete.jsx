@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import { MapPin, X, Loader2, LocateFixed, Building2, Navigation } from "lucide-react";
 import { allServiceLocations } from "@/data/locations";
+import { localAreaOptions } from "@/data/locations/coverage";
 
 const POPULAR_HUBS = [
   { name: "Patna", state: "Bihar", type: "hub" },
@@ -61,7 +62,7 @@ export default function LocationAutocomplete({
     const seen = new Set();
 
     // 1. Exact/prefix matches in service locations
-    allServiceLocations.forEach((loc) => {
+    [...allServiceLocations, ...localAreaOptions].forEach((loc) => {
       const cityNorm = loc.name.toLowerCase();
       const stateNorm = loc.state.toLowerCase();
       const slugNorm = loc.slug.toLowerCase();

@@ -28,4 +28,8 @@ export const uttarPradeshLocations = [
   { slug: "ghazipur", name: "Ghazipur", state: "Uttar Pradesh", type: "district" },
   { slug: "mirzapur", name: "Mirzapur", state: "Uttar Pradesh", type: "district" },
   { slug: "sonbhadra", name: "Sonbhadra (Robertsganj)", state: "Uttar Pradesh", type: "district" },
+
+  // Client location list, reviewed October 2026. These are destinations, not branches.
+  {"slug": "ayodhya", "name": "Ayodhya", "state": "Uttar Pradesh", "type": "city"},
+  {"slug": "muzaffarnagar", "name": "Muzaffarnagar", "state": "Uttar Pradesh", "type": "city"},
 ];

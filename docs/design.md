@@ -1,3 +1,5 @@
+> Pricing update: compact custom-select estimator and local/interstate switch use the shared pricing data without added percentage calculations. Quote links retain service, size and scope. Rate guides use responsive cards for local homes, interstate routes and vehicles, clearly marked indicative. Cost factors, a scope checklist and plus/minus FAQs replace unsupported fixed-price and competitor claims.
+
 > Service detail update: all eight routes share an accessible responsive template backed by distinct service guidance and FAQs. The early two-step enquiry preselects the current service, including transit insurance. Preparation, agreed scope, related services and call/quote actions replace unsupported ratings and guarantees. Catalogue data is shared with the overview.
 
 > Services overview: a concise service selector above the catalogue, searchable category filters, eight service cards with separate detail and quote actions, practical quote factors, shared moving process, plus/minus FAQs, and consultation CTA. Existing imagery is retained. Unverified guarantees, competitor claims and hard-coded estimator rates are removed from this overview.

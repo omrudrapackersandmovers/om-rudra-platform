@@ -219,6 +219,7 @@ const QuoteForm = ({
   defaultTimeline = "",
   defaultMoveSize = "",
   isStandalonePage = false,
+  embedded = false,
 }) => {
   const [searchParams] = useSearchParams();
   const [form, setForm] = useState(initialForm);
@@ -539,10 +540,10 @@ const QuoteForm = ({
   return (
     <section
       id="quote-form-section"
-      className={`relative overflow-hidden bg-background ${isStandalonePage ? "py-10 sm:py-16" : "py-10 sm:py-14"} border-y border-border/80 scroll-mt-4 lg:scroll-mt-44`}
+      className={embedded ? "w-full min-w-0 scroll-mt-24" : `relative overflow-hidden bg-background ${isStandalonePage ? "py-10 sm:py-16" : "py-10 sm:py-14"} border-y border-border/80 scroll-mt-4 lg:scroll-mt-44`}
       aria-labelledby="quote-form-heading"
     >
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className={embedded ? "w-full min-w-0" : "relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8"}>
         
         {/* Header (condensed when standalone page hero is present) */}
         {!isStandalonePage && (
@@ -565,7 +566,8 @@ const QuoteForm = ({
         )}
 
         {/* Card Form Container */}
-        <div className="bg-background border border-border rounded-lg p-6 sm:p-8 shadow-card">
+        <div className="w-full min-w-0 bg-background border border-border rounded-[var(--radius-lg)] p-5 sm:p-8">
+          {isStandalonePage && <div className="mb-6"><h2 id="quote-form-heading" className="font-display font-bold text-2xl">Tell us about your move.</h2><p className="text-sm text-text-muted leading-relaxed mt-2">Share your route and requirements. Fields marked * are required.</p></div>}
 
           {/* Service Select in One Line */}
           <div className="mb-7 pb-5 border-b border-border/80">
@@ -574,7 +576,7 @@ const QuoteForm = ({
                 Select Service:
               </label>
             </div>
-            <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-0.5 w-full">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 py-0.5 w-full min-w-0">
               {[
                 { label: "Home Shifting", val: "Home shifting" },
                 { label: "Office Relocation", val: "Office shifting" },
@@ -933,26 +935,18 @@ const QuoteForm = ({
                 </div>
               )}
 
-              <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
+              <div className="w-full">
                 <Button
                   type="submit"
                   disabled={status === "submitting"}
                   variant="accent"
                   size="lg"
-                  className="sm:col-span-8 w-full shadow-md"
+                  className="w-full shadow-md"
                 >
                   {status === "submitting" ? "Sending your request..." : "Request my free quote"}
                 </Button>
 
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="sm:col-span-4 inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-full bg-[#157347] text-white font-display font-bold text-xs sm:text-sm hover:brightness-105 transition-all shadow-sm"
-                >
-                  <MessageCircle size={16} />
-                  <span>WhatsApp Quote</span>
-                </a>
+
               </div>
               
               <div className="flex flex-wrap items-center justify-center gap-4 mt-5 text-xs text-text-muted">

@@ -59,4 +59,6 @@ export const interstateRoutes = [
   { slug: "jamshedpur-to-kolkata", from: "Jamshedpur", to: "Kolkata", fromSlug: "jamshedpur", toSlug: "kolkata", distanceKm: 270 },
   { slug: "jamshedpur-to-mumbai", from: "Jamshedpur", to: "Mumbai", fromSlug: "jamshedpur", toSlug: "mumbai", distanceKm: 1900 },
   { slug: "jamshedpur-to-bengaluru", from: "Jamshedpur", to: "Bengaluru", fromSlug: "jamshedpur", toSlug: "bengaluru", distanceKm: 2000 },
+
+  { slug: "patna-to-bhubaneswar", from: "Patna", to: "Bhubaneswar", fromSlug: "patna", toSlug: "bhubaneswar", distanceKm: null },
 ];

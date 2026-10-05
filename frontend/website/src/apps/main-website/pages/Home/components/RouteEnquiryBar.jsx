@@ -3,6 +3,8 @@ import { Link } from "react-router";
 import { ArrowRight, ArrowLeftRight, X, CheckCircle2, Loader2, PhoneCall } from "lucide-react";
 import CustomSelect from "../../../shared/components/CustomSelect";
 import { allServiceLocations } from "@/data/locations";
+import { localAreaOptions } from "@/data/locations/coverage";
+const enquiryLocations = [...allServiceLocations, ...localAreaOptions];
 import LocationAutocomplete from "./LocationAutocomplete";
 import { company } from "../../../../../data/company";
 
@@ -16,14 +18,14 @@ const inputClass = "w-full min-h-[50px] px-3 border rounded-md bg-background tex
 
 function resolveLocation(value) {
   const normalized = value.trim().toLowerCase();
-  return allServiceLocations.find((loc) => (loc.name === loc.state ? loc.name : `${loc.name}, ${loc.state}`).toLowerCase() === normalized)
-    || allServiceLocations.find((loc) => loc.name.toLowerCase() === normalized);
+  return enquiryLocations.find((loc) => (loc.name === loc.state ? loc.name : `${loc.name}, ${loc.state}`).toLowerCase() === normalized)
+    || enquiryLocations.find((loc) => loc.name.toLowerCase() === normalized);
 }
 function inferMoveType(from, to) {
   const origin = resolveLocation(from);
   const destination = resolveLocation(to);
   if (!origin || !destination) return "";
-  if (origin.name.toLowerCase() === destination.name.toLowerCase() && origin.state === destination.state) return "Within the city";
+  if ((origin.city || origin.name).toLowerCase() === (destination.city || destination.name).toLowerCase() && origin.state === destination.state) return "Within the city";
   return origin.state === destination.state ? "Within the state" : "To another state";
 }
 
