@@ -15,6 +15,7 @@ import { company } from "./company";
 
 // ── 1. Services Catalog ────────────────────────────────────────────────────────
 export const servicesSearchData = [
+  { id: "packing-materials", title: "Packing Materials & Protection", category: "Services", url: "/packing-materials", description: "Explore cartons, cushioning, covers, labels and crates for your move.", keywords: ["packing materials", "cartons", "bubble wrap", "foam", "blankets", "crates", "labels"], badges: [], icon: "Package" },
   {
     id: "svc-home-shifting",
     title: "Home Shifting Services",

@@ -21,6 +21,7 @@ export async function generateDiscoveryFiles(dist, write = writeFile) {
     link("Contact", "/contact", "Booking questions, feedback and general enquiries"),
     link("Pricing guide", "/pricing", "Indicative rates; confirm the final quote"),
     link("All services", "/services", "Browse moving and support services"),
+    link("Packing materials & protection", "/packing-materials", "Material uses and illustrative branded packaging mockups"),
     link("Where we serve", "/where-we-serve", "Search locations and listed routes"),
     link("Privacy policy", "/privacy"), link("Terms of service", "/terms"),
   ].join("\n")}\n\n## Official social profiles\n\n${socialProfiles}\n\n## Services\n\n${services.map(item => link(item.title, `/services/${item.slug}`, item.description)).join("\n")}\n\n## Reviewed city planning guides\n\n${indexableLocationPages.map(item => link(item.name, locationPath(item), item.state)).join("\n")}\n\n## City-to-city routes\n\n${allRoutes.map(item => link(`${item.from} to ${item.to}`, `/route/${item.slug}`)).join("\n")}\n\n## Optional\n\n${link("XML sitemap", "/sitemap.xml", "Canonical indexable HTML pages")}\n${link("Agent information", "/agent.txt", "Site-specific guidance; not a standard protocol declaration")}\n`;

@@ -3,7 +3,7 @@ import { allRoutes } from "./locations/index.js";
 import { services } from "./services.js";
 
 export const siteUrl = "https://omrudrapackersandmovers.com";
-export const corePaths = ["/", "/about", "/contact", "/pricing", "/where-we-serve", "/get-quote", "/privacy", "/terms", "/services"];
+export const corePaths = ["/", "/about", "/contact", "/pricing", "/where-we-serve", "/get-quote", "/privacy", "/terms", "/services", "/packing-materials"];
 export const indexablePaths = [...corePaths, ...services.map(item => `/services/${item.slug}`), ...indexableLocationPages.map(locationPath), ...allRoutes.map(item => `/route/${item.slug}`)];
 export const staticPaths = [...new Set([...indexablePaths, ...allLocationPages.map(locationPath), "/search", "/404"])];
 export function isIndexablePath(pathname) { return indexablePaths.includes(pathname); }

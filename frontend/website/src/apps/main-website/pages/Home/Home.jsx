@@ -1,3 +1,4 @@
+import PackingMaterialsPreview from "../../shared/components/PackingMaterialsPreview";
 import Hero from "./components/Hero";
 import RouteEnquiryBar from "./components/RouteEnquiryBar";
 import TrustBar from "./components/TrustBar";
@@ -60,6 +61,7 @@ const Home = () => {
       </Hero>
       <TrustBar />
       <ServicesGrid />
+      <PackingMaterialsPreview />
       <HowItWorks />
       <TestimonialsBlock />
       <LocationsSnapshot />

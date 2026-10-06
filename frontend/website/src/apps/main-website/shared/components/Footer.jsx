@@ -45,6 +45,7 @@ const serviceLinks = [
 ];
 
 const quickLinks = [
+  { label: "Packing Materials", to: "/packing-materials" },
   { label: "About Us", to: "/about" },
   { label: "Pricing & Estimates", to: "/pricing" },
   { label: "Where We Serve", to: "/where-we-serve" },

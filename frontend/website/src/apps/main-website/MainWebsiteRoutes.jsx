@@ -4,6 +4,7 @@ import { lazy } from "react";
 import MainWebsiteLayout from "./MainWebsiteLayout";
 import Home from "./pages/Home/Home";
 
+const PackingMaterials = import.meta.env.SSR ? null : lazy(() => import("./pages/PackingMaterials/PackingMaterials"));
 const ServicesPage = import.meta.env.SSR ? null : lazy(() => import("./pages/Services/ServicesPage"));
 const ServiceDetail = import.meta.env.SSR ? null : lazy(() => import("./pages/Services/ServiceDetail"));
 const About = import.meta.env.SSR ? null : lazy(() => import("./pages/About/About"));
@@ -18,13 +19,14 @@ const Terms = import.meta.env.SSR ? null : lazy(() => import("./pages/Legal/Term
 const SearchPage = import.meta.env.SSR ? null : lazy(() => import("./pages/Search/SearchPage"));
 const NotFound = import.meta.env.SSR ? null : lazy(() => import("./shared/components/NotFound"));
 
-const defaultPages = { Home, ServicesPage, ServiceDetail, About, Pricing, Contact, GetQuote, WhereWeServe, LocationPage, RoutePage, Privacy, Terms, SearchPage, NotFound };
+const defaultPages = { Home, PackingMaterials, ServicesPage, ServiceDetail, About, Pricing, Contact, GetQuote, WhereWeServe, LocationPage, RoutePage, Privacy, Terms, SearchPage, NotFound };
 const MainWebsiteRoutes = ({ pages = defaultPages }) => {
-  const { Home, ServicesPage, ServiceDetail, About, Pricing, Contact, GetQuote, WhereWeServe, LocationPage, RoutePage, Privacy, Terms, SearchPage, NotFound } = pages;
+  const { Home, PackingMaterials, ServicesPage, ServiceDetail, About, Pricing, Contact, GetQuote, WhereWeServe, LocationPage, RoutePage, Privacy, Terms, SearchPage, NotFound } = pages;
   return (
     <Routes>
       <Route path="/" element={<MainWebsiteLayout />}>
         <Route index element={<Home />} />
+        <Route path="packing-materials" element={<PackingMaterials />} />
         <Route path="services" element={<ServicesPage />} />
         <Route path="services/:slug" element={<ServiceDetail />} />
         <Route path="about" element={<About />} />
