@@ -11,7 +11,7 @@ import {
   Heart,
 } from "lucide-react";
 import { company } from "../../../../data/company";
-import { FaInstagram, FaYoutube, FaXTwitter, FaPinterestP, FaThreads } from "react-icons/fa6";
+import { FaInstagram, FaYoutube, FaXTwitter, FaPinterestP, FaThreads, FaRedditAlien } from "react-icons/fa6";
 
 const socialLinks = [
   { key: "instagram", label: "Instagram", icon: FaInstagram },
@@ -19,6 +19,7 @@ const socialLinks = [
   { key: "x", label: "X", icon: FaXTwitter },
   { key: "pinterest", label: "Pinterest", icon: FaPinterestP },
   { key: "threads", label: "Threads", icon: FaThreads },
+  { key: "reddit", label: "Reddit", icon: FaRedditAlien },
 ];
 
 const trustItems = [

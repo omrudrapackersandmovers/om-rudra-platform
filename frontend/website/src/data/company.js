@@ -74,8 +74,9 @@ export const company = {
     instagram: "https://www.instagram.com/omrudrapackersandmovers/",
     youtube: "https://www.youtube.com/@omrudrapackersandmovers",
     x: "https://x.com/omrudrapackers",
-    pinterest: "https://in.pinterest.com/omrudrapackersandmovers/",
+    pinterest: "https://www.pinterest.com/omrudrapackersandmovers/",
     threads: "https://www.threads.com/@omrudrapackersandmovers",
+    reddit: "https://www.reddit.com/user/omrudrapackersandmov/",
   },
 
   /**
