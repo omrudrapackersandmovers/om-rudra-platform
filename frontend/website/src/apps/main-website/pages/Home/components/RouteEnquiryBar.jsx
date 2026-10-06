@@ -89,7 +89,8 @@ export default function RouteEnquiryBar({ defaultService = "Home shifting" }) {
     const nextErrors = {};
     if (form.name.trim().length < 2) nextErrors.name = "Enter your full name (at least two characters).";
     if (!/^[6-9]\d{9}$/.test(form.phone)) nextErrors.phone = "Enter a valid 10-digit Indian mobile number.";
-    if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) nextErrors.email = "Enter a valid email address.";
+    if (!form.email.trim()) nextErrors.email = "Enter your email address.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) nextErrors.email = "Enter a valid email address.";
     if (!form.moveType) nextErrors.moveType = "Choose your move type.";
     if (!form.timeline) nextErrors.timeline = "Choose your preferred timeline.";
     setErrors(nextErrors);
@@ -100,7 +101,7 @@ export default function RouteEnquiryBar({ defaultService = "Home shifting" }) {
     }
     submittingRef.current = true;
     setStatus("submitting");
-    const rawBase = (import.meta.env.VITE_API_URL || "https://api.omrudrapackersandmovers.com").trim().replace(/\/+$/, "");
+    const rawBase = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "http://localhost:8787" : "https://api.omrudrapackersandmovers.com")).trim().replace(/\/+$/, "");
     const apiBase = /^https?:\/\//.test(rawBase) ? rawBase : `https://${rawBase}`;
     try {
       const response = await fetch(`${apiBase}/api/leads`, {
@@ -158,11 +159,11 @@ export default function RouteEnquiryBar({ defaultService = "Home shifting" }) {
               <fieldset disabled={status === "submitting"} className="grid sm:grid-cols-2 gap-4 disabled:opacity-60">
                 {field("name","Your name",null,true)}
                 {field("phone","Mobile number (+91)",null,true,"tel")}
+                {field("email","Email",null,true,"email")}
                 {field("moveType","Move type",moveTypes,true)}
                 {field("timeline","Preferred timeline",timelines,true)}
-                {inferMoveType(form.movingFrom, form.movingTo) && <p className="sm:col-span-2 text-xs text-text-muted -mt-1">Move type is suggested from your route. You can change it if needed.</p>}
                 {field("moveSize","Move size (optional)",sizes)}
-                {field("email","Email (optional)",null,false,"email")}
+                {inferMoveType(form.movingFrom, form.movingTo) && <p className="sm:col-span-2 text-xs text-text-muted -mt-1">Move type is suggested from your route. You can change it if needed.</p>}
               </fieldset>
               {serverError && <p className="mt-4 text-danger text-sm" role="alert">{serverError}</p>}
               <p className="text-xs text-text-muted mt-5">We will use these details to respond to your moving enquiry. <Link to="/privacy" className="text-primary underline">Privacy policy</Link></p>

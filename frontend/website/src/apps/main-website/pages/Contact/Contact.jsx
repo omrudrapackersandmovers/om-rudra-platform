@@ -20,7 +20,7 @@ const questions = [
 ];
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", phone: "", email: "", subject: "", message: "" });
+  const [form, setForm] = useState({ name: "", phone: "", email: "", subject: "", subjectOther: "", message: "" });
   const [status, setStatus] = useState("idle");
   const [errors, setErrors] = useState({});
   const formRef = useRef(null);
@@ -55,7 +55,7 @@ export default function Contact() {
   const change = event => update(event.target.name, event.target.value);
   const showErrors = next => {
     setErrors(next);
-    const first = ["name", "phone", "email", "subject", "message"].find(key => next[key]);
+    const first = ["name", "phone", "email", "subject", "subjectOther", "message"].find(key => next[key]);
     if (first) document.getElementById(`contact-${first}`)?.focus();
   };
   const blur = event => {
@@ -72,12 +72,12 @@ export default function Contact() {
     submitting.current = true;
     setStatus("submitting"); setError("");
     try {
-      const base = (import.meta.env.VITE_API_URL || "https://api.omrudrapackersandmovers.com").trim().replace(/\/+$/, "").replace(/\/api$/, "");
+      const base = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "http://localhost:8787" : "https://api.omrudrapackersandmovers.com")).trim().replace(/\/+$/, "").replace(/\/api$/, "");
       const response = await fetch(`${base}/api/leads/contact`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...Object.fromEntries(Object.entries(form).map(([key, value]) => [key, value.trim()])), turnstileToken: securityToken }), signal: AbortSignal.timeout(15000) });
       const result = await response.json().catch(() => null);
       if (!response.ok || !result?.success) {
         if (response.status === 400 && result?.details) {
-          const fields = Object.fromEntries(Object.entries(result.details).filter(([key, messages]) => ["name", "phone", "email", "subject", "message"].includes(key) && Array.isArray(messages) && messages.length).map(([key, messages]) => [key, messages[0]]));
+          const fields = Object.fromEntries(Object.entries(result.details).filter(([key, messages]) => ["name", "phone", "email", "subject", "subjectOther", "message"].includes(key) && Array.isArray(messages) && messages.length).map(([key, messages]) => [key, messages[0]]));
           if (Object.keys(fields).length) showErrors(fields);
         }
         setError(response.status === 429 ? "Too many attempts. Please wait a moment before trying again." : response.status === 400 && result?.details ? "Please review the highlighted fields." : "We could not send your message. Please try again or call our team.");
@@ -105,10 +105,11 @@ export default function Contact() {
           <p className="text-sm text-text-muted mt-5">Already booked? Have your booking reference and route ready when you contact us.</p>
         </div>
         <div id="enquiry" className="bg-background border border-border rounded-2xl p-5 sm:p-8 scroll-mt-24"><h2 className="font-display font-bold text-2xl">How can we help?</h2><p className="text-sm text-text-muted leading-relaxed mt-2">Ask a question, discuss a booking, share feedback or get in touch about working together.</p>
-          {status === "success" ? <div role="status" className="mt-6 rounded-xl bg-brand-soft p-5"><h3 className="font-semibold text-lg">Your message has been received.</h3><p className="text-sm text-text-muted mt-2">Our team will review your enquiry. Your reference is #{reference}.</p><button type="button" onClick={() => { setForm({ name: "", phone: "", email: "", subject: "", message: "" }); setErrors({}); setError(""); setStatus("idle"); }} className="min-h-11 mt-3 text-primary font-semibold">Send another message</button></div> : <form ref={formRef} noValidate onSubmit={submit} className="mt-6 space-y-4"><fieldset disabled={status === "submitting"} className="space-y-4 disabled:opacity-70">
+          {status === "success" ? <div role="status" className="mt-6 rounded-xl bg-brand-soft p-5"><h3 className="font-semibold text-lg">Your message has been received.</h3><p className="text-sm text-text-muted mt-2">Our team will review your enquiry. Your reference is #{reference}.</p><button type="button" onClick={() => { setForm({ name: "", phone: "", email: "", subject: "", subjectOther: "", message: "" }); setErrors({}); setError(""); setStatus("idle"); }} className="min-h-11 mt-3 text-primary font-semibold">Send another message</button></div> : <form ref={formRef} noValidate onSubmit={submit} className="mt-6 space-y-4"><fieldset disabled={status === "submitting"} className="space-y-4 disabled:opacity-70">
           <div className="grid sm:grid-cols-2 gap-4">{["name", "phone"].map(key => renderInput(key))}</div>
           {renderInput("email")}
           <CustomSelect id="contact-subject" name="subject" label="What can we help with?" required value={form.subject} onChange={value => update("subject", value)} options={contactSubjects} placeholder="Choose an enquiry subject" error={errors.subject} disabled={status === "submitting"} />
+          {form.subject === "Other" && <div><label htmlFor="contact-subjectOther" className="block text-sm font-semibold">Please specify <span className="text-danger">*</span></label><input id="contact-subjectOther" name="subjectOther" required maxLength={200} placeholder="e.g. Invoice correction or partnership request" value={form.subjectOther} onChange={change} onBlur={blur} aria-invalid={!!errors.subjectOther} aria-describedby={errors.subjectOther ? "contact-subjectOther-error" : undefined} className={`${fieldClass} mt-2 ${errors.subjectOther ? "border-danger" : ""}`} /><FieldError name="subjectOther" error={errors.subjectOther} /></div>}
           <div><label htmlFor="contact-message" className="block text-sm font-semibold">Your message <span className="text-danger">*</span></label><textarea id="contact-message" required name="message" rows={4} maxLength={2000} placeholder="Tell us how we can help. Include your booking reference or moving details if relevant." value={form.message} onChange={change} onBlur={blur} aria-invalid={!!errors.message} aria-describedby={errors.message ? "contact-message-error" : undefined} className={`${fieldClass} mt-2 resize-y ${errors.message ? "border-danger" : ""}`} /><FieldError name="message" error={errors.message} /></div>
           {siteKey && <div ref={securityRef} />}
           {error && <p role="alert" className="text-danger text-sm">{error} Your details are still here.</p>}

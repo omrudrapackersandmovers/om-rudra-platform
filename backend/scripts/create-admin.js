@@ -63,13 +63,13 @@ async function main() {
   const sql = `DELETE FROM admins WHERE username = '${username}'; INSERT INTO admins (username, password_hash, salt) VALUES ('${username}', '${hash}', '${salt}');`;
 
   const flag = isRemote ? "--remote" : "--local";
-  const cmd = `npx wrangler d1 execute 1stompackersandmover_db ${flag} -y --command="${sql}"`;
+  const cmd = `npx wrangler d1 execute DB ${flag} -y --command="${sql}"`;
 
   console.log(`\nExecuting on D1 Database (${flag})...`);
   try {
     const output = execSync(cmd, { stdio: "inherit" });
     console.log(`\n✅ Admin user '${username}' successfully created/updated!`);
-    console.log(`You can now log in at http://localhost:5173/login\n`);
+    console.log(`Sign in using the admin panel's development URL.\n`);
   } catch (err) {
     console.error(`\n❌ Failed to execute D1 command:`, err.message);
     process.exit(1);

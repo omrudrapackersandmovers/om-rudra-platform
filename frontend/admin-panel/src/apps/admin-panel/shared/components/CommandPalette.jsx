@@ -45,6 +45,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
   // Quick navigation pages with relevant specific icons
   const navItems = [
     { title: "Inquiries & Leads", category: "Navigation", path: "/leads", icon: UserCheck },
+    { title: "Contact & Support", category: "Navigation", path: "/support", icon: UserCheck },
     { title: "Quotations & Estimates", category: "Navigation", path: "/quotes", icon: FileSpreadsheet },
     { title: "Active Jobs & Dispatch", category: "Navigation", path: "/jobs", icon: Briefcase },
     { title: "Fleet Management", category: "Navigation", path: "/fleet", icon: Truck },

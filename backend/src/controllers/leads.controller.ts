@@ -12,7 +12,7 @@ const createLeadSchema = z.object({
   service: z.string().min(2, "Service type is required"),
   timeline: z.string().min(2, "Timeline is required"),
   moveSize: z.string().trim().max(120, "Move size is too long").optional(),
-  email: z.string().email("Please enter a valid email address with a domain (e.g. name@example.com)").optional().or(z.literal("")),
+  email: z.string().trim().min(1, "Enter your email address.").email("Please enter a valid email address with a domain (e.g. name@example.com)").max(254),
 });
 
 export const handleCreateLead = async (c: Context<{ Bindings: Bindings }>) => {

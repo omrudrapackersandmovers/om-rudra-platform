@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { handleGetSupport, handleUpdateSupport, handleCreateComplaint, handleSearchSupportReferences } from "../controllers/support.controller";
 import {
   handleAdminLogin,
   handleAdminMe,
@@ -80,6 +81,10 @@ adminRouter.get("/settings", handleGetSettings);
 adminRouter.use("*", authMiddleware);
 
 adminRouter.get("/auth/me", handleAdminMe);
+adminRouter.get("/support", handleGetSupport);
+adminRouter.get("/support/references", handleSearchSupportReferences);
+adminRouter.post("/support", handleCreateComplaint);
+adminRouter.patch("/support/:id", handleUpdateSupport);
 
 // Admin Profile & Security
 adminRouter.get("/profile", handleGetAdminProfile);

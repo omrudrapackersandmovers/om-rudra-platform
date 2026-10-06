@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useSearchParams } from "react-router";
 import {
   CheckCircle2,
@@ -10,6 +10,7 @@ import {
   MapPin,
   Truck,
   ArrowRight,
+  ArrowLeft,
   ArrowLeftRight,
   Shield,
   Clock,
@@ -20,7 +21,6 @@ import Button from "../../../shared/components/Button";
 import { company } from "@/data/company";
 import LocationAutocomplete from "./LocationAutocomplete";
 import { detectUserCity, detectFromBrowserGps } from "@/apps/main-website/utils/geoService";
-import { calculateFareEstimate } from "@/apps/main-website/utils/fareEstimator";
 
 const moveTypes = [
   "Within the city",
@@ -226,6 +226,15 @@ const QuoteForm = ({
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState("");
+  const [step, setStep] = useState(1);
+  const stepHeadingRef = useRef(null);
+  const changeStep = next => {
+    setStep(next);
+    requestAnimationFrame(() => {
+      stepHeadingRef.current?.focus({ preventScroll: true });
+      stepHeadingRef.current?.scrollIntoView({ block: "nearest" });
+    });
+  };
 
   // Sync state with URL query parameters and incoming props
   useEffect(() => {
@@ -315,7 +324,9 @@ const QuoteForm = ({
       errs.phone = "Please enter a valid 10-digit Indian mobile number (e.g. 9876543210).";
     }
 
-    if (form.email && form.email.trim()) {
+    if (!form.email.trim()) {
+      errs.email = "Please enter your email address.";
+    } else {
       const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!emailPattern.test(form.email.trim())) {
         errs.email = "Please enter a valid email address with a domain (e.g. name@example.com).";
@@ -408,21 +419,28 @@ const QuoteForm = ({
     }
   };
 
-  const handleQuickMoveType = (type) => {
-    setForm((prev) => ({ ...prev, moveType: type }));
-    if (errors.moveType) setErrors((prev) => ({ ...prev, moveType: undefined }));
-  };
-
   const handleQuickOrigin = (city) => {
     handleFromChange(city);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (status === "submitting") return;
     setServerError("");
     const errs = validate();
+    const moveErrors = Object.fromEntries(Object.entries(errs).filter(([field]) => ["movingFrom", "movingTo", "moveType", "timeline"].includes(field)));
+    if (step === 1) {
+      setErrors(moveErrors);
+      if (Object.keys(moveErrors).length) {
+        document.getElementById(Object.keys(moveErrors)[0])?.focus();
+        return;
+      }
+      changeStep(2);
+      return;
+    }
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
+      if (Object.keys(moveErrors).length) changeStep(1);
       setServerError("Please resolve the highlighted issues in the form before submitting.");
       return;
     }
@@ -430,7 +448,7 @@ const QuoteForm = ({
     setStatus("submitting");
 
     try {
-      const rawBase = (import.meta.env.VITE_API_URL || "https://api.omrudrapackersandmovers.com").trim();
+      const rawBase = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "http://localhost:8787" : "https://api.omrudrapackersandmovers.com")).trim();
       const apiBase = rawBase
         ? rawBase.startsWith("http://") || rawBase.startsWith("https://")
           ? rawBase.replace(/\/+$/, "")
@@ -452,6 +470,7 @@ const QuoteForm = ({
             fieldErrors[field] = firstMsg;
           }
           setErrors((prev) => ({ ...prev, ...fieldErrors }));
+          if (["movingFrom", "movingTo", "moveType", "timeline"].some(field => fieldErrors[field])) changeStep(1);
           setServerError("Please correct the highlighted fields with red warnings below.");
         } else {
           setServerError(errorData.error || "Unable to submit your quote request. Please verify your details or call our team directly.");
@@ -475,15 +494,6 @@ const QuoteForm = ({
     const msg = `Hi Om Rudra Packers and Movers, I would like a quote for ${form.service || "relocation"}${sizePart} from ${form.movingFrom || "[Origin]"} to ${form.movingTo || "[Destination]"} (${form.moveType || "Standard move"}). Timeline: ${form.timeline || "Soon"}.`;
     return `https://wa.me/${cleanNum}?text=${encodeURIComponent(msg)}`;
   }, [form]);
-
-  // Live dynamic fare estimate
-  const fareEstimate = useMemo(() => {
-    return calculateFareEstimate({
-      service: form.service,
-      moveSize: form.moveSize,
-      moveType: form.moveType,
-    });
-  }, [form.service, form.moveSize, form.moveType]);
 
   if (status === "success") {
     return (
@@ -569,8 +579,15 @@ const QuoteForm = ({
         <div className="w-full min-w-0 bg-background border border-border rounded-[var(--radius-lg)] p-5 sm:p-8">
           {isStandalonePage && <div className="mb-6"><h2 id="quote-form-heading" className="font-display font-bold text-2xl">Tell us about your move.</h2><p className="text-sm text-text-muted leading-relaxed mt-2">Share your route and requirements. Fields marked * are required.</p></div>}
 
+            <div ref={stepHeadingRef} tabIndex={-1} className="mb-5 flex items-start justify-between gap-3 focus:outline-none" aria-live="polite">
+              <div>
+              <p className="text-xs font-semibold text-primary">Step {step} of 2</p>
+              <h3 className="font-display text-lg font-bold text-text mt-1">{step === 1 ? "Move details" : "Contact details"}</h3>
+              </div>
+              {step === 2 && <button type="button" disabled={status === "submitting"} onClick={() => changeStep(1)} aria-label="Back to move details" className="inline-flex shrink-0 items-center gap-2 min-h-11 px-3 text-sm font-semibold text-primary rounded-md hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50"><ArrowLeft size={18} aria-hidden="true" /><span>Back</span></button>}
+            </div>
           {/* Service Select in One Line */}
-          <div className="mb-7 pb-5 border-b border-border/80">
+          <div hidden={step !== 1} className="mb-7 pb-5 border-b border-border/80">
             <div className="flex items-center gap-2 mb-2">
               <label className="text-xs font-bold uppercase tracking-wider text-text-muted">
                 Select Service:
@@ -608,7 +625,7 @@ const QuoteForm = ({
           <form
             onSubmit={handleSubmit}
             noValidate
-            className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-7"
+            className="space-y-7 sm:space-y-8"
           >
             {/* Top Alert Banner for Server/Validation Errors */}
             {serverError && (
@@ -619,13 +636,17 @@ const QuoteForm = ({
                 <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-danger" />
                 <div className="space-y-0.5 text-left">
                   <p className="text-sm font-semibold text-danger">{serverError}</p>
-                  <p className="text-xs text-danger/80">
+                  {Object.keys(errors).length > 0 && <p className="text-xs text-danger/80">
                     Please review the highlighted input fields below and correct them before continuing.
-                  </p>
+                  </p>}
                 </div>
               </div>
             )}
 
+            <fieldset hidden={step !== 2} disabled={step !== 2 || status === "submitting"} className="min-w-0 space-y-5">
+              <legend className="sr-only">Contact details</legend>
+              <p className="text-sm text-text-muted">How our team can reach you about your move.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
             {/* Name */}
             <div className="flex flex-col gap-2">
               <label htmlFor="name" className="text-sm font-semibold text-text tracking-wide">
@@ -694,6 +715,43 @@ const QuoteForm = ({
               )}
             </div>
 
+            {/* Email */}
+            <div className="flex flex-col gap-2 sm:col-span-2">
+              <label htmlFor="email" className="text-sm font-semibold text-text tracking-wide">
+                Email <span className="text-danger">*</span>
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                inputMode="email"
+                required
+                maxLength={254}
+                value={form.email}
+                onChange={handleChange}
+                className={`w-full px-4 py-3.5 text-[0.95rem] text-text bg-background border rounded-[var(--radius-md)] placeholder:text-text-muted transition-all duration-150 ${
+                  errors.email
+                    ? "border-danger ring-4 ring-danger/10"
+                    : "border-border hover:border-text-muted/60 focus:border-primary focus:ring-4 focus:ring-primary/10"
+                }`}
+                placeholder="you@example.com"
+                aria-invalid={errors.email ? "true" : undefined}
+                aria-describedby={errors.email ? "email-error" : undefined}
+              />
+              {errors.email && (
+                <p id="email-error" className="text-xs font-medium text-danger mt-0.5" role="alert">
+                  {errors.email}
+                </p>
+              )}
+            </div>
+
+              </div>
+            </fieldset>
+            <fieldset hidden={step !== 1} disabled={step !== 1 || status === "submitting"} className="min-w-0 space-y-5">
+              <legend className="sr-only">Move details</legend>
+              <p className="text-sm text-text-muted">Choose your route, move type, and preferred timing.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
             {/* Moving From with Autocomplete & Auto-detect */}
             <div className="flex flex-col gap-2">
               <LocationAutocomplete
@@ -765,6 +823,8 @@ const QuoteForm = ({
               </div>
             </div>
 
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
             {/* Move type (Custom Dropdown) */}
             <div className="flex flex-col gap-1.5">
               <CustomSelect
@@ -777,69 +837,11 @@ const QuoteForm = ({
                 error={errors.moveType}
                 required
               />
-              <div className="flex items-center gap-1.5">
-                {[
-                  { label: "Local", val: "Within the city" },
-                  { label: "Same State", val: "Within the state" },
-                  { label: "Interstate", val: "To another state" },
-                ].map((item) => (
-                  <button
-                    key={item.val}
-                    type="button"
-                    onClick={() => handleQuickMoveType(item.val)}
-                    className={`text-[11px] px-2 py-0.5 rounded-md font-medium border transition-colors cursor-pointer ${
-                      form.moveType === item.val
-                        ? "bg-primary text-white border-primary"
-                        : "bg-surface border-border text-text-muted hover:text-text"
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
+
             </div>
 
 
-            {/* Move size / Home configuration (Select & Quick Chips) */}
-            <div className="flex flex-col gap-1.5">
-              <CustomSelect
-                id="moveSize"
-                label="Home / move size"
-                value={form.moveSize}
-                onChange={(val) => handleSelectChange("moveSize", val)}
-                options={moveSizes}
-                placeholder="Select size (e.g. 1 BHK, 2 BHK, Vehicle)"
-              />
-              <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-                {[
-                  { label: "1 BHK", val: "1 BHK (1 Bedroom / Studio)" },
-                  { label: "2 BHK", val: "2 BHK (Standard Apartment)" },
-                  { label: "3 BHK", val: "3 BHK (Large Apartment)" },
-                  { label: "4+ BHK", val: "4+ BHK / Independent Villa" },
-                ].map((item) => (
-                  <button
-                    key={item.val}
-                    type="button"
-                    onClick={() => {
-                      setForm((prev) => ({
-                        ...prev,
-                        moveSize: item.val,
-                        service: prev.service || "Home shifting",
-                      }));
-                    }}
-                    className={`text-[11px] px-2 py-0.5 rounded-md font-medium border transition-colors cursor-pointer ${
-                      form.moveSize === item.val
-                        ? "bg-primary text-white border-primary"
-                        : "bg-surface border-border text-text-muted hover:text-text"
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Timeline (Custom Dropdown & Quick Chips) */}
+            {/* Timeline (Custom Dropdown) */}
             <div className="flex flex-col gap-1.5">
               <CustomSelect
                 id="timeline"
@@ -851,82 +853,24 @@ const QuoteForm = ({
                 error={errors.timeline}
                 required
               />
-              <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-                {[
-                  { label: "2-3 Days", val: "Urgent (within 2 to 3 days)" },
-                  { label: "Within 1 Wk", val: "Within a week" },
-                  { label: "15 Days", val: "Within 15 days" },
-                  { label: "Flexible", val: "Not fixed yet" },
-                ].map((item) => (
-                  <button
-                    key={item.val}
-                    type="button"
-                    onClick={() => handleSelectChange("timeline", item.val)}
-                    className={`text-[11px] px-2 py-0.5 rounded-md font-medium border transition-colors cursor-pointer ${
-                      form.timeline === item.val
-                        ? "bg-primary text-white border-primary"
-                        : "bg-surface border-border text-text-muted hover:text-text"
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
+
             </div>
 
-            {/* Email (optional) */}
-            <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-sm font-semibold text-text tracking-wide">
-                Email <span className="text-text-muted font-normal text-xs">(optional)</span>
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                inputMode="email"
-                value={form.email}
-                onChange={handleChange}
-                className={`w-full px-4 py-3.5 text-[0.95rem] text-text bg-background border rounded-[var(--radius-md)] placeholder:text-text-muted transition-all duration-150 ${
-                  errors.email
-                    ? "border-danger ring-4 ring-danger/10"
-                    : "border-border hover:border-text-muted/60 focus:border-primary focus:ring-4 focus:ring-primary/10"
-                }`}
-                placeholder="you@example.com"
-                aria-invalid={errors.email ? "true" : undefined}
-                aria-describedby={errors.email ? "email-error" : undefined}
+            {/* Move size / Home configuration */}
+            <div className="flex flex-col gap-1.5 sm:col-span-2">
+              <CustomSelect
+                id="moveSize"
+                label="Home / move size"
+                value={form.moveSize}
+                onChange={(val) => handleSelectChange("moveSize", val)}
+                options={moveSizes}
+                placeholder="Select size (e.g. 1 BHK, 2 BHK, Vehicle)"
               />
-              {errors.email && (
-                <p id="email-error" className="text-xs font-medium text-danger mt-0.5" role="alert">
-                  {errors.email}
-                </p>
-              )}
+
             </div>
 
-            {/* Live Dynamic Price Range Indicator Banner */}
-            <div className="relative mt-3 sm:col-span-2 rounded-xl border border-primary/20 bg-primary/[0.02] py-2.5 px-4 sm:px-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4">
-              {/* Embedded Top Tag */}
-              <span className="absolute -top-2.5 left-4 px-2.5 py-0.5 rounded-full bg-primary text-white text-[10px] font-bold uppercase tracking-wider shadow-xs">
-                Indicative estimate
-              </span>
-
-              <div className="flex items-center gap-2 text-xs text-text-muted pt-1 sm:pt-0 min-w-0">
-                <span className="font-semibold text-text-main shrink-0">
-                  {form.moveType || "Standard Move"}
-                </span>
-                <span className="text-border shrink-0">•</span>
-                <span className="truncate">
-                  Final price depends on inventory, access and route
-                </span>
               </div>
-
-              <div className="flex items-baseline gap-1.5 shrink-0">
-                <span className="text-base sm:text-lg font-bold font-display text-primary">
-                  {fareEstimate.min} – {fareEstimate.max}
-                </span>
-              </div>
-            </div>
-
+            </fieldset>
             {/* Submit & Assurance */}
             <div className="sm:col-span-2 pt-2">
               {status === "error" && (
@@ -943,7 +887,7 @@ const QuoteForm = ({
                   size="lg"
                   className="w-full shadow-md"
                 >
-                  {status === "submitting" ? "Sending your request..." : "Request my free quote"}
+                  {status === "submitting" ? "Sending your request..." : step === 1 ? "Continue to contact details" : "Request my free quote"}
                 </Button>
 
 

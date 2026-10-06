@@ -61,7 +61,7 @@ export async function detectUserCity() {
 
   try {
     // 1. Query Cloudflare Pages / Worker Edge function
-    const rawBase = (import.meta.env.VITE_API_URL || "https://api.omrudrapackersandmovers.com").trim();
+    const rawBase = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "http://localhost:8787" : "https://api.omrudrapackersandmovers.com")).trim();
     const apiBase = rawBase
       ? rawBase.startsWith("http://") || rawBase.startsWith("https://")
         ? rawBase.replace(/\/+$/, "")

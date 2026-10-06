@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import {
   Lock,
@@ -11,10 +11,7 @@ import {
   ArrowLeft,
   RefreshCw,
   CheckCircle,
-  KeyRound,
   Headphones,
-  Truck,
-  Receipt,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -286,7 +283,7 @@ const Login = () => {
           {error && (
             <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl flex items-start gap-2">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-              <span>{error}</span>
+              <span className="min-w-0 break-words [overflow-wrap:anywhere]">{error}</span>
             </div>
           )}
 

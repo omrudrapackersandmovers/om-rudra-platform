@@ -5,13 +5,18 @@ import { createDbClient } from "../db/client";
 import { leads, NewLead } from "../db/schema/leads";
 import { sendLeadNotificationEmail } from "../services/email.service";
 
-export const contactSchema = z.object({
+export const contactFields = z.object({
   name: z.string().trim().min(2).max(100),
   phone: z.string().regex(/^[6-9]\d{9}$/),
   email: z.string().trim().min(1, "Enter your email address.").email("Enter a valid email address.").max(254),
   subject: z.enum(["General enquiry", "Moving quote", "Existing booking", "Feedback or complaint", "Business enquiry", "Other"]),
+  subjectOther: z.string().trim().max(200).optional(),
   message: z.string().trim().min(10, "Please include at least 10 characters in your message.").max(2000),
 });
+export const requireOtherSubject = (data: { subject: string; subjectOther?: string }, ctx: z.RefinementCtx) => {
+  if (data.subject === "Other" && !data.subjectOther?.trim()) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["subjectOther"], message: "Please specify the enquiry subject." });
+};
+export const contactSchema = contactFields.superRefine(requireOtherSubject);
 
 export const handleContact = async (c: Context<{ Bindings: Bindings }>) => {
   const body = await c.req.json().catch(() => null);
@@ -23,6 +28,7 @@ export const handleContact = async (c: Context<{ Bindings: Bindings }>) => {
       name: data.name, phone: data.phone, email: data.email || null,
       movingFrom: "", movingTo: "", moveType: "Contact enquiry", service: data.subject,
       timeline: "Not specified", notes: data.message, status: "new", createdAt: new Date().toISOString(),
+      subjectOther: data.subject === "Other" ? data.subjectOther : null,
     };
     const [saved] = await createDbClient(c.env.DB).insert(leads).values(record).returning();
     c.executionCtx.waitUntil(sendLeadNotificationEmail(record, c.env.BREVO_API_KEY, c.env.NOTIFICATION_EMAIL));

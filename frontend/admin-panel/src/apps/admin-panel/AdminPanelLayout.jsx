@@ -18,6 +18,7 @@ import {
   Menu,
   Search,
   Smartphone,
+  Headphones,
 } from "lucide-react";
 import { useAuth } from "../../store/AuthContext";
 import { companyConfig } from "../../configs/company.config";
@@ -130,6 +131,10 @@ const AdminPanelLayout = () => {
         { to: "/settings", label: "Settings", icon: Settings },
       ],
     },
+    {
+      title: "Customer care",
+      items: [{ to: "/support", label: "Contact & Support", icon: Headphones }],
+    },
   ];
 
   const mobileBottomNavItems = [
@@ -144,6 +149,7 @@ const AdminPanelLayout = () => {
   // Helper to get active page title & breadcrumbs
   const getPageInfo = () => {
     const p = location.pathname;
+    if (p.startsWith("/support")) return { title: "Contact & Support", category: "Customer care", desc: "Website messages, booking questions & feedback" };
     if (p.startsWith("/leads")) return { title: "Inquiries & Leads", category: "Sales", desc: "Real-time web requests & customer calls" };
     if (p.startsWith("/quotes")) return { title: "Quotations", category: "Sales", desc: "Estimates & rate quotes issued" };
     if (p.startsWith("/jobs")) return { title: "Active Jobs & Moves", category: "Operations", desc: "Scheduled relocations, dispatch & crew assignment" };

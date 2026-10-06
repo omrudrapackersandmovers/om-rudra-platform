@@ -15,6 +15,11 @@ export const leads = sqliteTable("leads", {
     .default("new")
     .notNull(),
   notes: text("notes"),
+  supportStatus: text("support_status", { enum: ["new", "in_progress", "resolved", "closed"] }).default("new").notNull(),
+  supportNotes: text("support_notes"),
+  supportSource: text("support_source").default("website").notNull(),
+  bookingReference: text("booking_reference"),
+  subjectOther: text("subject_other"),
   createdAt: text("created_at")
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),

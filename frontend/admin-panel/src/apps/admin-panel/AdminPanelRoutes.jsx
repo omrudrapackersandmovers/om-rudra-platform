@@ -5,6 +5,7 @@ import { useAuth } from "../../store/AuthContext";
 import AdminPanelLayout from "./AdminPanelLayout";
 import Login from "./pages/Auth/Login";
 import LeadsList from "./pages/Leads/LeadsList";
+import SupportInbox from "./pages/Support/SupportInbox";
 import LeadDetail from "./pages/Leads/LeadDetail";
 import QuotesList from "./pages/Quotes/QuotesList";
 import QuoteBuilder from "./pages/Quotes/QuoteBuilder";
@@ -65,6 +66,7 @@ const AdminPanelRoutes = () => {
 
         {/* Leads */}
         <Route path="leads" element={<LeadsList />} />
+        <Route path="support" element={<SupportInbox />} />
         <Route path="leads/:id" element={<LeadDetail />} />
 
         {/* Quotes */}

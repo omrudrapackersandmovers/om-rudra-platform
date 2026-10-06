@@ -149,7 +149,7 @@ export const handleAdminLogin = async (c: Context<{ Bindings: Bindings }>) => {
     });
   } catch (err: any) {
     console.error("Login error:", err);
-    return c.json({ error: "Login failed: " + (err.message || "Unknown error") }, 500);
+    return c.json({ error: "Sign-in is temporarily unavailable. Please try again or contact support." }, 500);
   }
 };
 
@@ -482,6 +482,7 @@ export const handleUpdateLead = async (c: Context<{ Bindings: Bindings }>) => {
 
     const body = await c.req.json();
     const updated = await updateLeadStatusAndNotes(c.env, id, body);
+    if (!updated) return c.json({ error: "Sales lead not found. Manage contact messages in Contact & Support." }, 404);
     return c.json({ success: true, lead: updated });
   } catch (err) {
     console.error("Update lead error:", err);

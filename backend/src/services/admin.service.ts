@@ -1,4 +1,4 @@
-import { eq, desc, or } from "drizzle-orm";
+import { eq, desc, or, and, ne } from "drizzle-orm";
 import { getDb } from "../db/client";
 import { admins, quotations, jobs, invoices, bilties, leads, companySettings } from "../db/schema";
 import { hashPassword, verifyPassword, timingSafeEqual } from "../utils/crypto";
@@ -294,10 +294,10 @@ export const getAllLeads = async (env: Bindings, statusFilter?: string) => {
     return await db
       .select()
       .from(leads)
-      .where(eq(leads.status, statusFilter as never))
+      .where(and(eq(leads.status, statusFilter as never), ne(leads.moveType, "Contact enquiry")))
       .orderBy(desc(leads.createdAt));
   }
-  return await db.select().from(leads).orderBy(desc(leads.createdAt));
+  return await db.select().from(leads).where(ne(leads.moveType, "Contact enquiry")).orderBy(desc(leads.createdAt));
 };
 
 export const getLeadById = async (env: Bindings, id: number) => {
@@ -318,7 +318,7 @@ export const updateLeadStatusAndNotes = async (
       ...(data.status ? { status: data.status } : {}),
       ...(data.notes !== undefined ? { notes: data.notes } : {}),
     })
-    .where(eq(leads.id, leadId))
+    .where(and(eq(leads.id, leadId), ne(leads.moveType, "Contact enquiry")))
     .returning();
   return updated[0];
 };
