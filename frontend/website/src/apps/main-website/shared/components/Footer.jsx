@@ -1,4 +1,3 @@
-import { responsiveImageSet } from "../../../../utils/responsiveImages";
 import { Link } from "react-router";
 import {
   PhoneCall,
@@ -108,9 +107,9 @@ const Footer = () => {
               aria-label={`${company.brandName}, return to homepage`}
             >
               <img
-                width="416" height="208" loading="lazy" src={company.logo.reverse} srcSet={responsiveImageSet(company.logo.reverse)} sizes="208px"
+                width="540" height="144" loading="lazy" src={company.logo.reverse} sizes="240px"
                 alt={company.brandName}
-                className="w-48 sm:w-52 h-auto object-contain"
+                className="w-56 sm:w-60 h-auto object-contain"
               />
             </Link>
 

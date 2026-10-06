@@ -21,10 +21,11 @@ export const companyConfig = {
 
   // Brand Imagery
   logo: {
-    primary: "/images/primary-logo.webp",
-    horizontal: "/images/horizontal-lockup.webp",
-    reverse: "/images/reverse-logo.webp",
-    icon: "/images/icon.webp",
+    primary: "/brand/lockup-horizontal.svg",
+    horizontal: "/brand/lockup-horizontal.svg",
+    reverse: "/brand/lockup-reverse.svg",
+    icon: "/brand/symbol-red.svg",
+    print: "/brand/lockup-red-1080.png",
   },
 
   // Business & Tax Compliance

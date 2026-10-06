@@ -1,4 +1,3 @@
-import { responsiveImageSet } from "../../../../utils/responsiveImages";
 import { lazy, Suspense, useState, useEffect, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import {
@@ -137,7 +136,7 @@ const Header = () => {
     >
       {/* ── Main Navigation Bar ──────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="header-topbar grid grid-cols-[auto_1fr] lg:grid-cols-[160px_1fr_auto] items-center gap-3 lg:gap-5 h-18 lg:h-20">
+        <div className="header-topbar grid grid-cols-[auto_1fr] lg:grid-cols-[184px_1fr_auto] items-center gap-3 lg:gap-5 h-18 lg:h-20">
           
           {/* Zone 1: Brand Logo */}
           <Link
@@ -146,9 +145,9 @@ const Header = () => {
             aria-label={`${company.brandName}, return to homepage`}
           >
             <img
-              src={isTransparent ? company.logo.reverse : company.logo.horizontal} srcSet={responsiveImageSet(isTransparent ? company.logo.reverse : company.logo.horizontal)} sizes="160px"
+              src={isTransparent ? company.logo.reverse : company.logo.horizontal} sizes="184px"
               alt={company.brandName}
-              className={`${isTransparent ? "w-32 sm:w-36 lg:w-40 h-14" : "w-28 lg:w-36 h-10"} object-contain object-left`}
+              className="w-36 sm:w-40 lg:w-46 h-12 object-contain object-left"
             />
           </Link>
 

@@ -192,9 +192,9 @@ const CommandPalette = ({ isOpen, onClose }) => {
         aria-hidden="true"
       />
 
-      <div className="relative bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[85vh] animate-in zoom-in-95 duration-150">
+      <div className="relative bg-white dark:bg-slate-900 w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden flex flex-col max-h-[85vh] animate-in zoom-in-95 duration-150">
         {/* Search Input Bar */}
-        <div className="flex items-center px-4 py-3.5 border-b border-slate-100 gap-3">
+        <div className="flex items-center px-4 py-3.5 border-b border-slate-100 dark:border-slate-800 gap-3">
           <Search className="w-5 h-5 text-slate-400 shrink-0" />
           <input
             ref={inputRef}
@@ -205,7 +205,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
               setSelectedIndex(0);
             }}
             placeholder="Search leads, quotes, jobs, invoices, or type a page..."
-            className="flex-1 bg-transparent text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none"
+            className="flex-1 bg-transparent text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none"
           />
           {query && (
             <button
@@ -213,12 +213,12 @@ const CommandPalette = ({ isOpen, onClose }) => {
                 setQuery("");
                 inputRef.current?.focus();
               }}
-              className="text-slate-400 hover:text-slate-600 p-1"
+              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-1"
             >
               <X className="w-4 h-4" />
             </button>
           )}
-          <span className="hidden sm:inline-flex text-[10px] font-mono text-slate-400 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
+          <span className="hidden sm:inline-flex text-[10px] font-mono text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700">
             ESC to close
           </span>
         </div>
@@ -243,13 +243,13 @@ const CommandPalette = ({ isOpen, onClose }) => {
                     onClose();
                   }}
                   className={`flex items-center justify-between px-3 py-2.5 rounded-xl cursor-pointer transition-all ${
-                    isSelected ? "bg-blue-50 text-blue-900 font-medium" : "hover:bg-slate-50 text-slate-700"
+                    isSelected ? "bg-brand-50 dark:bg-brand-950 text-brand-900 dark:text-brand-300 font-medium" : "hover:bg-slate-50 dark:hover:bg-slate-950 text-slate-700 dark:text-slate-200"
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <div
                       className={`p-2 rounded-lg shrink-0 ${
-                        isSelected ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-600"
+                        isSelected ? "bg-brand-600 text-white" : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
                       }`}
                     >
                       <Icon className="w-4 h-4" />
@@ -269,8 +269,8 @@ const CommandPalette = ({ isOpen, onClose }) => {
                   <span
                     className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md shrink-0 ml-2 ${
                       isSelected
-                        ? "bg-blue-200/60 text-blue-800"
-                        : "bg-slate-100 text-slate-500"
+                        ? "bg-brand-200/60 dark:bg-brand-950/60 text-brand-800 dark:text-brand-300"
+                        : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
                     }`}
                   >
                     {item.category}
@@ -282,7 +282,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
         </div>
 
         {/* Footer shortcuts */}
-        <div className="px-4 py-2.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+        <div className="px-4 py-2.5 bg-slate-50 dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
           <div className="flex items-center gap-2">
             <span>↑↓ Navigate</span>
             <span>•</span>

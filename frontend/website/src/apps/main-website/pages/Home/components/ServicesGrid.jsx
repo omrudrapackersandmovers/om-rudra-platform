@@ -15,7 +15,7 @@ const services = [
     tagline:
       "Packing, transport and delivery for your household belongings.",
     slug: "home-shifting",
-    image: "/images/services/HomeShiftingServices.webp",
+    image: "/images/services/home-shifting-v2.webp",
   },
   {
     icon: Building2,
@@ -28,7 +28,7 @@ const services = [
     tagline:
       "Plan your office move around equipment, access and business hours.",
     slug: "office-commercial-shifting",
-    image: "/images/services/Office&CommercialShifting.webp",
+    image: "/images/services/office-commercial-shifting-v2.webp",
   },
   {
     icon: Car,
@@ -41,7 +41,7 @@ const services = [
     tagline:
       "Discuss pickup, carrier options and delivery arrangements for your car’s destination.",
     slug: "car-transportation",
-    image: "/images/services/CarTransportationServices.webp",
+    image: "/images/services/car-transportation-v2.webp",
   },
   {
     icon: Bike,
@@ -54,7 +54,7 @@ const services = [
     tagline:
       "Packing and transport for your bike or scooter.",
     slug: "bike-transportation",
-    image: "/images/services/Bike&Two-WheelerTransportation.webp",
+    image: "/images/services/bike-transportation-v2.webp",
   },
   {
     icon: Package,
@@ -67,7 +67,7 @@ const services = [
     tagline:
       "Packing support for furniture, boxes and fragile items.",
     slug: "packing-unpacking",
-    image: "/images/services/Packing&UnpackingServices.webp",
+    image: "/images/services/packing-unpacking-v2.webp",
   },
   {
     icon: Boxes,
@@ -80,7 +80,7 @@ const services = [
     tagline:
       "Help with heavy items, packed boxes, loading and unloading.",
     slug: "loading-unloading",
-    image: "/images/services/Loading&UnloadingServices.webp",
+    image: "/images/services/loading-unloading-v2.webp",
   },
   {
     icon: Warehouse,
@@ -93,7 +93,7 @@ const services = [
     tagline:
       "Discuss storage space, duration, access and availability.",
     slug: "warehousing-storage",
-    image: "/images/services/Warehousing&SecureStorage.webp",
+    image: "/images/services/warehousing-storage-v2.webp",
   },
   {
     icon: ShieldCheck,
@@ -106,7 +106,7 @@ const services = [
     tagline:
       "Understand available cover, exclusions and claim requirements.",
     slug: "goods-insurance",
-    image: "/images/services/GoodsTransitInsurance.webp",
+    image: "/images/services/goods-insurance-v2.webp",
   },
 ];
 

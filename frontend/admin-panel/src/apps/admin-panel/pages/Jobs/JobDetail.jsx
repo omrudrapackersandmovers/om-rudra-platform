@@ -262,11 +262,11 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
   return (
     <div className="space-y-6 pb-12 max-w-5xl mx-auto">
       {/* Top Bar with Relational Breadcrumbs */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs">
         <div className="flex items-center gap-2 flex-wrap text-xs">
           <button
             onClick={() => navigate("/jobs")}
-            className="p-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 flex items-center gap-1 cursor-pointer"
+            className="p-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1 cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Jobs</span>
@@ -275,7 +275,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
           {job.leadId && (
             <Link
               to={`/leads/${job.leadId}`}
-              className="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg font-semibold transition-colors"
+              className="inline-flex items-center gap-1 px-2.5 py-1 bg-brand-50 dark:bg-brand-950 hover:bg-brand-100 dark:hover:bg-brand-950 text-brand-700 dark:text-brand-300 rounded-lg font-semibold transition-colors"
             >
               <UserCheck className="w-3.5 h-3.5" />
               <span>Lead #{job.leadId}</span>
@@ -285,7 +285,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
           {job.quoteId && (
             <Link
               to={`/quotes/${job.quoteId}`}
-              className="inline-flex items-center gap-1 px-2.5 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded-lg font-semibold transition-colors"
+              className="inline-flex items-center gap-1 px-2.5 py-1 bg-purple-50 dark:bg-purple-950 hover:bg-purple-100 dark:hover:bg-purple-950 text-purple-700 dark:text-purple-300 rounded-lg font-semibold transition-colors"
             >
               <FileSpreadsheet className="w-3.5 h-3.5" />
               <span>Quote #{job.quoteId}</span>
@@ -293,7 +293,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
           )}
 
           <span className="font-mono text-slate-400 font-bold">•</span>
-          <span className="font-mono font-bold text-slate-900">{job.jobNumber}</span>
+          <span className="font-mono font-bold text-slate-900 dark:text-slate-100">{job.jobNumber}</span>
         </div>
 
         <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
@@ -309,7 +309,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                 )}&delivery=${encodeURIComponent(job.deliveryAddress)}`
               )
             }
-            className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors cursor-pointer"
+            className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 py-2 px-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors cursor-pointer"
           >
             <Receipt className="w-4 h-4" />
             <span>Generate Tax Bill</span>
@@ -346,27 +346,27 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
       </div>
 
       {/* Main Job Card */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-5 shadow-2xs space-y-5">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-4 sm:p-5 shadow-2xs space-y-5">
         <div className="flex items-start justify-between">
           <div>
-            <span className="font-mono text-xs font-bold text-blue-600">
+            <span className="font-mono text-xs font-bold text-brand-600 dark:text-brand-300">
               {job.jobNumber}
             </span>
-            <h2 className="text-xl font-bold text-slate-900 leading-tight">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 leading-tight">
               {job.customerName}
             </h2>
-            <p className="text-xs text-slate-500 font-mono mt-0.5">+91 {job.customerPhone}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-mono mt-0.5">+91 {job.customerPhone}</p>
           </div>
 
           <div className="text-right">
             <span className={`inline-block text-xs font-bold px-3 py-1 rounded-full uppercase ${
               job.status === "completed"
-                ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                ? "bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
                 : job.status === "in_progress"
-                ? "bg-blue-50 text-blue-700 border border-blue-200"
+                ? "bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800"
                 : job.status === "cancelled"
-                ? "bg-rose-50 text-rose-700 border border-rose-200"
-                : "bg-slate-100 text-slate-700"
+                ? "bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800"
+                : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200"
             }`}>
               {job.status.replace("_", " ")}
             </span>
@@ -374,8 +374,8 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
         </div>
 
         {/* Status Switcher Bar */}
-        <div className="bg-slate-50 p-3 rounded-xl flex items-center justify-between text-xs flex-wrap gap-2">
-          <span className="font-semibold text-slate-700">Move Lifecycle:</span>
+        <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl flex items-center justify-between text-xs flex-wrap gap-2">
+          <span className="font-semibold text-slate-700 dark:text-slate-200">Move Lifecycle:</span>
           <div className="flex flex-wrap gap-1.5">
             {["scheduled", "in_progress", "completed", "cancelled"].map((st) => (
               <button
@@ -383,8 +383,8 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                 onClick={() => handleStatusChange(st)}
                 className={`px-3 py-1.5 rounded-lg capitalize font-medium text-xs transition-colors cursor-pointer ${
                   job.status === st
-                    ? "bg-blue-600 text-white font-bold shadow-xs"
-                    : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
+                    ? "bg-brand-600 text-white font-bold shadow-xs"
+                    : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800"
                 }`}
               >
                 {st.replace("_", " ")}
@@ -394,46 +394,46 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
         </div>
 
         {/* Route Details */}
-        <div className="border border-slate-200/80 rounded-xl p-4 space-y-2 text-xs bg-slate-50/50">
-          <h4 className="font-bold text-slate-800 uppercase tracking-wider text-[11px]">
+        <div className="border border-slate-200/80 dark:border-slate-700/80 rounded-xl p-4 space-y-2 text-xs bg-slate-50/50 dark:bg-slate-950/50">
+          <h4 className="font-bold text-slate-800 dark:text-slate-100 uppercase tracking-wider text-[11px]">
             Route & Addresses
           </h4>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-700">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-700 dark:text-slate-200">
             <div className="flex items-start gap-2">
-              <MapPin className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+              <MapPin className="w-4 h-4 text-emerald-600 dark:text-emerald-300 shrink-0 mt-0.5" />
               <div>
-                <span className="font-semibold text-slate-900">Pickup:</span> {job.pickupAddress}
+                <span className="font-semibold text-slate-900 dark:text-slate-100">Pickup:</span> {job.pickupAddress}
               </div>
             </div>
             <div className="flex items-start gap-2">
-              <MapPin className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+              <MapPin className="w-4 h-4 text-brand-600 dark:text-brand-300 shrink-0 mt-0.5" />
               <div>
-                <span className="font-semibold text-slate-900">Delivery:</span> {job.deliveryAddress}
+                <span className="font-semibold text-slate-900 dark:text-slate-100">Delivery:</span> {job.deliveryAddress}
               </div>
             </div>
           </div>
         </div>
 
         {/* Schedule Info */}
-        <div className="bg-slate-50 p-3.5 rounded-xl text-xs space-y-2.5">
+        <div className="bg-slate-50 dark:bg-slate-950 p-3.5 rounded-xl text-xs space-y-2.5">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-blue-600 shrink-0" />
+              <Calendar className="w-4 h-4 text-brand-600 dark:text-brand-300 shrink-0" />
               <span>
-                Scheduled Date: <strong className="text-slate-900">{job.scheduledDate}</strong>{" "}
-                {job.scheduledTime && <span className="text-slate-500">({job.scheduledTime})</span>}
+                Scheduled Date: <strong className="text-slate-900 dark:text-slate-100">{job.scheduledDate}</strong>{" "}
+                {job.scheduledTime && <span className="text-slate-500 dark:text-slate-400">({job.scheduledTime})</span>}
               </span>
             </div>
             <button
               onClick={handleOpenEditSchedule}
-              className="px-2.5 py-1.5 bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer self-start sm:self-auto shadow-2xs"
+              className="px-2.5 py-1.5 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer self-start sm:self-auto shadow-2xs"
             >
-              <Edit2 className="w-3 h-3 text-blue-600" />
+              <Edit2 className="w-3 h-3 text-brand-600 dark:text-brand-300" />
               <span>Edit Schedule</span>
             </button>
           </div>
           {job.specialNotes && (
-            <div className="text-amber-800 bg-amber-50 px-3 py-2 rounded-lg text-[11px] font-medium border border-amber-200/80 leading-relaxed">
+            <div className="text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950 px-3 py-2 rounded-lg text-[11px] font-medium border border-amber-200/80 dark:border-amber-800/80 leading-relaxed">
               <span className="font-bold">Special Note:</span> {job.specialNotes}
             </div>
           )}
@@ -443,15 +443,15 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
       {/* OPERATIONS & RESOURCE MANAGEMENT SECTION */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Allocated Vehicles Panel */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-5 shadow-2xs space-y-3">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-4 sm:p-5 shadow-2xs space-y-3">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-1 sm:pb-0">
-            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <Truck className="w-4 h-4 text-blue-600 shrink-0" />
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <Truck className="w-4 h-4 text-brand-600 dark:text-brand-300 shrink-0" />
               <span>Assigned Fleet Vehicles</span>
             </h3>
             <button
               onClick={() => setIsAssignVehicleModalOpen(true)}
-              className="px-2.5 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg text-xs font-semibold flex items-center justify-center gap-1 transition-colors cursor-pointer self-start sm:self-auto"
+              className="px-2.5 py-1.5 bg-brand-50 dark:bg-brand-950 hover:bg-brand-100 dark:hover:bg-brand-950 text-brand-700 dark:text-brand-300 rounded-lg text-xs font-semibold flex items-center justify-center gap-1 transition-colors cursor-pointer self-start sm:self-auto"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Assign Vehicle</span>
@@ -463,20 +463,20 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
               {resources.vehicles.map((v) => (
                 <div
                   key={v.id}
-                  className="flex items-center justify-between p-3 border border-slate-200 rounded-xl text-xs bg-slate-50/50"
+                  className="flex items-center justify-between p-3 border border-slate-200 dark:border-slate-700 rounded-xl text-xs bg-slate-50/50 dark:bg-slate-950/50"
                 >
                   <div>
-                    <div className="font-bold text-slate-900 font-mono">{v.vehicleNumber}</div>
-                    <div className="text-slate-500 text-[11px]">{v.vehicleType}</div>
+                    <div className="font-bold text-slate-900 dark:text-slate-100 font-mono">{v.vehicleNumber}</div>
+                    <div className="text-slate-500 dark:text-slate-400 text-[11px]">{v.vehicleType}</div>
                     {v.driverName && (
-                      <div className="text-slate-600 text-[11px] mt-0.5">
+                      <div className="text-slate-600 dark:text-slate-300 text-[11px] mt-0.5">
                         Driver: {v.driverName} {v.driverPhone && `(${v.driverPhone})`}
                       </div>
                     )}
                   </div>
                   <button
                     onClick={() => removeVehicle({ jobId: id, vehicleId: v.vehicleId })}
-                    className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition-colors"
+                    className="p-1.5 text-slate-400 hover:text-rose-600 dark:hover:text-rose-300 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950 transition-colors"
                     title="Remove vehicle"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -485,22 +485,22 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
               ))}
             </div>
           ) : (
-            <div className="text-center py-6 px-4 border border-dashed border-slate-200 rounded-xl text-xs text-slate-400">
+            <div className="text-center py-6 px-4 border border-dashed border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-400">
               No fleet vehicles assigned yet. Click "Assign Vehicle" to allocate from available fleet.
             </div>
           )}
         </div>
 
         {/* Assigned Staff & Crew Panel */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-5 shadow-2xs space-y-3">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-4 sm:p-5 shadow-2xs space-y-3">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-1 sm:pb-0">
-            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <Users className="w-4 h-4 text-purple-600 shrink-0" />
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <Users className="w-4 h-4 text-purple-600 dark:text-purple-300 shrink-0" />
               <span>Assigned Crew & Payroll</span>
             </h3>
             <button
               onClick={() => setIsAssignStaffModalOpen(true)}
-              className="px-2.5 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded-lg text-xs font-semibold flex items-center justify-center gap-1 transition-colors cursor-pointer self-start sm:self-auto"
+              className="px-2.5 py-1.5 bg-purple-50 dark:bg-purple-950 hover:bg-purple-100 dark:hover:bg-purple-950 text-purple-700 dark:text-purple-300 rounded-lg text-xs font-semibold flex items-center justify-center gap-1 transition-colors cursor-pointer self-start sm:self-auto"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Assign Staff</span>
@@ -512,26 +512,26 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
               {resources.staff.map((s) => (
                 <div
                   key={s.id}
-                  className="flex items-start justify-between p-3 border border-slate-200 rounded-xl text-xs bg-slate-50/50 gap-2"
+                  className="flex items-start justify-between p-3 border border-slate-200 dark:border-slate-700 rounded-xl text-xs bg-slate-50/50 dark:bg-slate-950/50 gap-2"
                 >
                   <div className="space-y-1 min-w-0 flex-1">
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="font-bold text-slate-900">{s.name}</span>
-                      <span className="px-1.5 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-medium uppercase">
+                      <span className="font-bold text-slate-900 dark:text-slate-100">{s.name}</span>
+                      <span className="px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded text-[10px] font-medium uppercase">
                         {s.roleOnJob || s.role}
                       </span>
                     </div>
-                    <div className="text-slate-500 font-mono text-[11px]">
+                    <div className="text-slate-500 dark:text-slate-400 font-mono text-[11px]">
                       Pay: ₹{s.amountPayable} ({s.payType === "per_day" ? `₹${s.rateUsed}/day × ${s.daysWorked}d` : "fixed"})
                     </div>
                     <div className="flex flex-wrap items-center gap-2 pt-0.5">
                       <span
                         className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                           s.paymentStatus === "paid"
-                            ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                            ? "bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
                             : s.paymentStatus === "partial"
-                            ? "bg-amber-50 text-amber-700 border border-amber-200"
-                            : "bg-rose-50 text-rose-700 border border-rose-200"
+                            ? "bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800"
+                            : "bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800"
                         }`}
                       >
                         {s.paymentStatus.toUpperCase()} (Paid: ₹{s.amountPaid})
@@ -542,7 +542,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                           setPayAmount((s.amountPayable - s.amountPaid).toString());
                           setPayDays(s.daysWorked || 1);
                         }}
-                        className="text-[11px] font-semibold text-blue-600 hover:underline cursor-pointer py-0.5"
+                        className="text-[11px] font-semibold text-brand-600 dark:text-brand-300 hover:underline cursor-pointer py-0.5"
                       >
                         Update Pay
                       </button>
@@ -550,7 +550,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                   </div>
                   <button
                     onClick={() => removeStaff({ jobId: id, staffId: s.staffId })}
-                    className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition-colors shrink-0"
+                    className="p-1.5 text-slate-400 hover:text-rose-600 dark:hover:text-rose-300 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950 transition-colors shrink-0"
                     title="Remove staff"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -559,7 +559,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
               ))}
             </div>
           ) : (
-            <div className="text-center py-6 px-4 border border-dashed border-slate-200 rounded-xl text-xs text-slate-400">
+            <div className="text-center py-6 px-4 border border-dashed border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-400">
               No staff assigned yet. Click "Assign Staff" to allocate packers/loaders.
             </div>
           )}
@@ -569,15 +569,15 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
       {/* JOB EXPENSES & NET PROFIT SECTION */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Expenses Panel */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-5 shadow-2xs space-y-3">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-4 sm:p-5 shadow-2xs space-y-3">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-1 sm:pb-0">
-            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <DollarSign className="w-4 h-4 text-rose-500 shrink-0" />
               <span>Job Expenses (Fuel, Toll, Repairs)</span>
             </h3>
             <button
               onClick={() => setIsExpenseModalOpen(true)}
-              className="px-2.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg text-xs font-semibold flex items-center justify-center gap-1 transition-colors cursor-pointer self-start sm:self-auto"
+              className="px-2.5 py-1.5 bg-rose-50 dark:bg-rose-950 hover:bg-rose-100 dark:hover:bg-rose-950 text-rose-700 dark:text-rose-300 rounded-lg text-xs font-semibold flex items-center justify-center gap-1 transition-colors cursor-pointer self-start sm:self-auto"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Expense</span>
@@ -589,16 +589,16 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
               {resources.expenses.map((exp) => (
                 <div
                   key={exp.id}
-                  className="flex items-center justify-between p-2.5 border border-slate-200 rounded-xl text-xs bg-slate-50/50"
+                  className="flex items-center justify-between p-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-xs bg-slate-50/50 dark:bg-slate-950/50"
                 >
                   <div>
-                    <span className="font-semibold text-slate-800 capitalize">{exp.category.replace("_", " ")}: </span>
-                    <span className="font-mono font-bold text-rose-600">₹{exp.amount}</span>
-                    {exp.description && <span className="text-slate-500 text-[11px] block">{exp.description}</span>}
+                    <span className="font-semibold text-slate-800 dark:text-slate-100 capitalize">{exp.category.replace("_", " ")}: </span>
+                    <span className="font-mono font-bold text-rose-600 dark:text-rose-300">₹{exp.amount}</span>
+                    {exp.description && <span className="text-slate-500 dark:text-slate-400 text-[11px] block">{exp.description}</span>}
                   </div>
                   <button
                     onClick={() => deleteExpense({ jobId: id, expenseId: exp.id })}
-                    className="p-1 text-slate-400 hover:text-rose-600"
+                    className="p-1 text-slate-400 hover:text-rose-600 dark:hover:text-rose-300"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -606,7 +606,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
               ))}
             </div>
           ) : (
-            <div className="text-center py-6 px-4 border border-dashed border-slate-200 rounded-xl text-xs text-slate-400">
+            <div className="text-center py-6 px-4 border border-dashed border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-400">
               No operational expenses logged yet.
             </div>
           )}
@@ -651,8 +651,8 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
       </div>
 
       {/* 1-Tap Customer WhatsApp Communication Bar */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-2xs space-y-2">
-        <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-4 shadow-2xs space-y-2">
+        <label className="text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider block">
           1-Tap WhatsApp Customer Updates:
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -662,9 +662,9 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
             )}`}
             target="_blank"
             rel="noreferrer"
-            className="py-2.5 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-semibold text-xs rounded-xl flex items-center justify-center gap-2 transition-colors text-center"
+            className="py-2.5 px-3 bg-emerald-50 dark:bg-emerald-950 hover:bg-emerald-100 dark:hover:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-semibold text-xs rounded-xl flex items-center justify-center gap-2 transition-colors text-center"
           >
-            <MessageSquare className="w-4 h-4 text-emerald-600" />
+            <MessageSquare className="w-4 h-4 text-emerald-600 dark:text-emerald-300" />
             <span>Send Truck Dispatch Update</span>
           </a>
 
@@ -674,9 +674,9 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
             )}`}
             target="_blank"
             rel="noreferrer"
-            className="py-2.5 px-3 bg-blue-50 hover:bg-blue-100 text-blue-800 font-semibold text-xs rounded-xl flex items-center justify-center gap-2 transition-colors text-center"
+            className="py-2.5 px-3 bg-brand-50 dark:bg-brand-950 hover:bg-brand-100 dark:hover:bg-brand-950 text-brand-800 dark:text-brand-300 font-semibold text-xs rounded-xl flex items-center justify-center gap-2 transition-colors text-center"
           >
-            <CheckCircle className="w-4 h-4 text-blue-600" />
+            <CheckCircle className="w-4 h-4 text-brand-600 dark:text-brand-300" />
             <span>Send Completion & Review Request</span>
           </a>
         </div>
@@ -685,13 +685,13 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
       {/* MODAL: Assign Vehicle */}
       {isAssignVehicleModalOpen && (
         <div className="fixed inset-0 z-[70] bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-4 sm:p-6 space-y-4 shadow-2xl border border-slate-100">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <Truck className="w-5 h-5 text-blue-600" />
+          <div className="bg-white dark:bg-slate-900 w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-4 sm:p-6 space-y-4 shadow-2xl border border-slate-100 dark:border-slate-800">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <Truck className="w-5 h-5 text-brand-600 dark:text-brand-300" />
                 <span>Assign Fleet Vehicle</span>
               </h3>
-              <button onClick={() => setIsAssignVehicleModalOpen(false)} className="text-slate-400 hover:text-slate-700">
+              <button onClick={() => setIsAssignVehicleModalOpen(false)} className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -699,7 +699,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
             <form onSubmit={handleAssignVehicleSubmit} className="space-y-3.5 text-xs">
               <FormField label="Select Available Vehicle" required>
                 {allVehicles.length === 0 ? (
-                  <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800">
+                  <div className="p-3 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-xl text-xs text-amber-800 dark:text-amber-300">
                     No vehicles found in Fleet directory. Please add vehicles under <strong>Fleet</strong> in the sidebar first.
                   </div>
                 ) : (
@@ -717,7 +717,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                         setVehicleDriverPhone(v.defaultDriverPhone || "");
                       }
                     }}
-                    buttonClassName="bg-white border-slate-300"
+                    buttonClassName="bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600"
                   >
                     <option value="">-- Choose Vehicle --</option>
                     {(availableVehicles.length > 0 ? availableVehicles : allVehicles)
@@ -737,7 +737,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                   value={vehicleDriverName}
                   onChange={(e) => setVehicleDriverName(e.target.value)}
                   placeholder="Driver full name"
-                  className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm focus:border-blue-500 outline-none"
+                  className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm focus:border-brand-500 outline-none"
                 />
               </FormField>
 
@@ -748,13 +748,13 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                   value={vehicleDriverPhone}
                   onChange={(e) => setVehicleDriverPhone(e.target.value)}
                   placeholder="10-digit phone"
-                  className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm font-mono focus:border-blue-500 outline-none"
+                  className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm font-mono focus:border-brand-500 outline-none"
                 />
               </FormField>
 
               <button
                 type="submit"
-                className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-xl cursor-pointer"
+                className="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm rounded-xl cursor-pointer"
               >
                 Allocate Vehicle to Move
               </button>
@@ -766,13 +766,13 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
       {/* MODAL: Assign Staff */}
       {isAssignStaffModalOpen && (
         <div className="fixed inset-0 z-[70] bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-4 sm:p-6 space-y-4 shadow-2xl border border-slate-100">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <Users className="w-5 h-5 text-purple-600" />
+          <div className="bg-white dark:bg-slate-900 w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-4 sm:p-6 space-y-4 shadow-2xl border border-slate-100 dark:border-slate-800">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <Users className="w-5 h-5 text-purple-600 dark:text-purple-300" />
                 <span>Assign Staff Member</span>
               </h3>
-              <button onClick={() => setIsAssignStaffModalOpen(false)} className="text-slate-400 hover:text-slate-700">
+              <button onClick={() => setIsAssignStaffModalOpen(false)} className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -780,7 +780,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
             <form onSubmit={handleAssignStaffSubmit} className="space-y-3.5 text-xs">
               <FormField label="Select Team Member" required>
                 {allStaff.length === 0 ? (
-                  <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800">
+                  <div className="p-3 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-xl text-xs text-amber-800 dark:text-amber-300">
                     No crew members found in Team directory. Please add personnel under <strong>Team</strong> in the sidebar first.
                   </div>
                 ) : (
@@ -798,7 +798,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                         if (s.dailyWage) setStaffRate(s.dailyWage);
                       }
                     }}
-                    buttonClassName="bg-white border-slate-300"
+                    buttonClassName="bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600"
                   >
                     <option value="">-- Choose Member --</option>
                     {(availableStaff.length > 0 ? availableStaff : allStaff)
@@ -818,7 +818,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                   value={staffRoleOnJob}
                   onChange={(e) => setStaffRoleOnJob(e.target.value)}
                   placeholder="e.g. Lead Packer, Helper"
-                  className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm focus:border-blue-500 outline-none"
+                  className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm focus:border-brand-500 outline-none"
                 />
               </FormField>
 
@@ -827,7 +827,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                   <Select
                     value={staffPayType}
                     onChange={(e) => setStaffPayType(e.target.value)}
-                    buttonClassName="bg-white border-slate-300"
+                    buttonClassName="bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600"
                   >
                     <option value="per_job">Fixed per Move</option>
                     <option value="per_day">Daily Rate</option>
@@ -840,7 +840,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                     min="0"
                     value={staffRate}
                     onChange={(e) => setStaffRate(e.target.value)}
-                    className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm font-mono focus:border-blue-500 outline-none"
+                    className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm font-mono focus:border-brand-500 outline-none"
                   />
                 </FormField>
               </div>
@@ -859,13 +859,13 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
       {/* MODAL: Add Expense */}
       {isExpenseModalOpen && (
         <div className="fixed inset-0 z-[70] bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-4 sm:p-6 space-y-4 shadow-2xl border border-slate-100">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+          <div className="bg-white dark:bg-slate-900 w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-4 sm:p-6 space-y-4 shadow-2xl border border-slate-100 dark:border-slate-800">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
                 <DollarSign className="w-5 h-5 text-rose-500" />
                 <span>Add Move Operational Expense</span>
               </h3>
-              <button onClick={() => setIsExpenseModalOpen(false)} className="text-slate-400 hover:text-slate-700">
+              <button onClick={() => setIsExpenseModalOpen(false)} className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -875,7 +875,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                 <Select
                   value={expenseCategory}
                   onChange={(e) => setExpenseCategory(e.target.value)}
-                  buttonClassName="bg-white border-slate-300"
+                  buttonClassName="bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600"
                 >
                   <option value="fuel">Fuel / Diesel</option>
                   <option value="toll">Highway Toll Taxes</option>
@@ -893,7 +893,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                   value={expenseAmount}
                   onChange={(e) => setExpenseAmount(e.target.value)}
                   placeholder="e.g. 1200"
-                  className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm font-mono focus:border-blue-500 outline-none"
+                  className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm font-mono focus:border-brand-500 outline-none"
                 />
               </FormField>
 
@@ -903,7 +903,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                   value={expenseDesc}
                   onChange={(e) => setExpenseDesc(e.target.value)}
                   placeholder="e.g. Highway toll slip at Ranchi exit"
-                  className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm focus:border-blue-500 outline-none"
+                  className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm focus:border-brand-500 outline-none"
                 />
               </FormField>
 
@@ -921,13 +921,13 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
       {/* MODAL: Update Staff Payment */}
       {isStaffPayModalOpen && (
         <div className="fixed inset-0 z-[70] bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-4 sm:p-6 space-y-4 shadow-2xl border border-slate-100">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <CreditCard className="w-5 h-5 text-emerald-600" />
+          <div className="bg-white dark:bg-slate-900 w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-4 sm:p-6 space-y-4 shadow-2xl border border-slate-100 dark:border-slate-800">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <CreditCard className="w-5 h-5 text-emerald-600 dark:text-emerald-300" />
                 <span>Record Wages: {isStaffPayModalOpen.name}</span>
               </h3>
-              <button onClick={() => setIsStaffPayModalOpen(null)} className="text-slate-400 hover:text-slate-700">
+              <button onClick={() => setIsStaffPayModalOpen(null)} className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -944,7 +944,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                       const totalPayable = (isStaffPayModalOpen.rateUsed || 0) * Number(e.target.value);
                       setPayAmount((totalPayable - isStaffPayModalOpen.amountPaid).toString());
                     }}
-                    className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm font-mono focus:border-blue-500 outline-none"
+                    className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm font-mono focus:border-brand-500 outline-none"
                   />
                 </FormField>
               )}
@@ -956,7 +956,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                   required
                   value={payAmount}
                   onChange={(e) => setPayAmount(e.target.value)}
-                  className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm font-mono focus:border-blue-500 outline-none"
+                  className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm font-mono focus:border-brand-500 outline-none"
                 />
               </FormField>
 
@@ -964,7 +964,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                 <Select
                   value={payMode}
                   onChange={(e) => setPayMode(e.target.value)}
-                  buttonClassName="bg-white border-slate-300"
+                  buttonClassName="bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600"
                 >
                   <option value="cash">Cash</option>
                   <option value="upi">UPI / GPay</option>
@@ -978,7 +978,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                   value={payNotes}
                   onChange={(e) => setPayNotes(e.target.value)}
                   placeholder="e.g. Paid in cash at end of move"
-                  className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm focus:border-blue-500 outline-none"
+                  className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm focus:border-brand-500 outline-none"
                 />
               </FormField>
 
@@ -996,13 +996,13 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
       {/* MODAL: Edit Job Schedule */}
       {isEditScheduleOpen && (
         <div className="fixed inset-0 z-[70] bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-4 sm:p-6 space-y-4 shadow-2xl border border-slate-100">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-blue-600" />
+          <div className="bg-white dark:bg-slate-900 w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-4 sm:p-6 space-y-4 shadow-2xl border border-slate-100 dark:border-slate-800">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <Calendar className="w-5 h-5 text-brand-600 dark:text-brand-300" />
                 <span>Update Job Schedule</span>
               </h3>
-              <button onClick={() => setIsEditScheduleOpen(false)} className="text-slate-400 hover:text-slate-700">
+              <button onClick={() => setIsEditScheduleOpen(false)} className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -1014,7 +1014,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                   required
                   value={scheduleForm.scheduledDate}
                   onChange={(e) => setScheduleForm({ ...scheduleForm, scheduledDate: e.target.value })}
-                  className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm focus:border-blue-500 outline-none"
+                  className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm focus:border-brand-500 outline-none"
                 />
               </FormField>
 
@@ -1022,7 +1022,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                 <Select
                   value={scheduleForm.scheduledTime}
                   onChange={(e) => setScheduleForm({ ...scheduleForm, scheduledTime: e.target.value })}
-                  buttonClassName="bg-white border-slate-300"
+                  buttonClassName="bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600"
                 >
                   {["06:00 AM", "07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"].map((t) => (
                     <option key={t} value={t}>{t}</option>
@@ -1036,7 +1036,7 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                   value={scheduleForm.specialNotes}
                   onChange={(e) => setScheduleForm({ ...scheduleForm, specialNotes: e.target.value })}
                   placeholder="e.g. Fragile glassware, lift not working on 3rd floor"
-                  className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm focus:border-blue-500 outline-none"
+                  className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm focus:border-brand-500 outline-none"
                 />
               </FormField>
 
@@ -1044,13 +1044,13 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
                 <button
                   type="button"
                   onClick={() => setIsEditScheduleOpen(false)}
-                  className="px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100 rounded-xl cursor-pointer"
+                  className="px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-xs cursor-pointer"
+                  className="px-4 py-2 text-xs font-semibold bg-brand-600 hover:bg-brand-700 text-white rounded-xl shadow-xs cursor-pointer"
                 >
                   Save Schedule
                 </button>
@@ -1063,20 +1063,20 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
       {/* MODAL: Cancel Move Confirmation */}
       {isCancelConfirmOpen && (
         <div className="fixed inset-0 z-[70] bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-4 sm:p-6 space-y-4 shadow-2xl border border-slate-100">
-            <div className="flex items-center gap-3 text-rose-600">
-              <div className="p-2.5 bg-rose-50 rounded-xl">
+          <div className="bg-white dark:bg-slate-900 w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-4 sm:p-6 space-y-4 shadow-2xl border border-slate-100 dark:border-slate-800">
+            <div className="flex items-center gap-3 text-rose-600 dark:text-rose-300">
+              <div className="p-2.5 bg-rose-50 dark:bg-rose-950 rounded-xl">
                 <AlertCircle className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-bold text-slate-900">Cancel Active Move Job?</h3>
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Cancel Active Move Job?</h3>
             </div>
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Are you sure you want to mark this job as <strong>Cancelled</strong>? All assigned fleet vehicles and crew members will be immediately released back to available pool.
             </p>
             <div className="flex items-center justify-end gap-3 pt-2">
               <button
                 onClick={() => setIsCancelConfirmOpen(false)}
-                className="px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100 rounded-xl cursor-pointer"
+                className="px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl cursor-pointer"
               >
                 Keep Active
               </button>

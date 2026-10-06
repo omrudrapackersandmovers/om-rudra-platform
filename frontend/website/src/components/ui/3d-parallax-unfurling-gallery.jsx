@@ -1,44 +1,49 @@
 import React, { useRef, useState, useEffect, useMemo, useCallback } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { placeImages, placeImageDescriptions } from "../../data/locations/index";
+import { responsiveImageSet } from "../../utils/responsiveImages";
 
 // Default authentic logistics & fleet image assets from our codebase
 export const DEFAULT_RELOCATION_IMAGES = [
-  "/images/process-for-home-service/safe-transport.webp",
-  "/images/places/delhi-ncr.webp",
-  "/images/process-for-home-service/packing.webp",
-  "/images/services/CarTransportationServices.webp",
-  "/images/places/bihar.webp",
-  "/images/process-for-home-service/loading.webp",
-  "/images/services/HomeShiftingServices.webp",
-  "/images/places/jharkhand.webp",
-  "/images/process-for-home-service/setting-on-new-place.webp",
-  "/images/services/Bike&Two-WheelerTransportation.webp",
-  "/images/places/west-bengal.webp",
-  "/images/process-for-home-service/unloading.webp",
-  "/images/services/Warehousing&SecureStorage.webp",
-  "/images/places/up.webp",
-  "/images/process-for-home-service/packing1.webp",
-  "/images/services/Office&CommercialShifting.webp",
-  "/images/process-for-home-service/loading1.webp",
-  "/images/services/GoodsTransitInsurance.webp",
-  "/images/process-for-home-service/unpacking.webp",
-  "/images/places/maharashtra.webp",
-  "/images/process-for-home-service/visti-and-survey.webp",
-  "/images/services/Loading&UnloadingServices.webp",
-  "/images/process-for-home-service/after-shifting.webp",
-  "/images/places/karnataka.webp",
-  "/images/process-for-home-service/loading2.webp",
-  "/images/services/Packing&UnpackingServices.webp",
-  "/images/process-for-home-service/unloading0.webp",
-  "/images/places/gujrat.webp",
+  "/images/process-for-home-service/transport-v2.webp",
+  "/images/places/delhi-ncr-v2.webp",
+  "/images/process-for-home-service/packing-v2.webp",
+  "/images/services/car-transportation-v2.webp",
+  "/images/places/bihar-v2.webp",
+  "/images/process-for-home-service/loading-v2.webp",
+  "/images/services/home-shifting-v2.webp",
+  "/images/places/jharkhand-v2.webp",
+  "/images/process-for-home-service/unpacking-v2.webp",
+  "/images/services/bike-transportation-v2.webp",
+  "/images/places/west-bengal-v2.webp",
+  "/images/process-for-home-service/unloading-v2.webp",
+  "/images/services/warehousing-storage-v2.webp",
+  "/images/places/up-v2.webp",
+  "/images/process-for-home-service/packing-v2.webp",
+  "/images/services/office-commercial-shifting-v2.webp",
+  "/images/process-for-home-service/loading-v2.webp",
+  "/images/services/goods-insurance-v2.webp",
+  "/images/process-for-home-service/unpacking-v2.webp",
+  "/images/places/maharashtra-v2.webp",
+  "/images/process-for-home-service/survey-v2.webp",
+  "/images/services/loading-unloading-v2.webp",
+  "/images/process-for-home-service/settled-v2.webp",
+  "/images/places/karnataka-v2.webp",
+  "/images/process-for-home-service/loading-v2.webp",
+  "/images/services/packing-unpacking-v2.webp",
+  "/images/process-for-home-service/unloading-v2.webp",
+  "/images/places/gujrat-v2.webp",
 ];
 
 const ImageCard = ({ src, onLoad, alt = "Om Rudra Packers and Movers Transit Fleet" }) => {
+  const region = Object.keys(placeImages).find(key => placeImages[key] === src);
   return (
     <div className="w-full aspect-video flex-shrink-0 bg-[#0f172a] rounded-xl overflow-hidden border border-white/10 transition-transform duration-300 hover:scale-[1.02] relative will-change-transform backface-hidden preserve-3d shadow-md">
       <img
         src={src}
-        alt={alt}
+        alt={region ? placeImageDescriptions[region] : alt}
+        srcSet={responsiveImageSet(src)}
+        sizes="(min-width: 1024px) 400px, 80vw"
         loading="lazy"
         onLoad={onLoad}
         className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-300"

@@ -104,10 +104,10 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
       `}</style>
 
       {/* Top Bar (Hidden in Print) */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 print:hidden bg-white sm:bg-transparent p-3 sm:p-0 rounded-2xl border sm:border-0 border-slate-200/80 shadow-2xs sm:shadow-none">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 print:hidden bg-white dark:bg-slate-900 sm:bg-transparent p-3 sm:p-0 rounded-2xl border sm:border-0 border-slate-200/80 dark:border-slate-700/80 shadow-2xs sm:shadow-none">
         <button
           onClick={() => navigate("/bilties")}
-          className="p-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 flex items-center gap-1 text-xs cursor-pointer transition-colors self-start"
+          className="p-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1 text-xs cursor-pointer transition-colors self-start"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Bilties List</span>
@@ -129,20 +129,20 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
             )}`}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center justify-center gap-1.5 py-2 px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/80 font-semibold text-xs rounded-xl transition-colors text-center"
+            className="flex items-center justify-center gap-1.5 py-2 px-3 bg-emerald-50 dark:bg-emerald-950 hover:bg-emerald-100 dark:hover:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/80 font-semibold text-xs rounded-xl transition-colors text-center"
           >
-            <MessageSquare className="w-4 h-4 text-emerald-600" />
+            <MessageSquare className="w-4 h-4 text-emerald-600 dark:text-emerald-300" />
             <span>WhatsApp</span>
           </a>
         </div>
       </div>
 
       {/* Official Lorry Receipt / Bilty Printable Sheet */}
-      <div className="bg-white rounded-2xl border-2 border-slate-800 p-3.5 sm:p-8 shadow-sm space-y-5 print:border-2 print:border-black print:shadow-none print:p-4">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-800 p-3.5 sm:p-8 shadow-sm space-y-5 print:border-2 print:border-black print:shadow-none print:p-4">
         {/* Centered Brand Logo at Top */}
         <div className="flex justify-center items-center pb-2">
           <img
-            src={company.logo?.primary || "/images/primary-logo.webp"}
+            src={company.logo?.print || "/brand/lockup-red-1080.png"}
             alt={company.name || "Company Logo"}
             className="h-14 sm:h-16 w-auto object-contain max-w-60 drop-shadow-xs"
             onError={(e) => {
@@ -154,83 +154,83 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
         {/* LR Top Header Row (Data on Both Sides) */}
         <div className="border-b-2 border-slate-800 pb-4 flex flex-col sm:flex-row justify-between items-start gap-4">
           <div className="space-y-1 text-left max-w-md">
-            <h1 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight leading-tight">
+            <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 uppercase tracking-tight leading-tight">
               {company.name || "Om Rudra Packers and Movers"}
             </h1>
-            <p className="text-[11px] font-semibold text-blue-800">
+            <p className="text-[11px] font-semibold text-brand-800 dark:text-brand-300">
               GOVT. REGD. PACKERS & HIGHWAY TRANSPORT CONTRACTORS (IBA APPROVED)
             </p>
-            <p className="text-xs text-slate-600 mt-1 leading-snug">
+            <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-snug">
               {company.headOffice?.address
                 ? `${company.headOffice.address}, ${company.headOffice.city}, ${company.headOffice.state} - ${company.headOffice.pincode}`
                 : "Ram Krishna Nagar, Soranpur, Goraiya Asthan, Patna, Bihar - 800027"}
             </p>
-            <div className="pt-1 space-y-0.5 text-[11px] text-slate-600">
-              <p>Phone: <strong className="text-slate-900">{company.phone || "+91 7033488691"}</strong></p>
-              <p>Email: <strong className="text-slate-900">{company.email || "hello@omrudrapackersandmovers.com"}</strong></p>
-              <p>Web: <strong className="text-slate-900">{company.website?.replace(/^https?:\/\//, "") || "omrudrapackersandmovers.com"}</strong></p>
+            <div className="pt-1 space-y-0.5 text-[11px] text-slate-600 dark:text-slate-300">
+              <p>Phone: <strong className="text-slate-900 dark:text-slate-100">{company.phone || "+91 7033488691"}</strong></p>
+              <p>Email: <strong className="text-slate-900 dark:text-slate-100">{company.email || "hello@omrudrapackersandmovers.com"}</strong></p>
+              <p>Web: <strong className="text-slate-900 dark:text-slate-100">{company.website?.replace(/^https?:\/\//, "") || "omrudrapackersandmovers.com"}</strong></p>
             </div>
-            <p className="text-xs font-semibold text-slate-800 pt-0.5 font-mono">
+            <p className="text-xs font-semibold text-slate-800 dark:text-slate-100 pt-0.5 font-mono">
               {isRealGstin ? `GSTIN: ${company.gstin} ${isRealPan ? `| PAN: ${company.pan}` : ""}` : "Govt Approved Transport Carrier"}
             </p>
           </div>
 
-          <div className="sm:text-right border-2 border-slate-900 p-2 rounded-xl bg-slate-50 min-w-44 shrink-0">
-            <span className="block text-[10px] font-black uppercase tracking-wider text-slate-500">
+          <div className="sm:text-right border-2 border-slate-900 p-2 rounded-xl bg-slate-50 dark:bg-slate-950 min-w-44 shrink-0">
+            <span className="block text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400">
               CONSIGNMENT NOTE (LR)
             </span>
-            <p className="text-base font-black font-mono text-blue-900">{bilty.lrNumber}</p>
-            <p className="text-xs text-slate-700 font-semibold">
+            <p className="text-base font-black font-mono text-brand-900 dark:text-brand-300">{bilty.lrNumber}</p>
+            <p className="text-xs text-slate-700 dark:text-slate-200 font-semibold">
               Date: {formatDate(bilty.createdAt)}
             </p>
           </div>
         </div>
 
         {/* Consignor & Consignee Columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border border-slate-300 rounded-xl p-3 text-xs">
-          <div className="border-b sm:border-b-0 sm:border-r border-slate-200 pb-3 sm:pb-0 sm:pr-3 space-y-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border border-slate-300 dark:border-slate-600 rounded-xl p-3 text-xs">
+          <div className="border-b sm:border-b-0 sm:border-r border-slate-200 dark:border-slate-700 pb-3 sm:pb-0 sm:pr-3 space-y-1">
             <span className="bg-slate-800 text-white font-bold text-[10px] px-2 py-0.5 rounded uppercase">
               CONSIGNOR (SENDER)
             </span>
-            <p className="text-sm font-bold text-slate-900 pt-1">{bilty.consignorName}</p>
-            <p className="text-slate-600">Phone: <span className="font-mono">{bilty.consignorPhone}</span></p>
-            <p className="text-slate-700">From City: <span className="font-bold">{bilty.fromCity}</span></p>
-            <p className="text-slate-600">Pickup Address: {bilty.consignorAddress}</p>
+            <p className="text-sm font-bold text-slate-900 dark:text-slate-100 pt-1">{bilty.consignorName}</p>
+            <p className="text-slate-600 dark:text-slate-300">Phone: <span className="font-mono">{bilty.consignorPhone}</span></p>
+            <p className="text-slate-700 dark:text-slate-200">From City: <span className="font-bold">{bilty.fromCity}</span></p>
+            <p className="text-slate-600 dark:text-slate-300">Pickup Address: {bilty.consignorAddress}</p>
           </div>
 
           <div className="space-y-1 sm:pl-2">
             <span className="bg-slate-800 text-white font-bold text-[10px] px-2 py-0.5 rounded uppercase">
               CONSIGNEE (RECEIVER)
             </span>
-            <p className="text-sm font-bold text-slate-900 pt-1">{bilty.consigneeName}</p>
-            <p className="text-slate-600">Phone: <span className="font-mono">{bilty.consigneePhone}</span></p>
-            <p className="text-slate-700">To City: <span className="font-bold">{bilty.toCity}</span></p>
-            <p className="text-slate-600">Delivery Address: {bilty.consigneeAddress}</p>
+            <p className="text-sm font-bold text-slate-900 dark:text-slate-100 pt-1">{bilty.consigneeName}</p>
+            <p className="text-slate-600 dark:text-slate-300">Phone: <span className="font-mono">{bilty.consigneePhone}</span></p>
+            <p className="text-slate-700 dark:text-slate-200">To City: <span className="font-bold">{bilty.toCity}</span></p>
+            <p className="text-slate-600 dark:text-slate-300">Delivery Address: {bilty.consigneeAddress}</p>
           </div>
         </div>
 
         {/* Vehicle & Highway Details Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-slate-100 border border-slate-300 rounded-xl p-3 text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-3 text-xs">
           <div>
-            <span className="text-[10px] font-bold text-slate-500 uppercase block">Vehicle Reg No.</span>
-            <span className="font-black font-mono text-sm text-slate-900">{bilty.truckNumber}</span>
+            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase block">Vehicle Reg No.</span>
+            <span className="font-black font-mono text-sm text-slate-900 dark:text-slate-100">{bilty.truckNumber}</span>
           </div>
           <div>
-            <span className="text-[10px] font-bold text-slate-500 uppercase block">Driver Name</span>
-            <span className="font-bold text-slate-900">{bilty.driverName}</span>
+            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase block">Driver Name</span>
+            <span className="font-bold text-slate-900 dark:text-slate-100">{bilty.driverName}</span>
           </div>
           <div>
-            <span className="text-[10px] font-bold text-slate-500 uppercase block">Driver Mobile</span>
-            <span className="font-mono font-bold text-slate-900">{bilty.driverPhone || "N/A"}</span>
+            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase block">Driver Mobile</span>
+            <span className="font-mono font-bold text-slate-900 dark:text-slate-100">{bilty.driverPhone || "N/A"}</span>
           </div>
           <div>
-            <span className="text-[10px] font-bold text-slate-500 uppercase block">Risk Coverage</span>
-            <span className="font-bold text-amber-700 uppercase">{bilty.riskType.replace("_", " ")}</span>
+            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase block">Risk Coverage</span>
+            <span className="font-bold text-amber-700 dark:text-amber-300 uppercase">{bilty.riskType.replace("_", " ")}</span>
           </div>
         </div>
 
         {/* Goods Description & Packages */}
-        <div className="border border-slate-300 rounded-xl overflow-x-auto text-xs print-avoid-break">
+        <div className="border border-slate-300 dark:border-slate-600 rounded-xl overflow-x-auto text-xs print-avoid-break">
           <table className="w-full text-left min-w-[500px]">
             <thead className="bg-slate-800 text-white font-semibold">
               <tr>
@@ -240,21 +240,21 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
                 <th className="py-2 px-3 text-right">Freight Charges</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200 text-slate-800">
+            <tbody className="divide-y divide-slate-200 dark:divide-slate-700 text-slate-800 dark:text-slate-100">
               <tr>
                 <td className="py-3 px-3 font-mono font-bold text-sm">{bilty.packagesCount} Boxes</td>
                 <td className="py-3 px-3">
                   <p className="font-semibold">{bilty.goodsDescription}</p>
-                  <p className="text-[10px] text-slate-500">Carefully packed in corrugated boxes & bubble wrap.</p>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400">Carefully packed in corrugated boxes & bubble wrap.</p>
                 </td>
                 <td className="py-3 px-3 text-right font-mono font-bold">
                   ₹{bilty.declaredValue.toLocaleString("en-IN")}
                 </td>
                 <td className="py-3 px-3 text-right font-mono">
-                  <span className="block font-black text-sm text-slate-900">
+                  <span className="block font-black text-sm text-slate-900 dark:text-slate-100">
                     ₹{bilty.freightAmount.toLocaleString("en-IN")}
                   </span>
-                  <span className="text-[10px] font-bold uppercase text-blue-700">
+                  <span className="text-[10px] font-bold uppercase text-brand-700 dark:text-brand-300">
                     [{bilty.freightStatus.replace("_", " ")}]
                   </span>
                 </td>
@@ -265,8 +265,8 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
 
         {/* Legal Terms & Signatures */}
         <div className="space-y-4 pt-2 print-avoid-break">
-          <div className="text-[10px] text-slate-500 space-y-0.5 border-t border-slate-200 pt-2">
-            <p className="font-bold text-slate-700">NOTICE & CONDITIONS:</p>
+          <div className="text-[10px] text-slate-500 dark:text-slate-400 space-y-0.5 border-t border-slate-200 dark:border-slate-700 pt-2">
+            <p className="font-bold text-slate-700 dark:text-slate-200">NOTICE & CONDITIONS:</p>
             <ul className="list-disc pl-4 space-y-0.5">
               {(company.terms?.bilty || [
                 "Consignment is carried strictly under Carrier by Road Act.",
@@ -279,7 +279,7 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
             </ul>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 pt-6 text-center text-[11px] font-bold text-slate-700">
+          <div className="grid grid-cols-3 gap-4 pt-6 text-center text-[11px] font-bold text-slate-700 dark:text-slate-200">
             <div className="border-t border-slate-400 pt-1">
               Consignor / Sender Signature
             </div>

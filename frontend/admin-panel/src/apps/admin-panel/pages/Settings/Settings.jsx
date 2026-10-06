@@ -380,8 +380,8 @@ const Settings = () => {
       {/* Action Row */}
       {isLoading && (
         <div className="flex items-center justify-end">
-          <span className="flex items-center gap-1.5 text-xs text-slate-500 font-medium bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
-            <RefreshCw className="w-3.5 h-3.5 animate-spin text-blue-500" />
+          <span className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-medium bg-white dark:bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
+            <RefreshCw className="w-3.5 h-3.5 animate-spin text-brand-500" />
             <span>Loading...</span>
           </span>
         </div>
@@ -389,15 +389,15 @@ const Settings = () => {
 
       {/* Alert Banners Below the Header Strip */}
       {errorMessage && (
-        <div className="p-4 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-2xl flex items-center justify-between gap-3 shadow-2xs animate-in fade-in duration-200">
+        <div className="p-4 bg-rose-50 dark:bg-rose-950 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 text-xs rounded-2xl flex items-center justify-between gap-3 shadow-2xs animate-in fade-in duration-200">
           <div className="flex items-center gap-2.5">
-            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+            <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-300 shrink-0" />
             <span className="font-medium">{errorMessage}</span>
           </div>
           <button
             type="button"
             onClick={() => setErrorMessage("")}
-            className="text-rose-500 hover:text-rose-700 p-1 rounded-lg hover:bg-rose-100 transition-colors cursor-pointer"
+            className="text-rose-500 hover:text-rose-700 dark:hover:text-rose-300 p-1 rounded-lg hover:bg-rose-100 dark:hover:bg-rose-950 transition-colors cursor-pointer"
             aria-label="Dismiss error"
           >
             <X className="w-4 h-4" />
@@ -406,9 +406,9 @@ const Settings = () => {
       )}
 
       {savedSuccess && (
-        <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-2xl flex items-center justify-between gap-3 shadow-2xs animate-in fade-in duration-200">
+        <div className="p-4 bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs rounded-2xl flex items-center justify-between gap-3 shadow-2xs animate-in fade-in duration-200">
           <div className="flex items-center gap-2.5">
-            <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+            <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-300 shrink-0" />
             <span className="font-medium">
               {statusMessage || "Settings saved successfully!"}
             </span>
@@ -416,7 +416,7 @@ const Settings = () => {
           <button
             type="button"
             onClick={() => setSavedSuccess(false)}
-            className="text-emerald-500 hover:text-emerald-700 p-1 rounded-lg hover:bg-emerald-100 transition-colors cursor-pointer"
+            className="text-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-300 p-1 rounded-lg hover:bg-emerald-100 dark:hover:bg-emerald-950 transition-colors cursor-pointer"
             aria-label="Dismiss message"
           >
             <X className="w-4 h-4" />
@@ -425,7 +425,7 @@ const Settings = () => {
       )}
 
       {/* Settings Navigation Tabs */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-xs bg-white p-1.5 rounded-2xl border border-slate-200/80 shadow-2xs">
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-xs bg-white dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           return (
@@ -434,8 +434,8 @@ const Settings = () => {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium whitespace-nowrap transition-all cursor-pointer ${
                 activeTab === tab.id
-                  ? "bg-blue-600 text-white shadow-xs font-semibold"
-                  : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                  ? "bg-brand-600 text-white shadow-xs font-semibold"
+                  : "text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-950 hover:text-slate-900 dark:hover:text-slate-100"
               }`}
             >
               <Icon className="w-4 h-4" />
@@ -451,15 +451,15 @@ const Settings = () => {
         {activeTab === "company" && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Basic Info */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-4">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-blue-600" />
+            <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-4">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <Building2 className="w-4 h-4 text-brand-600 dark:text-brand-300" />
                 <span>Brand Identity & Legal Name</span>
               </h3>
 
               <div className="space-y-3 text-xs">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Company Legal Name *
                   </label>
                   <input
@@ -469,7 +469,7 @@ const Settings = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white text-xs font-medium"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 focus:bg-white dark:focus:bg-slate-900 text-xs font-medium"
                   />
                   <p className="text-[11px] text-slate-400 mt-1">
                     Appears on invoices, bilties, and formal documents.
@@ -477,7 +477,7 @@ const Settings = () => {
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Brand Display Name (Short Name)
                   </label>
                   <input
@@ -486,12 +486,12 @@ const Settings = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, shortName: e.target.value })
                     }
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white text-xs"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 focus:bg-white dark:focus:bg-slate-900 text-xs"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Company Tagline / Slogan
                   </label>
                   <input
@@ -500,12 +500,12 @@ const Settings = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, tagline: e.target.value })
                     }
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white text-xs"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 focus:bg-white dark:focus:bg-slate-900 text-xs"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Website URL
                   </label>
                   <div className="relative">
@@ -516,7 +516,7 @@ const Settings = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, website: e.target.value })
                       }
-                      className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white text-xs"
+                      className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 focus:bg-white dark:focus:bg-slate-900 text-xs"
                     />
                   </div>
                 </div>
@@ -524,16 +524,16 @@ const Settings = () => {
             </div>
 
             {/* Contact & Head Office */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-4">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-blue-600" />
+            <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-4">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-brand-600 dark:text-brand-300" />
                 <span>Head Office & Contact Channels</span>
               </h3>
 
               <div className="space-y-3 text-xs">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                       Primary Hotline *
                     </label>
                     <input
@@ -543,11 +543,11 @@ const Settings = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, phone: e.target.value })
                       }
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white text-xs font-mono"
+                      className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 focus:bg-white dark:focus:bg-slate-900 text-xs font-mono"
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                       WhatsApp Support *
                     </label>
                     <input
@@ -557,13 +557,13 @@ const Settings = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, whatsapp: e.target.value })
                       }
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white text-xs font-mono"
+                      className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 focus:bg-white dark:focus:bg-slate-900 text-xs font-mono"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Support Email
                   </label>
                   <div className="relative">
@@ -574,13 +574,13 @@ const Settings = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                       }
-                      className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white text-xs"
+                      className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 focus:bg-white dark:focus:bg-slate-900 text-xs"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Head Office Street Address
                   </label>
                   <input
@@ -595,13 +595,13 @@ const Settings = () => {
                         },
                       })
                     }
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white text-xs"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 focus:bg-white dark:focus:bg-slate-900 text-xs"
                   />
                 </div>
 
                 <div className="grid grid-cols-3 gap-3">
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                       City
                     </label>
                     <input
@@ -616,11 +616,11 @@ const Settings = () => {
                           },
                         })
                       }
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs"
+                      className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl text-xs"
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                       State
                     </label>
                     <input
@@ -635,11 +635,11 @@ const Settings = () => {
                           },
                         })
                       }
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs"
+                      className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl text-xs"
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                       Pincode
                     </label>
                     <input
@@ -654,7 +654,7 @@ const Settings = () => {
                           },
                         })
                       }
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono"
+                      className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-mono"
                     />
                   </div>
                 </div>
@@ -666,15 +666,15 @@ const Settings = () => {
         {/* Tab 2: Tax & Compliance */}
         {activeTab === "compliance" && (
           <div className="space-y-6">
-            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-4">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <FileText className="w-4 h-4 text-blue-600" />
+            <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-4">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <FileText className="w-4 h-4 text-brand-600 dark:text-brand-300" />
                 <span>GST Registration & Statutory Codes</span>
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     GSTIN Number
                   </label>
                   <input
@@ -683,7 +683,7 @@ const Settings = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, gstin: e.target.value })
                     }
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono text-xs uppercase"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 font-mono text-xs uppercase"
                   />
                   <p className="text-[11px] text-slate-400 mt-1">
                     Printed on Tax Invoices & Bilty notes.
@@ -691,7 +691,7 @@ const Settings = () => {
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Permanent Account Number (PAN)
                   </label>
                   <input
@@ -700,12 +700,12 @@ const Settings = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, pan: e.target.value })
                     }
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono text-xs uppercase"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 font-mono text-xs uppercase"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     GTA SAC / HSN Code
                   </label>
                   <input
@@ -714,7 +714,7 @@ const Settings = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, sacCode: e.target.value })
                     }
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono text-xs"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 font-mono text-xs"
                   />
                   <p className="text-[11px] text-slate-400 mt-1">
                     Default 9965 (Goods Transport Agency).
@@ -724,15 +724,15 @@ const Settings = () => {
             </div>
 
             {/* Standard Terms & Conditions for Documents */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-4">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <Sliders className="w-4 h-4 text-blue-600" />
+            <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-4">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <Sliders className="w-4 h-4 text-brand-600 dark:text-brand-300" />
                 <span>Default Document Terms & Conditions</span>
               </h3>
 
               <div className="space-y-4 text-xs">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Quotation Terms (One term per line)
                   </label>
                   <textarea
@@ -747,12 +747,12 @@ const Settings = () => {
                         },
                       })
                     }
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 text-xs font-mono"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 text-xs font-mono"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Invoice Terms & Conditions (One term per line)
                   </label>
                   <textarea
@@ -767,12 +767,12 @@ const Settings = () => {
                         },
                       })
                     }
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 text-xs font-mono"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 text-xs font-mono"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Bilty / Consignment Carrier Terms (One term per line)
                   </label>
                   <textarea
@@ -787,7 +787,7 @@ const Settings = () => {
                         },
                       })
                     }
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 text-xs font-mono"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 text-xs font-mono"
                   />
                 </div>
               </div>
@@ -799,15 +799,15 @@ const Settings = () => {
         {activeTab === "payments" && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Dynamic UPI Payment Settings */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-4">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <QrCode className="w-4 h-4 text-emerald-600" />
+            <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-4">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <QrCode className="w-4 h-4 text-emerald-600 dark:text-emerald-300" />
                 <span>UPI Payment & Instant QR Generation</span>
               </h3>
 
               <div className="space-y-3 text-xs">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Virtual Payment Address (VPA / UPI ID) *
                   </label>
                   <input
@@ -820,7 +820,7 @@ const Settings = () => {
                         upi: { ...formData.upi, id: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono text-xs"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 font-mono text-xs"
                   />
                   <p className="text-[11px] text-slate-400 mt-1">
                     Used to render dynamic payment QR codes on invoices.
@@ -828,7 +828,7 @@ const Settings = () => {
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     UPI Payee Display Name
                   </label>
                   <input
@@ -840,22 +840,22 @@ const Settings = () => {
                         upi: { ...formData.upi, payeeName: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 text-xs"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 text-xs"
                   />
                 </div>
               </div>
             </div>
 
             {/* NEFT / RTGS Bank Transfer Account */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-4">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <CreditCard className="w-4 h-4 text-blue-600" />
+            <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-4">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <CreditCard className="w-4 h-4 text-brand-600 dark:text-brand-300" />
                 <span>Official Bank Account (NEFT / RTGS)</span>
               </h3>
 
               <div className="space-y-3 text-xs">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Account Holder Name
                   </label>
                   <input
@@ -870,13 +870,13 @@ const Settings = () => {
                         },
                       })
                     }
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs uppercase"
+                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl text-xs uppercase"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                       Bank Name
                     </label>
                     <input
@@ -891,11 +891,11 @@ const Settings = () => {
                           },
                         })
                       }
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs"
+                      className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl text-xs"
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                       Branch
                     </label>
                     <input
@@ -910,14 +910,14 @@ const Settings = () => {
                           },
                         })
                       }
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs"
+                      className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl text-xs"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                       Account Number
                     </label>
                     <input
@@ -932,11 +932,11 @@ const Settings = () => {
                           },
                         })
                       }
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-mono text-xs"
+                      className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl font-mono text-xs"
                     />
                   </div>
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                       IFSC Code
                     </label>
                     <input
@@ -951,7 +951,7 @@ const Settings = () => {
                           },
                         })
                       }
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-mono text-xs uppercase"
+                      className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl font-mono text-xs uppercase"
                     />
                   </div>
                 </div>
@@ -965,43 +965,43 @@ const Settings = () => {
           <div className="space-y-6">
             {/* Top Feedback Alerts */}
             {profileSuccess && (
-              <div className="p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-2xl flex items-center gap-2">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+              <div className="p-3.5 bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs rounded-2xl flex items-center gap-2">
+                <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-300 shrink-0" />
                 <span>{profileSuccess}</span>
               </div>
             )}
             {profileError && (
-              <div className="p-3.5 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-2xl flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+              <div className="p-3.5 bg-rose-50 dark:bg-rose-950 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 text-xs rounded-2xl flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-300 shrink-0" />
                 <span>{profileError}</span>
               </div>
             )}
             {passwordSuccess && (
-              <div className="p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-2xl flex items-center gap-2">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+              <div className="p-3.5 bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs rounded-2xl flex items-center gap-2">
+                <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-300 shrink-0" />
                 <span>{passwordSuccess}</span>
               </div>
             )}
             {passwordError && (
-              <div className="p-3.5 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-2xl flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+              <div className="p-3.5 bg-rose-50 dark:bg-rose-950 border border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 text-xs rounded-2xl flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-300 shrink-0" />
                 <span>{passwordError}</span>
               </div>
             )}
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Card 1: Account Profile (Username & Email) */}
-              <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-4">
+              <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                    <User className="w-4 h-4 text-blue-600" />
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                    <User className="w-4 h-4 text-brand-600 dark:text-brand-300" />
                     <span>Account Profile</span>
                   </h3>
                 </div>
 
                 <div className="space-y-3 text-xs">
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                       Username *
                     </label>
                     <div className="relative">
@@ -1012,13 +1012,13 @@ const Settings = () => {
                         value={profileUsername}
                         onChange={(e) => setProfileUsername(e.target.value)}
                         placeholder="username"
-                        className="w-full pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 text-xs font-semibold"
+                        className="w-full pl-8 pr-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 text-xs font-semibold"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                       Registered Email Address *
                     </label>
                     <div className="relative">
@@ -1029,7 +1029,7 @@ const Settings = () => {
                         value={profileEmail}
                         onChange={(e) => setProfileEmail(e.target.value)}
                         placeholder="account@omrudrapackersandmovers.com"
-                        className="w-full pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 text-xs"
+                        className="w-full pl-8 pr-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 text-xs"
                       />
                     </div>
                     <p className="text-[11px] text-slate-400 mt-1">
@@ -1043,7 +1043,7 @@ const Settings = () => {
                       type="button"
                       disabled={profileSaving}
                       onClick={handleSaveProfile}
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs shadow-xs transition-all cursor-pointer disabled:opacity-60 flex items-center gap-1.5"
+                      className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl text-xs shadow-xs transition-all cursor-pointer disabled:opacity-60 flex items-center gap-1.5"
                     >
                       {profileSaving && (
                         <RefreshCw className="w-3.5 h-3.5 animate-spin" />
@@ -1059,51 +1059,51 @@ const Settings = () => {
               </div>
 
               {/* Card 2: Two-Factor Authentication (2FA) */}
-              <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-4">
+              <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                    <Shield className="w-4 h-4 text-emerald-600" />
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                    <Shield className="w-4 h-4 text-emerald-600 dark:text-emerald-300" />
                     <span>Two-Factor Authentication</span>
                   </h3>
                   <span
                     className={`text-[11px] font-semibold px-2 py-0.5 rounded-full border ${
                       twoFactorActive
-                        ? "text-emerald-700 bg-emerald-50 border-emerald-200/80"
-                        : "text-slate-600 bg-slate-100 border-slate-200"
+                        ? "text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950 border-emerald-200/80 dark:border-emerald-800/80"
+                        : "text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700"
                     }`}
                   >
                     {twoFactorActive ? "ENABLED" : "DISABLED"}
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                   Enhance account security with two-step email verification.
                   When active, sign-ins will require entering a one-time 6-digit
                   code delivered to{" "}
-                  <strong className="text-slate-900 font-mono">
+                  <strong className="text-slate-900 dark:text-slate-100 font-mono">
                     {profileEmail || "(no email registered)"}
                   </strong>
                   .
                 </p>
 
-                <div className="bg-slate-50 border border-slate-200/80 p-4 rounded-xl flex items-center justify-between gap-4">
+                <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-700/80 p-4 rounded-xl flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <div
                       className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
                         twoFactorActive
-                          ? "bg-emerald-100 text-emerald-600"
-                          : "bg-slate-200 text-slate-500"
+                          ? "bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-300"
+                          : "bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400"
                       }`}
                     >
                       <ShieldCheck className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-slate-900">
+                      <p className="text-xs font-bold text-slate-900 dark:text-slate-100">
                         {twoFactorActive
                           ? "Two-Step Verification Active"
                           : "Standard Sign-In Mode"}
                       </p>
-                      <p className="text-[11px] text-slate-500">
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400">
                         {twoFactorActive
                           ? "Email verification code required on every sign-in"
                           : "Direct sign-in using password only"}
@@ -1116,14 +1116,14 @@ const Settings = () => {
                     type="button"
                     disabled={toggling2FA}
                     onClick={handleToggle2FA}
-                    className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 ${
-                      twoFactorActive ? "bg-emerald-600" : "bg-slate-300"
+                    className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-600 focus:ring-offset-2 ${
+                      twoFactorActive ? "bg-emerald-600" : "bg-slate-300 dark:bg-slate-600"
                     }`}
                     role="switch"
                     aria-checked={twoFactorActive}
                   >
                     <span
-                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out ${
+                      className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white dark:bg-slate-900 shadow-md ring-0 transition duration-200 ease-in-out ${
                         twoFactorActive ? "translate-x-5" : "translate-x-0"
                       }`}
                     />
@@ -1131,8 +1131,8 @@ const Settings = () => {
                 </div>
 
                 {!profileEmail && (
-                  <div className="p-2.5 bg-amber-50 border border-amber-200 text-amber-800 rounded-xl text-[11px] flex items-start gap-2">
-                    <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-amber-600" />
+                  <div className="p-2.5 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 rounded-xl text-[11px] flex items-start gap-2">
+                    <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-amber-600 dark:text-amber-300" />
                     <span>
                       Please enter and save your email address in the
                       Account Profile box before enabling two-factor
@@ -1143,15 +1143,15 @@ const Settings = () => {
               </div>
 
               {/* Card 3: Change Password Form */}
-              <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-4">
-                <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                  <Lock className="w-4 h-4 text-blue-600" />
+              <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-4">
+                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                  <Lock className="w-4 h-4 text-brand-600 dark:text-brand-300" />
                   <span>Change Account Password</span>
                 </h3>
 
                 <div className="space-y-3 text-xs">
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                       Current Password *
                     </label>
                     <div className="relative">
@@ -1160,14 +1160,14 @@ const Settings = () => {
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)}
                         placeholder="••••••••"
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 pr-10 text-xs"
+                        className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 pr-10 text-xs"
                       />
                       <button
                         type="button"
                         onClick={() =>
                           setShowCurrentPassword(!showCurrentPassword)
                         }
-                        className="absolute right-3 top-2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                        className="absolute right-3 top-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 cursor-pointer"
                       >
                         {showCurrentPassword ? (
                           <EyeOff className="w-4 h-4" />
@@ -1180,7 +1180,7 @@ const Settings = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
+                      <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                         New Password (min 6) *
                       </label>
                       <div className="relative">
@@ -1189,12 +1189,12 @@ const Settings = () => {
                           value={newPassword}
                           onChange={(e) => setNewPassword(e.target.value)}
                           placeholder="New password"
-                          className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 pr-10 text-xs"
+                          className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 pr-10 text-xs"
                         />
                         <button
                           type="button"
                           onClick={() => setShowNewPassword(!showNewPassword)}
-                          className="absolute right-3 top-2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                          className="absolute right-3 top-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 cursor-pointer"
                         >
                           {showNewPassword ? (
                             <EyeOff className="w-4 h-4" />
@@ -1206,7 +1206,7 @@ const Settings = () => {
                     </div>
 
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1">
+                      <label className="block font-semibold text-slate-700 dark:text-slate-200 mb-1">
                         Confirm New Password *
                       </label>
                       <input
@@ -1214,7 +1214,7 @@ const Settings = () => {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         placeholder="Confirm password"
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 text-xs"
+                        className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-600 text-xs"
                       />
                     </div>
                   </div>
@@ -1245,18 +1245,18 @@ const Settings = () => {
               </div>
 
               {/* Card 4: Account Security Guidelines */}
-              <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-4">
-                <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                  <Key className="w-4 h-4 text-amber-600" />
+              <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-4">
+                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                  <Key className="w-4 h-4 text-amber-600 dark:text-amber-300" />
                   <span>Account Security Guidelines</span>
                 </h3>
 
-                <div className="space-y-3 text-xs text-slate-600">
-                  <div className="bg-slate-50 border border-slate-200/80 p-4 rounded-xl space-y-2">
-                    <p className="font-semibold text-slate-800">
+                <div className="space-y-3 text-xs text-slate-600 dark:text-slate-300">
+                  <div className="bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-700/80 p-4 rounded-xl space-y-2">
+                    <p className="font-semibold text-slate-800 dark:text-slate-100">
                       Best Practices for Account Protection:
                     </p>
-                    <ul className="space-y-1.5 text-[11px] text-slate-600 list-disc list-inside">
+                    <ul className="space-y-1.5 text-[11px] text-slate-600 dark:text-slate-300 list-disc list-inside">
                       <li>
                         Keep Two-Factor Authentication enabled for all
                         account access.
@@ -1276,9 +1276,9 @@ const Settings = () => {
                     </ul>
                   </div>
 
-                  <div className="bg-blue-50/70 border border-blue-200 text-blue-900 p-3 rounded-xl text-[11px] space-y-1">
+                  <div className="bg-brand-50/70 dark:bg-brand-950/70 border border-brand-200 dark:border-brand-800 text-brand-900 dark:text-brand-300 p-3 rounded-xl text-[11px] space-y-1">
                     <p className="font-bold flex items-center gap-1">
-                      <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-brand-600 dark:text-brand-300" />
                       <span>Protected Account</span>
                     </p>
                     <p>
@@ -1297,36 +1297,36 @@ const Settings = () => {
         {activeTab === "backup" && (
           <div className="space-y-6">
             {/* Header info */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-2xs space-y-2">
-              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <Database className="w-5 h-5 text-blue-600" />
+            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-2">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <Database className="w-5 h-5 text-brand-600 dark:text-brand-300" />
                 <span>Operational Data Management & Backup</span>
               </h3>
-              <p className="text-xs text-slate-500 max-w-2xl leading-relaxed">
+              <p className="text-xs text-slate-500 dark:text-slate-400 max-w-2xl leading-relaxed">
                 Monitor database records, download full system JSON archives, seed realistic sample data for testing, or safely wipe operational records while retaining your admin profile and company settings.
               </p>
             </div>
 
             {/* Live Database Status Card */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-2xs space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div>
-                  <h4 className="text-sm font-bold text-slate-900">Live Database Status</h4>
-                  <p className="text-[11px] text-slate-500">Real-time operational records in Cloudflare D1</p>
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">Live Database Status</h4>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">Real-time operational records in Cloudflare D1</p>
                 </div>
                 <div>
                   {isStatusLoading ? (
-                    <span className="inline-flex items-center gap-1.5 text-xs text-slate-500 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200">
-                      <RefreshCw className="w-3 h-3 animate-spin text-blue-500" />
+                    <span className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-950 px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700">
+                      <RefreshCw className="w-3 h-3 animate-spin text-brand-500" />
                       <span>Checking database...</span>
                     </span>
                   ) : dataStatus?.hasData ? (
-                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950 px-3 py-1.5 rounded-full border border-emerald-200 dark:border-emerald-800">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                       <span>Database Active ({dataStatus.totalRecords} records)</span>
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 bg-amber-50 px-3 py-1.5 rounded-full border border-amber-200">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950 px-3 py-1.5 rounded-full border border-amber-200 dark:border-amber-800">
                       <span className="w-2 h-2 rounded-full bg-amber-500" />
                       <span>Database Empty (0 records)</span>
                     </span>
@@ -1336,45 +1336,45 @@ const Settings = () => {
 
               {/* Grid of entity counts */}
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 pt-1">
-                <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
-                  <span className="text-[11px] text-slate-500 font-medium block">Leads</span>
-                  <span className="text-lg font-bold text-slate-900 font-mono">
+                <div className="p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-center">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">Leads</span>
+                  <span className="text-lg font-bold text-slate-900 dark:text-slate-100 font-mono">
                     {dataStatus?.counts?.leads ?? 0}
                   </span>
                 </div>
-                <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
-                  <span className="text-[11px] text-slate-500 font-medium block">Quotes</span>
-                  <span className="text-lg font-bold text-slate-900 font-mono">
+                <div className="p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-center">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">Quotes</span>
+                  <span className="text-lg font-bold text-slate-900 dark:text-slate-100 font-mono">
                     {dataStatus?.counts?.quotes ?? 0}
                   </span>
                 </div>
-                <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
-                  <span className="text-[11px] text-slate-500 font-medium block">Jobs</span>
-                  <span className="text-lg font-bold text-slate-900 font-mono">
+                <div className="p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-center">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">Jobs</span>
+                  <span className="text-lg font-bold text-slate-900 dark:text-slate-100 font-mono">
                     {dataStatus?.counts?.jobs ?? 0}
                   </span>
                 </div>
-                <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
-                  <span className="text-[11px] text-slate-500 font-medium block">Invoices</span>
-                  <span className="text-lg font-bold text-slate-900 font-mono">
+                <div className="p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-center">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">Invoices</span>
+                  <span className="text-lg font-bold text-slate-900 dark:text-slate-100 font-mono">
                     {dataStatus?.counts?.invoices ?? 0}
                   </span>
                 </div>
-                <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
-                  <span className="text-[11px] text-slate-500 font-medium block">Bilties</span>
-                  <span className="text-lg font-bold text-slate-900 font-mono">
+                <div className="p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-center">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">Bilties</span>
+                  <span className="text-lg font-bold text-slate-900 dark:text-slate-100 font-mono">
                     {dataStatus?.counts?.bilties ?? 0}
                   </span>
                 </div>
-                <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
-                  <span className="text-[11px] text-slate-500 font-medium block">Fleet</span>
-                  <span className="text-lg font-bold text-slate-900 font-mono">
+                <div className="p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-center">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">Fleet</span>
+                  <span className="text-lg font-bold text-slate-900 dark:text-slate-100 font-mono">
                     {dataStatus?.counts?.vehicles ?? 0}
                   </span>
                 </div>
-                <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 text-center">
-                  <span className="text-[11px] text-slate-500 font-medium block">Staff</span>
-                  <span className="text-lg font-bold text-slate-900 font-mono">
+                <div className="p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-center">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">Staff</span>
+                  <span className="text-lg font-bold text-slate-900 dark:text-slate-100 font-mono">
                     {dataStatus?.counts?.staff ?? 0}
                   </span>
                 </div>
@@ -1385,8 +1385,8 @@ const Settings = () => {
             <div
               className={`p-6 rounded-2xl border transition-all ${
                 dataStatus?.hasData
-                  ? "bg-slate-50/60 border-slate-200"
-                  : "bg-white border-blue-200/80 shadow-2xs"
+                  ? "bg-slate-50/60 dark:bg-slate-950/60 border-slate-200 dark:border-slate-700"
+                  : "bg-white dark:bg-slate-900 border-brand-200/80 dark:border-brand-800/80 shadow-2xs"
               }`}
             >
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-5">
@@ -1395,36 +1395,36 @@ const Settings = () => {
                     <div
                       className={`p-2 rounded-xl ${
                         dataStatus?.hasData
-                          ? "bg-slate-100 text-slate-400"
-                          : "bg-blue-50 text-blue-600"
+                          ? "bg-slate-100 dark:bg-slate-800 text-slate-400"
+                          : "bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-300"
                       }`}
                     >
                       <Sparkles className="w-4 h-4" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-slate-900">
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">
                         Load Sample Data
                       </h4>
-                      <p className="text-[11px] text-slate-500">
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400">
                         Populate comprehensive testing data across all modules
                       </p>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-600 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                     Seeds realistic fleet vehicles (Tata 407, Bolero Pickup, 14ft container), crew team members (supervisors, drivers, packers), leads in multiple pipeline stages, itemized quotes, scheduled jobs with assigned resources, and GST invoices.
                   </p>
 
                   {dataStatus?.hasData ? (
-                    <div className="inline-flex items-center gap-1.5 p-2.5 bg-amber-50 border border-amber-200 text-amber-800 text-xs rounded-xl mt-1">
-                      <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+                    <div className="inline-flex items-center gap-1.5 p-2.5 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 text-xs rounded-xl mt-1">
+                      <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-300 shrink-0" />
                       <span>
                         Sample data can only be loaded into an <strong>empty database</strong>. Reset existing records below if you wish to reload sample data.
                       </span>
                     </div>
                   ) : (
-                    <div className="inline-flex items-center gap-1.5 p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-xl mt-1">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <div className="inline-flex items-center gap-1.5 p-2.5 bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs rounded-xl mt-1">
+                      <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-300 shrink-0" />
                       <span>
                         Database is empty and ready. Click to load the full sample dataset.
                       </span>
@@ -1439,8 +1439,8 @@ const Settings = () => {
                     disabled={dataStatus?.hasData || isSeeding}
                     className={`flex items-center justify-center gap-2 font-semibold text-xs px-5 py-2.5 rounded-xl shadow-xs transition-all ${
                       dataStatus?.hasData
-                        ? "bg-slate-200 text-slate-400 cursor-not-allowed border border-slate-300"
-                        : "bg-blue-600 hover:bg-blue-700 text-white shadow-blue-500/20 active:scale-95 cursor-pointer"
+                        ? "bg-slate-200 dark:bg-slate-700 text-slate-400 cursor-not-allowed border border-slate-300 dark:border-slate-600"
+                        : "bg-brand-600 hover:bg-brand-700 text-white shadow-brand-500/20 active:scale-95 cursor-pointer"
                     }`}
                   >
                     {isSeeding ? (
@@ -1457,28 +1457,28 @@ const Settings = () => {
             </div>
 
             {/* Reset Data Card (Danger Zone) */}
-            <div className="bg-rose-50/40 p-6 rounded-2xl border border-rose-200 shadow-2xs space-y-4">
+            <div className="bg-rose-50/40 dark:bg-rose-950/40 p-6 rounded-2xl border border-rose-200 dark:border-rose-800 shadow-2xs space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-5">
                 <div className="space-y-2 flex-1">
                   <div className="flex items-center gap-2">
-                    <div className="p-2 bg-rose-100 text-rose-600 rounded-xl">
+                    <div className="p-2 bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-300 rounded-xl">
                       <RotateCcw className="w-4 h-4" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-rose-950">
+                      <h4 className="text-sm font-bold text-rose-950 dark:text-rose-300">
                         Reset All Operational Data
                       </h4>
-                      <p className="text-[11px] text-rose-600">
+                      <p className="text-[11px] text-rose-600 dark:text-rose-300">
                         Clear all operational records to return to an empty database
                       </p>
                     </div>
                   </div>
 
-                  <p className="text-xs text-rose-900/80 leading-relaxed">
+                  <p className="text-xs text-rose-900/80 dark:text-rose-300/80 leading-relaxed">
                     Wipes all customer inquiries, quotes, jobs, assigned resources, invoices, payment records, and bilties. <strong>Your admin login credentials and company settings will NOT be touched.</strong>
                   </p>
 
-                  <div className="text-[11px] text-rose-700 bg-rose-100/60 border border-rose-200 p-2.5 rounded-xl">
+                  <div className="text-[11px] text-rose-700 dark:text-rose-300 bg-rose-100/60 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800 p-2.5 rounded-xl">
                     ⚠️ <strong>Warning:</strong> This action is irreversible. We recommend exporting a JSON backup before proceeding.
                   </div>
                 </div>
@@ -1501,14 +1501,14 @@ const Settings = () => {
             </div>
 
             {/* JSON Export Card */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-2xs space-y-4">
+            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="space-y-1 text-xs">
-                  <p className="font-bold text-slate-800 flex items-center gap-1.5">
-                    <Download className="w-4 h-4 text-emerald-600" />
+                  <p className="font-bold text-slate-800 dark:text-slate-100 flex items-center gap-1.5">
+                    <Download className="w-4 h-4 text-emerald-600 dark:text-emerald-300" />
                     <span>Download JSON Backup Archive</span>
                   </p>
-                  <p className="text-slate-500 text-[11px]">
+                  <p className="text-slate-500 dark:text-slate-400 text-[11px]">
                     Export all leads, quotes, bills, bilties, and routes to a portable JSON file.
                   </p>
                 </div>
@@ -1529,16 +1529,16 @@ const Settings = () => {
 
         {/* Save Bar at Bottom (Hidden on Data Management tab) */}
         {activeTab !== "backup" && (
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-4 border-t border-slate-200/80">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-4 border-t border-slate-200/80 dark:border-slate-700/80">
             {savedSuccess && (
-              <span className="text-xs text-emerald-600 font-semibold flex items-center justify-center gap-1.5">
+              <span className="text-xs text-emerald-600 dark:text-emerald-300 font-semibold flex items-center justify-center gap-1.5">
                 <Check className="w-4 h-4" />
                 <span>Settings saved successfully!</span>
               </span>
             )}
             <button
               type="submit"
-              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl shadow-xs shadow-blue-500/20 transition-all cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl shadow-xs shadow-brand-500/20 transition-all cursor-pointer"
             >
               <Save className="w-4 h-4" />
               <span>Save All Changes</span>
@@ -1550,38 +1550,38 @@ const Settings = () => {
       {/* Reset Confirmation Modal */}
       {isResetModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 space-y-5 shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div className="flex items-center gap-2.5 text-rose-600">
-                <div className="p-2 bg-rose-50 rounded-xl">
-                  <AlertTriangle className="w-5 h-5 text-rose-600" />
+          <div className="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 space-y-5 shadow-2xl border border-slate-100 dark:border-slate-800 animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <div className="flex items-center gap-2.5 text-rose-600 dark:text-rose-300">
+                <div className="p-2 bg-rose-50 dark:bg-rose-950 rounded-xl">
+                  <AlertTriangle className="w-5 h-5 text-rose-600 dark:text-rose-300" />
                 </div>
-                <h3 className="text-base font-bold text-slate-900">Confirm Operational Reset</h3>
+                <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Confirm Operational Reset</h3>
               </div>
               <button
                 type="button"
                 onClick={() => setIsResetModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 p-1 rounded-lg"
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-1 rounded-lg"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               This action will permanently delete all <strong>{dataStatus?.totalRecords ?? 0} operational records</strong> (leads, quotes, jobs, fleet, crew, invoices, and bilties).
             </p>
 
-            <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800 space-y-1">
+            <div className="p-3 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-xl text-xs text-amber-800 dark:text-amber-300 space-y-1">
               <p className="font-semibold">What will be preserved:</p>
-              <p className="text-[11px] text-amber-700">
+              <p className="text-[11px] text-amber-700 dark:text-amber-300">
                 ✓ Admin login credentials and active session<br />
                 ✓ Company branding, logo, GSTIN, and bank account settings
               </p>
             </div>
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-semibold text-slate-700">
-                Type <span className="font-mono text-rose-600 font-bold">RESET</span> to confirm:
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200">
+                Type <span className="font-mono text-rose-600 dark:text-rose-300 font-bold">RESET</span> to confirm:
               </label>
               <input
                 type="text"
@@ -1589,7 +1589,7 @@ const Settings = () => {
                 value={resetConfirmText}
                 onChange={(e) => setResetConfirmText(e.target.value)}
                 placeholder="Type RESET"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-mono tracking-wider focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
+                className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl text-sm font-mono tracking-wider focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white dark:focus:bg-slate-900"
               />
             </div>
 
@@ -1597,7 +1597,7 @@ const Settings = () => {
               <button
                 type="button"
                 onClick={() => setIsResetModalOpen(false)}
-                className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
+                className="px-4 py-2.5 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
               >
                 Cancel
               </button>

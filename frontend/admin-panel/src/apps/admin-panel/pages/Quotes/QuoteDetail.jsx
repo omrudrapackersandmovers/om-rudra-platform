@@ -226,13 +226,13 @@ Govt Approved & Verified Mover.`;
       `}</style>
 
       {/* Relational Action Bar (Hidden on Print) */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs print:hidden">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs print:hidden">
         {/* Row 1 on Mobile / Left on Desktop: Navigation Breadcrumbs & Status Badge */}
         <div className="flex items-center justify-between gap-2 w-full sm:w-auto">
           <div className="flex items-center gap-2 min-w-0">
             <button
               onClick={() => navigate("/quotes")}
-              className="p-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 flex items-center gap-1 text-xs cursor-pointer transition-colors shrink-0"
+              className="p-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1 text-xs cursor-pointer transition-colors shrink-0"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Quotes</span>
@@ -241,7 +241,7 @@ Govt Approved & Verified Mover.`;
             {quote.leadId && (
               <Link
                 to={`/leads/${quote.leadId}`}
-                className="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200/80 rounded-xl text-xs font-semibold transition-colors truncate"
+                className="inline-flex items-center gap-1 px-2.5 py-1 bg-brand-50 dark:bg-brand-950 hover:bg-brand-100 dark:hover:bg-brand-950 text-brand-700 dark:text-brand-300 border border-brand-200/80 dark:border-brand-800/80 rounded-xl text-xs font-semibold transition-colors truncate"
               >
                 <UserCheck className="w-3.5 h-3.5 shrink-0" />
                 <span className="truncate">Lead #{quote.leadId}</span>
@@ -252,25 +252,25 @@ Govt Approved & Verified Mover.`;
           {/* Current Status Pill Badge */}
           <div className="shrink-0">
             {quote.status === "accepted" && (
-              <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200/80 text-xs font-bold px-2.5 py-1 rounded-full">
+              <span className="inline-flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/80 text-xs font-bold px-2.5 py-1 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                 Accepted (Won)
               </span>
             )}
             {quote.status === "sent" && (
-              <span className="inline-flex items-center gap-1.5 bg-blue-50 text-blue-800 border border-blue-200/80 text-xs font-bold px-2.5 py-1 rounded-full">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+              <span className="inline-flex items-center gap-1.5 bg-brand-50 dark:bg-brand-950 text-brand-800 dark:text-brand-300 border border-brand-200/80 dark:border-brand-800/80 text-xs font-bold px-2.5 py-1 rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
                 Sent
               </span>
             )}
             {quote.status === "rejected" && (
-              <span className="inline-flex items-center gap-1.5 bg-rose-50 text-rose-800 border border-rose-200/80 text-xs font-bold px-2.5 py-1 rounded-full">
+              <span className="inline-flex items-center gap-1.5 bg-rose-50 dark:bg-rose-950 text-rose-800 dark:text-rose-300 border border-rose-200/80 dark:border-rose-800/80 text-xs font-bold px-2.5 py-1 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
                 Rejected
               </span>
             )}
             {quote.status !== "accepted" && quote.status !== "sent" && quote.status !== "rejected" && (
-              <span className="inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-full">
+              <span className="inline-flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-medium px-2.5 py-1 rounded-full">
                 {quote.status}
               </span>
             )}
@@ -278,12 +278,12 @@ Govt Approved & Verified Mover.`;
         </div>
 
         {/* Row 2 on Mobile / Right on Desktop: Context-Aware Workflow Actions */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
           {/* Primary Action Button (Full width on mobile) */}
           {quote.status === "accepted" && (
             <button
               onClick={() => setIsJobModalOpen(true)}
-              className="flex items-center justify-center gap-1.5 py-2 px-3.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors cursor-pointer w-full sm:w-auto"
+              className="flex items-center justify-center gap-1.5 py-2 px-3.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors cursor-pointer w-full sm:w-auto"
             >
               <Truck className="w-4 h-4" />
               <span>Convert to Move Job</span>
@@ -302,7 +302,7 @@ Govt Approved & Verified Mover.`;
               </button>
               <button
                 onClick={() => handleUpdateStatus("rejected")}
-                className="flex items-center justify-center gap-1.5 py-2 px-3 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200/80 font-semibold text-xs rounded-xl transition-colors cursor-pointer"
+                className="flex items-center justify-center gap-1.5 py-2 px-3 bg-rose-50 dark:bg-rose-950 hover:bg-rose-100 dark:hover:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200/80 dark:border-rose-800/80 font-semibold text-xs rounded-xl transition-colors cursor-pointer"
                 title="Mark quote as rejected or lost"
               >
                 <XCircle className="w-4 h-4" />
@@ -314,7 +314,7 @@ Govt Approved & Verified Mover.`;
           {quote.status === "rejected" && (
             <button
               onClick={() => handleUpdateStatus("sent")}
-              className="flex items-center justify-center gap-1.5 py-2 px-3 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200/80 font-semibold text-xs rounded-xl transition-colors cursor-pointer w-full sm:w-auto"
+              className="flex items-center justify-center gap-1.5 py-2 px-3 bg-amber-50 dark:bg-amber-950 hover:bg-amber-100 dark:hover:bg-amber-950 text-amber-800 dark:text-amber-300 border border-amber-200/80 dark:border-amber-800/80 font-semibold text-xs rounded-xl transition-colors cursor-pointer w-full sm:w-auto"
               title="Reopen quote for customer negotiation"
             >
               <RotateCcw className="w-4 h-4" />
@@ -330,10 +330,10 @@ Govt Approved & Verified Mover.`;
               )}`}
               target="_blank"
               rel="noreferrer"
-              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 py-2 px-2.5 sm:px-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/80 font-semibold text-xs rounded-xl transition-colors"
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 py-2 px-2.5 sm:px-3 bg-emerald-50 dark:bg-emerald-950 hover:bg-emerald-100 dark:hover:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/80 font-semibold text-xs rounded-xl transition-colors"
               title="Send via WhatsApp"
             >
-              <MessageSquare className="w-4 h-4 text-emerald-600" />
+              <MessageSquare className="w-4 h-4 text-emerald-600 dark:text-emerald-300" />
               <span className="sm:inline">WhatsApp</span>
             </a>
 
@@ -348,10 +348,10 @@ Govt Approved & Verified Mover.`;
 
             <button
               onClick={() => navigate(`/quotes/${quote.id}/edit`)}
-              className="flex items-center justify-center gap-1.5 py-2 px-2.5 sm:px-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs rounded-xl transition-colors cursor-pointer"
+              className="flex items-center justify-center gap-1.5 py-2 px-2.5 sm:px-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 font-semibold text-xs rounded-xl transition-colors cursor-pointer"
               title="Edit Quote"
             >
-              <Edit2 className="w-4 h-4 text-blue-600" />
+              <Edit2 className="w-4 h-4 text-brand-600 dark:text-brand-300" />
               <span className="hidden sm:inline">Edit</span>
             </button>
 
@@ -361,7 +361,7 @@ Govt Approved & Verified Mover.`;
                 setIsDeleteModalOpen(true);
               }}
               disabled={deleting}
-              className="p-2 text-slate-400 hover:text-rose-600 rounded-xl hover:bg-rose-50 transition-colors cursor-pointer shrink-0"
+              className="p-2 text-slate-400 hover:text-rose-600 dark:hover:text-rose-300 rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950 transition-colors cursor-pointer shrink-0"
               title="Delete Quotation"
             >
               <Trash2 className="w-4 h-4" />
@@ -371,11 +371,11 @@ Govt Approved & Verified Mover.`;
       </div>
 
       {/* Official Printable Quotation Document */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-3.5 sm:p-8 shadow-sm space-y-5 print:border-none print:shadow-none print:p-0">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-3.5 sm:p-8 shadow-sm space-y-5 print:border-none print:shadow-none print:p-0">
         {/* Centered Brand Logo at Top */}
         <div className="flex justify-center items-center pb-2">
           <img
-            src={company.logo?.primary || "/images/primary-logo.webp"}
+            src={company.logo?.print || "/brand/lockup-red-1080.png"}
             alt={company.name || "Company Logo"}
             className="h-16 sm:h-20 w-auto object-contain max-w-64 drop-shadow-xs"
             onError={(e) => {
@@ -385,24 +385,24 @@ Govt Approved & Verified Mover.`;
         </div>
 
         {/* Company & Quotation Details Row (Data on Both Sides) */}
-        <div className="flex flex-col sm:flex-row justify-between items-start gap-4 border-b border-slate-200 pb-5">
+        <div className="flex flex-col sm:flex-row justify-between items-start gap-4 border-b border-slate-200 dark:border-slate-700 pb-5">
           {/* Left Side: Company Contact & Credentials */}
           <div className="space-y-1 text-left max-w-md">
-            <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-tight">
+            <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
               {company.name || "Om Rudra Packers and Movers"}
             </h1>
-            <p className="text-xs text-blue-600 font-semibold">{company.tagline || "Safer Moves, Brighter Tomorrows"}</p>
-            <p className="text-[11px] text-slate-600 mt-1 leading-snug">
+            <p className="text-xs text-brand-600 dark:text-brand-300 font-semibold">{company.tagline || "Safer Moves, Brighter Tomorrows"}</p>
+            <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-1 leading-snug">
               {company.headOffice?.address
                 ? `${company.headOffice.address}, ${company.headOffice.city}, ${company.headOffice.state} - ${company.headOffice.pincode}`
                 : "Ram Krishna Nagar, Soranpur, Goraiya Asthan, Patna, Bihar - 800027"}
             </p>
-            <div className="pt-1 space-y-0.5 text-[11px] text-slate-600">
-              <p>Phone: <strong className="text-slate-900">{company.phone || "+91 7033488691"}</strong></p>
-              <p>Email: <strong className="text-slate-900">{company.email || "hello@omrudrapackersandmovers.com"}</strong></p>
-              <p>Web: <strong className="text-slate-900">{company.website?.replace(/^https?:\/\//, "") || "omrudrapackersandmovers.com"}</strong></p>
+            <div className="pt-1 space-y-0.5 text-[11px] text-slate-600 dark:text-slate-300">
+              <p>Phone: <strong className="text-slate-900 dark:text-slate-100">{company.phone || "+91 7033488691"}</strong></p>
+              <p>Email: <strong className="text-slate-900 dark:text-slate-100">{company.email || "hello@omrudrapackersandmovers.com"}</strong></p>
+              <p>Web: <strong className="text-slate-900 dark:text-slate-100">{company.website?.replace(/^https?:\/\//, "") || "omrudrapackersandmovers.com"}</strong></p>
             </div>
-            <p className="text-[10px] text-slate-500 font-mono pt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono pt-0.5">
               {isRealGstin
                 ? `GSTIN: ${company.gstin} ${isRealPan ? `| PAN: ${company.pan}` : ""}`
                 : "Govt. Registered Relocation & Highway Transport Service (IBA Approved Standards)"}
@@ -411,27 +411,27 @@ Govt Approved & Verified Mover.`;
 
           {/* Right Side: Quotation Metadata */}
           <div className="text-left sm:text-right space-y-1 shrink-0">
-            <span className="inline-block px-3 py-1 bg-blue-50 text-blue-700 font-black text-xs rounded-lg uppercase tracking-wider mb-1 font-mono border border-blue-200/60">
+            <span className="inline-block px-3 py-1 bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 font-black text-xs rounded-lg uppercase tracking-wider mb-1 font-mono border border-brand-200/60 dark:border-brand-800/60">
               Quotation / Estimate
             </span>
-            <div className="text-base font-mono font-bold text-slate-900">{quote.quoteNumber}</div>
-            <div className="text-xs text-slate-600">
-              Date: <strong className="text-slate-800">{formatDate(quote.createdAt)}</strong>
+            <div className="text-base font-mono font-bold text-slate-900 dark:text-slate-100">{quote.quoteNumber}</div>
+            <div className="text-xs text-slate-600 dark:text-slate-300">
+              Date: <strong className="text-slate-800 dark:text-slate-100">{formatDate(quote.createdAt)}</strong>
             </div>
-            <div className="text-[11px] text-slate-500">
+            <div className="text-[11px] text-slate-500 dark:text-slate-400">
               Validity: <strong>15 Days</strong>
             </div>
           </div>
         </div>
 
         {/* Customer & Relocation Route Overview */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50/80 p-4 rounded-xl border border-slate-200/80">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50/80 dark:bg-slate-950/80 p-4 rounded-xl border border-slate-200/80 dark:border-slate-700/80">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
               Quotation Prepared For
             </span>
-            <div className="text-sm font-bold text-slate-900 mt-0.5">{quote.customerName}</div>
-            <div className="text-xs text-slate-600 flex items-center gap-1 font-mono mt-0.5">
+            <div className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-0.5">{quote.customerName}</div>
+            <div className="text-xs text-slate-600 dark:text-slate-300 flex items-center gap-1 font-mono mt-0.5">
               <Phone className="w-3 h-3 text-slate-400" />
               <span>+91 {quote.customerPhone}</span>
             </div>
@@ -441,19 +441,19 @@ Govt Approved & Verified Mover.`;
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
               Relocation Route & Schedule
             </span>
-            <div className="text-xs font-medium text-slate-700 mt-1 flex items-start gap-1">
-              <MapPin className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
+            <div className="text-xs font-medium text-slate-700 dark:text-slate-200 mt-1 flex items-start gap-1">
+              <MapPin className="w-3.5 h-3.5 text-brand-600 dark:text-brand-300 shrink-0 mt-0.5" />
               <span>
                 <strong>Origin (From):</strong> {quote.movingFrom}
               </span>
             </div>
-            <div className="text-xs font-medium text-slate-700 mt-1 flex items-start gap-1">
-              <MapPin className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+            <div className="text-xs font-medium text-slate-700 dark:text-slate-200 mt-1 flex items-start gap-1">
+              <MapPin className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-300 shrink-0 mt-0.5" />
               <span>
                 <strong>Destination (To):</strong> {quote.movingTo}
               </span>
             </div>
-            <div className="text-xs font-medium text-slate-700 mt-1 flex items-center gap-1">
+            <div className="text-xs font-medium text-slate-700 dark:text-slate-200 mt-1 flex items-center gap-1">
               <Calendar className="w-3.5 h-3.5 text-slate-400 shrink-0" />
               <span>
                 <strong>Target Move Date:</strong> {quote.moveDate || "To be confirmed upon booking"}
@@ -462,21 +462,21 @@ Govt Approved & Verified Mover.`;
           </div>
 
           {(quote.lead?.service || quote.lead?.moveType) && (
-            <div className="col-span-1 sm:col-span-2 bg-white p-2.5 rounded-lg border border-slate-200/70 flex flex-wrap gap-6 text-xs">
+            <div className="col-span-1 sm:col-span-2 bg-white dark:bg-slate-900 p-2.5 rounded-lg border border-slate-200/70 dark:border-slate-700/70 flex flex-wrap gap-6 text-xs">
               {quote.lead?.service && (
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 block">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-brand-600 dark:text-brand-300 block">
                     Service Requested
                   </span>
-                  <span className="font-semibold text-slate-900">{quote.lead.service}</span>
+                  <span className="font-semibold text-slate-900 dark:text-slate-100">{quote.lead.service}</span>
                 </div>
               )}
               {quote.lead?.moveType && (
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 block">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-brand-600 dark:text-brand-300 block">
                     Move Category
                   </span>
-                  <span className="font-semibold text-slate-900">{quote.lead.moveType}</span>
+                  <span className="font-semibold text-slate-900 dark:text-slate-100">{quote.lead.moveType}</span>
                 </div>
               )}
             </div>
@@ -486,12 +486,12 @@ Govt Approved & Verified Mover.`;
         {/* Inventory Articles Table (if items added) */}
         {inventory.length > 0 && (
           <div className="space-y-2 print-avoid-break">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Goods & Articles Included for Relocation
             </h4>
-            <div className="border border-slate-200 rounded-xl overflow-x-auto">
+            <div className="border border-slate-200 dark:border-slate-700 rounded-xl overflow-x-auto">
               <table className="w-full text-xs min-w-[440px]">
-                <thead className="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
+                <thead className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-300 font-semibold border-b border-slate-200 dark:border-slate-700">
                   <tr>
                     <th className="py-2 px-3 text-left w-12">#</th>
                     <th className="py-2 px-3 text-left">Article Description</th>
@@ -499,15 +499,15 @@ Govt Approved & Verified Mover.`;
                     <th className="py-2 px-3 text-right w-28">Est. Volume</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {inventory.map((item, idx) => (
-                    <tr key={idx} className="hover:bg-slate-50/50">
+                    <tr key={idx} className="hover:bg-slate-50/50 dark:hover:bg-slate-950/50">
                       <td className="py-2 px-3 text-slate-400 font-mono">{idx + 1}</td>
-                      <td className="py-2 px-3 font-medium text-slate-800">{item.name}</td>
-                      <td className="py-2 px-3 text-center font-mono font-bold text-slate-700">
+                      <td className="py-2 px-3 font-medium text-slate-800 dark:text-slate-100">{item.name}</td>
+                      <td className="py-2 px-3 text-center font-mono font-bold text-slate-700 dark:text-slate-200">
                         {item.qty}
                       </td>
-                      <td className="py-2 px-3 text-right font-mono text-slate-500">
+                      <td className="py-2 px-3 text-right font-mono text-slate-500 dark:text-slate-400">
                         {item.cft * item.qty} CFT
                       </td>
                     </tr>
@@ -520,33 +520,33 @@ Govt Approved & Verified Mover.`;
 
         {/* Professional Charge Breakdown Sheet */}
         <div className="space-y-2 print-avoid-break">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
             Professional Charge Breakdown
           </h4>
-          <div className="border border-slate-200 rounded-xl overflow-hidden divide-y divide-slate-100 text-xs">
-            <div className="flex justify-between py-2.5 px-4 bg-slate-50/50 font-medium">
-              <span className="text-slate-700">Safe Highway Container Transport Freight</span>
+          <div className="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden divide-y divide-slate-100 dark:divide-slate-800 text-xs">
+            <div className="flex justify-between py-2.5 px-4 bg-slate-50/50 dark:bg-slate-950/50 font-medium">
+              <span className="text-slate-700 dark:text-slate-200">Safe Highway Container Transport Freight</span>
               <span className="font-mono font-semibold">
                 ₹{quote.transportCharges.toLocaleString("en-IN")}
               </span>
             </div>
             <div className="flex justify-between py-2.5 px-4">
-              <span className="text-slate-600">
+              <span className="text-slate-600 dark:text-slate-300">
                 Multi-layer Protective Packing Materials & Labor
               </span>
               <span className="font-mono">₹{quote.packagingCharges.toLocaleString("en-IN")}</span>
             </div>
             <div className="flex justify-between py-2.5 px-4">
-              <span className="text-slate-600">Skilled Loading Operations</span>
+              <span className="text-slate-600 dark:text-slate-300">Skilled Loading Operations</span>
               <span className="font-mono">₹{quote.loadingCharges.toLocaleString("en-IN")}</span>
             </div>
             <div className="flex justify-between py-2.5 px-4">
-              <span className="text-slate-600">Unloading & Placement at Destination</span>
+              <span className="text-slate-600 dark:text-slate-300">Unloading & Placement at Destination</span>
               <span className="font-mono">₹{quote.unloadingCharges.toLocaleString("en-IN")}</span>
             </div>
             {quote.insuranceCharges > 0 && (
               <div className="flex justify-between py-2.5 px-4">
-                <span className="text-slate-600">
+                <span className="text-slate-600 dark:text-slate-300">
                   Transit Insurance Cover (Declared Goods Value: ₹
                   {quote.insuranceDeclaredValue?.toLocaleString("en-IN") || "-"})
                 </span>
@@ -556,30 +556,30 @@ Govt Approved & Verified Mover.`;
               </div>
             )}
             {quote.discount > 0 && (
-              <div className="flex justify-between py-2.5 px-4 text-emerald-700 bg-emerald-50/50">
+              <div className="flex justify-between py-2.5 px-4 text-emerald-700 dark:text-emerald-300 bg-emerald-50/50 dark:bg-emerald-950/50">
                 <span className="font-medium">Special Promotional Discount</span>
                 <span className="font-mono font-bold">
                   -₹{quote.discount.toLocaleString("en-IN")}
                 </span>
               </div>
             )}
-            <div className="flex justify-between py-2.5 px-4 bg-slate-50 font-semibold">
-              <span className="text-slate-800">Taxable Subtotal</span>
-              <span className="font-mono text-slate-900">
+            <div className="flex justify-between py-2.5 px-4 bg-slate-50 dark:bg-slate-950 font-semibold">
+              <span className="text-slate-800 dark:text-slate-100">Taxable Subtotal</span>
+              <span className="font-mono text-slate-900 dark:text-slate-100">
                 ₹{(quote.totalAmount - (quote.gstAmount || 0)).toLocaleString("en-IN")}
               </span>
             </div>
             {quote.gstRate > 0 && (
-              <div className="flex justify-between py-2.5 px-4 text-slate-700">
+              <div className="flex justify-between py-2.5 px-4 text-slate-700 dark:text-slate-200">
                 <span>Goods & Service Tax (GST {quote.gstRate}%)</span>
                 <span className="font-mono font-semibold">
                   ₹{quote.gstAmount.toLocaleString("en-IN")}
                 </span>
               </div>
             )}
-            <div className="flex justify-between py-3 px-4 bg-blue-50/80 text-blue-900 text-sm font-black border-t-2 border-blue-200">
+            <div className="flex justify-between py-3 px-4 bg-brand-50/80 dark:bg-brand-950/80 text-brand-900 dark:text-brand-300 text-sm font-black border-t-2 border-brand-200 dark:border-brand-800">
               <span>Total Estimated Investment (All-Inclusive)</span>
-              <span className="font-mono text-base text-blue-700">
+              <span className="font-mono text-base text-brand-700 dark:text-brand-300">
                 ₹{quote.totalAmount.toLocaleString("en-IN")}
               </span>
             </div>
@@ -587,9 +587,9 @@ Govt Approved & Verified Mover.`;
         </div>
 
         {/* Banking Details & Terms */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-slate-200 text-[11px] text-slate-600 print-avoid-break">
-          <div className="bg-slate-50/60 p-3 rounded-xl border border-slate-200/70 space-y-1">
-            <h5 className="font-bold text-slate-800 uppercase tracking-wider mb-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-slate-200 dark:border-slate-700 text-[11px] text-slate-600 dark:text-slate-300 print-avoid-break">
+          <div className="bg-slate-50/60 dark:bg-slate-950/60 p-3 rounded-xl border border-slate-200/70 dark:border-slate-700/70 space-y-1">
+            <h5 className="font-bold text-slate-800 dark:text-slate-100 uppercase tracking-wider mb-1">
               Payment & Bank Details
             </h5>
             <p>
@@ -604,20 +604,20 @@ Govt Approved & Verified Mover.`;
                 <p>IFSC: <strong>{company.bankDetails.ifsc}</strong></p>
               </>
             ) : (
-              <p className="text-slate-500 italic">
+              <p className="text-slate-500 dark:text-slate-400 italic">
                 Direct NEFT / RTGS account details will be shared on booking confirmation.
               </p>
             )}
-            <p className="text-[10px] text-slate-500 pt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 pt-0.5">
               Payment Terms: 50% advance at loading, 50% balance before unloading.
             </p>
           </div>
 
-          <div className="bg-slate-50/60 p-3 rounded-xl border border-slate-200/70 space-y-1">
-            <h5 className="font-bold text-slate-800 uppercase tracking-wider mb-1">
+          <div className="bg-slate-50/60 dark:bg-slate-950/60 p-3 rounded-xl border border-slate-200/70 dark:border-slate-700/70 space-y-1">
+            <h5 className="font-bold text-slate-800 dark:text-slate-100 uppercase tracking-wider mb-1">
               Terms & Conditions
             </h5>
-            <ul className="list-disc pl-4 space-y-0.5 text-slate-600">
+            <ul className="list-disc pl-4 space-y-0.5 text-slate-600 dark:text-slate-300">
               {(company.terms?.quotation || [
                 "Quotation is valid for 15 days from the date of issue.",
                 "Toll tax, octroi, parking & state entry tax will be charged as actual if applicable.",
@@ -631,8 +631,8 @@ Govt Approved & Verified Mover.`;
         </div>
 
         {/* Computer-Generated Document Notice (No signature needed) */}
-        <div className="pt-6 border-t border-slate-200 text-center text-xs text-slate-500 space-y-1 print-avoid-break">
-          <p className="font-semibold text-slate-800 text-xs sm:text-sm">
+        <div className="pt-6 border-t border-slate-200 dark:border-slate-700 text-center text-xs text-slate-500 dark:text-slate-400 space-y-1 print-avoid-break">
+          <p className="font-semibold text-slate-800 dark:text-slate-100 text-xs sm:text-sm">
             This is a computer-generated quotation and does not require any signature or seal.
           </p>
           <p className="text-[11px] text-slate-400">
@@ -644,24 +644,24 @@ Govt Approved & Verified Mover.`;
       {/* Convert to Job Modal */}
       {isJobModalOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 animate-in fade-in">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-4 sm:p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto border border-slate-100">
-            <div className="flex justify-between items-center pb-3 border-b border-slate-100">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-4 sm:p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto border border-slate-100 dark:border-slate-800">
+            <div className="flex justify-between items-center pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2">
-                <Truck className="w-5 h-5 text-blue-600" />
-                <h3 className="font-bold text-slate-900 text-base">
+                <Truck className="w-5 h-5 text-brand-600 dark:text-brand-300" />
+                <h3 className="font-bold text-slate-900 dark:text-slate-100 text-base">
                   Convert Quotation to Active Job
                 </h3>
               </div>
               <button
                 onClick={() => setIsJobModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 p-1"
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-1"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {convertError && (
-              <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 font-medium flex items-center gap-2">
+              <div className="p-3 bg-rose-50 dark:bg-rose-950 border border-rose-200 dark:border-rose-800 rounded-xl text-xs text-rose-700 dark:text-rose-300 font-medium flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 text-rose-500 shrink-0" />
                 <span>{convertError}</span>
               </div>
@@ -675,7 +675,7 @@ Govt Approved & Verified Mover.`;
                   onChange={(e) =>
                     setJobForm({ ...jobForm, scheduledDate: e.target.value })
                   }
-                  className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs sm:text-sm focus:border-blue-500 outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm focus:border-brand-500 outline-none"
                 />
               </FormField>
 
@@ -685,7 +685,7 @@ Govt Approved & Verified Mover.`;
                   onChange={(e) =>
                     setJobForm({ ...jobForm, scheduledTime: e.target.value })
                   }
-                  buttonClassName="bg-white border-slate-300"
+                  buttonClassName="bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600"
                 >
                   {["06:00 AM","07:00 AM","08:00 AM","09:00 AM","10:00 AM","11:00 AM","12:00 PM","01:00 PM","02:00 PM","03:00 PM","04:00 PM","05:00 PM"].map((t) => (
                     <option key={t} value={t}>{t}</option>
@@ -695,7 +695,7 @@ Govt Approved & Verified Mover.`;
 
               <FormField label="Allocated Vehicle" required error={modalErrors.vehicleAssigned}>
                 {availableVehicles.filter((v) => v.status !== "retired").length === 0 ? (
-                  <div className="w-full px-3 py-2 border border-amber-200 bg-amber-50 rounded-xl text-xs text-amber-700">
+                  <div className="w-full px-3 py-2 border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950 rounded-xl text-xs text-amber-700 dark:text-amber-300">
                     No vehicles added yet - add vehicles in Fleet section first.
                   </div>
                 ) : (
@@ -711,7 +711,7 @@ Govt Approved & Verified Mover.`;
                         driverPhone: v.defaultDriverPhone || jobForm.driverPhone,
                       });
                     }}
-                    buttonClassName="bg-white border-slate-300"
+                    buttonClassName="bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600"
                   >
                     <option value="">-- Select from fleet --</option>
                     {availableVehicles.filter((v) => v.status !== "retired").map((v) => (
@@ -722,9 +722,9 @@ Govt Approved & Verified Mover.`;
                   </Select>
                 )}
                 {jobForm.vehicleAssigned && (
-                  <div className="mt-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 flex justify-between items-center">
+                  <div className="mt-1.5 px-3 py-1.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-700 dark:text-slate-200 flex justify-between items-center">
                     <span>{jobForm.vehicleAssigned}</span>
-                    <button type="button" onClick={() => setJobForm({ ...jobForm, vehicleAssigned: "" })} className="text-rose-500 hover:text-rose-700 font-bold ml-2">×</button>
+                    <button type="button" onClick={() => setJobForm({ ...jobForm, vehicleAssigned: "" })} className="text-rose-500 hover:text-rose-700 dark:hover:text-rose-300 font-bold ml-2">×</button>
                   </div>
                 )}
               </FormField>
@@ -738,7 +738,7 @@ Govt Approved & Verified Mover.`;
                       setJobForm({ ...jobForm, driverName: e.target.value })
                     }
                     placeholder="Driver Name"
-                    className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs sm:text-sm focus:border-blue-500 outline-none"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm focus:border-brand-500 outline-none"
                   />
                 </FormField>
                 <FormField label="Driver Phone" error={modalErrors.driverPhone}>
@@ -750,7 +750,7 @@ Govt Approved & Verified Mover.`;
                       setJobForm({ ...jobForm, driverPhone: e.target.value })
                     }
                     placeholder="10-digit mobile"
-                    className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs sm:text-sm font-mono focus:border-blue-500 outline-none"
+                    className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm font-mono focus:border-brand-500 outline-none"
                   />
                 </FormField>
               </div>
@@ -758,7 +758,7 @@ Govt Approved & Verified Mover.`;
               <FormField label="Crew Members">
                 <div className="space-y-1.5">
                   {allStaff.filter((s) => s.status !== "inactive").length === 0 ? (
-                    <div className="px-3 py-2 border border-amber-200 bg-amber-50 rounded-xl text-xs text-amber-700">
+                    <div className="px-3 py-2 border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950 rounded-xl text-xs text-amber-700 dark:text-amber-300">
                       No crew added yet - add staff in Team section.
                     </div>
                   ) : (
@@ -775,7 +775,7 @@ Govt Approved & Verified Mover.`;
                           setJobForm({ ...jobForm, crewMembers: [...current, entry].join(", ") });
                         }
                       }}
-                      buttonClassName="bg-white border-slate-300"
+                      buttonClassName="bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600"
                     >
                       <option value="">+ Add crew member from team...</option>
                       {allStaff.filter((s) => s.status !== "inactive").map((s) => (
@@ -786,9 +786,9 @@ Govt Approved & Verified Mover.`;
                     </Select>
                   )}
                   {jobForm.crewMembers && (
-                    <div className="p-2 bg-slate-50 rounded-xl border border-slate-200 text-[11px] text-slate-700 flex justify-between items-start gap-2">
+                    <div className="p-2 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-700 text-[11px] text-slate-700 dark:text-slate-200 flex justify-between items-start gap-2">
                       <span>{jobForm.crewMembers}</span>
-                      <button type="button" onClick={() => setJobForm({ ...jobForm, crewMembers: "" })} className="text-rose-500 hover:text-rose-700 font-bold shrink-0">Clear</button>
+                      <button type="button" onClick={() => setJobForm({ ...jobForm, crewMembers: "" })} className="text-rose-500 hover:text-rose-700 dark:hover:text-rose-300 font-bold shrink-0">Clear</button>
                     </div>
                   )}
                 </div>
@@ -803,14 +803,14 @@ Govt Approved & Verified Mover.`;
                     setJobForm({ ...jobForm, specialNotes: e.target.value })
                   }
                   placeholder="Fragile items, mirror, floor climbing without lift, etc."
-                  className="w-full px-3 py-2 border border-slate-300 rounded-xl text-xs sm:text-sm focus:border-blue-500 outline-none"
+                  className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm focus:border-brand-500 outline-none"
                 />
               </FormField>
 
               <button
                 type="submit"
                 disabled={converting}
-                className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm rounded-xl transition-all cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2"
+                className="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm rounded-xl transition-all cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2"
               >
                 {converting ? (
                   <>
@@ -829,43 +829,43 @@ Govt Approved & Verified Mover.`;
       {/* Custom Delete Confirmation Modal */}
       {isDeleteModalOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 animate-in fade-in">
-          <div className="bg-white rounded-2xl max-w-md w-full p-4 sm:p-6 shadow-2xl border border-slate-100 space-y-4 max-h-[90vh] overflow-y-auto">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-4 sm:p-6 shadow-2xl border border-slate-100 dark:border-slate-800 space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-start justify-between">
-              <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-100 shrink-0">
+              <div className="w-12 h-12 rounded-2xl bg-rose-50 dark:bg-rose-950 text-rose-600 dark:text-rose-300 flex items-center justify-center border border-rose-100 dark:border-rose-800 shrink-0">
                 <Trash2 className="w-6 h-6" />
               </div>
               <button
                 onClick={() => setIsDeleteModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 p-1 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <div>
-              <h3 className="text-base font-bold text-slate-900">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
                 Delete Quotation?
               </h3>
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                 Are you sure you want to permanently delete quotation{" "}
-                <span className="font-mono font-bold text-slate-800">{quote.quoteNumber}</span> for{" "}
-                <span className="font-semibold text-slate-800">{quote.customerName}</span>? This action cannot be undone.
+                <span className="font-mono font-bold text-slate-800 dark:text-slate-100">{quote.quoteNumber}</span> for{" "}
+                <span className="font-semibold text-slate-800 dark:text-slate-100">{quote.customerName}</span>? This action cannot be undone.
               </p>
             </div>
 
-            <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 text-xs space-y-1">
-              <div className="flex justify-between text-slate-600">
+            <div className="p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 text-xs space-y-1">
+              <div className="flex justify-between text-slate-600 dark:text-slate-300">
                 <span>Quotation Value:</span>
-                <span className="font-mono font-bold text-slate-900">₹{Number(quote.totalAmount || 0).toLocaleString("en-IN")}</span>
+                <span className="font-mono font-bold text-slate-900 dark:text-slate-100">₹{Number(quote.totalAmount || 0).toLocaleString("en-IN")}</span>
               </div>
-              <div className="flex justify-between text-slate-600">
+              <div className="flex justify-between text-slate-600 dark:text-slate-300">
                 <span>Moving Route:</span>
-                <span className="font-medium text-slate-800 truncate max-w-[200px]">{quote.movingFrom} ➔ {quote.movingTo}</span>
+                <span className="font-medium text-slate-800 dark:text-slate-100 truncate max-w-[200px]">{quote.movingFrom} ➔ {quote.movingTo}</span>
               </div>
             </div>
 
             {deleteError && (
-              <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 font-medium flex items-center gap-2">
+              <div className="p-3 bg-rose-50 dark:bg-rose-950 border border-rose-200 dark:border-rose-800 rounded-xl text-xs text-rose-700 dark:text-rose-300 font-medium flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 text-rose-500 shrink-0" />
                 <span>{deleteError}</span>
               </div>
@@ -876,7 +876,7 @@ Govt Approved & Verified Mover.`;
                 type="button"
                 onClick={() => setIsDeleteModalOpen(false)}
                 disabled={deleting}
-                className="flex-1 py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-xs transition-colors cursor-pointer"
+                className="flex-1 py-2.5 px-4 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold rounded-xl text-xs transition-colors cursor-pointer"
               >
                 Cancel
               </button>

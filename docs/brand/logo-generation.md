@@ -1,0 +1,7 @@
+# Red logo symbol exploration
+
+Generated using the built-in image generation tool on 6 October 2026. Output: `logo-symbol-red-v1.png`. The symbol combines a parcel silhouette with a forward arrow cutout. No company-name text. This is a raster concept; vector cleanup and actual favicon-size testing are required before replacing production assets.
+
+## Prompt
+
+Design a single original polished logo symbol for Om Rudra Packers and Movers, based on a contemporary deep-red, charcoal and white brand theme. SYMBOL ONLY: absolutely no text, company name, letters, initials, numbers or tagline. One compact bold geometric silhouette suggesting a folded moving parcel and a forward route through simple open negative space. Use ONLY a uniform solid deep red #B51B35, no other colors. Prioritize immediate recognition at 16px favicon size: thick shapes, very few edges, generous negative spaces, balanced near-square proportions. A distinctive cohesive single mark, not a collection of icons. Flat vector-like graphic with perfectly crisp clean boundaries, no texture, distressed edges, speckles, artifacts, shading or gradients. No house roof, no literal truck, no wheels, no detailed box flaps, no swoosh, no thin lines, no enclosing badge, no 3D or mockup. Center the symbol with ample margin on a genuinely transparent background. Professional, practical, reassuring moving-service identity. Deliver just ONE finished symbol, not a presentation board or options.

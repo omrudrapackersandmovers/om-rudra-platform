@@ -185,17 +185,17 @@ const FleetManagement = () => {
   const renderExpiryBadge = (label, dateStr) => {
     if (!dateStr) return null;
     const days = getDaysUntil(dateStr);
-    let colorClass = "bg-slate-100 text-slate-700 border-slate-200";
+    let colorClass = "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700";
     let icon = null;
 
     if (days <= 0) {
-      colorClass = "bg-rose-100 text-rose-800 border-rose-300 font-bold animate-pulse";
-      icon = <AlertTriangle className="w-3 h-3 text-rose-600" />;
+      colorClass = "bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-300 border-rose-300 font-bold animate-pulse";
+      icon = <AlertTriangle className="w-3 h-3 text-rose-600 dark:text-rose-300" />;
     } else if (days <= 30) {
-      colorClass = "bg-rose-50 text-rose-700 border-rose-200 font-semibold";
+      colorClass = "bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800 font-semibold";
       icon = <AlertCircle className="w-3 h-3 text-rose-500" />;
     } else if (days <= 90) {
-      colorClass = "bg-amber-50 text-amber-800 border-amber-200";
+      colorClass = "bg-amber-50 dark:bg-amber-950 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800";
       icon = <AlertCircle className="w-3 h-3 text-amber-500" />;
     }
 
@@ -238,15 +238,15 @@ const FleetManagement = () => {
         <button
           onClick={handleSync}
           disabled={isSyncing}
-          className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center bg-white hover:bg-slate-50 text-slate-600 hover:text-blue-600 border border-slate-200/80 shadow-2xs hover:shadow-xs transition-all cursor-pointer active:scale-95 disabled:opacity-70"
+          className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-950 text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-300 border border-slate-200/80 dark:border-slate-700/80 shadow-2xs hover:shadow-xs transition-all cursor-pointer active:scale-95 disabled:opacity-70"
           title="Refresh & sync fleet"
           aria-label="Refresh & sync fleet"
         >
-          <RotateCcw className={`w-4 h-4 ${isSyncing || isFetching ? "animate-spin text-blue-600" : ""}`} />
+          <RotateCcw className={`w-4 h-4 ${isSyncing || isFetching ? "animate-spin text-brand-600 dark:text-brand-300" : ""}`} />
         </button>
         <button
           onClick={handleOpenAddModal}
-          className="flex items-center gap-1.5 sm:gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl shadow-xs shadow-blue-500/20 transition-all cursor-pointer active:scale-98"
+          className="flex items-center gap-1.5 sm:gap-2 bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-semibold px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl shadow-xs shadow-brand-500/20 transition-all cursor-pointer active:scale-98"
         >
           <Plus className="w-4 h-4" />
           <span>Add Vehicle</span>
@@ -255,9 +255,9 @@ const FleetManagement = () => {
 
       {/* Critical Expiry Warning Sticky Banner */}
       {criticalExpiries.length > 0 && (
-        <div className="p-3.5 sm:p-4 bg-rose-50 border-l-4 border-rose-500 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-rose-800 shadow-2xs">
+        <div className="p-3.5 sm:p-4 bg-rose-50 dark:bg-rose-950 border-l-4 border-rose-500 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-rose-800 dark:text-rose-300 shadow-2xs">
           <div className="flex items-center gap-2.5">
-            <AlertTriangle className="w-5 h-5 text-rose-600 shrink-0" />
+            <AlertTriangle className="w-5 h-5 text-rose-600 dark:text-rose-300 shrink-0" />
             <div>
               <strong className="font-bold">Compliance Alert: </strong>
               <span>
@@ -267,7 +267,7 @@ const FleetManagement = () => {
           </div>
           <div className="flex gap-1.5 flex-wrap">
             {criticalExpiries.map((v) => (
-              <span key={v.id} className="font-mono bg-white text-rose-700 px-2 py-0.5 rounded border border-rose-200 font-bold text-[11px]">
+              <span key={v.id} className="font-mono bg-white dark:bg-slate-900 text-rose-700 dark:text-rose-300 px-2 py-0.5 rounded border border-rose-200 dark:border-rose-800 font-bold text-[11px]">
                 {v.vehicleNumber}
               </span>
             ))}
@@ -277,55 +277,55 @@ const FleetManagement = () => {
 
       {/* KPI Metric Summary Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
-        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-xs transition-shadow">
+        <div className="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs hover:shadow-xs transition-shadow">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider truncate">Total Fleet</span>
-            <span className="p-1.5 sm:p-2 rounded-xl bg-blue-50 text-blue-600 shrink-0">
+            <span className="text-[11px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider truncate">Total Fleet</span>
+            <span className="p-1.5 sm:p-2 rounded-xl bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-300 shrink-0">
               <Truck className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </span>
           </div>
-          <p className="text-lg sm:text-2xl font-black text-slate-900 mt-2 font-mono truncate">{totalFleet}</p>
+          <p className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 mt-2 font-mono truncate">{totalFleet}</p>
           <p className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 truncate">All registered transport</p>
         </div>
 
-        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-xs transition-shadow">
+        <div className="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs hover:shadow-xs transition-shadow">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider truncate">Available</span>
-            <span className="p-1.5 sm:p-2 rounded-xl bg-emerald-50 text-emerald-600 shrink-0">
+            <span className="text-[11px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider truncate">Available</span>
+            <span className="p-1.5 sm:p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-300 shrink-0">
               <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </span>
           </div>
-          <p className="text-lg sm:text-2xl font-black text-emerald-600 mt-2 font-mono truncate">{availableCount}</p>
-          <p className="text-[10px] sm:text-[11px] text-emerald-600 font-medium mt-0.5 truncate">
+          <p className="text-lg sm:text-2xl font-black text-emerald-600 dark:text-emerald-300 mt-2 font-mono truncate">{availableCount}</p>
+          <p className="text-[10px] sm:text-[11px] text-emerald-600 dark:text-emerald-300 font-medium mt-0.5 truncate">
             {totalFleet > 0 ? `${Math.round((availableCount / totalFleet) * 100)}% Ready` : "Ready for moves"}
           </p>
         </div>
 
-        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-xs transition-shadow">
+        <div className="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs hover:shadow-xs transition-shadow">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider truncate">On Move</span>
-            <span className="p-1.5 sm:p-2 rounded-xl bg-blue-50 text-blue-600 shrink-0">
+            <span className="text-[11px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider truncate">On Move</span>
+            <span className="p-1.5 sm:p-2 rounded-xl bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-300 shrink-0">
               <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </span>
           </div>
-          <p className="text-lg sm:text-2xl font-black text-blue-600 mt-2 font-mono truncate">{onMoveCount}</p>
+          <p className="text-lg sm:text-2xl font-black text-brand-600 dark:text-brand-300 mt-2 font-mono truncate">{onMoveCount}</p>
           <p className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 truncate">Active on routes</p>
         </div>
 
-        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-xs transition-shadow">
+        <div className="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs hover:shadow-xs transition-shadow">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider truncate">Maintenance</span>
-            <span className="p-1.5 sm:p-2 rounded-xl bg-amber-50 text-amber-600 shrink-0">
+            <span className="text-[11px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider truncate">Maintenance</span>
+            <span className="p-1.5 sm:p-2 rounded-xl bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-300 shrink-0">
               <Wrench className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </span>
           </div>
-          <p className="text-lg sm:text-2xl font-black text-amber-600 mt-2 font-mono truncate">{maintenanceCount}</p>
+          <p className="text-lg sm:text-2xl font-black text-amber-600 dark:text-amber-300 mt-2 font-mono truncate">{maintenanceCount}</p>
           <p className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 truncate">Under repair</p>
         </div>
       </div>
 
       {/* Search & Filters */}
-      <div className="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-3">
+      <div className="bg-white dark:bg-slate-900 p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-3">
         <div className="relative">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
           <input
@@ -333,12 +333,12 @@ const FleetManagement = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by truck #, vehicle type, or driver..."
-            className="w-full pl-10 pr-9 py-2.5 bg-slate-50/70 border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all"
+            className="w-full pl-10 pr-9 py-2.5 bg-slate-50/70 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-700 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-600 focus:bg-white dark:focus:bg-slate-900 transition-all"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery("")}
-              className="absolute right-3 top-3 text-slate-400 hover:text-slate-600 p-0.5"
+              className="absolute right-3 top-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-0.5"
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -359,16 +359,16 @@ const FleetManagement = () => {
               onClick={() => setStatusFilter(tab.id)}
               className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer border ${
                 statusFilter === tab.id
-                  ? "bg-blue-600 text-white border-blue-600 shadow-xs"
-                  : "bg-slate-50 text-slate-600 hover:bg-slate-100 hover:text-slate-900 hover:border-slate-300 border-slate-200/70"
+                  ? "bg-brand-600 text-white border-brand-600 shadow-xs"
+                  : "bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100 hover:border-slate-300 dark:hover:border-slate-600 border-slate-200/70 dark:border-slate-700/70"
               }`}
             >
               <span>{tab.label}</span>
               <span
                 className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-medium ${
                   statusFilter === tab.id
-                    ? "bg-white/20 text-white"
-                    : "bg-slate-200/70 text-slate-600"
+                    ? "bg-white/20 dark:bg-slate-900/20 text-white"
+                    : "bg-slate-200/70 dark:bg-slate-700/70 text-slate-600 dark:text-slate-300"
                 }`}
               >
                 {tab.count}
@@ -382,19 +382,19 @@ const FleetManagement = () => {
       {isLoading || isFetching || isSyncing ? (
         <CardGridSkeleton count={6} />
       ) : filteredVehicles.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-12 text-center space-y-3">
-          <div className="w-14 h-14 bg-slate-100 text-slate-400 rounded-2xl flex items-center justify-center mx-auto">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-12 text-center space-y-3">
+          <div className="w-14 h-14 bg-slate-100 dark:bg-slate-800 text-slate-400 rounded-2xl flex items-center justify-center mx-auto">
             <Truck className="w-7 h-7" />
           </div>
-          <h3 className="text-base font-bold text-slate-800">No vehicles found</h3>
-          <p className="text-xs text-slate-500 max-w-md mx-auto">
+          <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">No vehicles found</h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto">
             {searchQuery
               ? `No transport assets match "${searchQuery}".`
               : "No vehicles registered in this category. Click \"Add Vehicle\" to add trucks and containers to your fleet."}
           </p>
           <button
             onClick={handleOpenAddModal}
-            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-xl shadow-xs transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold px-4 py-2 rounded-xl shadow-xs transition-colors cursor-pointer"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Add First Vehicle</span>
@@ -406,26 +406,26 @@ const FleetManagement = () => {
             <div
               key={v.id}
               onClick={() => navigate(`/fleet/${v.id}`)}
-              className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-2xs space-y-3.5 flex flex-col justify-between hover:border-blue-500 hover:shadow-md transition-all cursor-pointer group"
+              className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-5 shadow-2xs space-y-3.5 flex flex-col justify-between hover:border-brand-500 hover:shadow-md transition-all cursor-pointer group"
             >
               <div className="space-y-2">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="font-mono font-black text-base text-slate-900 tracking-tight group-hover:text-blue-600 transition-colors flex items-center gap-1.5">
+                    <h3 className="font-mono font-black text-base text-slate-900 dark:text-slate-100 tracking-tight group-hover:text-brand-600 dark:group-hover:text-brand-300 transition-colors flex items-center gap-1.5">
                       <span>{v.vehicleNumber}</span>
-                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all opacity-0 group-hover:opacity-100" />
+                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-brand-600 dark:group-hover:text-brand-300 group-hover:translate-x-0.5 transition-all opacity-0 group-hover:opacity-100" />
                     </h3>
-                    <p className="text-xs text-slate-500 font-medium">{v.vehicleType}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{v.vehicleType}</p>
                   </div>
                   <span
                     className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase ${
                       v.status === "available"
-                        ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                        ? "bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
                         : v.status === "on_move"
-                        ? "bg-blue-50 text-blue-700 border border-blue-200"
+                        ? "bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800"
                         : v.status === "maintenance"
-                        ? "bg-amber-50 text-amber-700 border border-amber-200"
-                        : "bg-slate-100 text-slate-500"
+                        ? "bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800"
+                        : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
                     }`}
                   >
                     {v.status.replace("_", " ")}
@@ -435,12 +435,12 @@ const FleetManagement = () => {
                 {/* Capacities */}
                 <div className="flex items-center gap-2 text-xs">
                   {v.capacityTons && (
-                    <span className="bg-slate-50 px-2 py-0.5 rounded-md border border-slate-200 font-medium text-slate-600">
+                    <span className="bg-slate-50 dark:bg-slate-950 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700 font-medium text-slate-600 dark:text-slate-300">
                       {v.capacityTons} Tons
                     </span>
                   )}
                   {v.capacityCft && (
-                    <span className="bg-slate-50 px-2 py-0.5 rounded-md border border-slate-200 font-medium text-slate-600">
+                    <span className="bg-slate-50 dark:bg-slate-950 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700 font-medium text-slate-600 dark:text-slate-300">
                       {v.capacityCft} CFT Volume
                     </span>
                   )}
@@ -448,15 +448,15 @@ const FleetManagement = () => {
 
                 {/* Driver */}
                 {v.defaultDriverName && (
-                  <div className="pt-2 border-t border-slate-100 text-xs text-slate-600 flex items-center justify-between">
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300 flex items-center justify-between">
                     <span className="text-slate-400">Driver:</span>
-                    <div className="font-medium text-slate-800">
+                    <div className="font-medium text-slate-800 dark:text-slate-100">
                       <span>{v.defaultDriverName}</span>{" "}
                       {v.defaultDriverPhone && (
                         <a
                           href={`tel:${v.defaultDriverPhone}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="font-mono text-blue-600 hover:underline"
+                          className="font-mono text-brand-600 dark:text-brand-300 hover:underline"
                         >
                           ({v.defaultDriverPhone})
                         </a>
@@ -466,15 +466,15 @@ const FleetManagement = () => {
                 )}
 
                 {/* Expiry badges */}
-                <div className="pt-2 border-t border-slate-100 flex flex-wrap gap-1">
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-1">
                   {renderExpiryBadge("Insurance", v.insuranceExpiry)}
                   {renderExpiryBadge("Fitness", v.fitnessExpiry)}
                   {renderExpiryBadge("Permit", v.permitExpiry)}
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-                <span className="text-xs font-semibold text-blue-600 group-hover:text-blue-700 flex items-center gap-1">
+              <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+                <span className="text-xs font-semibold text-brand-600 dark:text-brand-300 group-hover:text-brand-700 dark:group-hover:text-brand-300 flex items-center gap-1">
                   <span>View Details</span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </span>
@@ -485,7 +485,7 @@ const FleetManagement = () => {
                       e.stopPropagation();
                       handleOpenEditModal(v);
                     }}
-                    className="px-2.5 py-1 text-xs text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium flex items-center gap-1 cursor-pointer transition-colors"
+                    className="px-2.5 py-1 text-xs text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-300 hover:bg-brand-50 dark:hover:bg-brand-950 rounded-lg font-medium flex items-center gap-1 cursor-pointer transition-colors"
                   >
                     <Edit2 className="w-3.5 h-3.5" />
                     <span>Edit</span>
@@ -495,7 +495,7 @@ const FleetManagement = () => {
                       e.stopPropagation();
                       handleDeleteVehicle(v);
                     }}
-                    className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg cursor-pointer transition-colors"
+                    className="p-1.5 text-slate-400 hover:text-rose-600 dark:hover:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-950 rounded-lg cursor-pointer transition-colors"
                     title="Retire / Delete Vehicle"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
@@ -509,16 +509,16 @@ const FleetManagement = () => {
 
       {/* Add / Edit Vehicle Modal (Full screen on mobile, elegant dialog on desktop) */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-[70] bg-white sm:bg-slate-900/60 sm:backdrop-blur-xs flex flex-col sm:items-center sm:justify-center sm:p-4 animate-in fade-in">
-          <div className="bg-white w-full h-full sm:h-auto sm:max-h-[90vh] sm:max-w-lg sm:rounded-2xl flex flex-col sm:shadow-2xl sm:border sm:border-slate-200 overflow-hidden">
-            <div className="flex items-center justify-between p-4 sm:p-5 border-b border-slate-100 shrink-0 bg-white">
-              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                <Truck className="w-5 h-5 text-blue-600" />
+        <div className="fixed inset-0 z-[70] bg-white dark:bg-slate-900 sm:bg-slate-900/60 sm:backdrop-blur-xs flex flex-col sm:items-center sm:justify-center sm:p-4 animate-in fade-in">
+          <div className="bg-white dark:bg-slate-900 w-full h-full sm:h-auto sm:max-h-[90vh] sm:max-w-lg sm:rounded-2xl flex flex-col sm:shadow-2xl sm:border sm:border-slate-200 dark:sm:border-slate-700 overflow-hidden">
+            <div className="flex items-center justify-between p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 shrink-0 bg-white dark:bg-slate-900">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <Truck className="w-5 h-5 text-brand-600 dark:text-brand-300" />
                 <span>{editingVehicle ? "Edit Fleet Vehicle" : "Add Vehicle to Fleet"}</span>
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="text-slate-400 hover:text-slate-700 p-2 rounded-xl hover:bg-slate-100 cursor-pointer transition-colors"
+                className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
                 aria-label="Close"
               >
                 <X className="w-5 h-5" />
@@ -528,7 +528,7 @@ const FleetManagement = () => {
             <form onSubmit={handleSubmit} className="flex-1 flex flex-col min-h-0 text-xs">
               <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
                 {submitError && (
-                  <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 font-medium flex items-center gap-2">
+                  <div className="p-3 bg-rose-50 dark:bg-rose-950 border border-rose-200 dark:border-rose-800 rounded-xl text-xs text-rose-700 dark:text-rose-300 font-medium flex items-center gap-2">
                     <AlertCircle className="w-4 h-4 text-rose-500 shrink-0" />
                     <span>{submitError}</span>
                   </div>
@@ -540,7 +540,7 @@ const FleetManagement = () => {
                     value={form.vehicleNumber}
                     onChange={(e) => setForm({ ...form, vehicleNumber: e.target.value.toUpperCase() })}
                     placeholder="e.g. JH-01-AB-1234"
-                    className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl font-mono uppercase text-xs sm:text-sm focus:border-blue-500 outline-none"
+                    className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl font-mono uppercase text-xs sm:text-sm focus:border-brand-500 outline-none"
                   />
                 </FormField>
 
@@ -548,7 +548,7 @@ const FleetManagement = () => {
                   <Select
                     value={form.status}
                     onChange={(e) => setForm({ ...form, status: e.target.value })}
-                    buttonClassName="bg-white border-slate-300"
+                    buttonClassName="bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600"
                   >
                     <option value="available">Available</option>
                     <option value="on_move">On Move</option>
@@ -562,7 +562,7 @@ const FleetManagement = () => {
                 <Select
                   value={form.vehicleType}
                   onChange={(e) => setForm({ ...form, vehicleType: e.target.value })}
-                  buttonClassName="bg-white border-slate-300"
+                  buttonClassName="bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600"
                 >
                   {VEHICLE_TYPES.map((t, idx) => (
                     <option key={idx} value={t}>
@@ -579,7 +579,7 @@ const FleetManagement = () => {
                     step="0.1"
                     value={form.capacityTons}
                     onChange={(e) => setForm({ ...form, capacityTons: e.target.value })}
-                    className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm font-mono focus:border-blue-500 outline-none"
+                    className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm font-mono focus:border-brand-500 outline-none"
                   />
                 </FormField>
 
@@ -588,7 +588,7 @@ const FleetManagement = () => {
                     type="number"
                     value={form.capacityCft}
                     onChange={(e) => setForm({ ...form, capacityCft: e.target.value })}
-                    className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm font-mono focus:border-blue-500 outline-none"
+                    className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm font-mono focus:border-brand-500 outline-none"
                   />
                 </FormField>
               </div>
@@ -600,7 +600,7 @@ const FleetManagement = () => {
                     value={form.defaultDriverName}
                     onChange={(e) => setForm({ ...form, defaultDriverName: e.target.value })}
                     placeholder="Driver full name"
-                    className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm focus:border-blue-500 outline-none"
+                    className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm focus:border-brand-500 outline-none"
                   />
                 </FormField>
 
@@ -611,14 +611,14 @@ const FleetManagement = () => {
                     value={form.defaultDriverPhone}
                     onChange={(e) => setForm({ ...form, defaultDriverPhone: e.target.value })}
                     placeholder="10-digit mobile"
-                    className="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm font-mono focus:border-blue-500 outline-none"
+                    className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm font-mono focus:border-brand-500 outline-none"
                   />
                 </FormField>
               </div>
 
               {/* Compliance & Document Dates */}
-              <div className="pt-2 border-t border-slate-100 space-y-2">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
+              <div className="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-2">
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider block">
                   Legal Transit & Compliance Expiry Dates:
                 </label>
                 <div className="grid grid-cols-3 gap-2">
@@ -627,7 +627,7 @@ const FleetManagement = () => {
                       type="date"
                       value={form.insuranceExpiry}
                       onChange={(e) => setForm({ ...form, insuranceExpiry: e.target.value })}
-                      className="w-full px-2 py-2 border border-slate-300 rounded-xl text-xs focus:border-blue-500 outline-none"
+                      className="w-full px-2 py-2 border border-slate-300 dark:border-slate-600 rounded-xl text-xs focus:border-brand-500 outline-none"
                     />
                   </FormField>
 
@@ -636,7 +636,7 @@ const FleetManagement = () => {
                       type="date"
                       value={form.fitnessExpiry}
                       onChange={(e) => setForm({ ...form, fitnessExpiry: e.target.value })}
-                      className="w-full px-2 py-2 border border-slate-300 rounded-xl text-xs focus:border-blue-500 outline-none"
+                      className="w-full px-2 py-2 border border-slate-300 dark:border-slate-600 rounded-xl text-xs focus:border-brand-500 outline-none"
                     />
                   </FormField>
 
@@ -645,7 +645,7 @@ const FleetManagement = () => {
                       type="date"
                       value={form.permitExpiry}
                       onChange={(e) => setForm({ ...form, permitExpiry: e.target.value })}
-                      className="w-full px-2 py-2 border border-slate-300 rounded-xl text-xs focus:border-blue-500 outline-none"
+                      className="w-full px-2 py-2 border border-slate-300 dark:border-slate-600 rounded-xl text-xs focus:border-brand-500 outline-none"
                     />
                   </FormField>
                 </div>
@@ -657,23 +657,23 @@ const FleetManagement = () => {
                     value={form.notes}
                     onChange={(e) => setForm({ ...form, notes: e.target.value })}
                     placeholder="e.g. GPS tracked, FASTag installed, serviced in Ranchi terminal..."
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs sm:text-sm focus:border-blue-500 focus:bg-white outline-none resize-none"
+                    className="w-full px-3.5 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm focus:border-brand-500 focus:bg-white dark:focus:bg-slate-900 outline-none resize-none"
                   />
                 </FormField>
               </div>
 
-              <div className="p-3.5 sm:p-4 border-t border-slate-100 bg-white sm:bg-slate-50/60 flex items-center justify-end gap-2.5 shrink-0 pb-[max(env(safe-area-inset-bottom),0.875rem)]">
+              <div className="p-3.5 sm:p-4 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 sm:bg-slate-50/60 dark:sm:bg-slate-950/60 flex items-center justify-end gap-2.5 shrink-0 pb-[max(env(safe-area-inset-bottom),0.875rem)]">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="flex-1 sm:flex-initial px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-xs sm:text-sm text-center cursor-pointer transition-colors"
+                  className="flex-1 sm:flex-initial px-4 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold rounded-xl text-xs sm:text-sm text-center cursor-pointer transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={adding || updating}
-                  className="flex-1 sm:flex-initial px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm rounded-xl transition-all cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2 text-center shadow-xs"
+                  className="flex-1 sm:flex-initial px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs sm:text-sm rounded-xl transition-all cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2 text-center shadow-xs"
                 >
                   {adding || updating ? (
                     <>
@@ -692,25 +692,25 @@ const FleetManagement = () => {
       {/* Confirm Delete Modal */}
       {confirmTarget && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl max-w-sm w-full p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-rose-100 rounded-xl">
-                <Trash2 className="w-5 h-5 text-rose-600" />
+              <div className="p-2 bg-rose-100 dark:bg-rose-950 rounded-xl">
+                <Trash2 className="w-5 h-5 text-rose-600 dark:text-rose-300" />
               </div>
-              <h2 className="font-bold text-slate-800 text-base">Retire Vehicle?</h2>
+              <h2 className="font-bold text-slate-800 dark:text-slate-100 text-base">Retire Vehicle?</h2>
             </div>
-            <p className="text-slate-600 text-sm mb-1">
+            <p className="text-slate-600 dark:text-slate-300 text-sm mb-1">
               Are you sure you want to retire{" "}
-              <span className="font-semibold text-slate-900">{confirmTarget.vehicleNumber}</span>?
+              <span className="font-semibold text-slate-900 dark:text-slate-100">{confirmTarget.vehicleNumber}</span>?
             </p>
-            <p className="text-slate-500 text-xs mb-4">This will remove it from active fleet. This action cannot be undone.</p>
+            <p className="text-slate-500 dark:text-slate-400 text-xs mb-4">This will remove it from active fleet. This action cannot be undone.</p>
             {deleteError && (
-              <p className="text-rose-600 text-xs bg-rose-50 border border-rose-200 rounded-xl px-3 py-2 mb-4">{deleteError}</p>
+              <p className="text-rose-600 dark:text-rose-300 text-xs bg-rose-50 dark:bg-rose-950 border border-rose-200 dark:border-rose-800 rounded-xl px-3 py-2 mb-4">{deleteError}</p>
             )}
             <div className="flex gap-2 justify-end">
               <button
                 onClick={() => { setConfirmTarget(null); setDeleteError(""); }}
-                className="px-4 py-2 text-sm text-slate-600 hover:text-slate-900 border border-slate-200 hover:border-slate-300 rounded-xl transition-colors cursor-pointer"
+                className="px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 rounded-xl transition-colors cursor-pointer"
               >
                 Cancel
               </button>

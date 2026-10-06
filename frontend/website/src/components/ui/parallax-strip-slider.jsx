@@ -44,22 +44,22 @@ const TITLE_CHAR_Y_PERCENT = 100;
 
 const DEFAULT_SLIDES = [
   {
-    src: "/images/places/bihar.webp",
-    title: "Verified Logistics Hub",
-    chapter: "Regional Network 01",
+    src: "/images/places/bihar-v2.webp",
+    title: "Explore Patna",
+    chapter: "Bihar 01",
   },
   {
-    src: "/images/process-for-home-service/packing.webp",
+    src: "/images/process-for-home-service/packing-v2.webp",
     title: "5-Layer Defensive Packing",
     chapter: "Safe Transit 02",
   },
   {
-    src: "/images/process-for-home-service/safe-transport.webp",
+    src: "/images/process-for-home-service/transport-v2.webp",
     title: "Dedicated Sealed Containers",
     chapter: "Highway Fleet 03",
   },
   {
-    src: "/images/process-for-home-service/setting-on-new-place.webp",
+    src: "/images/process-for-home-service/unpacking-v2.webp",
     title: "Doorstep Setup and Placement",
     chapter: "Final Delivery 04",
   },

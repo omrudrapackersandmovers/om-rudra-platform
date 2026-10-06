@@ -1,4 +1,23 @@
 @import "tailwindcss";
+@custom-variant dark {
+  @media screen {
+    &:where([data-theme="dark"], [data-theme="dark"] *) { @slot; }
+  }
+}
+/* Shared Om Rudra brand palette, aligned with the public website. */
+@theme {
+  --color-brand-50: #fff1f3;
+  --color-brand-100: #ffe1e7;
+  --color-brand-200: #ffc5d0;
+  --color-brand-300: #f99aae;
+  --color-brand-400: #ef6483;
+  --color-brand-500: #d7193f;
+  --color-brand-600: #b51b35;
+  --color-brand-700: #96162c;
+  --color-brand-800: #7b1729;
+  --color-brand-900: #4b1524;
+  --color-brand-950: #211419;
+}
 
 @layer base {
   body {
@@ -32,3 +51,7 @@
     display: none !important;
   }
 }
+
+:root { --admin-chart-grid: #e2e8f0; }
+@media screen { :root[data-theme="dark"] { --admin-chart-grid: #334155; background: #020617; color: #e2e8f0; } }
+@media print { :root { color-scheme: light !important; } }

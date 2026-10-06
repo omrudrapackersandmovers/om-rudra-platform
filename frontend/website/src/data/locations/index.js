@@ -63,22 +63,38 @@ export const locationsByState = allServiceLocations.reduce((acc, loc) => {
 }, {});
 
 /**
- * Place poster images for states and regions (optimized WebP format)
+ * Illustrative landmark views for states and regions (optimized WebP format)
  */
 export const placeImages = {
-  Bihar: "/images/places/bihar.webp",
-  Jharkhand: "/images/places/jharkhand.webp",
-  "Uttar Pradesh": "/images/places/up.webp",
-  "Delhi NCR": "/images/places/delhi-ncr.webp",
-  "West Bengal": "/images/places/west-bengal.webp",
-  Maharashtra: "/images/places/maharashtra.webp",
-  Karnataka: "/images/places/karnataka.webp",
-  Telangana: "/images/places/telangana.webp",
-  Gujarat: "/images/places/gujrat.webp",
-  Rajasthan: "/images/places/rajasthan.webp",
-  "Madhya Pradesh": "/images/places/mp.webp",
-  "Tamil Nadu": "/images/places/tamil-nadu.webp",
-  Chandigarh: "/images/places/chandigarh.webp",
+  Bihar: "/images/places/bihar-v2.webp",
+  Jharkhand: "/images/places/jharkhand-v2.webp",
+  "Uttar Pradesh": "/images/places/up-v2.webp",
+  "Delhi NCR": "/images/places/delhi-ncr-v2.webp",
+  "West Bengal": "/images/places/west-bengal-v2.webp",
+  Maharashtra: "/images/places/maharashtra-v2.webp",
+  Karnataka: "/images/places/karnataka-v2.webp",
+  Telangana: "/images/places/telangana-v2.webp",
+  Gujarat: "/images/places/gujrat-v2.webp",
+  Rajasthan: "/images/places/rajasthan-v2.webp",
+  "Madhya Pradesh": "/images/places/mp-v2.webp",
+  "Tamil Nadu": "/images/places/tamil-nadu-v2.webp",
+  Chandigarh: "/images/places/chandigarh-v2.webp",
+};
+
+export const placeImageDescriptions = {
+  Bihar: "Illustrative view of Golghar in Patna",
+  Jharkhand: "Illustrative view of Dassam Falls near Ranchi",
+  "Uttar Pradesh": "Illustrative view of Rumi Darwaza in Lucknow",
+  "Delhi NCR": "Illustrative view of India Gate in New Delhi",
+  "West Bengal": "Illustrative view of Victoria Memorial in Kolkata",
+  Maharashtra: "Illustrative view of Gateway of India in Mumbai",
+  Karnataka: "Illustrative view of Vidhana Soudha in Bengaluru",
+  Telangana: "Illustrative view of Charminar in Hyderabad",
+  Gujarat: "Illustrative view of Sabarmati Riverfront in Ahmedabad",
+  Rajasthan: "Illustrative view of Hawa Mahal in Jaipur",
+  "Madhya Pradesh": "Illustrative view of the Great Stupa at Sanchi",
+  "Tamil Nadu": "Illustrative view of Shore Temple in Mamallapuram",
+  Chandigarh: "Illustrative view of Sukhna Lake in Chandigarh",
 };
 
 /**

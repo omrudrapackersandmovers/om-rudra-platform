@@ -49,21 +49,21 @@ export function useUnsavedChanges(navigate) {
     if (!isModalOpen) return null;
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 animate-in fade-in">
-        <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100">
-          <div className="flex items-center gap-3 text-amber-600 mb-3">
-            <div className="p-2.5 bg-amber-50 rounded-xl">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-800">
+          <div className="flex items-center gap-3 text-amber-600 dark:text-amber-300 mb-3">
+            <div className="p-2.5 bg-amber-50 dark:bg-amber-950 rounded-xl">
               <AlertCircle className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900">Unsaved Changes</h3>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">Unsaved Changes</h3>
           </div>
-          <p className="text-sm text-slate-600 leading-relaxed mb-6">
+          <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
             You have unsaved changes in this form. If you leave now, any modifications will be lost.
           </p>
           <div className="flex items-center justify-end gap-3">
             <button
               type="button"
               onClick={handleStay}
-              className="px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100 rounded-xl transition-all cursor-pointer"
+              className="px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all cursor-pointer"
             >
               Stay on Page
             </button>

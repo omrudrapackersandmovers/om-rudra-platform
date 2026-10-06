@@ -13,11 +13,13 @@ export const company = {
   tagline: "Safer Moves, Brighter Tomorrows",
 
   logo: {
-    primary: "/images/primary-logo.webp",
-    horizontal: "/images/horizontal-lockup.webp",
-    reverse: "/images/reverse-logo.webp",
-    icon: "/images/icon.webp",
-    monochrome: "/images/monochrome.webp",
+    primary: "/brand/lockup-horizontal.svg",
+    horizontal: "/brand/lockup-horizontal.svg",
+    reverse: "/brand/lockup-reverse.svg",
+    icon: "/brand/symbol-red.svg",
+    share: "/brand/social-share-1200x630.png",
+    print: "/brand/lockup-red-1080.png",
+    monochrome: "/brand/symbol-charcoal.svg",
     packageMockup: "/images/packgae.webp",
   },
 

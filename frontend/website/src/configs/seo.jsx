@@ -23,7 +23,7 @@ export default function SEO({ title, description, canonical, schemaJson, noindex
     graph.push(...entries.map(entry => entry["@type"] === "Service" ? { ...entry, provider: { "@id": businessId } } : entry));
   }
   const structuredData = JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replace(/</g, "\\u003c");
-  const image = `${siteUrl}${company.logo.horizontal}`;
+  const image = `${siteUrl}${company.logo.share}`;
   return <Helmet>
     <title>{fullTitle}</title>
     <meta name="description" content={metaDesc} />
@@ -36,6 +36,9 @@ export default function SEO({ title, description, canonical, schemaJson, noindex
     <meta property="og:site_name" content={company.brandName} />
     <meta property="og:locale" content="en_IN" />
     <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:alt" content={company.brandName} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />

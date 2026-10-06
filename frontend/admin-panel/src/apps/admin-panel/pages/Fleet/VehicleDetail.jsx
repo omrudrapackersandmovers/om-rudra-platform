@@ -128,20 +128,20 @@ const VehicleDetail = () => {
 
   const getComplianceColor = (status) => {
     switch (status) {
-      case "expired": return "bg-rose-100 text-rose-800 border-rose-300";
-      case "critical": return "bg-rose-50 text-rose-700 border-rose-200";
-      case "warning": return "bg-amber-50 text-amber-700 border-amber-200";
-      case "ok": return "bg-emerald-50 text-emerald-700 border-emerald-200";
-      default: return "bg-slate-100 text-slate-500 border-slate-200";
+      case "expired": return "bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-300 border-rose-300";
+      case "critical": return "bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800";
+      case "warning": return "bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800";
+      case "ok": return "bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800";
+      default: return "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700";
     }
   };
 
   const getComplianceIcon = (status) => {
     switch (status) {
-      case "expired": return <AlertTriangle className="w-3.5 h-3.5 text-rose-600" />;
+      case "expired": return <AlertTriangle className="w-3.5 h-3.5 text-rose-600 dark:text-rose-300" />;
       case "critical": return <AlertCircle className="w-3.5 h-3.5 text-rose-500" />;
       case "warning": return <AlertCircle className="w-3.5 h-3.5 text-amber-500" />;
-      case "ok": return <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />;
+      case "ok": return <CheckCircle className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-300" />;
       default: return <Shield className="w-3.5 h-3.5 text-slate-400" />;
     }
   };
@@ -174,23 +174,23 @@ const VehicleDetail = () => {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-20 space-y-3">
-        <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin" />
-        <p className="text-xs text-slate-500 font-medium">Loading vehicle profile...</p>
+        <div className="w-8 h-8 border-3 border-brand-600 border-t-transparent rounded-full animate-spin" />
+        <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Loading vehicle profile...</p>
       </div>
     );
   }
 
   if (!vehicle) {
     return (
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-12 text-center space-y-3 max-w-lg mx-auto mt-10">
-        <div className="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center mx-auto">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-12 text-center space-y-3 max-w-lg mx-auto mt-10">
+        <div className="w-12 h-12 bg-rose-50 dark:bg-rose-950 text-rose-500 rounded-2xl flex items-center justify-center mx-auto">
           <AlertTriangle className="w-6 h-6" />
         </div>
-        <h3 className="text-base font-bold text-slate-900">Vehicle Not Found</h3>
-        <p className="text-xs text-slate-500">This vehicle does not exist or has been removed.</p>
+        <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Vehicle Not Found</h3>
+        <p className="text-xs text-slate-500 dark:text-slate-400">This vehicle does not exist or has been removed.</p>
         <button
           onClick={() => navigate("/fleet")}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-semibold shadow-xs"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-brand-600 text-white rounded-xl text-xs font-semibold shadow-xs"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Fleet
@@ -200,10 +200,10 @@ const VehicleDetail = () => {
   }
 
   const statusConfig = {
-    available: "bg-emerald-50 text-emerald-700 border border-emerald-200",
-    on_move: "bg-blue-50 text-blue-700 border border-blue-200",
-    maintenance: "bg-amber-50 text-amber-700 border border-amber-200",
-    retired: "bg-slate-100 text-slate-500 border border-slate-200",
+    available: "bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800",
+    on_move: "bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800",
+    maintenance: "bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800",
+    retired: "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700",
   };
 
   const hasComplianceAlert = Object.values(complianceStatus).some(
@@ -217,7 +217,7 @@ const VehicleDetail = () => {
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
         <button
           onClick={() => navigate("/fleet")}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 px-2 sm:px-2.5 py-1.5 rounded-xl hover:bg-white hover:border-slate-200 border border-transparent transition-all cursor-pointer self-start"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 px-2 sm:px-2.5 py-1.5 rounded-xl hover:bg-white dark:hover:bg-slate-900 hover:border-slate-200 dark:hover:border-slate-700 border border-transparent transition-all cursor-pointer self-start"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Fleet Registry</span>
@@ -227,15 +227,15 @@ const VehicleDetail = () => {
           {vehicle.defaultDriverPhone && (
             <a
               href={`tel:${vehicle.defaultDriverPhone}`}
-              className="flex items-center justify-center gap-1.5 py-2 sm:py-1.5 px-2.5 sm:px-3 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/80 rounded-xl text-xs font-semibold shadow-2xs transition-colors active:scale-98"
+              className="flex items-center justify-center gap-1.5 py-2 sm:py-1.5 px-2.5 sm:px-3 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-950 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80 rounded-xl text-xs font-semibold shadow-2xs transition-colors active:scale-98"
             >
-              <Phone className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+              <Phone className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 shrink-0" />
               <span>Call Driver</span>
             </a>
           )}
           <button
             onClick={handleOpenEditModal}
-            className="flex items-center justify-center gap-1.5 py-2 sm:py-1.5 px-2.5 sm:px-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-xs shadow-blue-500/20 transition-all cursor-pointer active:scale-98 col-span-1"
+            className="flex items-center justify-center gap-1.5 py-2 sm:py-1.5 px-2.5 sm:px-3.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-semibold shadow-xs shadow-brand-500/20 transition-all cursor-pointer active:scale-98 col-span-1"
           >
             <Edit2 className="w-3.5 h-3.5 shrink-0" />
             <span>Edit Vehicle</span>
@@ -245,8 +245,8 @@ const VehicleDetail = () => {
 
       {/* Compliance Alert Banner */}
       {hasComplianceAlert && (
-        <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-2xl flex items-start gap-3 text-xs text-rose-800">
-          <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+        <div className="p-3.5 bg-rose-50 dark:bg-rose-950 border border-rose-200 dark:border-rose-800 rounded-2xl flex items-start gap-3 text-xs text-rose-800 dark:text-rose-300">
+          <AlertTriangle className="w-4 h-4 text-rose-600 dark:text-rose-300 shrink-0 mt-0.5" />
           <div>
             <strong className="font-bold">Compliance Alert: </strong>
             <span>
@@ -258,7 +258,7 @@ const VehicleDetail = () => {
       )}
 
       {/* Vehicle Header Banner */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 shadow-2xs">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-4 sm:p-6 shadow-2xs">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
           <div className="flex items-start gap-3 sm:gap-4 min-w-0">
             {/* Vehicle Icon */}
@@ -267,22 +267,22 @@ const VehicleDetail = () => {
             </div>
             <div className="space-y-1.5 min-w-0 flex-1">
               <div className="flex items-center gap-2 flex-wrap">
-                <h1 className="text-lg sm:text-2xl font-black text-slate-900 font-mono tracking-tight">
+                <h1 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 font-mono tracking-tight">
                   {vehicle.vehicleNumber}
                 </h1>
                 <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase shrink-0 ${statusConfig[vehicle.status] || statusConfig.available}`}>
                   {vehicle.status?.replace("_", " ")}
                 </span>
               </div>
-              <p className="text-sm text-slate-600 font-medium">{vehicle.vehicleType}</p>
+              <p className="text-sm text-slate-600 dark:text-slate-300 font-medium">{vehicle.vehicleType}</p>
               <div className="flex items-center gap-2 flex-wrap text-xs">
                 {vehicle.capacityTons && (
-                  <span className="bg-slate-50 px-2 py-0.5 rounded-md border border-slate-200 text-slate-600 font-medium">
+                  <span className="bg-slate-50 dark:bg-slate-950 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-medium">
                     {vehicle.capacityTons} Tons
                   </span>
                 )}
                 {vehicle.capacityCft && (
-                  <span className="bg-slate-50 px-2 py-0.5 rounded-md border border-slate-200 text-slate-600 font-medium">
+                  <span className="bg-slate-50 dark:bg-slate-950 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-medium">
                     {vehicle.capacityCft} CFT
                   </span>
                 )}
@@ -292,15 +292,15 @@ const VehicleDetail = () => {
 
           {/* Driver info */}
           {vehicle.defaultDriverName && (
-            <div className="flex flex-row sm:flex-col sm:items-end justify-between pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100 gap-2">
+            <div className="flex flex-row sm:flex-col sm:items-end justify-between pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800 gap-2">
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block sm:text-right">Default Driver</span>
-                <div className="text-sm font-bold text-slate-900 sm:text-right">{vehicle.defaultDriverName}</div>
+                <div className="text-sm font-bold text-slate-900 dark:text-slate-100 sm:text-right">{vehicle.defaultDriverName}</div>
               </div>
               {vehicle.defaultDriverPhone && (
                 <a
                   href={`tel:${vehicle.defaultDriverPhone}`}
-                  className="text-xs font-mono text-blue-600 hover:underline flex items-center gap-1"
+                  className="text-xs font-mono text-brand-600 dark:text-brand-300 hover:underline flex items-center gap-1"
                 >
                   <Phone className="w-3 h-3" />
                   {vehicle.defaultDriverPhone}
@@ -313,39 +313,39 @@ const VehicleDetail = () => {
 
       {/* 4 KPI Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
-        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-1">
+        <div className="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-1">
           <div className="flex items-center justify-between text-slate-400">
             <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider truncate">Moves Attended</span>
-            <Truck className="w-4 h-4 text-blue-600 shrink-0" />
+            <Truck className="w-4 h-4 text-brand-600 dark:text-brand-300 shrink-0" />
           </div>
-          <div className="text-lg sm:text-2xl font-black text-slate-900 font-mono">{metrics.totalMovesAttended}</div>
+          <div className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 font-mono">{metrics.totalMovesAttended}</div>
           <p className="text-[10px] text-slate-400 truncate">{metrics.totalMovesCompleted} completed</p>
         </div>
 
-        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-1">
+        <div className="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-1">
           <div className="flex items-center justify-between text-slate-400">
             <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider truncate">Fuel Cost</span>
             <Fuel className="w-4 h-4 text-orange-500 shrink-0" />
           </div>
-          <div className="text-lg sm:text-2xl font-black text-slate-900 font-mono">₹{metrics.totalFuelCost.toLocaleString("en-IN")}</div>
+          <div className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 font-mono">₹{metrics.totalFuelCost.toLocaleString("en-IN")}</div>
           <p className="text-[10px] text-slate-400 truncate">Total fuel spend</p>
         </div>
 
-        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-1">
+        <div className="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-1">
           <div className="flex items-center justify-between text-slate-400">
             <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider truncate">Repair Cost</span>
-            <Wrench className="w-4 h-4 text-amber-600 shrink-0" />
+            <Wrench className="w-4 h-4 text-amber-600 dark:text-amber-300 shrink-0" />
           </div>
-          <div className="text-lg sm:text-2xl font-black text-amber-600 font-mono">₹{metrics.totalRepairCost.toLocaleString("en-IN")}</div>
+          <div className="text-lg sm:text-2xl font-black text-amber-600 dark:text-amber-300 font-mono">₹{metrics.totalRepairCost.toLocaleString("en-IN")}</div>
           <p className="text-[10px] text-slate-400 truncate">Maintenance spend</p>
         </div>
 
-        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-1">
+        <div className="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-1">
           <div className="flex items-center justify-between text-slate-400">
             <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider truncate">Total Expenses</span>
             <Receipt className="w-4 h-4 text-rose-500 shrink-0" />
           </div>
-          <div className="text-lg sm:text-2xl font-black text-rose-600 font-mono">₹{metrics.totalExpenses.toLocaleString("en-IN")}</div>
+          <div className="text-lg sm:text-2xl font-black text-rose-600 dark:text-rose-300 font-mono">₹{metrics.totalExpenses.toLocaleString("en-IN")}</div>
           <p className="text-[10px] text-slate-400 truncate">All operational costs</p>
         </div>
       </div>
@@ -354,9 +354,9 @@ const VehicleDetail = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
 
         {/* Left: Compliance Documents */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-5 shadow-2xs space-y-3.5">
-          <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2 pb-2 border-b border-slate-100">
-            <Shield className="w-4 h-4 text-blue-600 shrink-0" />
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-4 sm:p-5 shadow-2xs space-y-3.5">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2 pb-2 border-b border-slate-100 dark:border-slate-800">
+            <Shield className="w-4 h-4 text-brand-600 dark:text-brand-300 shrink-0" />
             <span>Compliance & Documents</span>
           </h3>
 
@@ -367,17 +367,17 @@ const VehicleDetail = () => {
           </div>
 
           {vehicle.notes && (
-            <div className="pt-3 border-t border-slate-100">
+            <div className="pt-3 border-t border-slate-100 dark:border-slate-800">
               <span className="text-[10px] font-bold uppercase text-slate-400 block mb-1.5">Vehicle Notes</span>
-              <p className="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 leading-relaxed break-words">
+              <p className="text-xs text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-950 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800 leading-relaxed break-words">
                 {vehicle.notes}
               </p>
             </div>
           )}
 
-          <div className="pt-3 border-t border-slate-100 space-y-2 text-xs">
+          <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-2 text-xs">
             <span className="text-[10px] font-bold uppercase text-slate-400 block">Fleet Registry Info</span>
-            <div className="text-slate-700 space-y-1">
+            <div className="text-slate-700 dark:text-slate-200 space-y-1">
               <div className="flex justify-between">
                 <span className="text-slate-400">Added to Fleet</span>
                 <span className="font-semibold">{formatDate(vehicle.createdAt)}</span>
@@ -391,10 +391,10 @@ const VehicleDetail = () => {
         </div>
 
         {/* Right: Moves History */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-5 shadow-2xs space-y-4">
-          <div className="pb-2 border-b border-slate-100">
-            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <Activity className="w-4 h-4 text-blue-600 shrink-0" />
+        <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-4 sm:p-5 shadow-2xs space-y-4">
+          <div className="pb-2 border-b border-slate-100 dark:border-slate-800">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <Activity className="w-4 h-4 text-brand-600 dark:text-brand-300 shrink-0" />
               <span>Relocation Jobs ({movesAttended.length})</span>
             </h3>
             <p className="text-xs text-slate-400 mt-0.5">All jobs this vehicle has been dispatched on</p>
@@ -411,18 +411,18 @@ const VehicleDetail = () => {
               {movesAttended.map((move) => (
                 <div
                   key={move.id}
-                  className="p-3.5 bg-slate-50/70 hover:bg-slate-50 border border-slate-200/70 rounded-xl space-y-2.5 text-xs transition-all"
+                  className="p-3.5 bg-slate-50/70 dark:bg-slate-950/70 hover:bg-slate-50 dark:hover:bg-slate-950 border border-slate-200/70 dark:border-slate-700/70 rounded-xl space-y-2.5 text-xs transition-all"
                 >
                   {/* Header Row */}
                   <div className="flex items-center justify-between gap-2">
                     <Link
                       to={`/jobs/${move.jobId}`}
-                      className="font-mono font-bold text-xs sm:text-sm text-blue-600 hover:underline flex items-center gap-1 shrink-0"
+                      className="font-mono font-bold text-xs sm:text-sm text-brand-600 dark:text-brand-300 hover:underline flex items-center gap-1 shrink-0"
                     >
                       <span>{move.jobNumber}</span>
                       <ExternalLink className="w-3 h-3" />
                     </Link>
-                    <div className="text-[11px] text-slate-500 flex items-center gap-1 font-mono shrink-0">
+                    <div className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1 font-mono shrink-0">
                       <Calendar className="w-3.5 h-3.5 text-slate-400" />
                       <span>{formatDate(move.scheduledDate)}</span>
                     </div>
@@ -431,29 +431,29 @@ const VehicleDetail = () => {
                   {/* Role & Status badges */}
                   <div className="flex items-center gap-1.5 flex-wrap">
                     {move.role && (
-                      <span className="px-2 py-0.5 bg-blue-50 text-blue-700 rounded-md text-[10px] font-bold uppercase border border-blue-200/60">
+                      <span className="px-2 py-0.5 bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 rounded-md text-[10px] font-bold uppercase border border-brand-200/60 dark:border-brand-800/60">
                         {move.role} vehicle
                       </span>
                     )}
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${
                       move.jobStatus === "completed"
-                        ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                        ? "bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
                         : move.jobStatus === "in_progress"
-                        ? "bg-blue-50 text-blue-700 border border-blue-200"
+                        ? "bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800"
                         : move.jobStatus === "cancelled"
-                        ? "bg-rose-50 text-rose-700 border border-rose-200"
-                        : "bg-slate-100 text-slate-600 border border-slate-200"
+                        ? "bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800"
+                        : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
                     }`}>
                       {move.jobStatus?.replace("_", " ")}
                     </span>
                   </div>
 
                   {/* Customer & Route */}
-                  <div className="bg-white p-2.5 sm:p-3 rounded-xl border border-slate-200/80 space-y-2">
-                    <div className="text-[11px] text-slate-600 font-medium">
-                      Customer: <strong className="text-slate-900">{move.customerName}</strong>
+                  <div className="bg-white dark:bg-slate-900 p-2.5 sm:p-3 rounded-xl border border-slate-200/80 dark:border-slate-700/80 space-y-2">
+                    <div className="text-[11px] text-slate-600 dark:text-slate-300 font-medium">
+                      Customer: <strong className="text-slate-900 dark:text-slate-100">{move.customerName}</strong>
                       {move.customerPhone && (
-                        <a href={`tel:${move.customerPhone}`} className="ml-1.5 text-blue-600 font-mono hover:underline">
+                        <a href={`tel:${move.customerPhone}`} className="ml-1.5 text-brand-600 dark:text-brand-300 font-mono hover:underline">
                           {move.customerPhone}
                         </a>
                       )}
@@ -463,14 +463,14 @@ const VehicleDetail = () => {
                         <span className="w-2 h-2 rounded-full bg-emerald-500 mt-1 shrink-0 ring-2 ring-emerald-100" />
                         <div className="min-w-0 flex-1">
                           <span className="text-[10px] uppercase font-bold text-slate-400 block leading-none mb-0.5">Pickup</span>
-                          <span className="text-slate-700 leading-snug break-words">{move.pickupAddress}</span>
+                          <span className="text-slate-700 dark:text-slate-200 leading-snug break-words">{move.pickupAddress}</span>
                         </div>
                       </div>
                       <div className="flex items-start gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-blue-500 mt-1 shrink-0 ring-2 ring-blue-100" />
+                        <span className="w-2 h-2 rounded-full bg-brand-500 mt-1 shrink-0 ring-2 ring-brand-100" />
                         <div className="min-w-0 flex-1">
                           <span className="text-[10px] uppercase font-bold text-slate-400 block leading-none mb-0.5">Delivery</span>
-                          <span className="text-slate-900 font-medium leading-snug break-words">{move.deliveryAddress}</span>
+                          <span className="text-slate-900 dark:text-slate-100 font-medium leading-snug break-words">{move.deliveryAddress}</span>
                         </div>
                       </div>
                     </div>
@@ -478,11 +478,11 @@ const VehicleDetail = () => {
 
                   {/* Driver on this move */}
                   {(move.driverName || move.driverPhone) && (
-                    <div className="flex items-center gap-2 text-[11px] text-slate-600 pt-1 border-t border-slate-200/60">
+                    <div className="flex items-center gap-2 text-[11px] text-slate-600 dark:text-slate-300 pt-1 border-t border-slate-200/60 dark:border-slate-700/60">
                       <span className="text-slate-400">Driver:</span>
-                      <span className="font-semibold text-slate-800">{move.driverName || "-"}</span>
+                      <span className="font-semibold text-slate-800 dark:text-slate-100">{move.driverName || "-"}</span>
                       {move.driverPhone && (
-                        <a href={`tel:${move.driverPhone}`} className="font-mono text-blue-600 hover:underline ml-auto">{move.driverPhone}</a>
+                        <a href={`tel:${move.driverPhone}`} className="font-mono text-brand-600 dark:text-brand-300 hover:underline ml-auto">{move.driverPhone}</a>
                       )}
                     </div>
                   )}
@@ -494,17 +494,17 @@ const VehicleDetail = () => {
       </div>
 
       {/* Expense Ledger */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-5 shadow-2xs space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-start justify-between pb-3 border-b border-slate-100 gap-2">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-4 sm:p-5 shadow-2xs space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between pb-3 border-b border-slate-100 dark:border-slate-800 gap-2">
           <div>
-            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <Receipt className="w-4 h-4 text-orange-500 shrink-0" />
               <span>Operational Expense History</span>
             </h3>
             <p className="text-xs text-slate-400 mt-0.5">Fuel, toll, repair and all other costs across all moves</p>
           </div>
           <div className="self-start sm:self-auto">
-            <span className="text-xs font-mono font-bold text-rose-700 bg-rose-50 px-3 py-1 rounded-full border border-rose-200 inline-block">
+            <span className="text-xs font-mono font-bold text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950 px-3 py-1 rounded-full border border-rose-200 dark:border-rose-800 inline-block">
               Total: ₹{metrics.totalExpenses.toLocaleString("en-IN")}
             </span>
           </div>
@@ -515,38 +515,38 @@ const VehicleDetail = () => {
             No expenses logged for this vehicle yet.
           </div>
         ) : (
-          <div className="divide-y divide-slate-100">
+          <div className="divide-y divide-slate-100 dark:divide-slate-800">
             {expenseHistory.map((item, idx) => (
               <div key={idx} className="py-3 flex items-start justify-between gap-3 text-xs">
                 <div className="space-y-1 min-w-0 flex-1">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase border ${
                       item.category === "fuel"
-                        ? "bg-orange-50 text-orange-700 border-orange-200"
+                        ? "bg-orange-50 dark:bg-orange-950 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-800"
                         : item.category === "vehicle_repair"
-                        ? "bg-amber-50 text-amber-700 border-amber-200"
+                        ? "bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800"
                         : item.category === "toll"
-                        ? "bg-blue-50 text-blue-700 border-blue-200"
-                        : "bg-slate-100 text-slate-600 border-slate-200"
+                        ? "bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 border-brand-200 dark:border-brand-800"
+                        : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700"
                     }`}>
                       {EXPENSE_LABELS[item.category] || item.category}
                     </span>
-                    <Link to={`/jobs/${item.jobId}`} className="font-mono text-blue-600 hover:underline text-[11px] flex items-center gap-0.5">
+                    <Link to={`/jobs/${item.jobId}`} className="font-mono text-brand-600 dark:text-brand-300 hover:underline text-[11px] flex items-center gap-0.5">
                       {item.jobNumber}
                       <ExternalLink className="w-2.5 h-2.5" />
                     </Link>
                   </div>
                   {item.description && (
-                    <p className="text-[11px] text-slate-600">{item.description}</p>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-300">{item.description}</p>
                   )}
                   <p className="text-[11px] text-slate-400">
                     {formatDate(item.createdAt)}
-                    {item.paidBy && <span> • Paid by: <span className="font-medium text-slate-600">{item.paidBy}</span></span>}
+                    {item.paidBy && <span> • Paid by: <span className="font-medium text-slate-600 dark:text-slate-300">{item.paidBy}</span></span>}
                     {item.receiptNote && <span> • {item.receiptNote}</span>}
                   </p>
                 </div>
                 <div className="text-right shrink-0">
-                  <span className="font-mono font-black text-sm text-slate-900 block">
+                  <span className="font-mono font-black text-sm text-slate-900 dark:text-slate-100 block">
                     ₹{Number(item.amount).toLocaleString("en-IN")}
                   </span>
                 </div>
@@ -558,16 +558,16 @@ const VehicleDetail = () => {
 
       {/* Edit Vehicle Modal */}
       {isEditModalOpen && (
-        <div className="fixed inset-0 z-[80] bg-white sm:bg-slate-900/60 sm:backdrop-blur-xs flex flex-col sm:items-center sm:justify-center sm:p-4 animate-in fade-in">
-          <div className="bg-white w-full h-full sm:h-auto sm:max-h-[90vh] sm:max-w-lg sm:rounded-2xl sm:shadow-2xl sm:border sm:border-slate-200 overflow-hidden flex flex-col">
-            <div className="flex items-center justify-between p-4 sm:p-5 border-b border-slate-100 shrink-0 bg-white">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <Edit2 className="w-4 h-4 text-blue-600" />
+        <div className="fixed inset-0 z-[80] bg-white dark:bg-slate-900 sm:bg-slate-900/60 sm:backdrop-blur-xs flex flex-col sm:items-center sm:justify-center sm:p-4 animate-in fade-in">
+          <div className="bg-white dark:bg-slate-900 w-full h-full sm:h-auto sm:max-h-[90vh] sm:max-w-lg sm:rounded-2xl sm:shadow-2xl sm:border sm:border-slate-200 dark:sm:border-slate-700 overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 shrink-0 bg-white dark:bg-slate-900">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <Edit2 className="w-4 h-4 text-brand-600 dark:text-brand-300" />
                 <span>Edit Vehicle: {vehicle.vehicleNumber}</span>
               </h3>
               <button
                 onClick={() => setIsEditModalOpen(false)}
-                className="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg cursor-pointer"
+                className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-lg cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -580,7 +580,7 @@ const VehicleDetail = () => {
                     type="text"
                     value={editForm.vehicleNumber || ""}
                     onChange={(e) => setEditForm({ ...editForm, vehicleNumber: e.target.value.toUpperCase() })}
-                    className="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono uppercase focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl font-mono uppercase focus:ring-2 focus:ring-brand-600 focus:outline-none"
                     placeholder="e.g. JH01AB1234"
                   />
                 </FormField>
@@ -613,7 +613,7 @@ const VehicleDetail = () => {
                     type="number"
                     value={editForm.capacityTons || ""}
                     onChange={(e) => setEditForm({ ...editForm, capacityTons: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-600 focus:outline-none"
                     placeholder="e.g. 2.5"
                     step="0.1"
                   />
@@ -623,7 +623,7 @@ const VehicleDetail = () => {
                     type="number"
                     value={editForm.capacityCft || ""}
                     onChange={(e) => setEditForm({ ...editForm, capacityCft: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-600 focus:outline-none"
                     placeholder="e.g. 450"
                   />
                 </FormField>
@@ -635,7 +635,7 @@ const VehicleDetail = () => {
                     type="text"
                     value={editForm.defaultDriverName || ""}
                     onChange={(e) => setEditForm({ ...editForm, defaultDriverName: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-600 focus:outline-none"
                   />
                 </FormField>
                 <FormField label="Driver Phone">
@@ -643,7 +643,7 @@ const VehicleDetail = () => {
                     type="tel"
                     value={editForm.defaultDriverPhone || ""}
                     onChange={(e) => setEditForm({ ...editForm, defaultDriverPhone: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl font-mono focus:ring-2 focus:ring-brand-600 focus:outline-none"
                   />
                 </FormField>
               </div>
@@ -654,7 +654,7 @@ const VehicleDetail = () => {
                     type="date"
                     value={editForm.insuranceExpiry || ""}
                     onChange={(e) => setEditForm({ ...editForm, insuranceExpiry: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-600 focus:outline-none"
                   />
                 </FormField>
                 <FormField label="Fitness Expiry">
@@ -662,7 +662,7 @@ const VehicleDetail = () => {
                     type="date"
                     value={editForm.fitnessExpiry || ""}
                     onChange={(e) => setEditForm({ ...editForm, fitnessExpiry: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-600 focus:outline-none"
                   />
                 </FormField>
                 <FormField label="Permit Expiry">
@@ -670,7 +670,7 @@ const VehicleDetail = () => {
                     type="date"
                     value={editForm.permitExpiry || ""}
                     onChange={(e) => setEditForm({ ...editForm, permitExpiry: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-600 focus:outline-none"
                   />
                 </FormField>
               </div>
@@ -680,23 +680,23 @@ const VehicleDetail = () => {
                   rows={2}
                   value={editForm.notes || ""}
                   onChange={(e) => setEditForm({ ...editForm, notes: e.target.value })}
-                  className="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-600 focus:outline-none"
                   placeholder="Any remarks about this vehicle..."
                 />
               </FormField>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsEditModalOpen(false)}
-                  className="px-4 py-2 border border-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-50 transition-colors text-xs"
+                  className="px-4 py-2 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold rounded-xl hover:bg-slate-50 dark:hover:bg-slate-950 transition-colors text-xs"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={updating}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-xs transition-colors cursor-pointer text-xs"
+                  className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow-xs transition-colors cursor-pointer text-xs"
                 >
                   {updating ? "Saving..." : "Save Changes"}
                 </button>

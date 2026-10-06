@@ -2,7 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="icon.webp" />
+    <script>
+      (() => {
+        let saved;
+        try { saved = localStorage.getItem("om-rudra-admin-theme"); } catch {}
+        const theme = saved === "light" || saved === "dark" ? saved : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/brand/symbol-red-32.png" />
+    <link rel="icon" type="image/svg+xml" href="/brand/symbol-red.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/brand/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Manage leads, quotations, jobs, and invoices for Om Rudra Packers and Movers." />
     <title>Admin Panel | Om Rudra Packers and Movers</title>

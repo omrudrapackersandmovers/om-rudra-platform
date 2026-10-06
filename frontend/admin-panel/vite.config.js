@@ -10,7 +10,7 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
+      includeAssets: ["favicon.ico", "brand/symbol-red.svg", "brand/apple-touch-icon.png"],
       manifest: {
         name: "Om Rudra Packers and Movers - Admin",
         short_name: "Om Rudra Admin",
@@ -22,15 +22,13 @@ export default defineConfig({
         start_url: "/",
         icons: [
           {
-            src: "/pwa-192x192.png",
+            src: "/brand/symbol-red-192.png",
             sizes: "192x192",
             type: "image/png",
           },
-          {
-            src: "/pwa-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-          },
+          { src: "/brand/symbol-red-512.png", sizes: "512x512", type: "image/png" },
+          { src: "/brand/app-maskable-192.png", sizes: "192x192", type: "image/png", purpose: "maskable" },
+          { src: "/brand/app-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
         ],
       },
       workbox: {

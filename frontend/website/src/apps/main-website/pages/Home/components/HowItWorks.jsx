@@ -20,7 +20,7 @@ const steps = [
     icon: CheckCircle2,
     step: "1",
     title: "Survey & quote",
-    image: "/images/process-for-home-service/visti-and-survey.webp",
+    image: "/images/process-for-home-service/survey-v2.webp",
     description:
       "Share your inventory, route and access details. Confirm the scope and quote before booking.",
   },
@@ -28,7 +28,7 @@ const steps = [
     icon: Package,
     step: "2",
     title: "Professional packing",
-    image: "/images/process-for-home-service/packing.webp",
+    image: "/images/process-for-home-service/packing-v2.webp",
     description:
       "Agree on packing materials and special care for fragile items before moving day.",
   },
@@ -36,7 +36,7 @@ const steps = [
     icon: Truck,
     step: "3",
     title: "Safe transport",
-    image: "/images/process-for-home-service/safe-transport.webp",
+    image: "/images/process-for-home-service/transport-v2.webp",
     description:
       "Confirm transport arrangements, delivery timing and available transit cover.",
   },
@@ -44,7 +44,7 @@ const steps = [
     icon: Home,
     step: "4",
     title: "Delivery & unpacking",
-    image: "/images/process-for-home-service/setting-on-new-place.webp",
+    image: "/images/process-for-home-service/unpacking-v2.webp",
     description:
       "Check your delivered items with the team. Include unpacking and placement in your booking if needed.",
   },

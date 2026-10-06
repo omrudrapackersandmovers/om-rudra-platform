@@ -34,11 +34,11 @@ import { FormField } from "../../../../components/FormField";
 import { Select } from "../../shared/components/Select";
 
 const ROLES = [
-  { value: "driver", label: "Driver", color: "bg-blue-50 text-blue-700 border-blue-200" },
-  { value: "supervisor", label: "Supervisor", color: "bg-purple-50 text-purple-700 border-purple-200" },
-  { value: "packer", label: "Packer (Specialist)", color: "bg-teal-50 text-teal-700 border-teal-200" },
-  { value: "loader", label: "Loader", color: "bg-amber-50 text-amber-800 border-amber-200" },
-  { value: "helper", label: "Helper", color: "bg-slate-100 text-slate-700 border-slate-200" },
+  { value: "driver", label: "Driver", color: "bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 border-brand-200 dark:border-brand-800" },
+  { value: "supervisor", label: "Supervisor", color: "bg-purple-50 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800" },
+  { value: "packer", label: "Packer (Specialist)", color: "bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-800" },
+  { value: "loader", label: "Loader", color: "bg-amber-50 dark:bg-amber-950 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800" },
+  { value: "helper", label: "Helper", color: "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700" },
 ];
 
 const StaffDetail = () => {
@@ -172,23 +172,23 @@ const StaffDetail = () => {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-20 space-y-3">
-        <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-xs text-slate-500 font-medium">Loading team member profile...</p>
+        <div className="w-8 h-8 border-3 border-brand-600 border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Loading team member profile...</p>
       </div>
     );
   }
 
   if (!staff) {
     return (
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-12 text-center space-y-3 max-w-lg mx-auto mt-10">
-        <div className="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center mx-auto">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-12 text-center space-y-3 max-w-lg mx-auto mt-10">
+        <div className="w-12 h-12 bg-rose-50 dark:bg-rose-950 text-rose-500 rounded-2xl flex items-center justify-center mx-auto">
           <AlertCircle className="w-6 h-6" />
         </div>
-        <h3 className="text-base font-bold text-slate-900">Staff Member Not Found</h3>
-        <p className="text-xs text-slate-500">The team member profile you requested does not exist or has been removed.</p>
+        <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Staff Member Not Found</h3>
+        <p className="text-xs text-slate-500 dark:text-slate-400">The team member profile you requested does not exist or has been removed.</p>
         <button
           onClick={() => navigate("/team")}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-semibold shadow-xs"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-brand-600 text-white rounded-xl text-xs font-semibold shadow-xs"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Team Roster</span>
@@ -199,7 +199,7 @@ const StaffDetail = () => {
 
   const roleConfig = ROLES.find((r) => r.value === staff.role) || {
     label: staff.role,
-    color: "bg-slate-100 text-slate-700 border-slate-200",
+    color: "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700",
   };
 
   return (
@@ -209,7 +209,7 @@ const StaffDetail = () => {
         {/* Row 1 (mobile) / Left side (desktop): Back button */}
         <button
           onClick={() => navigate("/team")}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 px-2 sm:px-2.5 py-1.5 rounded-xl hover:bg-white hover:border-slate-200 border border-transparent transition-all cursor-pointer self-start"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 px-2 sm:px-2.5 py-1.5 rounded-xl hover:bg-white dark:hover:bg-slate-900 hover:border-slate-200 dark:hover:border-slate-700 border border-transparent transition-all cursor-pointer self-start"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Team Roster</span>
@@ -219,9 +219,9 @@ const StaffDetail = () => {
         <div className="grid grid-cols-3 gap-2 sm:flex sm:items-center sm:gap-2">
           <a
             href={`tel:${staff.phone}`}
-            className="flex items-center justify-center gap-1.5 py-2 sm:py-1.5 px-2.5 sm:px-3 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/80 rounded-xl text-xs font-semibold shadow-2xs transition-colors active:scale-98"
+            className="flex items-center justify-center gap-1.5 py-2 sm:py-1.5 px-2.5 sm:px-3 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-950 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80 rounded-xl text-xs font-semibold shadow-2xs transition-colors active:scale-98"
           >
-            <Phone className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+            <Phone className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 shrink-0" />
             <span>Call</span>
           </a>
 
@@ -231,15 +231,15 @@ const StaffDetail = () => {
             )}`}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center justify-center gap-1.5 py-2 sm:py-1.5 px-2.5 sm:px-3 bg-white hover:bg-emerald-50 text-emerald-800 border border-slate-200/80 rounded-xl text-xs font-semibold shadow-2xs transition-colors active:scale-98"
+            className="flex items-center justify-center gap-1.5 py-2 sm:py-1.5 px-2.5 sm:px-3 bg-white dark:bg-slate-900 hover:bg-emerald-50 dark:hover:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-slate-200/80 dark:border-slate-700/80 rounded-xl text-xs font-semibold shadow-2xs transition-colors active:scale-98"
           >
-            <MessageSquare className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+            <MessageSquare className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-300 shrink-0" />
             <span>WhatsApp</span>
           </a>
 
           <button
             onClick={handleOpenEditModal}
-            className="flex items-center justify-center gap-1.5 py-2 sm:py-1.5 px-2.5 sm:px-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-xs shadow-blue-500/20 transition-all cursor-pointer active:scale-98"
+            className="flex items-center justify-center gap-1.5 py-2 sm:py-1.5 px-2.5 sm:px-3.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-semibold shadow-xs shadow-brand-500/20 transition-all cursor-pointer active:scale-98"
           >
             <Edit2 className="w-3.5 h-3.5 shrink-0" />
             <span>Edit Profile</span>
@@ -248,15 +248,15 @@ const StaffDetail = () => {
       </div>
 
       {/* Main Staff Header Banner */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-6 shadow-2xs space-y-4">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-4 sm:p-6 shadow-2xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
           <div className="flex items-start gap-3 sm:gap-3.5 min-w-0">
-            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center justify-center font-bold text-lg sm:text-2xl shadow-sm shrink-0">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-brand-600 to-brand-700 text-white flex items-center justify-center font-bold text-lg sm:text-2xl shadow-sm shrink-0">
               {staff.name.charAt(0).toUpperCase()}
             </div>
             <div className="space-y-1.5 min-w-0 flex-1">
               <div className="flex items-center gap-2 flex-wrap">
-                <h1 className="text-lg sm:text-2xl font-black text-slate-900 tracking-tight leading-snug">
+                <h1 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 tracking-tight leading-snug">
                   {staff.name}
                 </h1>
                 <span className={`text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase border shrink-0 ${roleConfig.color}`}>
@@ -265,40 +265,40 @@ const StaffDetail = () => {
                 <span
                   className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase shrink-0 ${
                     staff.status === "available"
-                      ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                      ? "bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
                       : staff.status === "on_move"
-                      ? "bg-blue-50 text-blue-700 border border-blue-200"
-                      : "bg-amber-50 text-amber-700 border border-amber-200"
+                      ? "bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800"
+                      : "bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800"
                   }`}
                 >
                   {staff.status.replace("_", " ")}
                 </span>
               </div>
-              <p className="text-xs text-slate-600 font-mono flex items-center gap-1.5">
+              <p className="text-xs text-slate-600 dark:text-slate-300 font-mono flex items-center gap-1.5">
                 <Phone className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                 <span>+91 {staff.phone}</span>
               </p>
               {staff.specialization && (
-                <p className="text-xs text-slate-500 flex items-center gap-1.5 pt-0.5">
-                  <Briefcase className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-                  <span className="truncate">Specialty: <strong className="text-slate-700 font-semibold">{staff.specialization}</strong></span>
+                <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 pt-0.5">
+                  <Briefcase className="w-3.5 h-3.5 text-brand-600 dark:text-brand-300 shrink-0" />
+                  <span className="truncate">Specialty: <strong className="text-slate-700 dark:text-slate-200 font-semibold">{staff.specialization}</strong></span>
                 </p>
               )}
             </div>
           </div>
 
           {/* Wage Rate & Joined Container (Clean split on mobile, stacked on desktop) */}
-          <div className="flex items-center justify-between sm:flex-col sm:items-end sm:justify-between pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+          <div className="flex items-center justify-between sm:flex-col sm:items-end sm:justify-between pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
             <div>
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block sm:text-right">
                 Base Wage Rate
               </span>
-              <div className="text-lg sm:text-2xl font-black text-slate-900 font-mono sm:text-right">
-                ₹{staff.dailyWage || 0}<span className="text-xs font-medium text-slate-500">/day</span>
+              <div className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 font-mono sm:text-right">
+                ₹{staff.dailyWage || 0}<span className="text-xs font-medium text-slate-500 dark:text-slate-400">/day</span>
               </div>
             </div>
-            <div className="text-[11px] text-slate-500 sm:mt-1 text-right">
-              Joined: <strong className="text-slate-800 block sm:inline">{formatDate(staff.joiningDate || staff.createdAt)}</strong>
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 sm:mt-1 text-right">
+              Joined: <strong className="text-slate-800 dark:text-slate-100 block sm:inline">{formatDate(staff.joiningDate || staff.createdAt)}</strong>
             </div>
           </div>
         </div>
@@ -306,45 +306,45 @@ const StaffDetail = () => {
 
       {/* 4 Performance & Payroll Summary Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
-        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-1">
+        <div className="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-1">
           <div className="flex items-center justify-between text-slate-400">
             <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider truncate">Moves Attended</span>
-            <Truck className="w-4 h-4 text-blue-600 shrink-0" />
+            <Truck className="w-4 h-4 text-brand-600 dark:text-brand-300 shrink-0" />
           </div>
-          <div className="text-lg sm:text-2xl font-black text-slate-900 font-mono">
+          <div className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 font-mono">
             {metrics.totalMovesAttended}
           </div>
           <p className="text-[10px] text-slate-400 truncate">Relocation shifts</p>
         </div>
 
-        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-1">
+        <div className="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-1">
           <div className="flex items-center justify-between text-slate-400">
             <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider truncate">Lifetime Earned</span>
-            <DollarSign className="w-4 h-4 text-purple-600 shrink-0" />
+            <DollarSign className="w-4 h-4 text-purple-600 dark:text-purple-300 shrink-0" />
           </div>
-          <div className="text-lg sm:text-2xl font-black text-slate-900 font-mono">
+          <div className="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-100 font-mono">
             ₹{metrics.totalEarned.toLocaleString("en-IN")}
           </div>
           <p className="text-[10px] text-slate-400 truncate">Total wage accrued</p>
         </div>
 
-        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-1">
+        <div className="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-1">
           <div className="flex items-center justify-between text-slate-400">
-            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-emerald-700 truncate">Total Cleared</span>
-            <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300 truncate">Total Cleared</span>
+            <CheckCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-300 shrink-0" />
           </div>
-          <div className="text-lg sm:text-2xl font-black text-emerald-600 font-mono">
+          <div className="text-lg sm:text-2xl font-black text-emerald-600 dark:text-emerald-300 font-mono">
             ₹{metrics.totalPaid.toLocaleString("en-IN")}
           </div>
-          <p className="text-[10px] text-emerald-600 font-medium truncate">Disbursed cash & UPI</p>
+          <p className="text-[10px] text-emerald-600 dark:text-emerald-300 font-medium truncate">Disbursed cash & UPI</p>
         </div>
 
-        <div className="bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-2xs space-y-1">
+        <div className="bg-white dark:bg-slate-900 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs space-y-1">
           <div className="flex items-center justify-between text-slate-400">
-            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-rose-700 truncate">Balance Owed</span>
+            <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-rose-700 dark:text-rose-300 truncate">Balance Owed</span>
             <Clock className="w-4 h-4 text-rose-500 shrink-0" />
           </div>
-          <div className="text-lg sm:text-2xl font-black text-rose-600 font-mono">
+          <div className="text-lg sm:text-2xl font-black text-rose-600 dark:text-rose-300 font-mono">
             ₹{metrics.pendingWages.toLocaleString("en-IN")}
           </div>
           <p className="text-[10px] text-slate-400 truncate">Pending disbursement</p>
@@ -354,48 +354,48 @@ const StaffDetail = () => {
       {/* Grid: Profile & Identity Details + Moves History */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
         {/* Left Column: Personnel Information & Credentials */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-5 shadow-2xs space-y-3.5">
-          <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2 pb-2 border-b border-slate-100">
-            <User className="w-4 h-4 text-blue-600 shrink-0" />
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-4 sm:p-5 shadow-2xs space-y-3.5">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2 pb-2 border-b border-slate-100 dark:border-slate-800">
+            <User className="w-4 h-4 text-brand-600 dark:text-brand-300 shrink-0" />
             <span>Personnel & KYC Records</span>
           </h3>
 
           <div className="space-y-3 text-xs">
             <div>
               <span className="text-[10px] font-bold uppercase text-slate-400 block mb-0.5">Joined Organization</span>
-              <p className="font-semibold text-slate-800">
+              <p className="font-semibold text-slate-800 dark:text-slate-100">
                 {formatDate(staff.joiningDate || staff.createdAt)}
               </p>
             </div>
 
             <div>
               <span className="text-[10px] font-bold uppercase text-slate-400 block mb-0.5">Government ID Verification</span>
-              <div className="flex items-center gap-2 text-slate-800 font-medium">
-                <Shield className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+              <div className="flex items-center gap-2 text-slate-800 dark:text-slate-100 font-medium">
+                <Shield className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-300 shrink-0" />
                 <span>
-                  {staff.idType || "Aadhaar"}: <strong className="font-mono text-slate-900">{staff.idNumber || "Verified on File"}</strong>
+                  {staff.idType || "Aadhaar"}: <strong className="font-mono text-slate-900 dark:text-slate-100">{staff.idNumber || "Verified on File"}</strong>
                 </span>
               </div>
             </div>
 
             <div>
               <span className="text-[10px] font-bold uppercase text-slate-400 block mb-0.5">Residential Address</span>
-              <p className="text-slate-700 leading-relaxed break-words">
+              <p className="text-slate-700 dark:text-slate-200 leading-relaxed break-words">
                 {staff.address || "Local Station Residence, Patna, Bihar"}
               </p>
             </div>
 
             <div>
               <span className="text-[10px] font-bold uppercase text-slate-400 block mb-0.5">Specialization & Skills</span>
-              <p className="text-slate-700">
+              <p className="text-slate-700 dark:text-slate-200">
                 {staff.specialization || "Standard Relocation Handling"}
               </p>
             </div>
 
             {staff.notes && (
-              <div className="pt-2 border-t border-slate-100">
+              <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
                 <span className="text-[10px] font-bold uppercase text-slate-400 block mb-0.5">Internal Remarks</span>
-                <p className="text-slate-600 italic bg-slate-50 p-2.5 rounded-xl border border-slate-100 break-words">
+                <p className="text-slate-600 dark:text-slate-300 italic bg-slate-50 dark:bg-slate-950 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800 break-words">
                   {staff.notes}
                 </p>
               </div>
@@ -404,11 +404,11 @@ const StaffDetail = () => {
         </div>
 
         {/* Right 2 Columns: Relocation Moves Attended History */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-5 shadow-2xs space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-4 sm:p-5 shadow-2xs space-y-4">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
             <div>
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <Truck className="w-4 h-4 text-blue-600 shrink-0" />
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <Truck className="w-4 h-4 text-brand-600 dark:text-brand-300 shrink-0" />
                 <span>Relocation Moves Attended ({movesAttended.length})</span>
               </h3>
               <p className="text-xs text-slate-400">Shift assignments and wage status per relocation job</p>
@@ -429,19 +429,19 @@ const StaffDetail = () => {
                 return (
                   <div
                     key={move.id}
-                    className="p-3.5 bg-slate-50/70 hover:bg-slate-50 border border-slate-200/70 rounded-xl space-y-2.5 transition-all text-xs"
+                    className="p-3.5 bg-slate-50/70 dark:bg-slate-950/70 hover:bg-slate-50 dark:hover:bg-slate-950 border border-slate-200/70 dark:border-slate-700/70 rounded-xl space-y-2.5 transition-all text-xs"
                   >
                     {/* Header Row: Job # and Move Date */}
                     <div className="flex items-center justify-between gap-2">
                       <Link
                         to={`/jobs/${move.jobId}`}
-                        className="font-mono font-bold text-xs sm:text-sm text-blue-600 hover:underline flex items-center gap-1 shrink-0"
+                        className="font-mono font-bold text-xs sm:text-sm text-brand-600 dark:text-brand-300 hover:underline flex items-center gap-1 shrink-0"
                       >
                         <span>{move.jobNumber}</span>
                         <ExternalLink className="w-3 h-3" />
                       </Link>
 
-                      <div className="text-[11px] text-slate-500 flex items-center gap-1 font-mono shrink-0">
+                      <div className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1 font-mono shrink-0">
                         <Calendar className="w-3.5 h-3.5 text-slate-400" />
                         <span>{formatDate(move.scheduledDate)}</span>
                       </div>
@@ -449,14 +449,14 @@ const StaffDetail = () => {
 
                     {/* Role on move & Job status badges (New row approach!) */}
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="px-2 py-0.5 bg-purple-50 text-purple-700 rounded-md text-[10px] font-bold uppercase border border-purple-200/60">
+                      <span className="px-2 py-0.5 bg-purple-50 dark:bg-purple-950 text-purple-700 dark:text-purple-300 rounded-md text-[10px] font-bold uppercase border border-purple-200/60 dark:border-purple-800/60">
                         {move.roleOnJob || staff.role}
                       </span>
                       <span
                         className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase ${
                           move.jobStatus === "completed"
-                            ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                            : "bg-blue-50 text-blue-700 border border-blue-200"
+                            ? "bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                            : "bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800"
                         }`}
                       >
                         {move.jobStatus?.replace("_", " ")}
@@ -464,9 +464,9 @@ const StaffDetail = () => {
                     </div>
 
                     {/* Customer & Route Pathway (New row approach for unclipped mobile display!) */}
-                    <div className="bg-white p-2.5 sm:p-3 rounded-xl border border-slate-200/80 space-y-2">
-                      <div className="text-[11px] text-slate-600 font-medium">
-                        Customer: <strong className="text-slate-900">{move.customerName}</strong>
+                    <div className="bg-white dark:bg-slate-900 p-2.5 sm:p-3 rounded-xl border border-slate-200/80 dark:border-slate-700/80 space-y-2">
+                      <div className="text-[11px] text-slate-600 dark:text-slate-300 font-medium">
+                        Customer: <strong className="text-slate-900 dark:text-slate-100">{move.customerName}</strong>
                       </div>
 
                       <div className="space-y-1.5 text-[11px]">
@@ -474,35 +474,35 @@ const StaffDetail = () => {
                           <span className="w-2 h-2 rounded-full bg-emerald-500 mt-1 shrink-0 ring-2 ring-emerald-100" />
                           <div className="min-w-0 flex-1">
                             <span className="text-[10px] uppercase font-bold text-slate-400 block leading-none mb-0.5">Pickup</span>
-                            <span className="text-slate-700 leading-snug break-words">{move.pickupAddress || "Pickup location not specified"}</span>
+                            <span className="text-slate-700 dark:text-slate-200 leading-snug break-words">{move.pickupAddress || "Pickup location not specified"}</span>
                           </div>
                         </div>
 
                         <div className="flex items-start gap-1.5">
-                          <span className="w-2 h-2 rounded-full bg-blue-500 mt-1 shrink-0 ring-2 ring-blue-100" />
+                          <span className="w-2 h-2 rounded-full bg-brand-500 mt-1 shrink-0 ring-2 ring-brand-100" />
                           <div className="min-w-0 flex-1">
                             <span className="text-[10px] uppercase font-bold text-slate-400 block leading-none mb-0.5">Delivery</span>
-                            <span className="text-slate-900 font-medium leading-snug break-words">{move.deliveryAddress || "Delivery location not specified"}</span>
+                            <span className="text-slate-900 dark:text-slate-100 font-medium leading-snug break-words">{move.deliveryAddress || "Delivery location not specified"}</span>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     {/* Financial Wage Breakdown & Action Row */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-1 border-t border-slate-200/60 gap-2">
-                      <div className="text-slate-600 text-[11px] flex items-center flex-wrap gap-x-2 gap-y-0.5">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-1 border-t border-slate-200/60 dark:border-slate-700/60 gap-2">
+                      <div className="text-slate-600 dark:text-slate-300 text-[11px] flex items-center flex-wrap gap-x-2 gap-y-0.5">
                         <span>
-                          Pay: <strong className="text-slate-900 font-mono">₹{move.amountPayable}</strong>
+                          Pay: <strong className="text-slate-900 dark:text-slate-100 font-mono">₹{move.amountPayable}</strong>
                           <span className="text-slate-400"> ({move.payType === "per_day" ? `₹${move.rateUsed}/d × ${move.daysWorked}d` : "fixed"})</span>
                         </span>
                         <span className="text-slate-300">•</span>
                         <span>
-                          Paid: <strong className="text-emerald-700 font-mono">₹{move.amountPaid}</strong>
+                          Paid: <strong className="text-emerald-700 dark:text-emerald-300 font-mono">₹{move.amountPaid}</strong>
                         </span>
                         {balanceDue > 0 && (
                           <>
                             <span className="text-slate-300">•</span>
-                            <span className="text-rose-600 font-semibold">
+                            <span className="text-rose-600 dark:text-rose-300 font-semibold">
                               Due: <strong className="font-mono">₹{balanceDue}</strong>
                             </span>
                           </>
@@ -513,10 +513,10 @@ const StaffDetail = () => {
                         <span
                           className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase ${
                             move.paymentStatus === "paid"
-                              ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                              ? "bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
                               : move.paymentStatus === "partial"
-                              ? "bg-amber-50 text-amber-700 border border-amber-200"
-                              : "bg-rose-50 text-rose-700 border border-rose-200"
+                              ? "bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800"
+                              : "bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800"
                           }`}
                         >
                           {move.paymentStatus}
@@ -541,17 +541,17 @@ const StaffDetail = () => {
       </div>
 
       {/* Payment History / Disbursement Ledger */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 p-4 sm:p-5 shadow-2xs space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-start justify-between pb-3 border-b border-slate-100 gap-2">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-4 sm:p-5 shadow-2xs space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between pb-3 border-b border-slate-100 dark:border-slate-800 gap-2">
           <div>
-            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <Receipt className="w-4 h-4 text-emerald-600 shrink-0" />
+            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <Receipt className="w-4 h-4 text-emerald-600 dark:text-emerald-300 shrink-0" />
               <span>Wage Payment & Disbursement History</span>
             </h3>
             <p className="text-xs text-slate-400 mt-0.5">Audit log of all funds disbursed to this team member</p>
           </div>
           <div className="self-start sm:self-auto">
-            <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 inline-block">
+            <span className="text-xs font-mono font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950 px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800 inline-block">
               Total Disbursed: ₹{metrics.totalPaid.toLocaleString("en-IN")}
             </span>
           </div>
@@ -562,26 +562,26 @@ const StaffDetail = () => {
             No wage payments logged yet for this member.
           </div>
         ) : (
-          <div className="divide-y divide-slate-100">
+          <div className="divide-y divide-slate-100 dark:divide-slate-800">
             {paymentHistory.map((item, idx) => (
               <div key={idx} className="py-3 flex items-start justify-between gap-3 text-xs">
                 <div className="space-y-1 min-w-0 flex-1">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="font-mono font-bold text-slate-900 truncate">
+                    <span className="font-mono font-bold text-slate-900 dark:text-slate-100 truncate">
                       Payment for {item.jobNumber}
                     </span>
-                    <span className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded text-[10px] font-semibold uppercase">
+                    <span className="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded text-[10px] font-semibold uppercase">
                       {item.paymentMode || "Cash"}
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
                     Disbursed on {formatDate(item.paymentDate)}
                     {item.paymentNotes && <span className="text-slate-400"> • {item.paymentNotes}</span>}
                   </p>
                 </div>
 
                 <div className="text-right shrink-0">
-                  <span className="font-mono font-black text-sm text-emerald-600 block">
+                  <span className="font-mono font-black text-sm text-emerald-600 dark:text-emerald-300 block">
                     ₹{item.amount.toLocaleString("en-IN")}
                   </span>
                   <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
@@ -596,16 +596,16 @@ const StaffDetail = () => {
 
       {/* Record Wage Payment Modal */}
       {selectedMoveForPay && (
-        <div className="fixed inset-0 z-[80] bg-white sm:bg-slate-900/60 sm:backdrop-blur-xs flex flex-col sm:items-center sm:justify-center sm:p-4 animate-in fade-in">
-          <div className="bg-white w-full h-full sm:h-auto sm:max-h-[90vh] sm:max-w-md sm:rounded-2xl sm:shadow-2xl sm:border sm:border-slate-200 overflow-hidden flex flex-col">
-            <div className="flex items-center justify-between p-4 border-b border-slate-100 shrink-0 bg-white">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <CreditCard className="w-4 h-4 text-emerald-600" />
+        <div className="fixed inset-0 z-[80] bg-white dark:bg-slate-900 sm:bg-slate-900/60 sm:backdrop-blur-xs flex flex-col sm:items-center sm:justify-center sm:p-4 animate-in fade-in">
+          <div className="bg-white dark:bg-slate-900 w-full h-full sm:h-auto sm:max-h-[90vh] sm:max-w-md sm:rounded-2xl sm:shadow-2xl sm:border sm:border-slate-200 dark:sm:border-slate-700 overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800 shrink-0 bg-white dark:bg-slate-900">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <CreditCard className="w-4 h-4 text-emerald-600 dark:text-emerald-300" />
                 <span>Disburse Wages: {staff.name}</span>
               </h3>
               <button
                 onClick={() => setSelectedMoveForPay(null)}
-                className="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg cursor-pointer"
+                className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-lg cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -613,17 +613,17 @@ const StaffDetail = () => {
 
             <form onSubmit={handleRecordPaySubmit} className="p-4 sm:p-5 overflow-y-auto space-y-4 text-xs flex-1">
               {payError && (
-                <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs">
+                <div className="p-3 bg-rose-50 dark:bg-rose-950 border border-rose-200 dark:border-rose-800 rounded-xl text-rose-700 dark:text-rose-300 text-xs">
                   {payError}
                 </div>
               )}
 
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
-                <p className="text-slate-500">
-                  Move Reference: <strong className="text-slate-900">{selectedMoveForPay.jobNumber}</strong>
+              <div className="p-3 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800 space-y-1">
+                <p className="text-slate-500 dark:text-slate-400">
+                  Move Reference: <strong className="text-slate-900 dark:text-slate-100">{selectedMoveForPay.jobNumber}</strong>
                 </p>
-                <p className="text-slate-500">
-                  Allocated Wage: <strong className="text-slate-900 font-mono">₹{selectedMoveForPay.amountPayable}</strong> | Already Paid: <strong className="text-emerald-700 font-mono">₹{selectedMoveForPay.amountPaid}</strong>
+                <p className="text-slate-500 dark:text-slate-400">
+                  Allocated Wage: <strong className="text-slate-900 dark:text-slate-100 font-mono">₹{selectedMoveForPay.amountPayable}</strong> | Already Paid: <strong className="text-emerald-700 dark:text-emerald-300 font-mono">₹{selectedMoveForPay.amountPaid}</strong>
                 </p>
               </div>
 
@@ -632,7 +632,7 @@ const StaffDetail = () => {
                   type="number"
                   value={payAmount}
                   onChange={(e) => setPayAmount(e.target.value)}
-                  className="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl font-mono text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                   placeholder="Enter amount to pay"
                   min="1"
                   required
@@ -656,16 +656,16 @@ const StaffDetail = () => {
                   type="text"
                   value={payNotes}
                   onChange={(e) => setPayNotes(e.target.value)}
-                  className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl text-xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                   placeholder="e.g. Paid weekly batch settlement"
                 />
               </FormField>
 
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setSelectedMoveForPay(null)}
-                  className="px-4 py-2 border border-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-50 transition-colors"
+                  className="px-4 py-2 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold rounded-xl hover:bg-slate-50 dark:hover:bg-slate-950 transition-colors"
                 >
                   Cancel
                 </button>
@@ -684,16 +684,16 @@ const StaffDetail = () => {
 
       {/* Edit Profile Modal */}
       {isEditModalOpen && (
-        <div className="fixed inset-0 z-[80] bg-white sm:bg-slate-900/60 sm:backdrop-blur-xs flex flex-col sm:items-center sm:justify-center sm:p-4 animate-in fade-in">
-          <div className="bg-white w-full h-full sm:h-auto sm:max-h-[90vh] sm:max-w-lg sm:rounded-2xl sm:shadow-2xl sm:border sm:border-slate-200 overflow-hidden flex flex-col">
-            <div className="flex items-center justify-between p-4 sm:p-5 border-b border-slate-100 shrink-0 bg-white">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <Edit2 className="w-4 h-4 text-blue-600" />
+        <div className="fixed inset-0 z-[80] bg-white dark:bg-slate-900 sm:bg-slate-900/60 sm:backdrop-blur-xs flex flex-col sm:items-center sm:justify-center sm:p-4 animate-in fade-in">
+          <div className="bg-white dark:bg-slate-900 w-full h-full sm:h-auto sm:max-h-[90vh] sm:max-w-lg sm:rounded-2xl sm:shadow-2xl sm:border sm:border-slate-200 dark:sm:border-slate-700 overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 shrink-0 bg-white dark:bg-slate-900">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+                <Edit2 className="w-4 h-4 text-brand-600 dark:text-brand-300" />
                 <span>Edit Profile: {staff.name}</span>
               </h3>
               <button
                 onClick={() => setIsEditModalOpen(false)}
-                className="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg cursor-pointer"
+                className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-lg cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -705,7 +705,7 @@ const StaffDetail = () => {
                   type="text"
                   value={editForm.name}
                   onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-                  className="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-600 focus:outline-none"
                   required
                 />
               </FormField>
@@ -716,7 +716,7 @@ const StaffDetail = () => {
                     type="tel"
                     value={editForm.phone}
                     onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl font-mono focus:ring-2 focus:ring-brand-600 focus:outline-none"
                     required
                   />
                 </FormField>
@@ -736,7 +736,7 @@ const StaffDetail = () => {
                     type="number"
                     value={editForm.dailyWage}
                     onChange={(e) => setEditForm({ ...editForm, dailyWage: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl font-mono focus:ring-2 focus:ring-brand-600 focus:outline-none"
                   />
                 </FormField>
 
@@ -745,7 +745,7 @@ const StaffDetail = () => {
                     type="date"
                     value={editForm.joiningDate}
                     onChange={(e) => setEditForm({ ...editForm, joiningDate: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-600 focus:outline-none"
                   />
                 </FormField>
               </div>
@@ -755,7 +755,7 @@ const StaffDetail = () => {
                   type="text"
                   value={editForm.specialization}
                   onChange={(e) => setEditForm({ ...editForm, specialization: e.target.value })}
-                  className="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-600 focus:outline-none"
                   placeholder="e.g. Fragile Glassware & Furniture Wrapping"
                 />
               </FormField>
@@ -778,7 +778,7 @@ const StaffDetail = () => {
                     type="text"
                     value={editForm.idNumber}
                     onChange={(e) => setEditForm({ ...editForm, idNumber: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 rounded-xl font-mono focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl font-mono focus:ring-2 focus:ring-brand-600 focus:outline-none"
                   />
                 </FormField>
               </div>
@@ -788,7 +788,7 @@ const StaffDetail = () => {
                   rows={2}
                   value={editForm.address}
                   onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
-                  className="w-full px-3 py-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-600 focus:outline-none"
                 />
               </FormField>
 
@@ -805,18 +805,18 @@ const StaffDetail = () => {
                 />
               </FormField>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsEditModalOpen(false)}
-                  className="px-4 py-2 border border-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-50 transition-colors"
+                  className="px-4 py-2 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold rounded-xl hover:bg-slate-50 dark:hover:bg-slate-950 transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={updatingStaff}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-xs transition-colors cursor-pointer"
+                  className="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow-xs transition-colors cursor-pointer"
                 >
                   {updatingStaff ? "Saving..." : "Save Changes"}
                 </button>

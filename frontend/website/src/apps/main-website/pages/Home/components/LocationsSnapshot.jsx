@@ -1,8 +1,8 @@
 import { responsiveImageSet } from "../../../../../utils/responsiveImages";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
-import { MapPin, ArrowRight } from "lucide-react";
-import { locationsByState, placeImages } from "../../../../../data/locations/index";
+import { MapPin, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { locationsByState, placeImages, placeImageDescriptions } from "../../../../../data/locations/index";
 
 const STATE_CARDS = [
   {
@@ -41,6 +41,11 @@ const STATE_CARDS = [
     image: placeImages["Maharashtra"],
     cities: ["Mumbai", "Pune", "Nagpur", "Thane", "Navi Mumbai", "Nashik"],
   },
+  ...["Karnataka", "Telangana", "Gujarat", "Rajasthan", "Madhya Pradesh", "Tamil Nadu", "Chandigarh"].map(state => ({
+    state,
+    image: placeImages[state],
+    cities: (locationsByState[state] || []).map(location => location.name),
+  })),
 ];
 
 // 6 Top Interstate Routes - creates exactly 2 full rows on desktop (3 x 2)
@@ -95,10 +100,34 @@ const FEATURED_ROUTES = [
   },
 ];
 
-const filters = ["All regions", "Bihar", "Jharkhand", "Uttar Pradesh", "Delhi NCR", "West Bengal", "Maharashtra"];
+const filters = ["All regions", ...STATE_CARDS.map(item => item.state)];
 
 export default function LocationsSnapshot() {
   const [activeRegion, setActiveRegion] = useState("All regions");
+  const filterRef = useRef(null);
+  const [scrollEdges, setScrollEdges] = useState({ left: false, right: false });
+  useEffect(() => {
+    const element = filterRef.current;
+    const update = () => setScrollEdges({
+      left: element.scrollLeft > 1,
+      right: element.scrollLeft + element.clientWidth < element.scrollWidth - 1,
+    });
+    update();
+    element.addEventListener("scroll", update, { passive: true });
+    const observer = new ResizeObserver(update);
+    observer.observe(element);
+    return () => {
+      element.removeEventListener("scroll", update);
+      observer.disconnect();
+    };
+  }, []);
+  function scrollFilters(direction) {
+    const element = filterRef.current;
+    element.scrollBy({
+      left: direction * Math.max(160, element.clientWidth * 0.7),
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+    });
+  }
   const visibleRegions = activeRegion === "All regions" ? STATE_CARDS : STATE_CARDS.filter((item) => item.state === activeRegion);
   function getCityLink(state, name) {
     const location = (locationsByState[state] || []).find((item) => item.name.toLowerCase() === name.toLowerCase());
@@ -111,13 +140,17 @@ export default function LocationsSnapshot() {
           <div><h2 id="locations-heading" className="font-display font-extrabold text-[clamp(1.8rem,3.3vw,2.8rem)] tracking-tight mb-3"><span className="text-primary">A new city.</span> The same moving team.</h2><p className="text-base text-text-muted max-w-2xl">Explore your destination and ask us about availability for your route.</p></div>
           <Link to="/where-we-serve" className="inline-flex items-center gap-2 min-h-11 text-sm text-primary font-semibold shrink-0 hover:underline">All locations<ArrowRight size={16} aria-hidden="true" /></Link>
         </div>
-        <div className="flex gap-6 overflow-x-auto border-b border-border mt-7 mb-8" aria-label="Filter service regions">
+        <div className="flex items-center gap-2 sm:gap-3 mt-7 mb-8">
+          <button type="button" aria-label="Scroll regions left" aria-controls="region-filters" disabled={!scrollEdges.left} onClick={() => scrollFilters(-1)} className="shrink-0 inline-flex items-center justify-center size-11 rounded-full border border-border text-primary hover:bg-surface disabled:opacity-30 disabled:cursor-default focus-visible:outline-2 focus-visible:outline-primary"><ChevronLeft size={20} aria-hidden="true" /></button>
+          <div ref={filterRef} id="region-filters" className="flex min-w-0 flex-1 gap-6 overflow-x-auto no-scrollbar border-b border-border" aria-label="Filter service regions">
           {filters.map((region) => <button key={region} type="button" aria-pressed={activeRegion === region} onClick={() => setActiveRegion(region)} className={`shrink-0 inline-flex items-center gap-2 min-h-12 border-b-2 text-sm font-semibold ${activeRegion === region ? "text-primary border-primary" : "text-text-muted border-transparent hover:text-text"}`}><MapPin size={16} aria-hidden="true" />{region}</button>)}
+          </div>
+          <button type="button" aria-label="Scroll regions right" aria-controls="region-filters" disabled={!scrollEdges.right} onClick={() => scrollFilters(1)} className="shrink-0 inline-flex items-center justify-center size-11 rounded-full border border-border text-primary hover:bg-surface disabled:opacity-30 disabled:cursor-default focus-visible:outline-2 focus-visible:outline-primary"><ChevronRight size={20} aria-hidden="true" /></button>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {visibleRegions.map((item) => (
             <article key={item.state} className="relative rounded-lg overflow-hidden bg-hero-overlay min-h-[260px] sm:min-h-[320px] flex flex-col justify-end isolate">
-              <img src={item.image} srcSet={responsiveImageSet(item.image)} sizes="(min-width: 1024px) 400px, 50vw" alt={`Moving destinations in ${item.state}`} className="absolute inset-0 -z-20 w-full h-full object-cover" loading="lazy" width="640" height="480" />
+              <img src={item.image} srcSet={responsiveImageSet(item.image)} sizes="(min-width: 1024px) 400px, 50vw" alt={placeImageDescriptions[item.state]} className="absolute inset-0 -z-20 w-full h-full object-cover" loading="lazy" width="640" height="480" />
               <div className="absolute inset-0 -z-10 bg-gradient-to-t from-hero-overlay/95 via-hero-overlay/25 to-transparent" />
               <div className="p-3 sm:p-6"><h3 className="font-display text-white font-bold text-lg sm:text-2xl mb-2">{item.state}</h3><ul className="flex flex-wrap gap-x-3 gap-y-0">{item.cities.slice(0,4).map((city, index) => <li key={city} className={index > 1 ? "hidden sm:block" : ""}><Link to={getCityLink(item.state,city)} className="inline-flex min-h-11 items-center text-white text-sm underline decoration-white/40 underline-offset-4 hover:decoration-white">{city}</Link></li>)}</ul></div>
             </article>

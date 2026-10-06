@@ -215,12 +215,12 @@ export const Select = ({
   // Computed classes to guarantee consistent height, radius, padding and font
   const hasBg = buttonClassName.includes("bg-");
   const hasBorder = buttonClassName.includes("border-");
-  const defaultBg = hasBg ? "" : "bg-white";
+  const defaultBg = hasBg ? "" : "bg-white dark:bg-slate-900";
   const defaultBorder = isOpen
-    ? "ring-2 ring-blue-600 border-blue-600"
+    ? "ring-2 ring-brand-600 border-brand-600"
     : hasBorder
     ? ""
-    : "border-slate-300 hover:border-slate-400";
+    : "border-slate-300 dark:border-slate-600 hover:border-slate-400";
 
   return (
     <div
@@ -251,7 +251,7 @@ export const Select = ({
         onKeyDown={handleKeyDown}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        className={`w-full min-h-[42px] px-3.5 py-2.5 text-xs sm:text-sm rounded-xl font-normal transition-all duration-150 select-none cursor-pointer flex items-center justify-between gap-2 border text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 disabled:opacity-60 disabled:cursor-not-allowed ${defaultBg} ${defaultBorder} ${buttonClassName}`}
+        className={`w-full min-h-[42px] px-3.5 py-2.5 text-xs sm:text-sm rounded-xl font-normal transition-all duration-150 select-none cursor-pointer flex items-center justify-between gap-2 border text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-brand-600 disabled:opacity-60 disabled:cursor-not-allowed ${defaultBg} ${defaultBorder} ${buttonClassName}`}
       >
         <span className={`truncate text-left flex-1 ${!selectedOption && !value ? "text-slate-400" : ""}`}>
           {selectedOption ? (
@@ -267,7 +267,7 @@ export const Select = ({
         </span>
         <ChevronDown
           className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${
-            isOpen ? "rotate-180 text-blue-600" : ""
+            isOpen ? "rotate-180 text-brand-600 dark:text-brand-300" : ""
           }`}
         />
       </button>
@@ -278,7 +278,7 @@ export const Select = ({
           ref={listRef}
           role="listbox"
           tabIndex={-1}
-          className={`absolute left-0 right-0 z-[100] min-w-full bg-white rounded-xl shadow-xl border border-slate-200 py-1.5 max-h-60 overflow-y-auto animate-in fade-in-0 zoom-in-95 duration-100 ${
+          className={`absolute left-0 right-0 z-[100] min-w-full bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 py-1.5 max-h-60 overflow-y-auto animate-in fade-in-0 zoom-in-95 duration-100 ${
             openUpwards ? "bottom-full mb-1.5" : "top-full mt-1.5"
           } ${dropdownClassName}`}
         >
@@ -303,10 +303,10 @@ export const Select = ({
                     opt.disabled
                       ? "opacity-40 cursor-not-allowed text-slate-400"
                       : isSelected
-                      ? "bg-blue-50 text-blue-700 font-semibold"
+                      ? "bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 font-semibold"
                       : isHighlighted
-                      ? "bg-slate-100 text-slate-900"
-                      : "text-slate-700 hover:bg-slate-50"
+                      ? "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100"
+                      : "text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-950"
                   } ${optionClassName}`}
                 >
                   <div className="flex items-center gap-2 truncate">
@@ -322,7 +322,7 @@ export const Select = ({
                   </div>
 
                   {isSelected && (
-                    <Check className="w-4 h-4 text-blue-600 shrink-0 ml-2" />
+                    <Check className="w-4 h-4 text-brand-600 dark:text-brand-300 shrink-0 ml-2" />
                   )}
                 </div>
               );

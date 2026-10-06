@@ -89,27 +89,27 @@ ${this.state.errorInfo?.componentStack || "No stack trace available"}
       const { error, errorInfo, copied, showDetails } = this.state;
 
       return (
-        <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4 sm:p-6 lg:p-8 font-sans">
-          <div className="w-full max-w-2xl bg-white rounded-3xl border border-slate-200/80 shadow-xl overflow-hidden">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center p-4 sm:p-6 lg:p-8 font-sans">
+          <div className="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-700/80 shadow-xl overflow-hidden">
             {/* Header with Emergency Badge */}
-            <div className="p-6 sm:p-8 border-b border-slate-100 bg-gradient-to-b from-rose-50/50 to-white">
+            <div className="p-6 sm:p-8 border-b border-slate-100 dark:border-slate-800 bg-gradient-to-b from-rose-50/50 to-white">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-rose-100/80 border border-rose-200 flex items-center justify-center text-rose-600 shrink-0 shadow-2xs">
+                <div className="w-12 h-12 rounded-2xl bg-rose-100/80 dark:bg-rose-950/80 border border-rose-200 dark:border-rose-800 flex items-center justify-center text-rose-600 dark:text-rose-300 shrink-0 shadow-2xs">
                   <ShieldAlert className="w-6 h-6" />
                 </div>
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-rose-600 bg-rose-50 border border-rose-200/70 px-2 py-0.5 rounded-full">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-rose-600 dark:text-rose-300 bg-rose-50 dark:bg-rose-950 border border-rose-200/70 dark:border-rose-800/70 px-2 py-0.5 rounded-full">
                       System Exception
                     </span>
                     <span className="text-xs text-slate-400 font-mono">
                       {companyConfig.shortName} OS
                     </span>
                   </div>
-                  <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+                  <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
                     Something went wrong
                   </h1>
-                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
                     The operations interface encountered an unexpected error while rendering this view. Your saved database records are safe.
                   </p>
                 </div>
@@ -123,7 +123,7 @@ ${this.state.errorInfo?.componentStack || "No stack trace available"}
                 <button
                   type="button"
                   onClick={this.handleReload}
-                  className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl shadow-xs shadow-blue-500/20 transition-all cursor-pointer active:scale-98"
+                  className="flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl shadow-xs shadow-brand-500/20 transition-all cursor-pointer active:scale-98"
                 >
                   <RotateCcw className="w-4 h-4" />
                   <span>Reload Page</span>
@@ -132,22 +132,22 @@ ${this.state.errorInfo?.componentStack || "No stack trace available"}
                 <button
                   type="button"
                   onClick={this.handleReset}
-                  className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl transition-all cursor-pointer active:scale-98"
+                  className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl transition-all cursor-pointer active:scale-98"
                 >
-                  <Home className="w-4 h-4 text-slate-500" />
+                  <Home className="w-4 h-4 text-slate-500 dark:text-slate-400" />
                   <span>Go to Dashboard</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={this.handleCopyDetails}
-                  className="flex items-center gap-2 ml-auto text-xs font-medium text-slate-600 hover:text-slate-900 bg-slate-50 hover:bg-slate-100 border border-slate-200 px-3.5 py-2.5 rounded-xl transition-all cursor-pointer"
+                  className="flex items-center gap-2 ml-auto text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 px-3.5 py-2.5 rounded-xl transition-all cursor-pointer"
                   title="Copy technical diagnostic report"
                 >
                   {copied ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-emerald-600" />
-                      <span className="text-emerald-700 font-semibold">Report Copied!</span>
+                      <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-300" />
+                      <span className="text-emerald-700 dark:text-emerald-300 font-semibold">Report Copied!</span>
                     </>
                   ) : (
                     <>
@@ -159,7 +159,7 @@ ${this.state.errorInfo?.componentStack || "No stack trace available"}
               </div>
 
               {/* Collapsible Technical Diagnostics */}
-              <div className="rounded-2xl border border-slate-200 overflow-hidden bg-slate-900 text-slate-100">
+              <div className="rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden bg-slate-900 text-slate-100">
                 <button
                   type="button"
                   onClick={this.toggleDetails}
@@ -203,24 +203,24 @@ ${this.state.errorInfo?.componentStack || "No stack trace available"}
               </div>
 
               {/* Support & Helpline Footer */}
-              <div className="pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-500">
+              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2 text-xs text-slate-500 dark:text-slate-400">
                 <p>
                   Need help? Contact system administration or operations team:
                 </p>
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-0.5">
                   <a
                     href={`tel:${companyConfig.phone}`}
-                    className="inline-flex items-center gap-1.5 font-semibold text-blue-600 hover:text-blue-700 whitespace-nowrap"
+                    className="inline-flex items-center gap-1.5 font-semibold text-brand-600 dark:text-brand-300 hover:text-brand-700 dark:hover:text-brand-300 whitespace-nowrap"
                   >
-                    <Phone className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                    <Phone className="w-3.5 h-3.5 text-brand-500 shrink-0" />
                     <span>{companyConfig.phone}</span>
                   </a>
                   <span className="text-slate-300 hidden sm:inline">•</span>
                   <a
                     href={`mailto:${companyConfig.email}`}
-                    className="inline-flex items-center gap-1.5 font-semibold text-blue-600 hover:text-blue-700 break-all sm:break-normal"
+                    className="inline-flex items-center gap-1.5 font-semibold text-brand-600 dark:text-brand-300 hover:text-brand-700 dark:hover:text-brand-300 break-all sm:break-normal"
                   >
-                    <Mail className="w-3.5 h-3.5 text-blue-500 shrink-0" />
+                    <Mail className="w-3.5 h-3.5 text-brand-500 shrink-0" />
                     <span>{companyConfig.email}</span>
                   </a>
                 </div>

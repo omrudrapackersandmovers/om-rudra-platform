@@ -24,9 +24,9 @@ const Loader = ({
       <div
         role="status"
         aria-live="polite"
-        className={`inline-flex items-center gap-2 text-slate-500 font-medium text-xs ${className}`}
+        className={`inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 font-medium text-xs ${className}`}
       >
-        <Loader2 className="w-3.5 h-3.5 animate-spin text-blue-600" />
+        <Loader2 className="w-3.5 h-3.5 animate-spin text-brand-600 dark:text-brand-300" />
         {message && <span>{message}</span>}
       </div>
     );
@@ -38,18 +38,18 @@ const Loader = ({
       <div
         role="status"
         aria-live="polite"
-        className={`bg-white rounded-2xl border border-slate-200/80 p-8 sm:p-12 text-center flex flex-col items-center justify-center space-y-3 shadow-2xs ${className}`}
+        className={`bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-8 sm:p-12 text-center flex flex-col items-center justify-center space-y-3 shadow-2xs ${className}`}
       >
         <div className="relative">
-          <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
-            <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
+          <div className="w-12 h-12 rounded-2xl bg-brand-50 dark:bg-brand-950 border border-brand-100 dark:border-brand-800 flex items-center justify-center text-brand-600 dark:text-brand-300">
+            <Loader2 className="w-6 h-6 animate-spin text-brand-600 dark:text-brand-300" />
           </div>
-          <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-xs">
+          <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-brand-600 text-white flex items-center justify-center shadow-xs">
             <Truck className="w-2.5 h-2.5" />
           </div>
         </div>
         <div>
-          <p className="text-sm font-semibold text-slate-800">{message}</p>
+          <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">{message}</p>
           {subtext && <p className="text-xs text-slate-400 mt-0.5">{subtext}</p>}
         </div>
       </div>
@@ -65,19 +65,19 @@ const Loader = ({
       aria-live="polite"
       className={`flex flex-col items-center justify-center ${
         isFullscreen
-          ? "fixed inset-0 z-50 bg-slate-50/90 backdrop-blur-xs p-6"
+          ? "fixed inset-0 z-50 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-xs p-6"
           : "min-h-[50vh] w-full p-8"
       } ${className}`}
     >
-      <div className="bg-white/80 backdrop-blur-md p-8 sm:p-10 rounded-3xl border border-slate-200/80 shadow-xl max-w-sm w-full text-center flex flex-col items-center space-y-4">
+      <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-8 sm:p-10 rounded-3xl border border-slate-200/80 dark:border-slate-700/80 shadow-xl max-w-sm w-full text-center flex flex-col items-center space-y-4">
         {/* Animated Brand / Logo badge */}
         {showLogo && (
           <div className="relative flex items-center justify-center">
             {/* Spinning decorative ring */}
-            <div className="absolute inset-0 -m-3 border-2 border-blue-100 border-t-blue-600 rounded-full animate-spin" />
+            <div className="absolute inset-0 -m-3 border-2 border-brand-100 dark:border-brand-800 border-t-brand-600 rounded-full animate-spin" />
             
             {/* Inner Brand Avatar / Icon */}
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-900 to-slate-900 p-2.5 flex items-center justify-center shadow-md relative z-10">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-900 to-slate-900 p-2.5 flex items-center justify-center shadow-md relative z-10">
               <img
                 src={companyConfig.logo.primary}
                 alt={companyConfig.name}
@@ -97,7 +97,7 @@ const Loader = ({
 
         {/* Status text */}
         <div className="space-y-1">
-          <h3 className="text-sm sm:text-base font-bold text-slate-800 tracking-tight">
+          <h3 className="text-sm sm:text-base font-bold text-slate-800 dark:text-slate-100 tracking-tight">
             {message}
           </h3>
           <p className="text-xs text-slate-400 max-w-xs">
@@ -107,9 +107,9 @@ const Loader = ({
 
         {/* Animated Progress Dots Bar */}
         <div className="flex items-center gap-1.5 pt-1">
-          <span className="w-2 h-2 rounded-full bg-blue-600 animate-bounce [animation-delay:-0.3s]"></span>
-          <span className="w-2 h-2 rounded-full bg-blue-600 animate-bounce [animation-delay:-0.15s]"></span>
-          <span className="w-2 h-2 rounded-full bg-blue-600 animate-bounce"></span>
+          <span className="w-2 h-2 rounded-full bg-brand-600 animate-bounce [animation-delay:-0.3s]"></span>
+          <span className="w-2 h-2 rounded-full bg-brand-600 animate-bounce [animation-delay:-0.15s]"></span>
+          <span className="w-2 h-2 rounded-full bg-brand-600 animate-bounce"></span>
         </div>
       </div>
     </div>
