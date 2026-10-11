@@ -24,10 +24,24 @@ for (const [slug, guide] of Object.entries(editorialGuides)) {
   for (const source of guide.references) assert($("a[href]").toArray().some(el => $(el).attr("href") === source.url), `${slug}: reference link missing`);
   assert.equal($('input[name="from"]').attr("value"), locationAddress(location), `${slug}: enquiry pickup lost`);
 }
+const locationDescriptions = new Set();
 for (const location of allLocationPages) {
   assert(indexablePaths.includes(locationPath(location)), `${location.slug}: service location missing from search`);
   const data = getLocationPageData(location.slug);
   const $ = load(await readFile(fileFor(locationPath(location)), "utf8"));
+  const description = $('meta[name="description"]').attr("content");
+  assert(!locationDescriptions.has(description), `${location.slug}: duplicate location description`);
+  locationDescriptions.add(description);
+  assert($("h1").text().includes(data.searchName), `${location.slug}: ambiguous location heading`);
+  assert($("#location-quote-cost").text().includes(data.searchName), `${location.slug}: quote comparison section missing`);
+  const graph = JSON.parse($('script[type="application/ld+json"]').text())["@graph"];
+  const service = graph.find(entry => entry["@type"] === "Service");
+  assert.equal(service.areaServed.containedInPlace.name, location.state, `${location.slug}: service region mismatch`);
+  assert.equal(service.provider["@id"], `${siteUrl}/#business`, `${location.slug}: provider identity mismatch`);
+  if (data.parent) {
+    const crumbs = graph.find(entry => entry["@type"] === "BreadcrumbList").itemListElement;
+    assert.equal(crumbs[2].item, `${siteUrl}${locationPath(data.parent)}`, `${location.slug}: parent city breadcrumb missing`);
+  }
   assert.equal(data.planning.scenarios.length, 3, `${location.slug}: moving scenarios missing`);
   assert($("#location-moving-plan").text().includes(data.label), `${location.slug}: location plan missing`);
   assert($("main").text().includes(data.planning.scope), `${location.slug}: address guidance missing`);

@@ -26,3 +26,13 @@ Patna and Delhi NCR guides collect local-area planning in the parent guide. Thei
 5. Review the rendered guide on a narrow screen and confirm its enquiry and route links work. After deployment, use Search Console to monitor crawling and usefulness; re-review weak pages rather than adding more templates.
 
 `indexableLocationPages` derives from the client-listed location directory. The same collection controls robots metadata, sitemap and AI discovery generation. `editorialGuides` adds sourced content without limiting directory discovery. Do not import unsupported branch, fleet, pricing or road-restriction claims from legacy location profiles.
+
+## SEO review — 11 October 2026
+
+All location pages now use place-specific descriptions covering home, office and vehicle moving intent. Locality H1s include their parent city to distinguish similarly named neighbourhoods. Parent cities are included in visible and structured breadcrumbs, and Service schema refers to the single confirmed company identity with its service region; no new branch entities or ratings are invented.
+
+Each location has a quote-comparison section covering inventory, packing, exact addresses, access, vehicle arrangement, timing, inclusions and potential extras. This is shared practical guidance, not an independently researched local price list. Existing sourced guides remain intact. The build audits every location for unique descriptions, disambiguated headings, quote guidance, service-region identity and locality breadcrumbs, in addition to canonical, sitemap and link checks.
+
+Research consulted: Google helpful-content guidance (https://developers.google.com/search/docs/fundamentals/creating-helpful-content), doorway-page guidance (https://developers.google.com/search/blog/2015/03/an-update-on-doorway-pages), and LocalBusiness guidance (https://developers.google.com/search/docs/appearance/structured-data/local-business). Competitor pages reviewed for customer question coverage include https://patnapackers.com/ and https://sakaldeorelocation.com/packers-and-movers-ranchi/. Their prices, ratings and operating claims are not reused as company facts. No paid keyword-volume or ranking tool is connected; keywords reflect intent rather than measured demand.
+
+Next editorial work requires company evidence: actual move examples, authorised customer photos and feedback, confirmed service availability, approved price examples and quote inclusions. Adding more shared copy does not replace those inputs or guarantee rankings.

@@ -23,6 +23,18 @@ export function getLocationPageData(slug) {
   const routes = allRoutes.filter(route => route.fromSlug === citySlug || route.toSlug === citySlug);
   const sameState = allLocationPages.filter(item => item.state === location.state && item.slug !== slug && item.type !== "locality");
   const label = location.type === "locality" ? location.name.split(",")[0] : location.name;
+  const searchName = location.type === "locality" ? `${label}, ${location.city}` : location.name;
+  const seo = {
+    title: `Packers and Movers in ${searchName}`,
+    description: `Moving in ${searchName}, ${location.state}? Discuss home shifting, office moves and vehicle transport with Om Rudra. Get a quote based on your inventory and addresses.`,
+    primaryKeyword: `packers and movers in ${searchName}`,
+  };
+  const costFactors = [
+    { title: "Belongings and packing", detail: "Share a room-by-room inventory or item photos. Furniture size, fragile items, packing materials and dismantling affect the work required." },
+    { title: "Actual pickup and delivery", detail: `Use the full address in ${locationAddress(location)} and the complete destination. Distance alone does not account for stairs, lifts, parking or carrying goods to the vehicle.` },
+    { title: "Transport and timing", detail: "Ask which vehicle arrangement is proposed, whether goods travel on a shared or dedicated vehicle, and how the pickup and delivery windows are agreed." },
+    { title: "Included services and extras", detail: "Confirm packing, loading, unloading and reassembly in writing. Ask whether taxes, tolls, special handling, storage or transit cover are included or charged separately." },
+  ];
   const kind = location.type === "locality" ? "area" : location.type === "district" ? "district" : "city";
   const checklist = kind === "area" ? [
     { title: `Your address in ${label}`, detail: `Include your building or house number, ${label}, ${location.city}, and a nearby landmark so pickup can be discussed precisely.` },
@@ -58,5 +70,5 @@ export function getLocationPageData(slug) {
     { q: `What should I confirm before booking a move involving ${label}?`, a: `Confirm the complete ${locationAddress(location)} address, inventory, packing scope, pickup and delivery windows, total price and payment terms in writing. Ask about any extra handling or transit cover that your move needs. Submitting an enquiry does not confirm a booking.` },
     { q: `Is there an Om Rudra office in ${label}?`, a: location.isPrimaryHub ? "Our office is in Ram Krishna Nagar, Soranpur, Goraiya Asthan, Patna, Bihar 800027. Call the team before visiting to agree a suitable time." : `Our confirmed office is in Patna, Bihar. This page describes enquiries for ${label}; it is not a claim of a branch office here.` },
   ];
-  return { location, parent, label, kind, guide, planning, listedAreas, routes, sameState, checklist: guide?.decisions || checklist, faqs: [...(guide?.faqs || []), ...faqs] };
+  return { location, parent, label, searchName, seo, costFactors, kind, guide, planning, listedAreas, routes, sameState, checklist: guide?.decisions || checklist, faqs: [...(guide?.faqs || []), ...faqs] };
 }
