@@ -4,7 +4,7 @@ import { MessageCircle, X, Send, Loader2, ArrowUpRight, RotateCcw } from "lucide
 import { company } from "../../../../data/company";
 import { getQuickAnswer, starterQuestions } from "../../../../data/relocationAssistant";
 
-const welcome = { role: "assistant", content: "Hi! I’m Om Rudra’s AI moving assistant. Ask me about packing, planning your move, vehicle transport or our services.", kind: "welcome" };
+const welcome = { role: "assistant", content: "Hi! I’m Om Rudra’s virtual moving assistant. Ask me about packing, planning your move, vehicle transport or our services.", kind: "welcome" };
 const apiBase = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "http://localhost:8787" : "https://api.omrudrapackersandmovers.com")).trim().replace(/\/+$/, "").replace(/\/api$/, "");
 
 export default function RelocationChat() {
@@ -78,7 +78,7 @@ export default function RelocationChat() {
       } else {
         setMessages((previous) => previous.slice(0, -1));
         setQuestion(content);
-        setError("The AI assistant is unavailable right now. Try again, choose a common question, or speak to our team.");
+        setError("The moving assistant is unavailable right now. Try again, choose a common question, or speak to our team.");
       }
     } finally {
       clearTimeout(timeout);
@@ -97,7 +97,7 @@ export default function RelocationChat() {
         <div className="flex flex-col h-full">
           <div className="flex items-center gap-3 px-5 py-4 bg-primary text-white shrink-0">
             <div className="rounded-xl bg-white/15 p-2"><MessageCircle size={22} aria-hidden="true" /></div>
-            <div className="flex-1"><h2 id="chat-title" className="text-base font-bold">Your moving assistant</h2><p className="text-xs text-white/80">Om Rudra · AI guidance</p></div>
+            <div className="flex-1"><h2 id="chat-title" className="text-base font-bold">Your moving assistant</h2><p className="text-xs text-white/80">Moving tips and service help</p></div>
             <button type="button" onClick={() => setOpen(false)} className="p-2 rounded-full hover:bg-white/15" aria-label="Close moving assistant"><X size={20} /></button>
           </div>
           <div ref={logRef} role="log" aria-label="Moving assistant conversation" aria-live="polite" aria-relevant="additions" className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-5 space-y-4">
@@ -105,7 +105,7 @@ export default function RelocationChat() {
               <div key={index} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
                 <div className={`max-w-[92%] rounded-2xl px-4 py-3 ${message.role === "user" ? "bg-primary text-white rounded-br-sm" : "bg-surface text-text rounded-bl-sm"}`}>
                   <span className="sr-only">{message.role === "user" ? "You" : "Moving assistant"}: </span>
-                  {message.kind === "guide" && <p className="text-[11px] font-semibold text-primary mb-2">Quick guide · AI currently unavailable</p>}
+                  {message.kind === "guide" && <p className="text-[11px] font-semibold text-primary mb-2">Moving guide</p>}
                   <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{message.content}</p>
                 </div>
               </div>
@@ -125,7 +125,7 @@ export default function RelocationChat() {
               <textarea ref={inputRef} id="moving-question" value={question} onChange={(event) => setQuestion(event.target.value)} maxLength={2000} rows={2} placeholder="Ask a moving question…" disabled={pending} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); sendQuestion(question); } }} className="flex-1 min-w-0 resize-none rounded-xl border border-border bg-surface px-3 py-2 text-base md:text-sm focus:border-primary focus:ring-2 focus:ring-primary/15 disabled:opacity-60" />
               <button type="submit" disabled={pending || !question.trim()} aria-label="Send question" className="h-11 w-11 shrink-0 flex items-center justify-center rounded-xl bg-primary text-white hover:bg-accent disabled:opacity-40"><Send size={18} /></button>
             </form>
-            <p id="chat-disclaimer" className="text-[10px] leading-relaxed text-text-muted mt-2">AI answers can be mistaken. The team confirms quotes and bookings. Messages are processed by Cloudflare AI; avoid sensitive details. <Link to="/privacy" onClick={() => setOpen(false)} className="underline">Privacy</Link></p>
+            <p id="chat-disclaimer" className="text-[10px] leading-relaxed text-text-muted mt-2">Explore services, packing tips and moving advice. <Link to="/privacy" onClick={() => setOpen(false)} className="underline">Privacy</Link></p>
           </div>
         </div>
       </dialog>
