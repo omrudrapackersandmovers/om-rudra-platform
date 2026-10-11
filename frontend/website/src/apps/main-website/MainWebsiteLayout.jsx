@@ -1,5 +1,6 @@
-import { Suspense } from "react";
-import { Outlet } from "react-router";
+import { Suspense, useRef } from "react";
+import { Outlet, useLocation } from "react-router";
+import useScrollReveals from "../../hooks/useScrollReveals";
 import Footer from "./shared/components/Footer";
 import Header from "./shared/components/Header";
 import MobileActionBar from "./shared/components/MobileActionBar";
@@ -12,11 +13,14 @@ const PageLoadingFallback = () => (
 );
 
 const MainWebsiteLayout = () => {
+  const mainRef = useRef(null);
+  const { pathname } = useLocation();
+  useScrollReveals(mainRef, pathname);
   return (
     <div className="flex flex-col min-h-dvh">
       <Header />
       {/* The homepage hero extends behind the transparent header. */}
-      <main className="flex-1">
+      <main ref={mainRef} className="flex-1">
         <Suspense fallback={<PageLoadingFallback />}>
           <Outlet />
         </Suspense>

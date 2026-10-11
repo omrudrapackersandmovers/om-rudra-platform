@@ -9,7 +9,7 @@ import { CheckCircle2, Package, Truck, Home } from "lucide-react";
  * A truck marker travels along the line as the user scrolls - built with
  * GSAP ScrollTrigger.
  *
- * Every other section on this page uses NO scroll animation.
+ * Other sections use subtle entrance reveals.
  * This section owns the "spent boldness."
  *
  * prefers-reduced-motion: the line still draws but instantly, no motion.
@@ -194,11 +194,11 @@ const HowItWorks = () => {
 
         {/* ── Steps grid ───────────────────────────────────── */}
         <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-6">
-          {steps.map((s) => {
+          {steps.map((s, index) => {
             const Icon = s.icon;
             return (
               <li
-                key={s.step}
+                key={s.step} data-reveal={index}
                 className="group flex flex-row sm:flex-col rounded-[var(--radius-lg)] border border-border/80 bg-background shadow-xs hover:border-primary/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
               >
                 {/* 16:10 Visual Image Header */}

@@ -111,6 +111,16 @@
   }
 }
 
+/* A small lift gives service cards a tactile response without moving layout. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .motion-card {
+    transition: translate 220ms ease;
+  }
+  .motion-card:hover {
+    translate: 0 -4px;
+  }
+}
+
 /* Button shine animation */
 @keyframes button-shine {
   0% {

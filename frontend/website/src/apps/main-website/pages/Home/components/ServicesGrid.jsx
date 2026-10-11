@@ -129,8 +129,8 @@ export default function ServicesGrid() {
           {categoryTabs.map((tab) => <button key={tab.id} type="button" aria-pressed={activeTab === tab.id} onClick={() => setActiveTab(tab.id)} className={`min-h-12 shrink-0 border-b-2 text-sm font-semibold transition-colors ${activeTab === tab.id ? "border-primary text-primary" : "border-transparent text-text-muted hover:text-text"}`}>{tab.label}</button>)}
         </div>
         <ul className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-7 sm:gap-6">
-          {filteredServices.map((service) => (
-            <li key={service.slug} className="flex flex-col">
+          {filteredServices.map((service, index) => (
+            <li key={service.slug} data-reveal={index % 4} className="motion-card flex flex-col">
               <Link to={`/services/${service.slug}`} className="block overflow-hidden rounded-lg bg-surface group">
                 <img src={service.image} srcSet={responsiveImageSet(service.image)} sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 50vw" alt={service.title} className="w-full aspect-[4/3] object-cover group-hover:scale-[1.03] transition-transform duration-300" loading="lazy" width="640" height="480" />
               </Link>

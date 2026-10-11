@@ -17,9 +17,10 @@ function symbol(ctx, x, y, size, color) {
 }
 function lockup(ctx, x, y, width, color, markColor = color) {
   ctx.save(); ctx.translate(x, y); ctx.scale(width / 540, width / 540);
-  symbol(ctx, 0, 0, 144, markColor);
+  symbol(ctx, 0, 10, 144, markColor);
   ctx.fillStyle = color; ctx.font = '700 48px Sora'; ctx.fillText('Om Rudra', 150, 72);
   ctx.font = '600 29px Inter'; ctx.fillText('Packers and Movers', 152, 111);
+  ctx.font = '600 22px Inter'; ctx.fillText('Private Limited', 152, 139);
   ctx.restore();
 }
 function png(name, width, height, draw) {
@@ -32,7 +33,7 @@ for (const [variant, color] of [['red', '#b51b35'], ['white', '#ffffff'], ['char
     png(`symbol-${variant}-${size}.png`, size, size, ctx => symbol(ctx, 0, 0, size, color));
   }
   for (const width of [320, 640, 1080, 2160]) {
-    png(`lockup-${variant}-${width}.png`, width, Math.round(width * 144 / 540), ctx => lockup(ctx, 0, 0, width, variant === 'red' ? '#141416' : color, color));
+    png(`lockup-${variant}-${width}.png`, width, Math.round(width * 160 / 540), ctx => lockup(ctx, 0, 0, width, variant === 'red' ? '#141416' : color, color));
   }
 }
 for (const variant of ['horizontal', 'reverse']) {

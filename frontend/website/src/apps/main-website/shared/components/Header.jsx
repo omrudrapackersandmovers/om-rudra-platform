@@ -136,18 +136,18 @@ const Header = () => {
     >
       {/* ── Main Navigation Bar ──────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="header-topbar grid grid-cols-[auto_1fr] lg:grid-cols-[184px_1fr_auto] items-center gap-3 lg:gap-5 h-18 lg:h-20">
+        <div className="header-topbar grid grid-cols-[auto_1fr] lg:grid-cols-[216px_1fr_auto] items-center gap-3 lg:gap-5 h-18 lg:h-20">
           
           {/* Zone 1: Brand Logo */}
           <Link
             to="/"
             className="flex items-center shrink-0 py-1 transition-transform duration-200 hover:scale-[1.02]"
-            aria-label={`${company.brandName}, return to homepage`}
+            aria-label={`${company.legalName}, return to homepage`}
           >
             <img
-              src={isTransparent ? company.logo.reverse : company.logo.horizontal} sizes="184px"
-              alt={company.brandName}
-              className="w-36 sm:w-40 lg:w-46 h-12 object-contain object-left"
+              src={isTransparent ? company.logo.reverse : company.logo.horizontal} sizes="(min-width: 1024px) 216px, (min-width: 640px) 184px, 168px"
+              alt={company.legalName}
+              className="w-42 sm:w-46 lg:w-54 h-14 lg:h-16 object-contain object-left"
             />
           </Link>
 

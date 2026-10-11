@@ -50,7 +50,7 @@ const TestimonialsBlock = () => {
         >
           {testimonials.map((t, i) => (
             <li
-              key={i}
+              key={i} data-reveal={i % 3}
               className="flex flex-col p-6 rounded-[var(--radius-md)] border border-border bg-surface"
             >
               {/* Stars */}
