@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { render } from "../dist-ssr/entry-server.js";
-import { staticPaths, indexablePaths, siteUrl, generateSitemap } from "../src/data/site.js";
+import { staticPaths, indexablePaths, generateSitemap } from "../src/data/site.js";
 import { generateDiscoveryFiles } from "./discovery.mjs";
 
 import { writeSitemapView } from "./sitemap-view.mjs";
@@ -23,8 +23,9 @@ for (const pathname of staticPaths) {
 await writeFile(path.join(dist, "sitemap.xml"), generateSitemap());
 await generateDiscoveryFiles(dist);
 await writeSitemapView(dist);
+// Hostname redirects are configured in Cloudflare Redirect Rules.
+// Pages _redirects accepts relative source paths only.
 const redirects = [
-  `https://www.omrudrapackersandmovers.com/* ${siteUrl}/:splat 301`,
   ...staticPaths.filter(p => p.startsWith("/packers-movers-")).map(p => `/packers-movers/${p.slice("/packers-movers-".length)} ${p} 301`),
   ...indexablePaths.filter(p => p.startsWith("/route/")).map(p => `/route/route-${p.slice("/route/".length)} ${p} 301`),
   ...indexablePaths.filter(p => p.startsWith("/route/")).map(p => `/${p.slice("/route/".length)} ${p} 301`),
