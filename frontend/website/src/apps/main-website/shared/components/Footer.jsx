@@ -257,7 +257,7 @@ const Footer = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-xs text-white/70">
-            <div className="flex items-center gap-3 sm:gap-4">
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4">
               <Link
                 to="/privacy"
                 className="whitespace-nowrap text-white/70 hover:text-white hover:underline underline-offset-4 transition-colors duration-200 cursor-pointer"
@@ -271,6 +271,14 @@ const Footer = () => {
               >
                 Terms of Service
               </Link>
+              <span className="text-white/30 select-none">•</span>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event("open-analytics-preferences"))}
+                className="whitespace-nowrap text-white/70 hover:text-white hover:underline underline-offset-4 transition-colors duration-200 cursor-pointer"
+              >
+                Cookie settings
+              </button>
             </div>
 
             <span className="hidden sm:inline text-white/30 select-none">•</span>
