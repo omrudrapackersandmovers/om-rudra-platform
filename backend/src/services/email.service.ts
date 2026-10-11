@@ -1,4 +1,5 @@
 import { NewLead } from "../db/schema/leads";
+import { company } from "../../../frontend/website/src/data/company.js";
 
 function escapeHtml(str?: string | null): string {
   if (!str) return "";
@@ -88,8 +89,8 @@ export const sendOtpEmail = async (
     return true; // Return true so flow continues seamlessly in local development
   }
 
-  const fromEmail = senderEmail || "1stompackersandmovers@gmail.com";
-  const fromName = senderName || "Om Rudra Packers and Movers Security";
+  const fromEmail = senderEmail || company.email.general;
+  const fromName = senderName || company.legalName;
 
   const safePurposeHeader = sanitizeHeader(purpose);
   const safePurposeHtml = escapeHtml(purpose);

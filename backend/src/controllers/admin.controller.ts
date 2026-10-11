@@ -117,7 +117,7 @@ export const handleAdminLogin = async (c: Context<{ Bindings: Bindings }>) => {
     // If Two-Factor Authentication is enabled AND email is set
     if (admin.twoFactorEnabled && admin.email) {
       const otp = await generateAndStoreOtp(c.env, admin.id, "2FA Login Verification");
-      await sendOtpEmail(admin.email, otp, "2FA Login Verification", c.env.BREVO_API_KEY, c.env.BREVO_SENDER_EMAIL);
+      await sendOtpEmail(admin.email, otp, "2FA Login Verification", c.env.BREVO_API_KEY, c.env.BREVO_SENDER_EMAIL, c.env.BREVO_SENDER_NAME);
 
       // Create short-lived 10-minute challenge token
       const exp = Math.floor(Date.now() / 1000) + 600;
@@ -220,7 +220,7 @@ export const handleResend2FAOtp = async (c: Context<{ Bindings: Bindings }>) => 
     }
 
     const otp = await generateAndStoreOtp(c.env, admin.id, "2FA Login Verification");
-    await sendOtpEmail(admin.email, otp, "2FA Login Verification", c.env.BREVO_API_KEY, c.env.BREVO_SENDER_EMAIL);
+    await sendOtpEmail(admin.email, otp, "2FA Login Verification", c.env.BREVO_API_KEY, c.env.BREVO_SENDER_EMAIL, c.env.BREVO_SENDER_NAME);
     return c.json({ success: true, message: `New verification code sent to ${maskEmail(admin.email)}` });
   } catch (err: any) {
     return c.json({ error: "Failed to resend OTP" }, 500);
@@ -243,7 +243,7 @@ export const handleForgotPasswordRequestOtp = async (c: Context<{ Bindings: Bind
     }
 
     const otp = await generateAndStoreOtp(c.env, admin.id, "Password Reset");
-    await sendOtpEmail(admin.email, otp, "Password Reset", c.env.BREVO_API_KEY, c.env.BREVO_SENDER_EMAIL);
+    await sendOtpEmail(admin.email, otp, "Password Reset", c.env.BREVO_API_KEY, c.env.BREVO_SENDER_EMAIL, c.env.BREVO_SENDER_NAME);
 
     const secret = getJwtSecret(c.env);
     const exp = Math.floor(Date.now() / 1000) + 600;
