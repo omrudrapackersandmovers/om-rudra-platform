@@ -3,6 +3,14 @@ main = "src/index.ts"
 compatibility_date = "2024-09-23"
 account_id = "cb08ee7e11f68fade1c303c525e8da0f"
 
+[ai]
+binding = "AI"
+
+[[ratelimits]]
+name = "CHAT_RATE_LIMITER"
+namespace_id = "7102026"
+simple = { limit = 10, period = 60 }
+
 
 # D1 Database binding: connects remote Cloudflare D1 to env.DB in your Worker code
 [[d1_databases]]

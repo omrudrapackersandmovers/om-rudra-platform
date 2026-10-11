@@ -1,4 +1,4 @@
-export interface Bindings {
+export interface Bindings extends Pick<WorkerBindings, "AI" | "CHAT_RATE_LIMITER"> {
   DB: D1Database;
   ENVIRONMENT?: string;
   BREVO_API_KEY?: string;

@@ -4,6 +4,7 @@ import useScrollReveals from "../../hooks/useScrollReveals";
 import Footer from "./shared/components/Footer";
 import Header from "./shared/components/Header";
 import MobileActionBar from "./shared/components/MobileActionBar";
+import RelocationChat from "./shared/components/RelocationChat";
 
 const PageLoadingFallback = () => (
   <div className="min-h-[60vh] flex flex-col items-center justify-center gap-3 py-16" aria-label="Loading page content">
@@ -27,6 +28,7 @@ const MainWebsiteLayout = () => {
       </main>
       <Footer />
       <MobileActionBar />
+      <RelocationChat />
     </div>
   );
 };
