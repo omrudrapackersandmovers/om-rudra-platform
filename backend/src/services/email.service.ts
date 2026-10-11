@@ -1,6 +1,23 @@
 import { NewLead } from "../db/schema/leads";
 import { company } from "../../../frontend/website/src/data/company.js";
 
+// Flatten the transparent lockup onto white inside the PNG itself. Email clients
+// can change HTML background colors in dark mode, but the image stays readable.
+const emailLogoUrl = "https://res.cloudinary.com/dqdwk0nk/image/upload/b_white,c_pad,w_600,h_220/f_png/v1791709380/lockup-red-1080.png";
+const emailSymbolUrl = "https://res.cloudinary.com/dqdwk0nk/image/upload/v1791709388/symbol-red-512.png";
+
+const emailBrandHeader = () => `
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0"><tr><td align="center" style="padding: 0 0 20px;">
+    <img src="${emailLogoUrl}" width="260" alt="Om Rudra Packers and Movers" style="display: block; width: 260px; max-width: 100%; height: auto; border: 0; background-color: #ffffff; border-radius: 8px;" />
+    <p style="margin: 8px 0 0; font-size: 12px; color: #64748b;">${escapeHtml(company.legalName)}</p>
+  </td></tr></table>`;
+
+const emailBrandFooter = () => `
+  <table role="presentation" cellspacing="0" cellpadding="0" style="margin-top: 16px;"><tr>
+    <td width="32" style="vertical-align: middle;"><img src="${emailSymbolUrl}" width="24" height="24" alt="" style="display: block; border: 0;" /></td>
+    <td style="font-size: 11px; line-height: 1.5; color: #64748b;">${escapeHtml(company.legalName)}</td>
+  </tr></table>`;
+
 function escapeHtml(str?: string | null): string {
   if (!str) return "";
   return String(str)
@@ -35,6 +52,8 @@ export const sendLeadNotificationEmail = async (
     to: [{ email: recipientEmail }],
     subject: lead.moveType === "Contact enquiry" ? `New Contact Enquiry: ${safeName} - ${sanitizeHeader(lead.service)}` : `New Moving Inquiry: ${safeName} (${safeFrom} to ${safeTo})`,
     htmlContent: `
+      <div style="font-family: Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 24px; background-color: #ffffff; color: #0f172a; border: 1px solid #e2e8f0; border-radius: 16px;">
+      ${emailBrandHeader()}
       <h2>${lead.moveType === "Contact enquiry" ? "New Contact Enquiry" : "New Relocation Request Received"}</h2>
       <p><strong>Customer Name:</strong> ${escapeHtml(lead.name)}</p>
       <p><strong>Phone:</strong> <a href="tel:${encodeURIComponent(lead.phone)}">${escapeHtml(lead.phone)}</a></p>
@@ -46,6 +65,8 @@ export const sendLeadNotificationEmail = async (
       <p><strong>Service Requested:</strong> ${escapeHtml(lead.service)}</p>
       <p><strong>Preferred Timeline:</strong> ${escapeHtml(lead.timeline)}</p>
       ${lead.notes ? `<p><strong>Message / Moving Details:</strong> ${escapeHtml(lead.notes)}</p>` : ""}
+      ${emailBrandFooter()}
+      </div>
     `,
   };
 
@@ -100,7 +121,7 @@ export const sendOtpEmail = async (
   const htmlContent = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 520px; margin: 0 auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px;">
       <div style="text-align: center; margin-bottom: 24px;">
-        <h1 style="color: #0f172a; font-size: 20px; font-weight: 700; margin: 0;">Om Rudra Packers and Movers</h1>
+        ${emailBrandHeader()}
         <p style="color: #64748b; font-size: 13px; margin-top: 4px;">Account Security Verification</p>
       </div>
 
@@ -114,7 +135,7 @@ export const sendOtpEmail = async (
 
       <div style="color: #64748b; font-size: 12px; line-height: 1.6; border-top: 1px solid #e2e8f0; padding-top: 16px;">
         <p style="margin: 0;">If you did not initiate this request, someone may be attempting to access your Om Rudra account. Please immediately review your account credentials.</p>
-        <p style="margin: 8px 0 0 0; color: #94a3b8; font-size: 11px;">Om Rudra Packers and Movers Hub Central • Automated Security Service</p>
+        ${emailBrandFooter()}
       </div>
     </div>
   `;

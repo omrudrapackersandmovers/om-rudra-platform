@@ -2,6 +2,7 @@ name = "backend"
 main = "src/index.ts"
 compatibility_date = "2024-09-23"
 account_id = "cb08ee7e11f68fade1c303c525e8da0f"
+routes = [{ pattern = "api.omrudrapackersandmovers.com", custom_domain = true }]
 
 [ai]
 binding = "AI"
