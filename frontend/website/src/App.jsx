@@ -4,6 +4,8 @@ import { HelmetProvider } from "react-helmet-async";
 import MainWebsiteRoutes from "./apps/main-website/MainWebsiteRoutes";
 import ErrorBoundary from "./apps/main-website/shared/components/ErrorBoundary";
 
+import AnalyticsConsent from "./apps/main-website/shared/components/AnalyticsConsent.jsx";
+
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -69,6 +71,7 @@ const App = ({ Router = BrowserRouter, routerProps = {}, helmetContext, pageComp
     <HelmetProvider context={helmetContext}>
         <Router {...routerProps}>
           <ScrollToTop />
+          <AnalyticsConsent />
           <LenisScroll />
           <Routes>
             <Route
