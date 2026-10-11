@@ -1,5 +1,5 @@
 // Geography references support address distinctions, not company operations or vehicle rules.
-// Only these manually reviewed guides qualify for search discovery. All locations remain usable.
+// These manually reviewed guides supplement the public service-location directory.
 export const editorialGuides = {
   patna: {
     heading: "A Patna address needs more than the city name.",

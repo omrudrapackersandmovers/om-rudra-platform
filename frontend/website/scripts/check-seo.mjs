@@ -5,12 +5,12 @@ import { fileURLToPath } from "node:url";
 import { load } from "cheerio";
 import { staticPaths, indexablePaths, siteUrl } from "../src/data/site.js";
 import { editorialGuides } from "../src/data/locations/editorialGuides.js";
-import { allLocationPages, locationPath, locationAddress } from "../src/data/locations/pageData.js";
+import { allLocationPages, getLocationPageData, locationPath, locationAddress } from "../src/data/locations/pageData.js";
 import { company } from "../src/data/company.js";
 
 const dist = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../dist");
 const fileFor = p => path.join(dist, p === "/" ? "index.html" : `${p.slice(1)}.html`);
-// Editorial admission is deliberate: a new location must not automatically enter search.
+// Preserve sourced editorial guides while verifying every directory page is useful and discoverable.
 const reviewedCopy = new Set();
 for (const [slug, guide] of Object.entries(editorialGuides)) {
   const location = allLocationPages.find(item => item.slug === slug);
@@ -25,7 +25,14 @@ for (const [slug, guide] of Object.entries(editorialGuides)) {
   assert.equal($('input[name="from"]').attr("value"), locationAddress(location), `${slug}: enquiry pickup lost`);
 }
 for (const location of allLocationPages) {
-  assert.equal(indexablePaths.includes(locationPath(location)), Boolean(editorialGuides[location.slug]), `${location.slug}: unreviewed location entered search`);
+  assert(indexablePaths.includes(locationPath(location)), `${location.slug}: service location missing from search`);
+  const data = getLocationPageData(location.slug);
+  const $ = load(await readFile(fileFor(locationPath(location)), "utf8"));
+  assert.equal(data.planning.scenarios.length, 3, `${location.slug}: moving scenarios missing`);
+  assert($("#location-moving-plan").text().includes(data.label), `${location.slug}: location plan missing`);
+  assert($("main").text().includes(data.planning.scope), `${location.slug}: address guidance missing`);
+  assert.equal($('input[name="from"]').attr("value"), locationAddress(location), `${location.slug}: enquiry pickup lost`);
+  if (!location.isPrimaryHub) assert($("main").text().includes("not a claim of a branch office here"), `${location.slug}: branch distinction missing`);
   assert(staticPaths.includes(locationPath(location)), `${location.slug}: enquiry page removed`);
 }
 const inbound = new Set();
