@@ -1,54 +1,10 @@
-import { NewLead } from "../db/schema/leads";
-import { leadEmail, securityEmail } from "./email-templates";
+import { securityEmail } from "./email-templates";
 import { company } from "../../../frontend/website/src/data/company.js";
 
 function sanitizeHeader(str?: string | null): string {
   if (!str) return "";
   return String(str).replace(/[\r\n]+/g, " ").trim();
 }
-
-export const sendLeadNotificationEmail = async (
-  lead: NewLead,
-  apiKey?: string,
-  recipientEmail?: string
-): Promise<boolean> => {
-  if (!apiKey || !recipientEmail) {
-    console.warn("Brevo API key or notification recipient email not set. Skipping email dispatch.");
-    return false;
-  }
-
-  const safeName = sanitizeHeader(lead.name);
-  const safeFrom = sanitizeHeader(lead.movingFrom);
-  const safeTo = sanitizeHeader(lead.movingTo);
-
-  const payload = {
-    sender: { name: "Om Rudra Packers and Movers System", email: "alerts@omrudrapackersandmovers.com" },
-    to: [{ email: recipientEmail }],
-    subject: lead.moveType === "Contact enquiry" ? `New Contact Enquiry: ${safeName} - ${sanitizeHeader(lead.service)}` : `New Moving Inquiry: ${safeName} (${safeFrom} to ${safeTo})`,
-    ...leadEmail(lead),
-  };
-
-  try {
-    const res = await fetch("https://api.brevo.com/v3/smtp/email", {
-      method: "POST",
-      headers: {
-        "api-key": apiKey,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-
-    if (!res.ok) {
-      console.error("Failed to send Brevo alert email:", await res.text());
-      return false;
-    }
-    return true;
-  } catch (err) {
-    console.error("Network error while calling Brevo API:", err);
-    return false;
-  }
-};
 
 export const sendOtpEmail = async (
   recipientEmail: string,

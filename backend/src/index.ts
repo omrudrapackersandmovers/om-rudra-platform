@@ -4,8 +4,16 @@ import { leadsRouter } from "./routes/leads.routes";
 import { adminRouter } from "./routes/admin.routes";
 import { chatRouter } from "./routes/chat.routes";
 import { Bindings } from "./types";
+import { drainEmailOutbox, maintainEmailOutbox } from "./services/email-outbox.service";
 
 const app = new Hono<{ Bindings: Bindings }>();
+
+app.use("*", async (c, next) => {
+  await next();
+  if (["POST", "PUT", "PATCH"].includes(c.req.method) && c.res.status < 400 && !c.req.path.includes("/auth/") && c.req.path !== "/api/chat") {
+    c.executionCtx.waitUntil(drainEmailOutbox(c.env).catch(() => console.error("email_outbox_drain_failed")));
+  }
+});
 
 // Enable CORS for frontend requests
 app.use(
@@ -77,4 +85,9 @@ app.onError((err, c) => {
   return c.json({ error: "An unexpected error occurred" }, 500);
 });
 
-export default app;
+export default {
+  fetch: app.fetch,
+  async scheduled(_controller: ScheduledController, env: Bindings, ctx: ExecutionContext) {
+    ctx.waitUntil(maintainEmailOutbox(env));
+  },
+};

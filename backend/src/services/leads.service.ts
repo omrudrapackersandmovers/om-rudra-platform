@@ -1,6 +1,5 @@
 import { createDbClient } from "../db/client";
 import { leads, NewLead } from "../db/schema/leads";
-import { sendLeadNotificationEmail } from "./email.service";
 import { Bindings } from "../types";
 
 export const createLead = async (
@@ -35,15 +34,6 @@ export const createLead = async (
 
   // Insert lead into Cloudflare D1
   const [inserted] = await db.insert(leads).values(newLeadRecord).returning();
-
-  // Trigger non-blocking email notification
-  sendLeadNotificationEmail(
-    newLeadRecord,
-    env.BREVO_API_KEY,
-    env.NOTIFICATION_EMAIL
-  ).catch((err) => {
-    console.error("Non-blocking notification error:", err);
-  });
 
   return inserted;
 };

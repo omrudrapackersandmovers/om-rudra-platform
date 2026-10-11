@@ -3,7 +3,6 @@ import { z } from "zod";
 import { Bindings } from "../types";
 import { createDbClient } from "../db/client";
 import { leads, NewLead } from "../db/schema/leads";
-import { sendLeadNotificationEmail } from "../services/email.service";
 
 export const contactFields = z.object({
   name: z.string().trim().min(2).max(100),
@@ -31,7 +30,6 @@ export const handleContact = async (c: Context<{ Bindings: Bindings }>) => {
       subjectOther: data.subject === "Other" ? data.subjectOther : null,
     };
     const [saved] = await createDbClient(c.env.DB).insert(leads).values(record).returning();
-    c.executionCtx.waitUntil(sendLeadNotificationEmail(record, c.env.BREVO_API_KEY, c.env.NOTIFICATION_EMAIL));
     return c.json({ success: true, reference: saved.id }, 201);
   } catch (error) {
     console.error("Contact submission failed", error);

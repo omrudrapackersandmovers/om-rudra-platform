@@ -73,6 +73,8 @@ export const getDataStatus = async (env: Bindings) => {
 export const resetOperationalData = async (env: Bindings) => {
   const db = getDb(env.DB);
 
+  await env.DB.prepare("DELETE FROM email_outbox").run();
+
   // Delete in reverse dependency order to avoid foreign key conflicts
   await db.delete(jobExpenses);
   await db.delete(jobStaff);
@@ -286,7 +288,7 @@ export const loadSampleData = async (env: Bindings) => {
 
   const insertedLeads: any[] = [];
   for (const l of sampleLeads) {
-    const res = await db.insert(leads).values(l).returning();
+    const res = await db.insert(leads).values({ ...l, supportSource: "sample" }).returning();
     insertedLeads.push(res[0]);
   }
 

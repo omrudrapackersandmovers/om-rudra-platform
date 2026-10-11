@@ -12,6 +12,11 @@ name = "CHAT_RATE_LIMITER"
 namespace_id = "7102026"
 simple = { limit = 10, period = 60 }
 
+[[ratelimits]]
+name = "LEAD_RATE_LIMITER"
+namespace_id = "7102027"
+simple = { limit = 5, period = 60 }
+
 
 # D1 Database binding: connects remote Cloudflare D1 to env.DB in your Worker code
 [[d1_databases]]
@@ -26,6 +31,10 @@ ENVIRONMENT = "production"
 BREVO_SENDER_EMAIL = "hello@omrudrapackersandmovers.com"
 BREVO_SENDER_NAME = "Om Rudra Packers and Movers"
 NOTIFICATION_EMAIL = "hello@omrudrapackersandmovers.com"
+CUSTOMER_EMAILS_ENABLED = "true"
+
+[triggers]
+crons = ["* * * * *"]
 
 # Observability (Logs & Traces)
 [observability.logs]

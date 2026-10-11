@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "test:emails": "node scripts/test-emails.mjs",
     "test:chat": "node scripts/test-chat.mjs",
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",

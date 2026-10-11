@@ -27,6 +27,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import EmailActivity from "./EmailActivity";
 import { useAuth } from "../../../../store/AuthContext";
 import { api, setAuthToken } from "../../../../util/api";
 import {
@@ -372,6 +373,7 @@ const Settings = () => {
     { id: "compliance", label: "Tax & Compliance", icon: FileText },
     { id: "payments", label: "UPI & Banking", icon: CreditCard },
     { id: "security", label: "Account Settings", icon: ShieldCheck },
+    { id: "emails", label: "Email Activity", icon: Mail },
     { id: "backup", label: "Data Management", icon: Database },
   ];
 
@@ -1527,8 +1529,9 @@ const Settings = () => {
           </div>
         )}
 
-        {/* Save Bar at Bottom (Hidden on Data Management tab) */}
-        {activeTab !== "backup" && (
+        {activeTab === "emails" && <EmailActivity />}
+        {/* Save Bar at Bottom */}
+        {activeTab !== "backup" && activeTab !== "emails" && (
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-4 border-t border-slate-200/80 dark:border-slate-700/80">
             {savedSuccess && (
               <span className="text-xs text-emerald-600 dark:text-emerald-300 font-semibold flex items-center justify-center gap-1.5">

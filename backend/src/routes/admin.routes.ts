@@ -80,6 +80,22 @@ adminRouter.get("/settings", handleGetSettings);
 // Protected routes (require Bearer JWT)
 adminRouter.use("*", authMiddleware);
 
+adminRouter.get("/emails", async c => {
+  const result = await c.env.DB.prepare(`SELECT id,kind,entity_id,recipient,status,attempts,last_error,provider_id,created_at,accepted_at,(status='failed' AND uncertain_since IS NULL) AS can_retry
+    FROM email_outbox ORDER BY id DESC LIMIT 100`).all();
+  const counts = await c.env.DB.prepare("SELECT status,COUNT(*) AS count FROM email_outbox GROUP BY status").all();
+  return c.json({ emails: result.results, counts: counts.results, enabled: c.env.CUSTOMER_EMAILS_ENABLED !== "false", providerConfigured: Boolean(c.env.BREVO_API_KEY) });
+});
+
+adminRouter.post("/emails/:id/retry", async c => {
+  const id = Number(c.req.param("id"));
+  if (!Number.isSafeInteger(id) || id <= 0) return c.json({ error: "Invalid email ID" }, 400);
+  const result = await c.env.DB.prepare(`UPDATE email_outbox SET status='queued',attempts=0,next_attempt=unixepoch(),first_attempt=NULL,last_error=NULL
+    WHERE id=? AND status='failed' AND uncertain_since IS NULL RETURNING id`).bind(id).first();
+  if (!result) return c.json({ error: "Only definite failures can be retried. Check uncertain sends in Brevo before taking further action." }, 409);
+  return c.json({ success: true });
+});
+
 adminRouter.get("/auth/me", handleAdminMe);
 adminRouter.get("/support", handleGetSupport);
 adminRouter.get("/support/references", handleSearchSupportReferences);

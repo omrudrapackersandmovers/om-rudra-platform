@@ -64,3 +64,54 @@ export function securityEmail(code: string, purpose: string) {
     textContent: `${heading}\n\n${explanation}\n\nVerification code: ${code}\nValid for 10 minutes. Keep this code private.\n\nIf you did not request this code, do not use or share it.\n\n${company.legalName}`,
   };
 }
+
+export type CustomerEvent = "enquiry_received" | "quote_sent" | "quote_revised" | "booking_confirmed" | "booking_updated" | "booking_cancelled" | "move_started" | "move_completed" | "invoice_issued" | "invoice_updated" | "payment_received" | "support_updated";
+export type EventDetails = Record<string, string | number | null>;
+const money = (value: string | number | null | undefined) => new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(Number(value || 0));
+
+export function customerEmail(kind: CustomerEvent, data: EventDetails, entityId: number) {
+  const contact = data.move_type === "Contact enquiry";
+  const messages: Record<CustomerEvent, [string, string]> = {
+    enquiry_received: [contact ? "We received your message." : "We received your moving request.", "Thank you for contacting Om Rudra. Our team will review your request and get in touch. This acknowledgement does not confirm a booking or price."],
+    quote_sent: ["Your moving estimate is ready.", "Review the estimate below. Reply to discuss the scope, exclusions, and availability before confirming your move."],
+    quote_revised: ["Your moving estimate has been updated.", "This revised estimate replaces the previous version. Please review the updated amounts and validity before confirming."],
+    booking_confirmed: ["Your move is booked.", "Our team has scheduled your move. Please check the pickup details below and contact us if anything needs to change."],
+    booking_updated: ["Your moving arrangements have changed.", "These are your latest scheduled arrangements. Please review the date, time, and addresses below."],
+    booking_cancelled: ["Your booking has been cancelled.", "Our team has marked this booking as cancelled. Contact us to discuss rescheduling or any applicable payment adjustment."],
+    move_started: ["Your move is underway.", "Our team has marked your move as in progress. Keep your booking reference handy if you need assistance."],
+    move_completed: ["Your move is complete.", "Thank you for choosing Om Rudra. We hope you are settling in comfortably. Reply with feedback or contact us if you need further help. Invoice details are emailed separately when issued."],
+    invoice_issued: ["Your invoice is ready.", "Here is your invoice summary. Reply to request the complete invoice document or discuss any questions."],
+    invoice_updated: ["Your invoice has been updated.", "Review your latest invoice amounts below. Contact us if you have questions about an adjustment."],
+    payment_received: ["Your payment has been recorded.", "Thank you. Our team has recorded the payment below against your invoice. Keep this email for your records."],
+    support_updated: ["An update on your enquiry.", "Our team has updated the status of your request. Reply to this email if you need clarification or further assistance."],
+  };
+  const [heading, explanation] = messages[kind];
+  const fields: [string, string][] = [["Reference", String(data.quote_number || data.job_number || data.invoice_number || `ENQ-${entityId}`)]];
+  const add = (label: string, key: string) => { if (data[key] !== null && data[key] !== undefined && String(data[key]).trim()) fields.push([label, String(data[key])]); };
+  const amount = (label: string, key: string) => fields.push([label, money(data[key])]);
+  if (kind === "enquiry_received") {
+    add(contact ? "Subject" : "Service", data.service === "Other" && data.subject_other ? "subject_other" : "service");
+    if (!contact) { add("Moving from", "moving_from"); add("Moving to", "moving_to"); add("Preferred timeline", "timeline"); }
+  } else if (kind.startsWith("quote_")) {
+    add("Moving from", "moving_from"); add("Moving to", "moving_to"); add("Move date", "move_date");
+    for (const [label, key] of [["Packing", "packaging_charges"], ["Transport", "transport_charges"], ["Loading", "loading_charges"], ["Unloading", "unloading_charges"], ["Insurance", "insurance_charges"], ["Other charges", "other_charges"], ["Discount", "discount"]]) amount(label, key);
+    amount("GST", "gst_amount"); amount("Estimated total", "total_amount"); add("Valid until", "valid_until");
+  } else if (kind.startsWith("booking_") || kind.startsWith("move_")) {
+    add("Pickup", "pickup_address"); add("Delivery", "delivery_address"); add("Scheduled date", "scheduled_date"); add("Scheduled time", "scheduled_time");
+    if (kind !== "booking_cancelled") { add("Driver", "driver_name"); add("Driver phone", "driver_phone"); }
+  } else if (kind === "support_updated") {
+    const statuses: Record<string, string> = { new: "Received", in_progress: "In progress", resolved: "Resolved", closed: "Closed" };
+    fields.push(["Status", statuses[String(data.support_status)] || "Updated"]); add("Booking reference", "booking_reference");
+  } else {
+    if (kind === "payment_received") { amount("Payment recorded", "payment_amount"); add("Payment method", "payment_mode"); }
+    amount("Subtotal", "subtotal"); amount("GST", "gst_amount"); amount("Invoice total", "total_amount"); amount("Total paid", "advance_paid"); amount("Balance due", "balance_due");
+  }
+  const name = data.name || data.customer_name;
+  const rows = fields.map(([label,value]) => `<tr><td class="email-rule" style="padding:12px 0;border-bottom:1px solid #e3e8ef;"><div class="email-muted" style="font-size:11px;color:#68758a;margin-bottom:5px;">${html(label)}</div><div class="email-value" style="font-size:15px;font-weight:bold;line-height:1.5;color:#172033;overflow-wrap:anywhere;">${html(value)}</div></td></tr>`).join("");
+  const replyUrl = `mailto:${company.email.general}`;
+  return {
+    subject: `Om Rudra · ${heading.replace(/\.$/, "")} · ${fields[0][1]}`,
+    htmlContent: shell(heading, kind === "support_updated" ? "Customer care" : "Your move with Om Rudra", `${title(heading)}${paragraph(`${name ? `Hello ${html(String(name))},<br>` : ""}${html(explanation)}`)}<table role="presentation" width="100%" cellspacing="0" cellpadding="0">${rows}</table><div style="margin-top:24px;">${button(kind === "move_completed" ? "Share feedback" : "Contact our team", replyUrl)}</div>`, `Need help? Reply to this email or call <a class="email-link" href="tel:${company.phone.primary.replace(/\s/g, "")}" style="color:#b7193b;">${html(company.phone.primaryDisplay)}</a>.`),
+    textContent: `${heading}\n\n${name ? `Hello ${name},\n` : ""}${explanation}\n\n${fields.map(([label,value])=>`${label}: ${value}`).join("\n")}\n\nContact: ${company.email.general} / ${company.phone.primaryDisplay}\n${company.legalName}`,
+  };
+}

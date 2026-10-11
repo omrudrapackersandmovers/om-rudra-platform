@@ -28,61 +28,22 @@ export const recordInvoicePayment = async (
 ) => {
   const db = getDb(env.DB);
 
-  // 1. Insert payment
-  const payment = await db
-    .insert(invoicePayments)
-    .values({
-      invoiceId,
-      amount: Number(data.amount),
-      paymentMode: data.paymentMode,
-      paymentDate: data.paymentDate,
-      transactionRef: data.transactionRef || null,
-      notes: data.notes || null,
-    })
-    .returning();
-
-  // 2. Fetch all payments for this invoice
-  const allPayments = await db
-    .select({ amount: invoicePayments.amount })
-    .from(invoicePayments)
-    .where(eq(invoicePayments.invoiceId, invoiceId));
-
-  const totalRecordedPayments = allPayments.reduce((acc, p) => acc + (Number(p.amount) || 0), 0);
-
-  // 3. Fetch invoice to recalculate
-  const invRes = await db.select().from(invoices).where(eq(invoices.id, invoiceId)).limit(1);
-  if (!invRes[0]) throw new Error("Invoice not found");
-
-  const inv = invRes[0];
-  const advance = Number(inv.advancePaid) || 0;
-  const totalPaid = advance + totalRecordedPayments;
-  const totalAmount = Number(inv.totalAmount) || 0;
-  const balanceDue = Math.max(0, totalAmount - totalPaid);
-
-  let paymentStatus: "unpaid" | "partial" | "paid" = "unpaid";
-  if (balanceDue <= 0 && totalAmount > 0) {
-    paymentStatus = "paid";
-  } else if (totalPaid > 0) {
-    paymentStatus = "partial";
-  }
-
-  const updatedInv = await db
-    .update(invoices)
-    .set({
-      advancePaid: totalPaid, // Keep advancePaid in sync so updateInvoicePayment reads correct total
-      balanceDue,
-      paymentStatus,
-    })
-    .where(eq(invoices.id, invoiceId))
-    .returning();
-
-  return {
-    payment: payment[0],
-    invoice: {
-      ...updatedInv[0],
-      paidAmount: totalPaid,
-    },
-  };
+  if (!Number.isFinite(data.amount) || data.amount <= 0) throw new Error("Payment amount must be positive");
+  const exists = await env.DB.prepare("SELECT id FROM invoices WHERE id=?").bind(invoiceId).first();
+  if (!exists) throw new Error("Invoice not found");
+  // D1 batch is transactional: receipt and invoice totals change together.
+  // advance_paid already stores cumulative payments; do not add the old ledger again.
+  const [receipt] = await env.DB.batch<{ id: number }>([
+    env.DB.prepare(`INSERT INTO invoice_payments(invoice_id,amount,payment_mode,payment_date,transaction_ref,notes)
+      VALUES(?,?,?,?,?,?) RETURNING id`).bind(invoiceId,data.amount,data.paymentMode,data.paymentDate,data.transactionRef || null,data.notes || null),
+    env.DB.prepare(`UPDATE invoices SET advance_paid=advance_paid+?, balance_due=MAX(0,total_amount-advance_paid-?),
+      payment_status=CASE WHEN advance_paid+?>=total_amount THEN 'paid' ELSE 'partial' END,payment_mode=? WHERE id=?`)
+      .bind(data.amount,data.amount,data.amount,data.paymentMode,invoiceId),
+  ]);
+  const paymentId = Number(receipt.results[0].id);
+  const payment = await db.select().from(invoicePayments).where(eq(invoicePayments.id,paymentId)).limit(1);
+  const invoice = await db.select().from(invoices).where(eq(invoices.id,invoiceId)).limit(1);
+  return { payment: payment[0], invoice: { ...invoice[0], paidAmount: Number(invoice[0].advancePaid) } };
 };
 
 export const getInvoicePayments = async (env: Bindings, invoiceId: number) => {
