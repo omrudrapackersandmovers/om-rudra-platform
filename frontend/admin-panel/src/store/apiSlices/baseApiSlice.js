@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const getApiBaseUrl = () => {
-  let url = (import.meta.env.VITE_API_URL || "http://localhost:8787/api/admin").trim();
+  let url = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "http://localhost:8787/api/admin" : "https://api.omrudrapackersandmovers.com/api/admin")).trim();
   if (!url.startsWith("http://") && !url.startsWith("https://")) {
     url = `https://${url}`;
   }
