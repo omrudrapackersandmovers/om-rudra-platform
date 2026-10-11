@@ -6,7 +6,7 @@ import { gzipSync } from "node:zlib";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../dist");
 const redirects = new Map((await readFile(path.join(root, "_redirects"), "utf8")).trim().split("\n").filter(line => line.startsWith("/")).map(line => { const [from, to] = line.split(/\s+/); return [from, to]; }));
-const mime = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".xml": "application/xml", ".txt": "text/plain", ".webp": "image/webp", ".svg": "image/svg+xml", ".woff2": "font/woff2" };
+const mime = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".xml": "application/xml", ".xsl": "application/xslt+xml", ".txt": "text/plain", ".webp": "image/webp", ".svg": "image/svg+xml", ".woff2": "font/woff2" };
 createServer(async (request, response) => {
   try {
     const url = new URL(request.url, "http://localhost");

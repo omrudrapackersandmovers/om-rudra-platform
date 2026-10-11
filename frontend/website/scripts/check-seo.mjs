@@ -94,6 +94,15 @@ const sitemap = load(await readFile(path.join(dist, "sitemap.xml"), "utf8"), { x
 const urls = sitemap("loc").toArray().map(element => sitemap(element).text());
 assert.deepEqual(new Set(urls), new Set(indexablePaths.map(p => `${siteUrl}${p}`)));
 assert.equal(urls.length, indexablePaths.length);
+assert((await readFile(path.join(dist, "sitemap.xml"), "utf8")).includes('<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>'), "Sitemap stylesheet missing");
+await access(path.join(dist, "sitemap.xsl"));
+await access(path.join(dist, "sitemap.css"));
+const sitemapView = load(await readFile(path.join(dist, "sitemap-view.html"), "utf8"));
+const viewUrls = sitemapView("tbody a").toArray().map(element => sitemapView(element).attr("href"));
+assert.deepEqual(new Set(viewUrls), new Set(urls), "Readable sitemap differs from XML");
+assert.equal(viewUrls.length, urls.length, "Readable sitemap has duplicate URLs");
+assert(sitemapView('meta[name="robots"]').attr("content").includes("noindex"), "Readable sitemap should not enter search");
+
 const robots = await readFile(path.join(dist, "robots.txt"), "utf8");
 assert(robots.includes("User-agent: *\nAllow: /"), "All public crawlers must be allowed");
 assert(!/^Disallow:\s*\S/m.test(robots), "Unexpected crawler block");

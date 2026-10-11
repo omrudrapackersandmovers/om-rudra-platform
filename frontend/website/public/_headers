@@ -9,3 +9,8 @@ https://:project.pages.dev/*
   X-Robots-Tag: noindex
 https://:branch.:project.pages.dev/*
   X-Robots-Tag: noindex
+
+/sitemap.xsl
+  Content-Type: application/xslt+xml; charset=utf-8
+/sitemap-view.html
+  X-Robots-Tag: noindex, follow

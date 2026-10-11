@@ -5,6 +5,8 @@ import { render } from "../dist-ssr/entry-server.js";
 import { staticPaths, indexablePaths, siteUrl, generateSitemap } from "../src/data/site.js";
 import { generateDiscoveryFiles } from "./discovery.mjs";
 
+import { writeSitemapView } from "./sitemap-view.mjs";
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
 const template = await readFile(path.join(dist, "index.html"), "utf8");
@@ -20,6 +22,7 @@ for (const pathname of staticPaths) {
 }
 await writeFile(path.join(dist, "sitemap.xml"), generateSitemap());
 await generateDiscoveryFiles(dist);
+await writeSitemapView(dist);
 const redirects = [
   `https://www.omrudrapackersandmovers.com/* ${siteUrl}/:splat 301`,
   ...staticPaths.filter(p => p.startsWith("/packers-movers-")).map(p => `/packers-movers/${p.slice("/packers-movers-".length)} ${p} 301`),
