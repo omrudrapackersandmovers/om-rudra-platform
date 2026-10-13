@@ -2,8 +2,11 @@ import { baseApiSlice } from "./baseApiSlice";
 
 export const leadsApiSlice = baseApiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    deleteLead: builder.mutation({query: id => ({url:`/leads/${id}`,method:"DELETE"}), invalidatesTags:["Leads","Customers"]}),
+    restoreLead: builder.mutation({query: id => ({url:`/leads/${id}/restore`,method:"POST"}), invalidatesTags:["Leads","Customers"]}),
+
     getLeads: builder.query({
-      query: (status) => (status && status !== "all" ? `/leads?status=${status}` : "/leads"),
+      query: (status) => (typeof status === "string" && status !== "all" ? `/leads?status=${status}` : "/leads"),
       transformResponse: (response) => response.leads || [],
       providesTags: (result) =>
         result
@@ -34,7 +37,7 @@ export const leadsApiSlice = baseApiSlice.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: "Leads", id: "LIST" }],
+      invalidatesTags: ["Customers", { type: "Leads", id: "LIST" }],
     }),
     updateLead: builder.mutation({
       query: ({ id, ...body }) => ({
@@ -51,6 +54,7 @@ export const leadsApiSlice = baseApiSlice.injectEndpoints({
 });
 
 export const {
+  useDeleteLeadMutation, useRestoreLeadMutation,
   useGetLeadsQuery,
   useGetLeadByIdQuery,
   useGetLeadPipelineQuery,

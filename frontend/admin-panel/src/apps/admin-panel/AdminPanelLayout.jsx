@@ -41,7 +41,7 @@ const AdminPanelLayout = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
 
   // Live queries for navigation notification badges
-  const { data: leads = [] } = useGetLeadsQuery({});
+  const { data: leads = [] } = useGetLeadsQuery("all");
   const { data: jobs = [] } = useGetJobsQuery({});
   const newLeadsCount = leads.filter((l) => l.status === "new").length;
   const activeJobsCount = jobs.filter((j) => j.status === "scheduled" || j.status === "in_transit").length;
@@ -107,6 +107,7 @@ const AdminPanelLayout = () => {
       title: "Sales Pipeline",
       items: [
         { to: "/leads", label: "Leads", icon: Inbox },
+        { to: "/customers", label: "Customers", icon: Users },
         { to: "/quotes", label: "Quotes", icon: FileSpreadsheet },
       ],
     },
@@ -151,6 +152,7 @@ const AdminPanelLayout = () => {
   const getPageInfo = () => {
     const p = location.pathname;
     if (p.startsWith("/support")) return { title: "Contact & Support", category: "Customer care", desc: "Website messages, booking questions & feedback" };
+    if (p.startsWith("/customers")) return { title: "Customers", category: "Sales", desc: "Customer profiles & enquiry history" };
     if (p.startsWith("/leads")) return { title: "Inquiries & Leads", category: "Sales", desc: "Real-time web requests & customer calls" };
     if (p.startsWith("/quotes")) return { title: "Quotations", category: "Sales", desc: "Estimates & rate quotes issued" };
     if (p.startsWith("/jobs")) return { title: "Active Jobs & Moves", category: "Operations", desc: "Scheduled relocations, dispatch & crew assignment" };
@@ -528,20 +530,20 @@ const AdminPanelLayout = () => {
             type="button"
             onClick={() => setMobileMenuOpen(true)}
             className={`flex flex-col items-center justify-center py-1 rounded-xl transition-all outline-none focus:outline-none focus-visible:outline-none focus-visible:ring-0 cursor-pointer ${
-              ["/fleet", "/team", "/invoices", "/bilties", "/settings"].some((p) => location.pathname.startsWith(p))
+              ["/customers", "/fleet", "/team", "/invoices", "/bilties", "/settings"].some((p) => location.pathname.startsWith(p))
                 ? "text-brand-600 dark:text-brand-300 font-bold"
                 : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100"
             }`}
           >
             <div
               className={`p-1 rounded-xl transition-colors relative ${
-                ["/fleet", "/team", "/invoices", "/bilties", "/settings"].some((p) => location.pathname.startsWith(p))
+                ["/customers", "/fleet", "/team", "/invoices", "/bilties", "/settings"].some((p) => location.pathname.startsWith(p))
                   ? "bg-brand-50 dark:bg-brand-950"
                   : ""
               }`}
             >
               <Menu className="w-5 h-5" />
-              {["/fleet", "/team", "/invoices", "/bilties", "/settings"].some((p) => location.pathname.startsWith(p)) && (
+              {["/customers", "/fleet", "/team", "/invoices", "/bilties", "/settings"].some((p) => location.pathname.startsWith(p)) && (
                 <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-brand-600"></span>
               )}
             </div>

@@ -1,3 +1,4 @@
+import { customers } from "./customers";
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 import { sql } from "drizzle-orm";
 import { quotations } from "./quotations";
@@ -5,6 +6,7 @@ import { leads } from "./leads";
 
 export const jobs = sqliteTable("jobs", {
   id: integer("id").primaryKey({ autoIncrement: true }),
+  customerId: integer("customer_id").references(() => customers.id),
   jobNumber: text("job_number").notNull().unique(),
   quoteId: integer("quote_id").references(() => quotations.id),
   leadId: integer("lead_id").references(() => leads.id),

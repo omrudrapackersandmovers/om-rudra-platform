@@ -261,16 +261,17 @@ Scheduled Date: ${job.scheduledDate} ${job.scheduledTime ? `at ${job.scheduledTi
 
   return (
     <div className="space-y-6 pb-12 max-w-5xl mx-auto">
-      {/* Top Bar with Relational Breadcrumbs */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs">
-        <div className="flex items-center gap-2 flex-wrap text-xs">
-          <button
+      <div className="print:hidden"><button
             onClick={() => navigate("/jobs")}
-            className="p-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1 cursor-pointer"
+            className="inline-flex items-center gap-1.5 self-start px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Jobs</span>
-          </button>
+          </button></div>
+      {/* Top Bar with Relational Breadcrumbs */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs">
+        <div className="flex items-center gap-2 flex-wrap text-xs">
+
 
           {job.leadId && (
             <Link

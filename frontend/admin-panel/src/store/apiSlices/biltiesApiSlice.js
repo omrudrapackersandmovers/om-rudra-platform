@@ -18,6 +18,10 @@ export const biltiesApiSlice = baseApiSlice.injectEndpoints({
       transformResponse: (response) => response.bilty || response,
       providesTags: (result, error, id) => [{ type: "Bilties", id }],
     }),
+    updateBilty: builder.mutation({
+      query: ({ id, ...body }) => ({ url: `/bilties/${id}`, method: "PUT", body }),
+      invalidatesTags: (result, error, { id }) => [{ type: "Bilties", id }, { type: "Bilties", id: "LIST" }, { type: "Jobs", id: "LIST" }],
+    }),
     createBilty: builder.mutation({
       query: (body) => ({
         url: "/bilties",
@@ -36,4 +40,5 @@ export const {
   useGetBiltiesQuery,
   useGetBiltyByIdQuery,
   useCreateBiltyMutation,
+  useUpdateBiltyMutation,
 } = biltiesApiSlice;

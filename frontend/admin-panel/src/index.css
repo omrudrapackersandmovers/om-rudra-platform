@@ -23,6 +23,18 @@
   body {
     -webkit-tap-highlight-color: transparent;
   }
+
+  /* Keep numeric inputs and validation without browser spinner controls. */
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 /* Touch momentum and clean scrollbars for mobile & desktop pill tabs */

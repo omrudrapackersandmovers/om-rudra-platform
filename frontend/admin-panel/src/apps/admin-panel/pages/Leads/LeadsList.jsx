@@ -1,3 +1,4 @@
+import LeadDeleteButton from "./LeadDeleteButton";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import {
@@ -54,19 +55,7 @@ const LeadsList = () => {
     return map;
   }, [quotes]);
 
-  const findQuoteForLead = (lead) => {
-    if (quoteByLeadId[lead.id]) return quoteByLeadId[lead.id];
-    if (lead.phone) {
-      const cleanPhone = lead.phone.replace(/[^0-9]/g, "");
-      if (cleanPhone) {
-        const match = quotes.find(
-          (q) => q.customerPhone && q.customerPhone.replace(/[^0-9]/g, "") === cleanPhone
-        );
-        if (match) return match;
-      }
-    }
-    return null;
-  };
+  const findQuoteForLead = lead => quoteByLeadId[lead.id] || null;
 
   const handleSync = async () => {
     if (isSyncing) return;
@@ -204,11 +193,12 @@ const LeadsList = () => {
     );
   });
 
+  const { data: activeLeads = [] } = useGetLeadsQuery("all");
   // KPI Calculations
-  const totalLeads = leads.length;
-  const newLeadsCount = leads.filter((l) => l.status === "new").length;
-  const contactedCount = leads.filter((l) => l.status === "contacted").length;
-  const convertedCount = leads.filter((l) => l.status === "converted").length;
+  const totalLeads = activeLeads.length;
+  const newLeadsCount = activeLeads.filter((l) => l.status === "new").length;
+  const contactedCount = activeLeads.filter((l) => l.status === "contacted").length;
+  const convertedCount = activeLeads.filter((l) => l.status === "converted").length;
 
   const getStatusBadge = (status) => {
     switch (status) {
@@ -373,10 +363,11 @@ const LeadsList = () => {
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-xs">
           {[
             { id: "all", label: "All Leads", count: totalLeads },
+            { id: "deleted", label: "Deleted" },
             { id: "new", label: "New", count: newLeadsCount },
             { id: "contacted", label: "Contacted", count: contactedCount },
             { id: "converted", label: "Converted", count: convertedCount },
-            { id: "lost", label: "Lost", count: leads.filter((l) => l.status === "lost").length },
+            { id: "lost", label: "Lost", count: activeLeads.filter((l) => l.status === "lost").length },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -522,19 +513,20 @@ const LeadsList = () => {
                 )}
               </div>
 
+              <div className="flex items-center justify-between">{lead.customerId && <button onClick={()=>navigate(`/customers/${lead.customerId}`)} title="View all enquiries and documents for this customer" className="cursor-pointer text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-300">Customer Profile & History</button>}<LeadDeleteButton lead={lead}/></div>
               {/* Bottom Actions Area */}
               <div className="space-y-2.5 pt-2 border-t border-slate-100 dark:border-slate-800">
-                {/* View Full Customer Pipeline CTA */}
+                {/* View This Lead and Its Documents */}
                 <button
                   onClick={() => navigate(`/leads/${lead.id}`)}
                   className="w-full flex items-center justify-center gap-1.5 py-2 px-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold cursor-pointer transition-colors shadow-2xs"
                 >
                   <TrendingUp className="w-3.5 h-3.5 text-brand-400" />
-                  <span>View Customer Pipeline & Relocation Tree →</span>
+                  <span>View Lead & Documents →</span>
                 </button>
 
                 {/* Communication & Conversion Buttons */}
-                <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
+                {!lead.deletedAt && <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
                   <a
                     href={`tel:${lead.phone}`}
                     className="flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 px-1 sm:px-2 bg-emerald-50 dark:bg-emerald-950 hover:bg-emerald-100 dark:hover:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-semibold text-[11px] sm:text-xs rounded-xl transition-colors text-center border border-emerald-200/60 dark:border-emerald-800/60"
@@ -596,7 +588,7 @@ const LeadsList = () => {
                       </button>
                     );
                   })()}
-                </div>
+                </div>}
 
                 {/* Quick Status Pill Bar */}
                 <div className="flex items-center justify-between text-[11px] pt-1">
@@ -605,6 +597,7 @@ const LeadsList = () => {
                     {["new", "contacted", "converted", "lost"].map((st) => (
                       <button
                         key={st}
+                        disabled={!!lead.deletedAt}
                         onClick={() => handleUpdateStatus(lead.id, st)}
                         className={`px-2 py-0.5 rounded-md capitalize font-medium transition-all ${
                           lead.status === st

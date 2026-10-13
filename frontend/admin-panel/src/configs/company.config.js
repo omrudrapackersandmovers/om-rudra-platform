@@ -6,7 +6,7 @@
 
 export const companyConfig = {
   id: "1stom",
-  name: "Om Rudra Packers and Movers",
+  name: "Om Rudra Packers and Movers Pvt. Ltd.",
   shortName: "Om Rudra",
   tagline: "Safer Moves, Brighter Tomorrows",
   phone: "+91 7033488691",
@@ -30,7 +30,7 @@ export const companyConfig = {
 
   // Business & Tax Compliance
   legal: {
-    legalName: "Om Rudra Packers and Movers",
+    legalName: "Om Rudra Packers and Movers Pvt. Ltd.",
     gstin: "",
     pan: "",
   },
@@ -87,4 +87,12 @@ export const companyConfig = {
       "No claims entertained after delivery verification is signed.",
     ],
   },
+};
+
+// Normalize the previous saved company name for document branding as well.
+export const getDocumentCompanyName = (name) => {
+  const value = name?.trim() || companyConfig.name;
+  return /^Om Rudra Packers and Movers(?:\s+(?:Private Limited|Pvt\.?\s*Ltd\.?))?$/i.test(value)
+    ? companyConfig.name
+    : value;
 };

@@ -1,3 +1,4 @@
+import { handleGetCustomers, handleGetCustomer, handleUpdateCustomer, handleDeleteLead, handleRestoreLead } from "../controllers/customers.controller";
 import { Hono } from "hono";
 import { handleGetSupport, handleUpdateSupport, handleCreateComplaint, handleSearchSupportReferences } from "../controllers/support.controller";
 import {
@@ -34,6 +35,7 @@ import {
   handleRecordInvoicePayment,
   handleGetInvoicePayments,
   handleCreateBilty,
+  handleUpdateBilty,
   handleGetBilties,
   handleGetBiltyById,
   handleGetSettings,
@@ -108,6 +110,11 @@ adminRouter.patch("/profile", handleUpdateAdminProfile);
 adminRouter.patch("/change-password", handleChangePassword);
 adminRouter.patch("/toggle-2fa", handleToggle2FA);
 
+adminRouter.get("/customers", handleGetCustomers);
+adminRouter.get("/customers/:id", handleGetCustomer);
+adminRouter.patch("/customers/:id", handleUpdateCustomer);
+adminRouter.delete("/leads/:id", handleDeleteLead);
+adminRouter.post("/leads/:id/restore", handleRestoreLead);
 // Leads & Pipeline
 adminRouter.get("/leads", handleGetLeads);
 adminRouter.post("/leads/manual", handleCreateManualLead);
@@ -163,6 +170,7 @@ adminRouter.get("/invoices/:id/payments", handleGetInvoicePayments);
 // Bilties
 adminRouter.get("/bilties", handleGetBilties);
 adminRouter.post("/bilties", handleCreateBilty);
+adminRouter.put("/bilties/:id", handleUpdateBilty);
 adminRouter.get("/bilties/:id", handleGetBiltyById);
 
 // Finance & Analytics

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
+import BiltyDetails from "./BiltyDetails";
 import { useParams, useNavigate } from "react-router";
 import {
   ArrowLeft,
@@ -12,10 +13,11 @@ import {
 } from "lucide-react";
 import { useGetBiltyByIdQuery } from "../../../../store/apiSlices/biltiesApiSlice";
 import { useGetSettingsQuery } from "../../../../store/apiSlices/settingsApiSlice";
-import { companyConfig } from "../../../../configs/company.config";
+import { companyConfig, getDocumentCompanyName } from "../../../../configs/company.config";
 
 const BiltyView = () => {
   const { id } = useParams();
+  const [copyType, setCopyType] = useState("Consignor copy");
   const navigate = useNavigate();
 
   const { data: bilty, isLoading: loading } = useGetBiltyByIdQuery(id);
@@ -23,6 +25,7 @@ const BiltyView = () => {
   const company = {
     ...companyConfig,
     ...(dbSettings || {}),
+    name: getDocumentCompanyName(dbSettings?.name),
     headOffice: {
       ...companyConfig.headOffice,
       ...(dbSettings?.headOffice || {}),
@@ -41,6 +44,7 @@ const BiltyView = () => {
       return "-";
     }
     try {
+      if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return new Date(`${dateStr}T00:00:00`).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
       const s = dateStr.includes("T") ? dateStr : dateStr.replace(" ", "T") + "Z";
       const d = new Date(s);
       return isNaN(d.getTime())
@@ -85,17 +89,24 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
 
   return (
     <div className="print-document-page space-y-6 pb-10 max-w-5xl mx-auto">
-      {/* Top Bar (Hidden in Print) */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 print:hidden bg-white dark:bg-slate-900 sm:bg-transparent p-3 sm:p-0 rounded-2xl border sm:border-0 border-slate-200/80 dark:border-slate-700/80 shadow-2xs sm:shadow-none">
-        <button
+      <div className="print:hidden"><button
           onClick={() => navigate("/bilties")}
-          className="p-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1 text-xs cursor-pointer transition-colors self-start"
+          className="inline-flex items-center gap-1.5 self-start px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Bilties List</span>
-        </button>
+        </button></div>
+      {/* Top Bar (Hidden in Print) */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 print:hidden bg-white dark:bg-slate-900 sm:bg-transparent p-3 sm:p-0 rounded-2xl border sm:border-0 border-slate-200/80 dark:border-slate-700/80 shadow-2xs sm:shadow-none">
 
-        <div className="grid grid-cols-2 sm:flex items-center gap-2 w-full sm:w-auto">
+
+        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+          <button type="button" onClick={() => navigate(`/bilties/${id}/edit`)} className="px-3 py-2 rounded-xl border border-slate-300 text-xs font-semibold">Edit / record delivery</button>
+          <label className="text-xs">Print copy
+            <select aria-label="Print copy" value={copyType} onChange={event => setCopyType(event.target.value)} className="ml-2 p-2 rounded-xl border border-slate-300 bg-white dark:bg-slate-900">
+              {["Consignor copy", "Consignee copy", "Transporter copy"].map(copy => <option key={copy}>{copy}</option>)}
+            </select>
+          </label>
           <button
             onClick={handleDownloadPdf}
             className="flex items-center justify-center gap-1.5 py-2 px-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors cursor-pointer"
@@ -120,7 +131,9 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
       </div>
 
       {/* Official Lorry Receipt / Bilty Printable Sheet */}
-      <div className="print-document bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-800 p-3.5 sm:p-8 shadow-sm space-y-5 print:border-2 print:border-black print:shadow-none print:p-4">
+      <div className="print-document bg-white dark:bg-slate-900 rounded-2xl p-3.5 sm:p-8 shadow-sm space-y-5 print:shadow-none print:p-4">
+        <p className="text-right text-[10px] uppercase font-bold text-slate-500">{copyType}</p>
+        {bilty.hazardousGoods && <p className="font-bold text-brand-700 text-sm">DANGEROUS AND HAZARDOUS GOODS</p>}
         {/* Centered Brand Logo at Top */}
         <div className="flex justify-center items-center pb-2">
           <img
@@ -157,13 +170,13 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
             </p>
           </div>
 
-          <div className="sm:text-right border-2 border-slate-900 p-2 rounded-xl bg-slate-50 dark:bg-slate-950 min-w-44 shrink-0">
+          <div className="sm:text-right p-2 rounded-xl bg-slate-50 dark:bg-slate-950 min-w-44 shrink-0">
             <span className="block text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400">
               CONSIGNMENT NOTE (LR)
             </span>
             <p className="text-base font-black font-mono text-brand-900 dark:text-brand-300">{bilty.lrNumber}</p>
             <p className="text-xs text-slate-700 dark:text-slate-200 font-semibold">
-              Date: {formatDate(bilty.createdAt)}
+              Date: {formatDate(bilty.documentDate || bilty.createdAt)}
             </p>
           </div>
         </div>
@@ -224,10 +237,10 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
             </thead>
             <tbody className="divide-y divide-slate-200 dark:divide-slate-700 text-slate-800 dark:text-slate-100">
               <tr>
-                <td className="py-3 px-3 font-mono font-bold text-sm">{bilty.packagesCount} Boxes</td>
+                <td className="py-3 px-3 font-mono font-bold text-sm">{bilty.packagesCount} {bilty.packageType || "Packages"}</td>
                 <td className="py-3 px-3">
                   <p className="font-semibold">{bilty.goodsDescription}</p>
-                  <p className="text-[10px] text-slate-500 dark:text-slate-400">Carefully packed in corrugated boxes & bubble wrap.</p>
+
                 </td>
                 <td className="py-3 px-3 text-right font-mono font-bold">
                   ₹{bilty.declaredValue.toLocaleString("en-IN")}
@@ -245,6 +258,8 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
           </table>
         </div>
 
+        <BiltyDetails bilty={bilty} />
+
         {/* Legal Terms & Signatures */}
         <div className="space-y-4 pt-2 print-avoid-break">
           <div className="text-[10px] text-slate-500 dark:text-slate-400 space-y-0.5 border-t border-slate-200 dark:border-slate-700 pt-2">
@@ -261,13 +276,14 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
             </ul>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 pt-6 text-center text-[11px] font-bold text-slate-700 dark:text-slate-200">
+          <div className="grid grid-cols-2 sm:grid-cols-4 print:grid-cols-4 gap-4 pt-6 text-center text-[11px] font-bold text-slate-700 dark:text-slate-200">
             <div className="border-t border-slate-400 pt-1">
               Consignor / Sender Signature
             </div>
             <div className="border-t border-slate-400 pt-1">
               Driver Signature
             </div>
+            <div className="border-t border-slate-400 pt-1">Receiver Signature / Stamp</div>
             <div className="border-t border-slate-400 pt-1">
               For {company.name || "Om Rudra Packers and Movers"}
             </div>

@@ -1,3 +1,4 @@
+import LeadDeleteButton from "./LeadDeleteButton";
 import React, { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router";
 import {
@@ -72,7 +73,7 @@ const LeadDetail = () => {
   };
 
   if (loading) {
-    return <div className="text-center py-12 text-slate-400 text-sm">Loading customer pipeline...</div>;
+    return <div className="text-center py-12 text-slate-400 text-sm">Loading lead details...</div>;
   }
 
   if (!lead) {
@@ -81,35 +82,41 @@ const LeadDetail = () => {
 
   return (
     <div className="space-y-6 pb-12 max-w-5xl mx-auto">
-      {/* Top Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs">
-        <div className="flex items-center gap-3">
-          <button
+      <div className="print:hidden"><button
             onClick={() => navigate("/leads")}
-            className="p-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1 text-xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 self-start px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Leads</span>
-          </button>
+          </button></div>
+      {/* Top Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs">
+        <div className="flex items-center gap-3">
+
           <div>
             <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
-              Customer Pipeline #{lead.id}
+              Lead #{lead.id}
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400">End-to-end relocation lifecycle & linked documents</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Details, progress and documents for this enquiry</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
+        <div className="flex items-center gap-1.5 shrink-0">
+          <LeadDeleteButton lead={lead} iconOnly/>
+          {lead.customerId && <Link to={`/customers/${lead.customerId}`} title="Customer Profile & History" aria-label="Customer Profile & History" className="cursor-pointer w-10 h-10 inline-flex items-center justify-center rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-brand-600 dark:hover:text-brand-300 transition-colors"><User className="w-4 h-4"/></Link>}
+          {lead.deletedAt && <span className="text-amber-700 text-xs">Deleted enquiry</span>}
           {quotes.length > 0 ? (
             <>
               <Link
                 to={`/quotes/${quotes[0].id}`}
-                className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-xs shadow-brand-500/20 transition-all cursor-pointer"
+                title="View / Edit Quote"
+                className="w-10 h-10 flex items-center justify-center bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold  rounded-xl shadow-xs shadow-brand-500/20 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <FileSpreadsheet className="w-4 h-4" />
-                <span>View / Edit Quote</span>
+                <span className="sr-only">View / Edit Quote</span>
               </Link>
               <button
+                disabled={!!lead.deletedAt}
                 onClick={() =>
                   navigate(
                     `/quotes/new?leadId=${lead.id}&name=${encodeURIComponent(
@@ -123,15 +130,16 @@ const LeadDetail = () => {
                     )}&to=${encodeURIComponent(lead.movingTo)}&service=${encodeURIComponent(lead.service || "")}&moveType=${encodeURIComponent(lead.moveType || "")}&timeline=${encodeURIComponent(lead.timeline || "")}`
                   )
                 }
-                className="flex items-center justify-center gap-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold px-3 py-2.5 rounded-xl transition-all cursor-pointer"
-                title="Create an alternative quotation for this customer"
+                className="w-10 h-10 flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold  rounded-xl transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                title="Add Another Quote"
               >
                 <Plus className="w-4 h-4" />
-                <span className="hidden sm:inline">Add Another Quote</span>
+                <span className="sr-only">Add Another Quote</span>
               </button>
             </>
           ) : (
-            <button
+            <button title="Create Quote"
+              disabled={!!lead.deletedAt}
               onClick={() =>
                 navigate(
                   `/quotes/new?leadId=${lead.id}&name=${encodeURIComponent(
@@ -145,10 +153,10 @@ const LeadDetail = () => {
                   )}&to=${encodeURIComponent(lead.movingTo)}&service=${encodeURIComponent(lead.service || "")}&moveType=${encodeURIComponent(lead.moveType || "")}&timeline=${encodeURIComponent(lead.timeline || "")}`
                 )
               }
-              className="w-full sm:w-auto flex items-center justify-center gap-1.5 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-xs shadow-brand-500/20 transition-all cursor-pointer"
+              className="w-10 h-10 flex items-center justify-center bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold  rounded-xl shadow-xs shadow-brand-500/20 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Plus className="w-4 h-4" />
-              <span>Create Quote</span>
+              <span className="sr-only">Create Quote</span>
             </button>
           )}
         </div>
@@ -214,6 +222,7 @@ const LeadDetail = () => {
             {["new", "contacted", "converted", "lost"].map((st) => (
               <button
                 key={st}
+                disabled={!!lead.deletedAt}
                 onClick={() => handleStatusChange(st)}
                 className={`py-1.5 px-2 sm:px-3 text-center rounded-lg capitalize text-xs transition-colors cursor-pointer ${
                   lead.status === st
@@ -250,7 +259,7 @@ const LeadDetail = () => {
         {/* Notes */}
         <div className="text-xs space-y-1.5">
           <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 font-semibold">
-            <span>Customer Notes / Communication Log:</span>
+            <span>Lead Notes / Communication Log:</span>
             {!isEditingNotes && (
               <button
                 onClick={() => {
@@ -279,6 +288,7 @@ const LeadDetail = () => {
                   Cancel
                 </button>
                 <button
+                  disabled={!!lead.deletedAt}
                   onClick={handleSaveNotes}
                   className="px-3 py-1 bg-brand-600 text-white font-semibold rounded-lg text-xs"
                 >
@@ -314,10 +324,11 @@ const LeadDetail = () => {
             <div>
               <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">No Quotations Created Yet</h4>
               <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto mt-1">
-                To start this customer's relocation pipeline, generate their formal quote with inventory and pricing.
+                Generate a quote with inventory and pricing for this enquiry.
               </p>
             </div>
             <button
+              disabled={!!lead.deletedAt}
               onClick={() =>
                 navigate(
                   `/quotes/new?leadId=${lead.id}&name=${encodeURIComponent(

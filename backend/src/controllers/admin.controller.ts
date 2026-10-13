@@ -1,3 +1,4 @@
+import { biltyInputSchema } from "../validators/bilty";
 import { Context } from "hono";
 import { z } from "zod";
 import { verify, sign } from "hono/jwt";
@@ -32,6 +33,7 @@ import {
   getInvoiceById,
   updateInvoicePayment,
   createBilty,
+  updateBilty,
   getAllBilties,
   getBiltyById,
   getCompanySettings,
@@ -720,14 +722,33 @@ export const handleUpdateInvoicePayment = async (c: Context<{ Bindings: Bindings
 export const handleCreateBilty = async (c: Context<{ Bindings: Bindings }>) => {
   try {
     const body = await c.req.json();
-    if (!body.consignorName || !body.consigneeName || !body.truckNumber) {
-      return c.json({ error: "Consignor, consignee, and truck number are required." }, 400);
-    }
-    const bilty = await createBilty(c.env, body);
+    const parsed = biltyInputSchema.safeParse(body);
+    if (!parsed.success) return c.json({ error: "Please correct the bilty details", fields: parsed.error.flatten().fieldErrors }, 400);
+    if (parsed.data.jobId && !(await getJobById(c.env, parsed.data.jobId))) return c.json({ error: "Linked job not found", fields: { jobId: ["Select an existing job"] } }, 400);
+    const bilty = await createBilty(c.env, parsed.data);
     return c.json({ success: true, bilty }, 201);
   } catch (err) {
+    if (err instanceof SyntaxError) return c.json({ error: "Invalid JSON request" }, 400);
     console.error("Create bilty error:", err);
     return c.json({ error: "Failed to create bilty" }, 500);
+  }
+};
+
+export const handleUpdateBilty = async (c: Context<{ Bindings: Bindings }>) => {
+  const id = parseId(c.req.param("id"));
+  if (!id) return c.json({ error: "Invalid bilty ID" }, 400);
+  try {
+    const body = await c.req.json();
+    const parsed = biltyInputSchema.safeParse(body);
+    if (!parsed.success) return c.json({ error: "Please correct the bilty details", fields: parsed.error.flatten().fieldErrors }, 400);
+    if (parsed.data.jobId && !(await getJobById(c.env, parsed.data.jobId))) return c.json({ error: "Linked job not found", fields: { jobId: ["Select an existing job"] } }, 400);
+    const bilty = await updateBilty(c.env, id, parsed.data);
+    if (!bilty) return c.json({ error: "Bilty not found" }, 404);
+    return c.json({ success: true, bilty });
+  } catch (err) {
+    if (err instanceof SyntaxError) return c.json({ error: "Invalid JSON request" }, 400);
+    console.error("Update bilty error:", err);
+    return c.json({ error: "Failed to update bilty" }, 500);
   }
 };
 

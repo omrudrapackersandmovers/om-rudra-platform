@@ -1,3 +1,4 @@
+import { ensureCustomer } from "./customers.service";
 import { createDbClient } from "../db/client";
 import { leads, NewLead } from "../db/schema/leads";
 import { Bindings } from "../types";
@@ -19,6 +20,7 @@ export const createLead = async (
   const db = createDbClient(env.DB);
 
   const newLeadRecord: NewLead = {
+    customerId: await ensureCustomer(env, leadData.name, leadData.phone, leadData.email),
     name: leadData.name.trim(),
     phone: leadData.phone.trim(),
     movingFrom: leadData.movingFrom.trim(),

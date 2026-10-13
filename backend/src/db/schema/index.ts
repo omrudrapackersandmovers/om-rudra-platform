@@ -9,3 +9,5 @@ export * from "./vehicles";
 export * from "./staff";
 export * from "./job_resources";
 export * from "./invoice_payments";
+
+export * from "./customers";

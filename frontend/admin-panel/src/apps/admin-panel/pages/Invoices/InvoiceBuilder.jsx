@@ -30,9 +30,9 @@ const InvoiceBuilder = () => {
     }
   }, [dbSettings]);
 
-  const [subtotal, setSubtotal] = useState(15000);
+  const [subtotal, setSubtotal] = useState("");
   const [gstRate, setGstRate] = useState(18); // 0, 5, 18
-  const [advancePaid, setAdvancePaid] = useState(5000);
+  const [advancePaid, setAdvancePaid] = useState("");
   const [paymentMode, setPaymentMode] = useState("UPI");
 
   const [errors, setErrors] = useState({});
@@ -60,7 +60,9 @@ const InvoiceBuilder = () => {
     }
     if (!pickupAddress.trim()) errs.pickupAddress = "Pickup address is required";
     if (!deliveryAddress.trim()) errs.deliveryAddress = "Delivery address is required";
-    if (Number(subtotal) <= 0) errs.subtotal = "Subtotal must be greater than 0";
+    if (!Number.isFinite(Number(subtotal)) || Number(subtotal) <= 0) errs.subtotal = "Subtotal must be greater than 0";
+    if (!Number.isFinite(Number(advancePaid)) || Number(advancePaid) < 0) errs.advancePaid = "Advance payment cannot be negative";
+    else if (Number(advancePaid) > totalAmount) errs.advancePaid = "Advance payment cannot exceed the invoice total";
     if (customerGstin.trim() && !/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/.test(customerGstin.trim())) {
       errs.customerGstin = "Invalid GSTIN format (e.g. 20AAAAA0000A1Z5)";
     }
@@ -105,16 +107,17 @@ const InvoiceBuilder = () => {
     <div className="space-y-6 pb-10">
       <UnsavedModal />
 
+      <div className="print:hidden"><button aria-label="Back"
+            type="button"
+            onClick={() => confirmNavigation(jobId ? `/jobs/${jobId}` : "/invoices")}
+            className="inline-flex items-center gap-1.5 self-start px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+          >
+            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+          <span>Back</span></button></div>
       {/* Top Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs">
         <div className="flex items-center gap-2.5 sm:gap-3">
-          <button
-            type="button"
-            onClick={() => confirmNavigation(jobId ? `/jobs/${jobId}` : "/invoices")}
-            className="p-1.5 sm:p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer"
-          >
-            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-          </button>
+
           <div>
             <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">Create GST Tax Invoice</h2>
             <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">Official moving invoice with HSN/SAC code & UPI QR code</p>
@@ -157,6 +160,7 @@ const InvoiceBuilder = () => {
             <FormField label="Customer / Company Name" required error={errors.customerName}>
               <input
                 type="text"
+                placeholder="Enter customer / company name"
                 value={customerName}
                 onChange={handleFieldChange(setCustomerName)}
                 className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none"
@@ -187,6 +191,7 @@ const InvoiceBuilder = () => {
             <FormField label="HSN / SAC Code">
               <input
                 type="text"
+                placeholder="Enter HSN / SAC code"
                 value={sacCode}
                 onChange={handleFieldChange(setSacCode)}
                 className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm font-mono focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none"
@@ -196,6 +201,7 @@ const InvoiceBuilder = () => {
             <FormField label="Pickup Address" required error={errors.pickupAddress}>
               <input
                 type="text"
+                placeholder="Enter complete pickup address"
                 value={pickupAddress}
                 onChange={handleFieldChange(setPickupAddress)}
                 className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none"
@@ -205,6 +211,7 @@ const InvoiceBuilder = () => {
             <FormField label="Delivery Address" required error={errors.deliveryAddress}>
               <input
                 type="text"
+                placeholder="Enter complete delivery address"
                 value={deliveryAddress}
                 onChange={handleFieldChange(setDeliveryAddress)}
                 className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl text-xs sm:text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none"
@@ -225,6 +232,7 @@ const InvoiceBuilder = () => {
               <input
                 type="number"
                 min="1"
+                placeholder="Enter total shifting charges"
                 value={subtotal}
                 onChange={handleFieldChange(setSubtotal)}
                 className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl font-mono text-xs sm:text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none"
@@ -253,10 +261,11 @@ const InvoiceBuilder = () => {
               </div>
             </FormField>
 
-            <FormField label="Advance Paid Amount (₹)">
+            <FormField label="Advance Paid Amount (₹)" error={errors.advancePaid}>
               <input
                 type="number"
                 min="0"
+                placeholder="0 if no advance payment received"
                 value={advancePaid}
                 onChange={handleFieldChange(setAdvancePaid)}
                 className="w-full px-3.5 py-2.5 border border-slate-300 dark:border-slate-600 rounded-xl font-mono text-xs sm:text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none"

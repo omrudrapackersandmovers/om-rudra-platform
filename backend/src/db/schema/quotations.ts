@@ -1,9 +1,11 @@
+import { customers } from "./customers";
 import { sqliteTable, text, integer, real } from "drizzle-orm/sqlite-core";
 import { sql } from "drizzle-orm";
 import { leads } from "./leads";
 
 export const quotations = sqliteTable("quotations", {
   id: integer("id").primaryKey({ autoIncrement: true }),
+  customerId: integer("customer_id").references(() => customers.id),
   quoteNumber: text("quote_number").notNull().unique(),
   leadId: integer("lead_id").references(() => leads.id),
   customerName: text("customer_name").notNull(),

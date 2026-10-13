@@ -296,16 +296,17 @@ const QuoteBuilder = () => {
     <div className="space-y-6 pb-10">
       <UnsavedModal />
 
+      <div className="print:hidden"><button aria-label="Back"
+            type="button"
+            onClick={() => confirmNavigation(isEditMode ? `/quotes/${id}` : (leadId ? `/leads/${leadId}` : "/quotes"))}
+            className="inline-flex items-center gap-1.5 self-start px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+          >
+            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+          <span>Back</span></button></div>
       {/* Top Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs">
         <div className="flex items-center gap-2.5 sm:gap-3">
-          <button
-            type="button"
-            onClick={() => confirmNavigation(isEditMode ? `/quotes/${id}` : (leadId ? `/leads/${leadId}` : "/quotes"))}
-            className="p-1.5 sm:p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer"
-          >
-            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-          </button>
+
           <div>
             <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
               {isEditMode ? `Edit Quotation #${existingQuote?.quoteNumber || id}` : "Create Quotation"}
@@ -505,17 +506,27 @@ const QuoteBuilder = () => {
           <div>
             <p className="text-xs text-slate-500 dark:text-slate-400 mb-2 font-medium">Click to add common items:</p>
             <div className="flex flex-wrap gap-1.5">
-              {COMMON_ITEMS.map((item, idx) => (
-                <button
-                  type="button"
-                  key={idx}
-                  onClick={() => handleAddItem(item)}
-                  className="px-2.5 py-1 bg-slate-50 dark:bg-slate-950 hover:bg-brand-50 dark:hover:bg-brand-950 hover:text-brand-700 dark:hover:text-brand-300 hover:border-brand-200 dark:hover:border-brand-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-lg text-xs font-medium transition-all flex items-center gap-1 cursor-pointer"
-                >
-                  <Plus className="w-3 h-3" />
-                  <span>{item.name}</span>
-                </button>
-              ))}
+              {COMMON_ITEMS.map((item) => {
+                const addedItem = selectedItems.find((selected) => selected.name === item.name);
+                return (
+                  <button
+                    type="button"
+                    key={item.name}
+                    onClick={() => handleAddItem(item)}
+                    aria-label={addedItem ? `Add another ${item.name}; ${addedItem.qty} already added` : `Add ${item.name}`}
+                    title={addedItem ? "Already added. Click to increase quantity." : "Add to inventory"}
+                    className={`px-2.5 py-1 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-medium transition-all flex items-center gap-1 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 ${
+                      addedItem
+                        ? "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 opacity-75 hover:opacity-100 focus-visible:opacity-100"
+                        : "bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-200 hover:bg-brand-50 dark:hover:bg-brand-950 hover:text-brand-700 dark:hover:text-brand-300 hover:border-brand-200 dark:hover:border-brand-800"
+                    }`}
+                  >
+                    {addedItem ? <CheckCircle className="w-3 h-3" /> : <Plus className="w-3 h-3" />}
+                    <span>{item.name}</span>
+                    {addedItem && <span className="font-mono text-[10px]">×{addedItem.qty}</span>}
+                  </button>
+                );
+              })}
             </div>
           </div>
 

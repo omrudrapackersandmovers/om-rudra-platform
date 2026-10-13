@@ -204,16 +204,17 @@ const StaffDetail = () => {
 
   return (
     <div className="space-y-4 sm:space-y-5 pb-28 sm:pb-16 max-w-6xl mx-auto px-1 sm:px-0">
-      {/* Top Action Row */}
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
-        {/* Row 1 (mobile) / Left side (desktop): Back button */}
-        <button
+      <div className="print:hidden"><button
           onClick={() => navigate("/team")}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 px-2 sm:px-2.5 py-1.5 rounded-xl hover:bg-white dark:hover:bg-slate-900 hover:border-slate-200 dark:hover:border-slate-700 border border-transparent transition-all cursor-pointer self-start"
+          className="inline-flex items-center gap-1.5 self-start px-2 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Team Roster</span>
-        </button>
+        </button></div>
+      {/* Top Action Row */}
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+        {/* Row 1 (mobile) / Left side (desktop): Back button */}
+
 
         {/* Row 2 (mobile) / Right side (desktop): Action buttons */}
         <div className="grid grid-cols-3 gap-2 sm:flex sm:items-center sm:gap-2">

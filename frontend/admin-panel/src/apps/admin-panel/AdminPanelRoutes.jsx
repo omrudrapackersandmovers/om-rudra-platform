@@ -1,3 +1,4 @@
+import Customers from "./pages/Customers/Customers";
 import React from "react";
 import { Route, Routes, Navigate } from "react-router";
 
@@ -65,6 +66,8 @@ const AdminPanelRoutes = () => {
         <Route index element={<Navigate to="/leads" replace />} />
 
         {/* Leads */}
+        <Route path="customers" element={<Customers />} />
+        <Route path="customers/:id" element={<Customers />} />
         <Route path="leads" element={<LeadsList />} />
         <Route path="support" element={<SupportInbox />} />
         <Route path="leads/:id" element={<LeadDetail />} />
@@ -91,6 +94,7 @@ const AdminPanelRoutes = () => {
         {/* Bilties */}
         <Route path="bilties" element={<BiltiesList />} />
         <Route path="bilties/new" element={<BiltyBuilder />} />
+        <Route path="bilties/:id/edit" element={<BiltyBuilder />} />
         <Route path="bilties/:id" element={<BiltyView />} />
 
         {/* Finance */}

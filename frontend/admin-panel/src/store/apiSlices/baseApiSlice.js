@@ -33,7 +33,7 @@ export const baseApiSlice = createApi({
   tagTypes: [
     "Settings",
     "AdminProfile",
-    "Leads",
+    "Leads", "Customers",
     "Quotes",
     "Jobs",
     "Invoices",

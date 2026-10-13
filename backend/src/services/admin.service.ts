@@ -1,4 +1,6 @@
-import { eq, desc, or, and, ne } from "drizzle-orm";
+import { ensureCustomer } from "./customers.service";
+import { biltyInputSchema, getBiltyTotal, type BiltyInput } from "../validators/bilty";
+import { eq, desc, or, and, ne, isNull, isNotNull } from "drizzle-orm";
 import { getDb } from "../db/client";
 import { admins, quotations, jobs, invoices, bilties, leads, companySettings } from "../db/schema";
 import { hashPassword, verifyPassword, timingSafeEqual } from "../utils/crypto";
@@ -290,14 +292,11 @@ export const verifyAdminOtp = async (
 
 export const getAllLeads = async (env: Bindings, statusFilter?: string) => {
   const db = getDb(env.DB);
-  if (statusFilter && statusFilter !== "all") {
-    return await db
-      .select()
-      .from(leads)
-      .where(and(eq(leads.status, statusFilter as never), ne(leads.moveType, "Contact enquiry")))
-      .orderBy(desc(leads.createdAt));
-  }
-  return await db.select().from(leads).where(ne(leads.moveType, "Contact enquiry")).orderBy(desc(leads.createdAt));
+  return db.select().from(leads).where(and(
+    ne(leads.moveType, "Contact enquiry"),
+    statusFilter === "deleted" ? isNotNull(leads.deletedAt) : isNull(leads.deletedAt),
+    statusFilter && !["all", "deleted"].includes(statusFilter) ? eq(leads.status, statusFilter as never) : undefined
+  )).orderBy(desc(leads.createdAt));
 };
 
 export const getLeadById = async (env: Bindings, id: number) => {
@@ -318,7 +317,7 @@ export const updateLeadStatusAndNotes = async (
       ...(data.status ? { status: data.status } : {}),
       ...(data.notes !== undefined ? { notes: data.notes } : {}),
     })
-    .where(and(eq(leads.id, leadId), ne(leads.moveType, "Contact enquiry")))
+    .where(and(eq(leads.id, leadId), ne(leads.moveType, "Contact enquiry"), isNull(leads.deletedAt)))
     .returning();
   return updated[0];
 };
@@ -341,6 +340,7 @@ export const createManualLead = async (
   const inserted = await db
     .insert(leads)
     .values({
+      customerId: await ensureCustomer(env, data.name, data.phone, data.email),
       name: data.name,
       phone: data.phone,
       movingFrom: data.movingFrom,
@@ -398,6 +398,7 @@ export const createQuotation = async (
     .values({
       quoteNumber,
       leadId: data.leadId || null,
+      customerId: await ensureCustomer(env, data.customerName, data.customerPhone),
       customerName: data.customerName,
       customerPhone: data.customerPhone,
       movingFrom: data.movingFrom,
@@ -517,6 +518,7 @@ export const createJob = async (
       jobNumber,
       quoteId: data.quoteId || null,
       leadId: data.leadId || null,
+      customerId: await ensureCustomer(env, data.customerName, data.customerPhone),
       customerName: data.customerName,
       customerPhone: data.customerPhone,
       pickupAddress: data.pickupAddress,
@@ -619,6 +621,7 @@ export const createInvoice = async (
       invoiceNumber,
       jobId: data.jobId || null,
       quoteId: data.quoteId || null,
+      customerId: await ensureCustomer(env, data.customerName, data.customerPhone),
       customerName: data.customerName,
       customerPhone: data.customerPhone,
       customerGstin: data.customerGstin || null,
@@ -693,59 +696,29 @@ export const updateInvoicePayment = async (
 
 // ================= BILTIES (LR) ================= //
 
-export const createBilty = async (
-  env: Bindings,
-  data: {
-    jobId?: number;
-    consignorName: string;
-    consignorAddress: string;
-    consignorPhone: string;
-    consigneeName: string;
-    consigneeAddress: string;
-    consigneePhone: string;
-    fromCity: string;
-    toCity: string;
-    truckNumber: string;
-    driverName: string;
-    driverPhone: string;
-    packagesCount: number;
-    goodsDescription: string;
-    declaredValue: number;
-    freightAmount: number;
-    freightStatus: "paid" | "to_pay";
-    riskType: "owner_risk" | "carrier_risk";
-  }
-) => {
+// Validate at the service boundary as well as the HTTP boundary.
+const prepareBiltyData = (input: BiltyInput) => {
+  const data = biltyInputSchema.parse(input);
+  const total = getBiltyTotal(data);
+  const advancePaid = data.advancePaid ?? (data.freightStatus === "paid" ? total : 0);
+  return { ...data, jobId: data.jobId ?? null, advancePaid,
+    freightStatus: advancePaid >= total ? "paid" as const : "to_pay" as const };
+};
+
+export const createBilty = async (env: Bindings, input: BiltyInput) => {
   const db = getDb(env.DB);
-  const lrNumber = generateDocNumber("1OM-LR");
-
-  const inserted = await db
-    .insert(bilties)
-    .values({
-      lrNumber,
-      jobId: data.jobId || null,
-      consignorName: data.consignorName,
-      consignorAddress: data.consignorAddress,
-      consignorPhone: data.consignorPhone,
-      consigneeName: data.consigneeName,
-      consigneeAddress: data.consigneeAddress,
-      consigneePhone: data.consigneePhone,
-      fromCity: data.fromCity,
-      toCity: data.toCity,
-      truckNumber: data.truckNumber,
-      driverName: data.driverName,
-      driverPhone: data.driverPhone,
-      packagesCount: data.packagesCount || 1,
-      goodsDescription: data.goodsDescription,
-      declaredValue: data.declaredValue || 0,
-      freightAmount: data.freightAmount || 0,
-      freightStatus: data.freightStatus || "to_pay",
-      riskType: data.riskType || "owner_risk",
-      createdAt: new Date().toISOString(),
-    })
-    .returning();
-
+  const data = prepareBiltyData(input);
+  const inserted = await db.insert(bilties).values({ ...data,
+    lrNumber: generateDocNumber("1OM-LR"), createdAt: new Date().toISOString(),
+  }).returning();
   return inserted[0];
+};
+
+export const updateBilty = async (env: Bindings, id: number, input: BiltyInput) => {
+  const db = getDb(env.DB);
+  const updated = await db.update(bilties).set(prepareBiltyData(input))
+    .where(eq(bilties.id, id)).returning();
+  return updated[0] || null;
 };
 
 export const getAllBilties = async (env: Bindings) => {
