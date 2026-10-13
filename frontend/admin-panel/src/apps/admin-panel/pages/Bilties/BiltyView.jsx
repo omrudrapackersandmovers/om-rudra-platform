@@ -84,25 +84,7 @@ Risk: ${bilty.riskType.toUpperCase().replace("_", " ")}
 Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
 
   return (
-    <div className="space-y-6 pb-10 max-w-5xl mx-auto">
-      {/* Print CSS Configuration */}
-      <style>{`
-        @media print {
-          @page {
-            size: A4 portrait;
-            margin: 10mm 12mm;
-          }
-          body {
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-          }
-          .print-avoid-break {
-            break-inside: avoid;
-            page-break-inside: avoid;
-          }
-        }
-      `}</style>
-
+    <div className="print-document-page space-y-6 pb-10 max-w-5xl mx-auto">
       {/* Top Bar (Hidden in Print) */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 print:hidden bg-white dark:bg-slate-900 sm:bg-transparent p-3 sm:p-0 rounded-2xl border sm:border-0 border-slate-200/80 dark:border-slate-700/80 shadow-2xs sm:shadow-none">
         <button
@@ -138,7 +120,7 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
       </div>
 
       {/* Official Lorry Receipt / Bilty Printable Sheet */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-800 p-3.5 sm:p-8 shadow-sm space-y-5 print:border-2 print:border-black print:shadow-none print:p-4">
+      <div className="print-document bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-800 p-3.5 sm:p-8 shadow-sm space-y-5 print:border-2 print:border-black print:shadow-none print:p-4">
         {/* Centered Brand Logo at Top */}
         <div className="flex justify-center items-center pb-2">
           <img
@@ -230,7 +212,7 @@ Emergency Transport Helpline: ${company.phone || "+91 7033488691"}`;
         </div>
 
         {/* Goods Description & Packages */}
-        <div className="border border-slate-300 dark:border-slate-600 rounded-xl overflow-x-auto text-xs print-avoid-break">
+        <div className="border border-slate-300 dark:border-slate-600 rounded-xl overflow-x-auto text-xs">
           <table className="w-full text-left min-w-[500px]">
             <thead className="bg-slate-800 text-white font-semibold">
               <tr>

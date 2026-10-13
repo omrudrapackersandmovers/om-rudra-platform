@@ -38,17 +38,68 @@
   -webkit-overflow-scrolling: touch;
 }
 
+/* Documents must leave the screen scroll containers before pagination. */
 @media print {
   @page {
-    margin: 1cm;
-    size: auto;
+    size: A4 portrait;
+    margin: 10mm 12mm;
   }
-  body {
+
+  html, body, #root, .admin-shell, .admin-workspace, .admin-content {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
     background: white !important;
     color: black !important;
   }
-  header, nav, aside, button, a {
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  header, nav, aside, button, .admin-shell > .fixed {
     display: none !important;
+  }
+
+  .admin-content > div, .print-document-page, .print-document {
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Only the actual document belongs on paper, including when a modal is open. */
+  .print-document-page > :not(.print-document) {
+    display: none !important;
+  }
+
+  .print-document, .print-document * {
+    overflow: visible !important;
+    max-height: none !important;
+    box-shadow: none !important;
+    overflow-wrap: anywhere;
+  }
+
+  .print-document table {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .print-document thead { display: table-header-group; }
+  .print-document tr, .print-avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-document h4 {
+    break-after: avoid;
+    page-break-after: avoid;
   }
 }
 

@@ -206,25 +206,7 @@ For booking confirmation, reply to this message or call ${company.phone || "+91 
 Govt Approved & Verified Mover.`;
 
   return (
-    <div className="space-y-6 pb-12 max-w-5xl mx-auto">
-      {/* Print CSS Configuration */}
-      <style>{`
-        @media print {
-          @page {
-            size: A4 portrait;
-            margin: 10mm 12mm;
-          }
-          body {
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-          }
-          .print-avoid-break {
-            break-inside: avoid;
-            page-break-inside: avoid;
-          }
-        }
-      `}</style>
-
+    <div className="print-document-page space-y-6 pb-12 max-w-5xl mx-auto">
       {/* Relational Action Bar (Hidden on Print) */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-slate-900 p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs print:hidden">
         {/* Row 1 on Mobile / Left on Desktop: Navigation Breadcrumbs & Status Badge */}
@@ -371,7 +353,7 @@ Govt Approved & Verified Mover.`;
       </div>
 
       {/* Official Printable Quotation Document */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-3.5 sm:p-8 shadow-sm space-y-5 print:border-none print:shadow-none print:p-0">
+      <div className="print-document bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-3.5 sm:p-8 shadow-sm space-y-5 print:border-none print:shadow-none print:p-0">
         {/* Centered Brand Logo at Top */}
         <div className="flex justify-center items-center pb-2">
           <img
@@ -485,7 +467,7 @@ Govt Approved & Verified Mover.`;
 
         {/* Inventory Articles Table (if items added) */}
         {inventory.length > 0 && (
-          <div className="space-y-2 print-avoid-break">
+          <div className="space-y-2">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Goods & Articles Included for Relocation
             </h4>

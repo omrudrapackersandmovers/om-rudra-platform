@@ -166,7 +166,7 @@ const AdminPanelLayout = () => {
   const pageInfo = getPageInfo();
 
   return (
-    <div className="h-screen overflow-hidden bg-slate-50/70 dark:bg-slate-950/70 flex flex-row font-sans text-slate-800 dark:text-slate-100 antialiased selection:bg-brand-600 selection:text-white">
+    <div className="admin-shell h-screen overflow-hidden bg-slate-50/70 dark:bg-slate-950/70 flex flex-row font-sans text-slate-800 dark:text-slate-100 antialiased selection:bg-brand-600 selection:text-white">
       {/* Desktop Left-Docked Sidebar (Smooth transition between Expanded w-64 and Icon Rail w-16) */}
       <aside
         className={`hidden md:flex flex-col bg-white dark:bg-slate-900 h-screen shrink-0 z-40 border-r border-slate-200/80 dark:border-slate-700/80 transition-all duration-300 ease-in-out ${
@@ -370,7 +370,7 @@ const AdminPanelLayout = () => {
       )}
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col h-screen min-w-0 overflow-hidden">
+      <div className="admin-workspace flex-1 flex flex-col h-screen min-w-0 overflow-hidden">
         {/* Top Header Bar (Scales down gracefully on mobile: h-14 sm:h-16) */}
         <header className="h-14 sm:h-16 shrink-0 bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-700/80 flex items-center z-30">
           <div className="w-full px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2 sm:gap-4">
@@ -468,7 +468,7 @@ const AdminPanelLayout = () => {
         </header>
 
         {/* Content Area (Fluid & Responsive with optimized mobile padding) */}
-        <main className="flex-1 overflow-y-auto w-full p-3 sm:p-5 lg:p-8 pb-20 sm:pb-24 md:pb-12">
+        <main className="admin-content flex-1 overflow-y-auto w-full p-3 sm:p-5 lg:p-8 pb-20 sm:pb-24 md:pb-12">
           <div className="w-full max-w-7xl mx-auto">
             <Outlet />
           </div>
