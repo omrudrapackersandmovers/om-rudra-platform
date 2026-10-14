@@ -295,7 +295,7 @@ export const loadSampleData = async (env: Bindings) => {
   // 4. Seed Sample Quotations
   const sampleQuotes = [
     {
-      quoteNumber: "1STOM-Q-2026-001",
+      quoteNumber: "ORPM-Q-2026-001",
       leadId: insertedLeads[0].id,
       customerName: "Dr. Alok Ranjan",
       customerPhone: "9835120011",
@@ -327,7 +327,7 @@ export const loadSampleData = async (env: Bindings) => {
       validUntil: new Date(Date.now() + 86400000 * 15).toISOString().slice(0, 10),
     },
     {
-      quoteNumber: "1STOM-Q-2026-002",
+      quoteNumber: "ORPM-Q-2026-002",
       leadId: insertedLeads[1].id,
       customerName: "Priya Kumari",
       customerPhone: "9431002233",
@@ -367,7 +367,7 @@ export const loadSampleData = async (env: Bindings) => {
   // 5. Seed Sample Jobs
   const sampleJobs = [
     {
-      jobNumber: "1STOM-JOB-2026-001",
+      jobNumber: "ORPM-JOB-2026-001",
       quoteId: insertedQuotes[0].id,
       leadId: insertedLeads[0].id,
       customerName: "Dr. Alok Ranjan",
@@ -384,7 +384,7 @@ export const loadSampleData = async (env: Bindings) => {
       status: "in_progress" as const,
     },
     {
-      jobNumber: "1STOM-JOB-2026-002",
+      jobNumber: "ORPM-JOB-2026-002",
       quoteId: insertedQuotes[1].id,
       leadId: insertedLeads[1].id,
       customerName: "Priya Kumari",
@@ -477,7 +477,7 @@ export const loadSampleData = async (env: Bindings) => {
   // 7. Seed Sample Invoices
   const sampleInvoices = [
     {
-      invoiceNumber: "1STOM-INV-2026-001",
+      invoiceNumber: "ORPM-INV-2026-001",
       jobId: insertedJobs[0].id,
       quoteId: insertedQuotes[0].id,
       customerName: "Dr. Alok Ranjan",
@@ -496,7 +496,7 @@ export const loadSampleData = async (env: Bindings) => {
       paymentMode: "UPI",
     },
     {
-      invoiceNumber: "1STOM-INV-2026-002",
+      invoiceNumber: "ORPM-INV-2026-002",
       jobId: insertedJobs[1].id,
       quoteId: insertedQuotes[1].id,
       customerName: "Priya Kumari",
@@ -544,7 +544,7 @@ export const loadSampleData = async (env: Bindings) => {
 
   // 8. Seed Sample Bilty
   await db.insert(bilties).values({
-    lrNumber: "1STOM-LR-2026-001",
+    lrNumber: "ORPM-LR-2026-001",
     jobId: insertedJobs[0].id,
     consignorName: "Dr. Alok Ranjan",
     consignorAddress: "Flat 402, Shanti Vihar, Kankarbagh, Patna",

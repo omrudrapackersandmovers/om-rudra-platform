@@ -359,10 +359,12 @@ export const createManualLead = async (
 
 // ================= QUOTATIONS ================= //
 
-const generateDocNumber = (prefix: string) => {
+const DOCUMENT_COMPANY_PREFIX = "ORPM"; // Om Rudra Packers and Movers
+
+const generateDocNumber = (documentType: "Q" | "JOB" | "INV" | "LR") => {
   const dateStr = new Date().toISOString().slice(2, 10).replace(/-/g, "");
   const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-  return `${prefix}-${dateStr}-${randomSuffix}`;
+  return `${DOCUMENT_COMPANY_PREFIX}-${documentType}-${dateStr}-${randomSuffix}`;
 };
 
 export const createQuotation = async (
@@ -391,7 +393,7 @@ export const createQuotation = async (
   }
 ) => {
   const db = getDb(env.DB);
-  const quoteNumber = generateDocNumber("1OM-Q");
+  const quoteNumber = generateDocNumber("Q");
 
   const inserted = await db
     .insert(quotations)
@@ -510,7 +512,7 @@ export const createJob = async (
   }
 ) => {
   const db = getDb(env.DB);
-  const jobNumber = generateDocNumber("1OM-JOB");
+  const jobNumber = generateDocNumber("JOB");
 
   const inserted = await db
     .insert(jobs)
@@ -607,7 +609,7 @@ export const createInvoice = async (
   }
 ) => {
   const db = getDb(env.DB);
-  const invoiceNumber = generateDocNumber("1OM-INV");
+  const invoiceNumber = generateDocNumber("INV");
   const paymentStatus =
     data.balanceDue <= 0
       ? "paid"
@@ -709,7 +711,7 @@ export const createBilty = async (env: Bindings, input: BiltyInput) => {
   const db = getDb(env.DB);
   const data = prepareBiltyData(input);
   const inserted = await db.insert(bilties).values({ ...data,
-    lrNumber: generateDocNumber("1OM-LR"), createdAt: new Date().toISOString(),
+    lrNumber: generateDocNumber("LR"), createdAt: new Date().toISOString(),
   }).returning();
   return inserted[0];
 };

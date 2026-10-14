@@ -63,6 +63,7 @@ try {
   response = await request("/bilties", "POST", formPayload);
   assert.equal(response.status, 201, JSON.stringify(await response.clone().json()));
   const created = (await response.json()).bilty;
+  assert.match(created.lrNumber, /^ORPM-LR-\d{6}-\d{4}$/);
   for (const [key, value] of Object.entries(details)) assert.deepEqual(created[key], value, key);
   assert.equal(created.freightStatus, "to_pay");
   response = await request(`/bilties/${created.id}`, "PUT", { ...details, advancePaid: 1300, receivedBy: "Receiver", deliveredAt: "2026-10-15T14:00:00+05:30", deliveryRemarks: "One scratched chair", id: 99, lrNumber: "OVERWRITE", createdAt: "2020-01-01" });
