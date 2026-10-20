@@ -36,14 +36,16 @@ export default function SEO({ title, description, canonical, schemaJson, noindex
     <meta property="og:site_name" content={company.brandName} />
     <meta property="og:locale" content="en_IN" />
     <meta property="og:image" content={image} />
+    <meta property="og:image:secure_url" content={image} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:alt" content={company.brandName} />
+    <meta property="og:image:alt" content={`${company.brandName}: home shifting, office relocation and vehicle transport, based in Patna`} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={metaDesc} />
     <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content={`${company.brandName} — your next move, planned with care`} />
     {import.meta.env.VITE_GOOGLE_SITE_VERIFICATION && <meta name="google-site-verification" content={import.meta.env.VITE_GOOGLE_SITE_VERIFICATION} />}
     {import.meta.env.VITE_BING_SITE_VERIFICATION && <meta name="msvalidate.01" content={import.meta.env.VITE_BING_SITE_VERIFICATION} />}
     <script type="application/ld+json">{structuredData}</script>

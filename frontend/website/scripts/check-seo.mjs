@@ -10,6 +10,10 @@ import { company } from "../src/data/company.js";
 
 const dist = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../dist");
 const fileFor = p => path.join(dist, p === "/" ? "index.html" : `${p.slice(1)}.html`);
+const shareImage = await readFile(path.join(dist, company.logo.share));
+assert.equal(shareImage.subarray(1, 4).toString(), "PNG", "Social preview must be a PNG");
+assert.equal(shareImage.readUInt32BE(16), 1200, "Social preview width");
+assert.equal(shareImage.readUInt32BE(20), 630, "Social preview height");
 // Preserve sourced editorial guides while verifying every directory page is useful and discoverable.
 const reviewedCopy = new Set();
 for (const [slug, guide] of Object.entries(editorialGuides)) {
@@ -68,7 +72,8 @@ for (const p of staticPaths) {
     const robots = $('meta[name="robots"]').attr("content");
     assert.equal(robots?.includes("noindex"), !indexablePaths.includes(p), `${p}: indexing rule mismatch`);
     assert.equal($('meta[property="og:url"]').attr("content"), `${siteUrl}${p}`);
-    assert($('meta[property="og:image"]').attr("content")?.startsWith(`${siteUrl}/`));
+    assert.equal($('meta[property="og:image"]').attr("content"), `${siteUrl}${company.logo.share}`);
+    assert.equal($('meta[name="twitter:image"]').attr("content"), `${siteUrl}${company.logo.share}`);
     const scripts = $('script[type="application/ld+json"]');
     assert.equal(scripts.length, 1, `${p}: one JSON-LD graph required`);
     scripts.each((_, element) => {

@@ -17,7 +17,7 @@ export const company = {
     horizontal: "/brand/lockup-horizontal.svg",
     reverse: "/brand/lockup-reverse.svg",
     icon: "/brand/symbol-red.svg",
-    share: "/brand/social-share-1200x630.png",
+    share: "/brand/social-preview-moving-v2.png",
     print: "/brand/lockup-red-1080.png",
     monochrome: "/brand/symbol-charcoal.svg",
     packageMockup: "/images/packgae.webp",
