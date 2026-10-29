@@ -19,6 +19,7 @@ import {
 import CustomSelect from "../../../shared/components/CustomSelect";
 import Button from "../../../shared/components/Button";
 import { company } from "@/data/company";
+import { trackEnquiry } from "@/utils/analytics.js";
 import LocationAutocomplete from "./LocationAutocomplete";
 import { detectUserCity, detectFromBrowserGps } from "@/apps/main-website/utils/geoService";
 
@@ -458,10 +459,12 @@ const QuoteForm = ({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
+        signal: AbortSignal.timeout(15000),
       });
 
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
+      const result = await res.json().catch(() => null);
+      if (!res.ok || result?.success !== true) {
+        const errorData = result || {};
         setStatus("idle");
         if (errorData.details) {
           const fieldErrors = {};
@@ -478,6 +481,7 @@ const QuoteForm = ({
         return;
       }
 
+      trackEnquiry("generate_lead", "moving_quote");
       setStatus("success");
       setForm(initialForm);
     } catch (err) {

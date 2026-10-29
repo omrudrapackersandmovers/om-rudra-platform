@@ -5,6 +5,7 @@ import { company } from "../../../../data/company";
 import CustomSelect from "../../shared/components/CustomSelect";
 import { contactSubjects, validateContact } from "../../utils/contactValidation";
 import SEO from "../../../../configs/seo";
+import { trackEnquiry } from "../../../../utils/analytics.js";
 
 const phone = company.phone.primary.replace(/[^+\d]/g, "");
 const whatsappNumber = company.phone.whatsapp.replace(/\D/g, "");
@@ -83,6 +84,7 @@ export default function Contact() {
         setError(response.status === 429 ? "Too many attempts. Please wait a moment before trying again." : response.status === 400 && result?.details ? "Please review the highlighted fields." : "We could not send your message. Please try again or call our team.");
         setStatus("idle"); return;
       }
+      if (form.subject === "Moving quote") trackEnquiry("generate_lead", "contact_enquiry");
       setReference(result.reference); setStatus("success");
     } catch (failure) { setError(failure.name === "TimeoutError" ? "The request timed out. Please try again or call our team." : "Could not connect. Please check your connection and try again, or call our team."); setStatus("idle"); }
     finally { submitting.current = false; setSecurityToken(""); if (widgetRef.current !== null) window.turnstile?.reset(widgetRef.current); }

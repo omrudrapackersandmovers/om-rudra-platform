@@ -55,3 +55,26 @@ export function trackPage(pathname) {
   });
   previousPage = page;
 }
+
+// Only fixed event names and labels cross the analytics boundary. Never pass form data.
+export function trackEnquiry(eventName, source) {
+  const sources = {
+    generate_lead: ["moving_quote", "contact_enquiry"],
+    click_to_call: ["website"],
+    click_whatsapp: ["website"],
+  };
+  if (!sources[eventName]?.includes(source)) return;
+  if (typeof window === "undefined" || readConsent() !== "accepted") return;
+  if (window[`ga-disable-${measurementId}`]) return;
+  try {
+    trackPage(window.location.pathname);
+    if (!configured || typeof window.gtag !== "function") return;
+    const page = indexablePaths.includes(window.location.pathname) ? window.location.pathname : "/404";
+    window.gtag("event", eventName, {
+      lead_source: source,
+      page_location: `${siteUrl}${page}`,
+      page_referrer: "",
+      transport_type: "beacon",
+    });
+  } catch { /* Optional measurement must never interrupt an enquiry or contact link. */ }
+}
