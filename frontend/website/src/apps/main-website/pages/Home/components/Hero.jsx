@@ -11,8 +11,8 @@ export default function Hero({ children }) {
       <div className="absolute inset-0 -z-10 bg-gradient-to-t from-hero-overlay/95 via-hero-overlay/65 to-hero-overlay/35" />
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-8 sm:pt-32 sm:pb-10 lg:pt-36 lg:pb-12 text-center">
         <p className="inline-flex items-center gap-2 text-sm font-semibold text-white/90 mb-5"><MapPin size={16} aria-hidden="true" />From Patna to your next address</p>
-        <h1 id="hero-heading" className="font-display font-extrabold text-[clamp(2rem,4.6vw,4.25rem)] leading-[1.14] tracking-tight max-w-5xl mx-auto">Your next move,<br />made simple.</h1>
-        <p className="max-w-2xl mx-auto mt-5 text-base sm:text-lg text-white/90 leading-relaxed">Home, office and vehicle moves. Get your free quote.</p>
+        <h1 id="hero-heading" className="font-display font-extrabold text-[clamp(2rem,4.6vw,4.25rem)] leading-[1.14] tracking-tight max-w-5xl mx-auto">Packers and movers<br />in Bihar, based in Patna.</h1>
+        <p className="max-w-2xl mx-auto mt-5 text-base sm:text-lg text-white/90 leading-relaxed">Plan home shifting, office relocation or vehicle transport with Om Rudra. Share your pickup, destination and moving date for a free quote.</p>
 
       </div>
       {children}

@@ -7,6 +7,7 @@ import HowItWorks from "./components/HowItWorks";
 import TestimonialsBlock from "./components/TestimonialsBlock";
 import LocationsSnapshot from "./components/LocationsSnapshot";
 import MovingHelp from "./components/MovingHelp";
+import BiharMovingGuides from "./components/BiharMovingGuides";
 import SEO from "../../../../configs/seo";
 import { company } from "../../../../data/company";
 
@@ -52,8 +53,8 @@ const Home = () => {
   return (
     <>
       <SEO
-        title="Reliable Packers and Movers in Bihar & Pan-India"
-        description="Dedicated home shifting, office relocation, and vehicle transport across Bihar, Jharkhand, UP, Delhi NCR, and nationwide routes."
+        title="Packers and Movers in Bihar"
+        description="Plan home shifting, office relocation and car or bike transport in Bihar with Patna-based Om Rudra Packers and Movers. Call 7033488691 for a free moving quote."
         schemaJson={schema}
       />
       <Hero>
@@ -61,6 +62,7 @@ const Home = () => {
       </Hero>
       <TrustBar />
       <ServicesGrid />
+      <BiharMovingGuides />
       <PackingMaterialsPreview />
       <HowItWorks />
       <TestimonialsBlock />

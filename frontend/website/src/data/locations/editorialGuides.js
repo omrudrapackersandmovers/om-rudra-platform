@@ -15,8 +15,9 @@ export const editorialGuides = {
     faqs: [{ q: "Can I plan Danapur and central Patna pickups the same way?", a: "Use the same inventory checklist, but share separate map pins and access details. Danapur is identified separately in Patna district's administrative directory; the actual addresses determine your route and loading arrangements." }],
   },
   gaya: {
+    description: "Request a moving quote for Gaya or Bodh Gaya with Patna-based Om Rudra. Discuss home shifting, office moves, packing and your destination before booking.",
     heading: "Gaya, Bodh Gaya or a pickup elsewhere in the district?",
-    intro: "A Gaya enquiry can describe very different addresses. Identify the pickup town first, then pair it with the complete delivery address. This guide helps you separate a city move from a district pickup or a listed journey to Delhi NCR or Kolkata.",
+    intro: "Enquire about home shifting, office relocation or vehicle transport involving Gaya with our Patna-based team. Tell us whether your pickup is in Gaya city, Manpur, Bodh Gaya or elsewhere in the district, then share your inventory and delivery address. Compare local moving requirements with the listed Delhi NCR and Kolkata routes before requesting your quote.",
     fact: "The Gaya district directory lists Gaya Sadar, Manpur and Bodhgaya separately, along with blocks in the Tekari and Sherghati subdivisions. 'Gaya district' alone does not identify a loading address.",
     references: [{ label: "Gaya district: subdivisions and blocks", url: "https://gaya.nic.in/subdivision-and-blocks/" }],
     areas: ["Gaya Sadar", "Manpur", "Bodh Gaya", "Tekari", "Sherghati", "Dobhi"],
@@ -41,8 +42,9 @@ export const editorialGuides = {
     faqs: [{ q: "Is a Bundu address enough if I select Ranchi?", a: "Include Bundu and the complete property location in your enquiry. The district directory separates Bundu subdivision from Ranchi subdivision, so use the town or village name as well as the district." }],
   },
   muzaffarpur: {
+    description: "Plan a Muzaffarpur home or office move with Patna-based Om Rudra. Share your city or district pickup, inventory and destination for a free moving quote.",
     heading: "Muzaffarpur city and district pickups need different detail.",
-    intro: "For an address in the city, share the neighbourhood and property entrance. For a pickup elsewhere in the district, identify the town or village before discussing the route. Use the Delhi NCR and Kolkata connections below to prepare a receiving address as well.",
+    intro: "Request a quote for home shifting, office relocation or vehicle transport involving Muzaffarpur. Our confirmed office is in Patna; share your Muzaffarpur pickup and destination so the team can check arrangements. For a city address, include the neighbourhood and entrance. For a district pickup, add the town or village before comparing packing, carrying and transport.",
     fact: "The district directory places Mushahari and Bochahan in the East subdivision, and Kanti, Kurhani and Motipur in the West subdivision. These are address references, not interchangeable pickup points.",
     references: [{ label: "Muzaffarpur district: subdivisions and blocks", url: "https://muzaffarpur.nic.in/about-district/administrative-setup/subdivision-blocks/" }],
     areas: ["Mushahari", "Bochahan", "Kanti", "Kurhani", "Motipur", "Saraiya"],
@@ -54,8 +56,9 @@ export const editorialGuides = {
     faqs: [{ q: "What should I add for a Motipur pickup?", a: "Include Motipur, the village or town address, postcode and a map pin. The district directory lists Motipur separately in the West subdivision; 'Muzaffarpur' alone leaves the pickup unclear." }],
   },
   bhagalpur: {
+    description: "Enquire about home shifting or office relocation in Bhagalpur with Patna-based Om Rudra. Discuss packing, your route and delivery access for a moving quote.",
     heading: "Name the town as well as Bhagalpur district.",
-    intro: "Prepare a city pickup with a street and property entrance, or describe a district pickup with its town or village. Then compare the listed Delhi NCR and Kolkata routes and identify who will receive your items at the destination.",
+    intro: "Discuss a Bhagalpur home or office move with our Patna-based team. Prepare a city pickup with a street and property entrance, or identify the town or village for a district pickup. List your furniture, appliances or workplace items, then use the Delhi NCR and Kolkata route guides to prepare the receiving side of an interstate enquiry.",
     fact: "Bhagalpur's administrative directory groups blocks by Sadar, Kahalgaon and Naugachia subdivisions. An address in the district needs its town or village as well as the Bhagalpur label.",
     references: [{ label: "Bhagalpur district: subdivisions and blocks", url: "https://bhagalpur.nic.in/subdivision-blocks/" }],
     areas: ["Kahalgaon", "Naugachia", "Sabour", "Nathnagar", "Sultanganj", "Pirpainti"],
