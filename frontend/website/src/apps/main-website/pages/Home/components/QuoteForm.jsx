@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from "react";
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import {
   CheckCircle2,
   ShieldCheck,
@@ -19,7 +19,7 @@ import {
 import CustomSelect from "../../../shared/components/CustomSelect";
 import Button from "../../../shared/components/Button";
 import { company } from "@/data/company";
-import { trackEnquiry } from "@/utils/analytics.js";
+import { trackEnquiry, trackPage } from "@/utils/analytics.js";
 import LocationAutocomplete from "./LocationAutocomplete";
 import { detectUserCity, detectFromBrowserGps } from "@/apps/main-website/utils/geoService";
 
@@ -223,6 +223,7 @@ const QuoteForm = ({
   embedded = false,
 }) => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
   const [errors, setErrors] = useState({});
@@ -484,6 +485,8 @@ const QuoteForm = ({
       trackEnquiry("generate_lead", "moving_quote");
       setStatus("success");
       setForm(initialForm);
+      try { trackPage("/quote-received", { confirmedQuote: true }); } catch { /* Measurement is optional. */ }
+      navigate("/quote-received", { state: { quoteReceived: true } });
     } catch (err) {
       console.error("Quote submission error:", err);
       setStatus("idle");

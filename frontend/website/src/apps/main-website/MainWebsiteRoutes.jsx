@@ -11,6 +11,7 @@ const About = import.meta.env.SSR ? null : lazy(() => import("./pages/About/Abou
 const Pricing = import.meta.env.SSR ? null : lazy(() => import("./pages/Pricing/Pricing"));
 const Contact = import.meta.env.SSR ? null : lazy(() => import("./pages/Contact/Contact"));
 const GetQuote = import.meta.env.SSR ? null : lazy(() => import("./pages/GetQuote/GetQuote"));
+const QuoteReceived = import.meta.env.SSR ? null : lazy(() => import("./pages/GetQuote/QuoteReceived"));
 const WhereWeServe = import.meta.env.SSR ? null : lazy(() => import("./pages/WhereWeServe/WhereWeServe"));
 const LocationPage = import.meta.env.SSR ? null : lazy(() => import("./pages/Location/LocationPage"));
 const RoutePage = import.meta.env.SSR ? null : lazy(() => import("./pages/Route/RoutePage"));
@@ -19,9 +20,9 @@ const Terms = import.meta.env.SSR ? null : lazy(() => import("./pages/Legal/Term
 const SearchPage = import.meta.env.SSR ? null : lazy(() => import("./pages/Search/SearchPage"));
 const NotFound = import.meta.env.SSR ? null : lazy(() => import("./shared/components/NotFound"));
 
-const defaultPages = { Home, PackingMaterials, ServicesPage, ServiceDetail, About, Pricing, Contact, GetQuote, WhereWeServe, LocationPage, RoutePage, Privacy, Terms, SearchPage, NotFound };
+const defaultPages = { Home, PackingMaterials, ServicesPage, ServiceDetail, About, Pricing, Contact, GetQuote, QuoteReceived, WhereWeServe, LocationPage, RoutePage, Privacy, Terms, SearchPage, NotFound };
 const MainWebsiteRoutes = ({ pages = defaultPages }) => {
-  const { Home, PackingMaterials, ServicesPage, ServiceDetail, About, Pricing, Contact, GetQuote, WhereWeServe, LocationPage, RoutePage, Privacy, Terms, SearchPage, NotFound } = pages;
+  const { Home, PackingMaterials, ServicesPage, ServiceDetail, About, Pricing, Contact, GetQuote, QuoteReceived, WhereWeServe, LocationPage, RoutePage, Privacy, Terms, SearchPage, NotFound } = pages;
   return (
     <Routes>
       <Route path="/" element={<MainWebsiteLayout />}>
@@ -33,6 +34,7 @@ const MainWebsiteRoutes = ({ pages = defaultPages }) => {
         <Route path="pricing" element={<Pricing />} />
         <Route path="contact" element={<Contact />} />
         <Route path="get-quote" element={<GetQuote />} />
+        <Route path="quote-received" element={<QuoteReceived />} />
         <Route path="where-we-serve" element={<WhereWeServe />} />
         <Route path="packers-movers/:slug" element={<LocationPage />} />
         <Route path="route/:slug" element={<RoutePage />} />

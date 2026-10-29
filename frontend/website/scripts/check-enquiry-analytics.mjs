@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { trackEnquiry, consentKey, measurementId } from "../src/utils/analytics.js";
+import { trackEnquiry, trackPage, consentKey, measurementId } from "../src/utils/analytics.js";
 
 let consent = null;
 const inserted = [];
@@ -30,4 +30,12 @@ window[`ga-disable-${measurementId}`] = true;
 const disabledCount = window.dataLayer.length;
 trackEnquiry("generate_lead", "moving_quote");
 assert.equal(window.dataLayer.length, disabledCount, "Revocation stops measurement");
+window[`ga-disable-${measurementId}`] = false;
+trackPage("/quote-received");
+assert.equal(window.dataLayer.length, disabledCount, "Direct confirmation-page visits never count");
+trackPage("/quote-received", { confirmedQuote: true });
+assert.equal(events().at(-1)[2].page_location, "https://omrudrapackersandmovers.com/quote-received");
+const receiptCount = window.dataLayer.length;
+trackPage("/quote-received", { confirmedQuote: true });
+assert.equal(window.dataLayer.length, receiptCount, "Repeated receipt render does not count again");
 console.log("Enquiry analytics checks passed: consent, event allowlist, query redaction and contact/lead separation.");

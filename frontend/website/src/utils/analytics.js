@@ -24,11 +24,12 @@ export function setConsent(value) {
   }
 }
 
-export function trackPage(pathname) {
+export function trackPage(pathname, { confirmedQuote = false } = {}) {
+  if (pathname === "/quote-received" && !confirmedQuote) return;
   if (!["omrudrapackersandmovers.com", "www.omrudrapackersandmovers.com"].includes(window.location.hostname)) return;
   if (window[`ga-disable-${measurementId}`] || readConsent() !== "accepted") return;
   // Never send query parameters, fragments, search terms or arbitrary user paths.
-  const page = indexablePaths.includes(pathname) ? pathname : "/404";
+  const page = indexablePaths.includes(pathname) || (pathname === "/quote-received" && confirmedQuote) ? pathname : "/404";
   if (page === previousPage) return;
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
