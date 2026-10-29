@@ -3,10 +3,10 @@ import { ArrowRight } from "lucide-react";
 import { responsiveImageSet } from "../../../../../utils/responsiveImages";
 
 const guides = [
-  { slug: "patna", place: "Patna", image: "home-shifting", alt: "Illustrative home move with a protected sofa", text: "Find your locality, prepare both building addresses and compare local shifting with an interstate move." },
-  { slug: "gaya", place: "Gaya", image: "packing-unpacking", alt: "Illustrative packing of household belongings for a move", text: "Separate a Gaya city, Manpur or Bodh Gaya pickup and prepare the receiving address for your route." },
-  { slug: "muzaffarpur", place: "Muzaffarpur", image: "office-commercial-shifting", alt: "Illustrative office relocation with packed equipment", text: "Plan a city or district pickup with your inventory, loading entrance and complete destination." },
-  { slug: "bhagalpur", place: "Bhagalpur", image: "loading-unloading", alt: "Illustrative loading of packed belongings for transport", text: "Identify your town and property before comparing packing, transport and delivery arrangements." },
+  { slug: "patna", place: "Patna", alt: "Illustrative view of Golghar in Patna", text: "Find your locality, prepare both building addresses and compare local shifting with an interstate move." },
+  { slug: "gaya", place: "Gaya", alt: "Illustrative view of Mahabodhi Temple in Bodh Gaya, Gaya district", text: "Separate a Gaya city, Manpur or Bodh Gaya pickup and prepare the receiving address for your route." },
+  { slug: "muzaffarpur", place: "Muzaffarpur", alt: "Illustrative litchi orchard representing Muzaffarpur", text: "Plan a city or district pickup with your inventory, loading entrance and complete destination." },
+  { slug: "bhagalpur", place: "Bhagalpur", alt: "Illustrative view of Vikramshila monastery ruins in Bhagalpur district", text: "Identify your town and property before comparing packing, transport and delivery arrangements." },
 ];
 const localities = [
   ["patna-boring-road", "Boring Road"],
@@ -24,7 +24,7 @@ export default function BiharMovingGuides() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-7">
         {guides.map(guide => <article key={guide.slug} className="bg-background border border-border rounded-lg overflow-hidden flex flex-col">
           <Link to={`/packers-movers-${guide.slug}`} aria-label={`Explore the ${guide.place} moving guide`} className="block bg-surface overflow-hidden">
-            <img src={`/images/services/${guide.image}-v2.webp`} srcSet={responsiveImageSet(`/images/services/${guide.image}-v2.webp`)} sizes="(min-width: 1280px) 300px, (min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" alt={guide.alt} width="640" height="360" loading="lazy" decoding="async" className="w-full aspect-video object-cover" />
+            <img src={`/images/places/${guide.slug}-guide-v2.webp`} srcSet={responsiveImageSet(`/images/places/${guide.slug}-guide-v2.webp`)} sizes="(min-width: 1280px) 300px, (min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" alt={guide.alt} width="640" height="360" loading="lazy" decoding="async" className="w-full aspect-video object-cover" />
           </Link>
           <div className="p-5 sm:p-6 flex flex-col flex-1">
           <h3 className="font-display font-bold text-xl"><Link to={`/packers-movers-${guide.slug}`} className="hover:text-primary">Packers and movers in {guide.place}</Link></h3>
